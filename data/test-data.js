@@ -419,7 +419,7 @@ const testIngredientsData = [
   {
     "id": 1002014,
     "name": "comino",
-    "estimatedcostincents": 547
+    "estimatedCostInCents": 547
   },
   {
     "id": 2042,
