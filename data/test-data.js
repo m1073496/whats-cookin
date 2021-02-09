@@ -497,3 +497,9 @@ const testIngredientsData = [
     "estimatedCostInCents": 902
   }
 ];
+
+module.exports = {
+  testRecipeData, 
+  testUsersData, 
+  testIngredientsData
+}
