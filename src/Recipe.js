@@ -11,6 +11,10 @@ class Recipe {
   returnInstructions() {
     return this.instructions;
   }
+
+  getIngredientsCost() {
+
+  }
 }
 
 module.exports = Recipe;
