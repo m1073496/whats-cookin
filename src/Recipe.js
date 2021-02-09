@@ -7,6 +7,10 @@ class Recipe {
     this.name = recipe.name;
     this.tags = recipe.tags;
   }
+
+  returnInstructions() {
+    return this.instructions;
+  }
 }
 
 module.exports = Recipe;

@@ -47,4 +47,8 @@ describe('Recipe', function() {
   it('should have tags', function() {
     expect(recipe.tags).to.deep.equal(testRecipeData[0].tags);
   });
+
+  it('should be able to return its instructions', function() {
+    expect(recipe.returnInstructions()).to.deep.equal(testRecipeData[0].instructions);
+  });
 });
