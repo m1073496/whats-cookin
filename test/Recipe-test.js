@@ -70,7 +70,7 @@ describe('Recipe', function() {
     });
     const testNames = allTestNames.slice(0, 18);
 
-    const names = recipe.getIngredientNames();
+    const names = recipe.getIngredientAttribute('name');
 
     expect(names).to.deep.equal(testNames);
   });

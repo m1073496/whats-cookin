@@ -21,21 +21,22 @@ class Recipe {
     return ingredientIds;
   }
 
-  getIngredientNames() {
+  getIngredientAttribute(attribute) {
     const ingredientIds = this.getIngredientIds();
 
-    const names = ingredientIds.map(ingredientId => {
+    const attributes = ingredientIds.map(ingredientId => {
       const match = ingredientsData.find(ingredient => {
         return ingredient.id === ingredientId
       });
-      return match.name;
+      return match[attribute];
     });
 
-    return names;
+    return attributes;
   }
 
-  getIngredientsCost() {
-    const ingredientIds = this.getIngredientIds();
+  getTotalCost() {
+    const ingredientPrices = this.getIngredientAttribute(estimatedCostInCents);
+    const ingredientQuantities = this.ingredients(estimatedCostInCents);
 
     const prices = ingredientIds.map(ingredientId => {
       const match = ingredientsData.find(ingredient => {
