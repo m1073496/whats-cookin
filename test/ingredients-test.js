@@ -10,22 +10,22 @@ describe('Ingredient', function() {
     expect(Ingredient).to.be.a('function');
   });
 
-  xit('should create an instance of an Ingredient', function() {
-    const ingredient = new Ingredient();
+  it('should create an instance of an Ingredient', function() {
+    const ingredient = new Ingredient(testIngredientsData[5]);
     expect(ingredient).to.be.an.instanceOf(Ingredient);
   });
 
-  xit('should have an ID', function() {
+  it('should have an ID', function() {
     const ingredient = new Ingredient(testIngredientsData[0]);
     expect(ingredient.id).to.equal(9019);
   });
 
-  xit('should have a name', function() {
+  it('should have a name', function() {
     const ingredient = new Ingredient(testIngredientsData[1]);
     expect(ingredient.name).to.equal('dry breadcrumbs');
   });
 
-  xit('should have an estimated cost in cents', function() {
+  it('should have an estimated cost in cents', function() {
     const ingredient = new Ingredient(testIngredientsData[2]);
     expect(ingredient.estimatedCostInCents).to.equal(903);
   });
