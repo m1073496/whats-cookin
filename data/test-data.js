@@ -170,7 +170,7 @@ const testRecipeData = [
     ],
     "name": "Vegan Lentil Loaf",
     "tags": [
-      "side dish", 
+      "side dish",
       "main dish",
       "starter"
     ]
@@ -497,3 +497,9 @@ const testIngredientsData = [
     "estimatedCostInCents": 902
   }
 ];
+
+module.exports = {
+  testRecipeData,
+  testUsersData,
+  testIngredientsData
+}
