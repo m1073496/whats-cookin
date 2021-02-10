@@ -13,10 +13,6 @@ class Recipe {
     return this.instructions;
   }
 
-  getIngredientsCost() {
-
-  }
-
   getIngredientIds() {
     const ingredientIds = this.ingredients.map(ingredient => {
       return ingredient.id;
@@ -36,6 +32,10 @@ class Recipe {
     });
 
     return names;
+  }
+
+  getIngredientsCost() {
+
   }
 }
 
