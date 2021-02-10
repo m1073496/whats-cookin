@@ -3,7 +3,6 @@ const expect = chai.expect;
 
 const { 
   testRecipeData, 
-  testUsersData, 
   testIngredientsData 
 } = require('../data/test-data');
 
@@ -49,7 +48,9 @@ describe('Recipe', function() {
   });
 
   it('should be able to return its instructions', function() {
-    expect(recipe.returnInstructions()).to.deep.equal(testRecipeData[0].instructions);
+    const instructions = recipe.returnInstructions();
+
+    expect(instructions).to.deep.equal(testRecipeData[0].instructions);
   });
 
   it.skip('should be able calculate the cost of its ingredients', function() {
@@ -58,7 +59,9 @@ describe('Recipe', function() {
     // calculate total price so we know what the expected result is
     const ingredientIds = ingredients.map(ingredient => ingredient.id);
     // console.log(ingredientIds);
-    const ingredientQuantities = ingredients.map(ingredient => ingredient.quantity.amount);
+    const ingredientQuantities = ingredients.map(
+      ingredient => ingredient.quantity.amount
+    );
     // console.log(ingredientQuantities);
     
     const ingredientPrices = [];
@@ -76,16 +79,19 @@ describe('Recipe', function() {
     });
     // console.log(ingredientPrices);
 
-    const ingredientTotalCost = ingredientIds.reduce((total, ingredientId, index) => {
-      total += ingredientQuantities[index] * ingredientPrices[index];
-      return total;
-    }, 0);
+    const ingredientTotalCost = ingredientIds.reduce(
+      (total, ingredientId, index) => {
+        total += ingredientQuantities[index] * ingredientPrices[index];
+        return total;
+      }, 
+      0
+    );
 
     // console.log(ingredientQuantities[0] * ingredientPrices[0]);
     // console.log(ingredientTotalCost);
     // // --> 14836
 
-    expect(recipe.getIngredientsCost()).to.equal(14836);
+    expect(recipe.getIngredientsCost()).to.equal(ingredientTotalCost);
   });
 
   it('should be able to return the ids of its ingredients', function() {
