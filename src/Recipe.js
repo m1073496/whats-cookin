@@ -35,7 +35,20 @@ class Recipe {
   }
 
   getIngredientsCost() {
+    const ingredientIds = this.getIngredientIds();
 
+    const prices = ingredientIds.map(ingredientId => {
+      const match = ingredientsData.find(ingredient => {
+        return ingredient.id === ingredientId
+      });
+      return match.estimatedCostInCents;
+    });
+
+    const totalCost = prices.reduce((total, price) => {
+      return total += price;
+    }, 0);
+
+    return totalCost;
   }
 }
 

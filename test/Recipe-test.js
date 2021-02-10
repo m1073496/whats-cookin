@@ -75,7 +75,7 @@ describe('Recipe', function() {
     expect(names).to.deep.equal(testNames);
   });
 
-  it.skip('should be able calculate the cost of its ingredients', function() {
+  it('should be able calculate the cost of its ingredients', function() {
     const ingredients = testRecipeData[0].ingredients;
 
     // calculate total price so we know what the expected result is
