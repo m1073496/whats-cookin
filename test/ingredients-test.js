@@ -30,9 +30,4 @@ describe('Ingredient', function() {
     const ingredient = new Ingredient(testIngredientsData[2]);
     expect(ingredient.estimatedCostInCents).to.equal(903);
   });
-
-
-
-
-
 });
