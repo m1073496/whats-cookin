@@ -69,17 +69,20 @@ describe('Recipe', function() {
     expect(recipe.tags).to.deep.equal(testRecipeData[0].tags);
   });
 
-  it('should be able to return the names of its ingredients', function() {
-    const allTestNames = testIngredientsData.map(ingredient => {
-      return ingredient.name;
-    });
-    const testNames = allTestNames.slice(0, 18);
+  it('should be able to get ingredient attributes', function() {
+    const sampleIngs = recipe.createIngredients(testRecipeData[0].ingredients);
+    const sampleIng0 = sampleIngs[0];
+    const sampleIng1 = sampleIngs[1];
 
-    const names = recipe.ingredients.map(ingredient => {
-      return ingredient.name;
-    });
+    const name0 = recipe.getIngredientAttribute(sampleIng0.id, 'name');
+    const cost0 = recipe.getIngredientAttribute(sampleIng0.id, 'estimatedCostInCents');
+    const name1 = recipe.getIngredientAttribute(sampleIng1.id, 'name');
+    const cost1 = recipe.getIngredientAttribute(sampleIng1.id, 'estimatedCostInCents');
 
-    expect(names).to.deep.equal(testNames);
+    expect(name0).to.equal('unsweetened apple sauce');
+    expect(cost0).to.equal(154);
+    expect(name1).to.equal('dry breadcrumbs');
+    expect(cost1).to.equal(167);
   });
 
   it('should be able calculate the cost of its ingredients', function() {
