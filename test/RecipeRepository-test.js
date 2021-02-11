@@ -24,8 +24,9 @@ describe('RecipeRepository', () => {
     expect(recipeRepository.filterByTag('midnight snack').length).to.equal(0)
   });
 
-  xit('should filter ingredients using a search term', () => {
-    expect(recipeRepository.filterByIngredient(11282).length).to.equal(3)
+  it.only('should filter ingredients using a search term', () => {
+    expect(recipeRepository.filterByIngredient('onions').length).to.equal(2)
+
   });
 
   xit('should return message when ingredient filter returns no results', () => {
