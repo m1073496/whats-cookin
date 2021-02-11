@@ -10,30 +10,30 @@ class Recipe {
   }
 
   createIngredients(ingredients) {
-    const fancyIngredients = ingredients.map(ingredient => {
-      const fancyIngredient = {
+    const formatIngredients = ingredients.map(ingredient => {
+      const formatIngredient = {
         id: ingredient.id,
         amount: ingredient.quantity.amount,
         unit: ingredient.quantity.unit,
       };
-      fancyIngredient.name = this.getIngredientAttribute(
-        fancyIngredient.id, 
+      formatIngredient.name = this.getIngredientData(
+        formatIngredient.id, 
         'name'
       ); 
-      fancyIngredient.costPerUnit = this.getIngredientAttribute(
-        fancyIngredient.id, 
+      formatIngredient.costPerUnit = this.getIngredientData(
+        formatIngredient.id, 
         'estimatedCostInCents'
       );
-      fancyIngredient.totalCostInCents = 
-        fancyIngredient.amount * fancyIngredient.costPerUnit;
+      formatIngredient.totalCostInCents = 
+        formatIngredient.amount * formatIngredient.costPerUnit;
 
-      return fancyIngredient;
+      return formatIngredient;
     });
 
-    return fancyIngredients;
+    return formatIngredients;
   }
 
-  getIngredientAttribute(id, attribute) {
+  getIngredientData(id, attribute) {
     const match = ingredientsData.find(ingredient => {
       return ingredient.id === id;
     });
@@ -51,6 +51,7 @@ class Recipe {
     return sum;
   }
 }
+
 
 if (typeof module !== 'undefined') {
   module.exports = Recipe;
