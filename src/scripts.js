@@ -2,8 +2,8 @@
 const allRecipesButton = document.getElementById('all-recipes');
 const landingView = document.querySelector('.landing-view');
 // const recipeDetailView = document.querySelector('.recipe-detail-view');
-const featuredSection1 = document.querySelector('.featured-content1');
-const featuredSection2 = document.querySelector('.featured-content2');
+const landingSection1 = document.querySelector('.landing-content1');
+const landingSection2 = document.querySelector('.landing-content2');
 const recipeListView = document.querySelector('.list-view');
 const recipeListContent1 = document.querySelector('.recipe-list-content1');
 const recipeListContent2 = document.querySelector('.recipe-list-content2');
@@ -17,8 +17,8 @@ display = (element) => element.classList.remove('hidden');
 
 displayRecipeList = () => {
   hide(landingView);
-  hide(featuredSection1);
-  hide(featuredSection2);
+  hide(landingSection1);
+  hide(landingSection2);
 
   display(recipeListView);
   display(recipeListContent1);
@@ -30,3 +30,9 @@ displayRecipeList = () => {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 allRecipesButton.addEventListener('click', displayRecipeList);
+// console.log('Hello world');
+// const { recipeData } = require('../data/recipes');
+// 
+// var singleInstruction = recipeData.filter(recipe => recipe.instructions.length < 2)
+//
+// console.log(singleInstruction);
