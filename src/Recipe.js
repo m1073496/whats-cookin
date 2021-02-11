@@ -16,11 +16,11 @@ class Recipe {
         amount: ingredient.quantity.amount,
         unit: ingredient.quantity.unit,
       };
-      fancyIngredient.name = this.getIngredientAttribute(
+      fancyIngredient.name = this.getIngredientData(
         fancyIngredient.id, 
         'name'
       ); 
-      fancyIngredient.costPerUnit = this.getIngredientAttribute(
+      fancyIngredient.costPerUnit = this.getIngredientData(
         fancyIngredient.id, 
         'estimatedCostInCents'
       );
@@ -33,7 +33,7 @@ class Recipe {
     return fancyIngredients;
   }
 
-  getIngredientAttribute(id, attribute) {
+  getIngredientData(id, attribute) {
     const match = ingredientsData.find(ingredient => {
       return ingredient.id === id;
     });
