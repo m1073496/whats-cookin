@@ -29,7 +29,7 @@ describe('RecipeRepository', () => {
 
   });
 
-  it.only('should have no length when ingredient filter returns no results', () => {
+  it('should have no length when ingredient filter returns no results', () => {
     expect(recipeRepository.filterByIngredient('chocolate').length).to.equal(0)
   });
 

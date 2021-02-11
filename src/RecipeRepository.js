@@ -15,9 +15,7 @@ class RecipeRepository {
 
   filterByIngredient(searchTerm) {
     return this.recipes.filter(recipe => {
-      return recipe.ingredients.find(ingredient => {
-        return ingredient.name === searchTerm
-      })
+      return recipe.ingredients.find(ingredient => ingredient.name === searchTerm)
     })
   }
 }

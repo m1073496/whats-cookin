@@ -424,7 +424,7 @@ const testRecipeData = [
     ],
     "name": "Vegan Lentil Loaf",
     "tags": [
-      "side dish"
+      "starter"
     ]
   }
 ];
