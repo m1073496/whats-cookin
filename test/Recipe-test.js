@@ -51,7 +51,6 @@ describe('Recipe', function() {
 
   it.skip('should create an ingredients object', function() {
     const ingredients = recipe.createIngredients(testRecipeData[0].ingredients);
-    // console.log(ingredients);
 
     expect(recipe.ingredients).to.deep.equal(ingredients);
   });
@@ -69,8 +68,8 @@ describe('Recipe', function() {
     expect(names).to.deep.equal(testNames);
   });
 
-  it.skip('should be able calculate the cost of its ingredients', function() {
-    const total = recipe.getIngredientsCost();
+  it('should be able calculate the cost of its ingredients', function() {
+    const total = recipe.getTotalCost();
 
     expect(total).to.equal(14836);
   });

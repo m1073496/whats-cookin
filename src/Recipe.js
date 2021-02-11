@@ -3,19 +3,10 @@ class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
     this.image = recipe.image;
-    // this.ingredients = recipe.ingredients;
     this.ingredients = this.createIngredients(recipe.ingredients);
     this.instructions = recipe.instructions;
     this.name = recipe.name;
     this.tags = recipe.tags;
-  }
-
-  getIngredientAttribute(id, attribute) {
-    const match = ingredientsData.find(ingredient => {
-      return ingredient.id === id;
-    });
-
-    return match[attribute];
   }
 
   createIngredients(ingredients) {
@@ -42,27 +33,23 @@ class Recipe {
     return fancyIngredients;
   }
 
-  
+  getIngredientAttribute(id, attribute) {
+    const match = ingredientsData.find(ingredient => {
+      return ingredient.id === id;
+    });
 
-  // getTotalCost() {
-  //   const ingredientPrices = this.getIngredientAttribute(estimatedCostInCents);
-  //   const ingredientQuantities = this.ingredients.map(ingredient => {
-  //     return ingredient.quantity;
-  //   });
+    return match[attribute];
+  }
 
-  //   // const prices = ingredientIds.map(ingredientId => {
-  //   //   const match = ingredientsData.find(ingredient => {
-  //   //     return ingredient.id === ingredientId;
-  //   //   });
-  //   //   return match.estimatedCostInCents;
-  //   // });
+  getTotalCost() {
+    let sum = 0;
 
-  //   const totalCost = prices.reduce((total, price) => {
-  //     return total += price;
-  //   }, 0);
+    this.ingredients.forEach(ingredient => {
+      sum += ingredient.amount * ingredient.costPerUnit;
+    });
 
-  //   return totalCost;
-  // }
+    return sum;
+  }
 }
 
 module.exports = Recipe;
