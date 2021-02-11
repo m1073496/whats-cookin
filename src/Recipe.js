@@ -9,10 +9,6 @@ class Recipe {
     this.tags = recipe.tags;
   }
 
-  returnInstructions() {
-    return this.instructions;
-  }
-
   getIngredientIds() {
     const ingredientIds = this.ingredients.map(ingredient => {
       return ingredient.id;

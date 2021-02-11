@@ -47,12 +47,6 @@ describe('Recipe', function() {
     expect(recipe.tags).to.deep.equal(testRecipeData[0].tags);
   });
 
-  it('should be able to return its instructions', function() {
-    const instructions = recipe.returnInstructions();
-
-    expect(instructions).to.deep.equal(testRecipeData[0].instructions);
-  });
-
   it('should be able to return the ids of its ingredients', function() {
     const allTestIds = testIngredientsData.map(ingredient => {
       return ingredient.id;
