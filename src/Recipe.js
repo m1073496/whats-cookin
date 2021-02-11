@@ -34,23 +34,25 @@ class Recipe {
     return attributes;
   }
 
-  getTotalCost() {
-    const ingredientPrices = this.getIngredientAttribute(estimatedCostInCents);
-    const ingredientQuantities = this.ingredients(estimatedCostInCents);
+  // getTotalCost() {
+  //   const ingredientPrices = this.getIngredientAttribute(estimatedCostInCents);
+  //   const ingredientQuantities = this.ingredients.map(ingredient => {
+  //     return ingredient.quantity;
+  //   });
 
-    const prices = ingredientIds.map(ingredientId => {
-      const match = ingredientsData.find(ingredient => {
-        return ingredient.id === ingredientId
-      });
-      return match.estimatedCostInCents;
-    });
+  //   // const prices = ingredientIds.map(ingredientId => {
+  //   //   const match = ingredientsData.find(ingredient => {
+  //   //     return ingredient.id === ingredientId;
+  //   //   });
+  //   //   return match.estimatedCostInCents;
+  //   // });
 
-    const totalCost = prices.reduce((total, price) => {
-      return total += price;
-    }, 0);
+  //   const totalCost = prices.reduce((total, price) => {
+  //     return total += price;
+  //   }, 0);
 
-    return totalCost;
-  }
+  //   return totalCost;
+  // }
 }
 
 module.exports = Recipe;
