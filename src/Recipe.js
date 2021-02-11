@@ -10,14 +10,6 @@ class Recipe {
     this.tags = recipe.tags;
   }
 
-  getIngredientIds() {
-    const ingredientIds = this.ingredients.map(ingredient => {
-      return ingredient.id;
-    });
-
-    return ingredientIds;
-  }
-
   getIngredientAttribute(id, attribute) {
     const match = ingredientsData.find(ingredient => {
       return ingredient.id === id;

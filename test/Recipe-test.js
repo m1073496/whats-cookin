@@ -49,17 +49,6 @@ describe('Recipe', function() {
     expect(recipe.tags).to.deep.equal(testRecipeData[0].tags);
   });
 
-  it('should be able to return the ids of its ingredients', function() {
-    const allTestIds = testIngredientsData.map(ingredient => {
-      return ingredient.id;
-    });
-    const testIds = allTestIds.slice(0, 18);
-
-    const ids = recipe.getIngredientIds();
-
-    expect(ids).to.deep.equal(testIds);
-  });
-
   it.skip('should create an ingredients object', function() {
     const ingredients = recipe.createIngredients(testRecipeData[0].ingredients);
     // console.log(ingredients);
