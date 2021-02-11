@@ -7,6 +7,7 @@ const featuredSection2 = document.querySelector('.featured-content2');
 const recipeListView = document.querySelector('.list-view');
 const recipeListContent1 = document.querySelector('.recipe-list-content1');
 const recipeListContent2 = document.querySelector('.recipe-list-content2');
+const recipeListTitle = document.querySelector('.recipe-list-h1');
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -22,6 +23,8 @@ displayRecipeList = () => {
   display(recipeListView);
   display(recipeListContent1);
   display(recipeListContent2);
+
+  recipeListTitle.innerText = "All";
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
