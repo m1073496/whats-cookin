@@ -3,7 +3,6 @@ const expect = chai.expect;
 
 const { 
   testRecipeData, 
-  testIngredientsData 
 } = require('../data/test-data');
 
 const Recipe = require('../src/Recipe');
@@ -37,9 +36,13 @@ describe('Recipe', function() {
     const sampleIng1 = sampleIngs[1];
 
     const name0 = recipe.getIngredientData(sampleIng0.id, 'name');
-    const cost0 = recipe.getIngredientData(sampleIng0.id, 'estimatedCostInCents');
+    const cost0 = recipe.getIngredientData(
+      sampleIng0.id, 'estimatedCostInCents'
+    );
     const name1 = recipe.getIngredientData(sampleIng1.id, 'name');
-    const cost1 = recipe.getIngredientData(sampleIng1.id, 'estimatedCostInCents');
+    const cost1 = recipe.getIngredientData(
+      sampleIng1.id, 'estimatedCostInCents'
+    );
 
     expect(name0).to.equal('unsweetened apple sauce');
     expect(cost0).to.equal(154);
