@@ -419,7 +419,7 @@ const testIngredientsData = [
   {
     "id": 1002014,
     "name": "comino",
-    "estimatedcostincents": 547
+    "estimatedCostInCents": 547
   },
   {
     "id": 2042,
@@ -497,3 +497,9 @@ const testIngredientsData = [
     "estimatedCostInCents": 902
   }
 ];
+
+module.exports = {
+  testRecipeData, 
+  testUsersData, 
+  testIngredientsData
+}
