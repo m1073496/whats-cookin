@@ -76,43 +76,8 @@ describe('Recipe', function() {
   });
 
   it('should be able calculate the cost of its ingredients', function() {
-    const ingredients = testRecipeData[0].ingredients;
+    const total = recipe.getIngredientsCost();
 
-    // calculate total price so we know what the expected result is
-    const ingredientIds = ingredients.map(ingredient => ingredient.id);
-    // console.log(ingredientIds);
-    const ingredientQuantities = ingredients.map(
-      ingredient => ingredient.quantity.amount
-    );
-    // console.log(ingredientQuantities);
-    
-    const ingredientPrices = [];
-    // for each ingredient in ingredientIds,
-      // for each ingredient in the array of test ingredients
-        // if ids match
-          // put the ingredient price into the prices array
-    ingredientIds.forEach(ingredientId => {
-      testIngredientsData.forEach(testIngredient => {
-        if (testIngredient.id === ingredientId) {
-          ingredientPrices.push(testIngredient.estimatedCostInCents);
-        }
-      });
-
-    });
-    // console.log(ingredientPrices);
-
-    const ingredientTotalCost = ingredientIds.reduce(
-      (total, ingredientId, index) => {
-        total += ingredientQuantities[index] * ingredientPrices[index];
-        return total;
-      }, 
-      0
-    );
-
-    // console.log(ingredientQuantities[0] * ingredientPrices[0]);
-    // console.log(ingredientTotalCost);
-    // // --> 14836
-
-    expect(recipe.getIngredientsCost()).to.equal(ingredientTotalCost);
+    expect(total).to.equal(14836);
   });
 });
