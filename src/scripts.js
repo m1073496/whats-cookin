@@ -6,14 +6,18 @@ var recipeDetailLeft = document.querySelector('.recipe-detail__bottom--left');
 var recipeDetailRight = document.querySelector('.recipe-detail__bottom--right');
 
 
+hide = (element) => element.classList.add('hidden');
+
+display = (element) => element.classList.remove('hidden');
+
+displayRecipeList = () => {
+  console.log('This is working')
+  hide(landingView);
+  hide(featuredSections);
+
+  display(recipeDetailView);
+  display(recipeDetailLeft);
+  display(recipeDetailRight);
+}
 
 allRecipesButton.addEventListener('click', displayRecipeList);
-
-function displayRecipeList() {
-  landingView.classList.add('hidden');
-  featuredSections.classList.add('hidden');
-
-  recipeDetailView.classList.remove('hidden');
-  recipeDetailLeft.classList.remove('hidden');
-  recipeDetailRight.classList.remove('hidden');
-}
