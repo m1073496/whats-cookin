@@ -1,3 +1,4 @@
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Global Variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 const allRecipesButton = document.getElementById('all-recipes');
 const landingView = document.querySelector('.landing-view');
 // const recipeDetailView = document.querySelector('.recipe-detail-view');
@@ -7,7 +8,7 @@ const recipeListView = document.querySelector('.list-view');
 const recipeListContent1 = document.querySelector('.recipe-list-content1');
 const recipeListContent2 = document.querySelector('.recipe-list-content2');
 
-
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 hide = (element) => element.classList.add('hidden');
 
@@ -22,5 +23,7 @@ displayRecipeList = () => {
   display(recipeListContent1);
   display(recipeListContent2);
 }
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 allRecipesButton.addEventListener('click', displayRecipeList);
