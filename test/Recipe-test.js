@@ -31,10 +31,30 @@ describe('Recipe', function() {
     expect(recipe.image).to.equal(testRecipeData[0].image);
   });  
 
-  // TODO change this so it checks that ingredients exist
-  // TODO then further down check that ingredients match what we expect
-  it.skip('should have ingredients', function() {
-    expect(recipe.ingredients).to.deep.equal(testRecipeData[0].ingredients);
+  it('should create ingredients with desired properties', function() {
+    const sampleIngs = recipe.createIngredients(testRecipeData[0].ingredients);
+    const sampleIng0 = sampleIngs[0];
+    const sampleIng1 = sampleIngs[1];
+
+    expect(sampleIng0.id).to.equal(9019);
+    expect(sampleIng0.amount).to.equal(2);
+    expect(sampleIng0.unit).to.equal('tablespoons');
+    expect(sampleIng0.name).to.equal('unsweetened apple sauce');
+    expect(sampleIng0.costPerUnit).to.equal(154);
+    expect(sampleIng0.totalCostInCents).to.equal(308);
+
+    expect(sampleIng1.id).to.equal(18079);
+    expect(sampleIng1.amount).to.equal(1);
+    expect(sampleIng1.unit).to.equal('cup');
+    expect(sampleIng1.name).to.equal('dry breadcrumbs');
+    expect(sampleIng1.costPerUnit).to.equal(167);
+    expect(sampleIng1.totalCostInCents).to.equal(167);
+  });
+
+  it('should have all ingredients', function() {
+    expect(recipe.ingredients.length).to.equal(
+      testRecipeData[0].ingredients.length
+    );
   });
 
   it('should have instructions', function() {
@@ -47,12 +67,6 @@ describe('Recipe', function() {
 
   it('should have tags', function() {
     expect(recipe.tags).to.deep.equal(testRecipeData[0].tags);
-  });
-
-  it.skip('should create an ingredients object', function() {
-    const ingredients = recipe.createIngredients(testRecipeData[0].ingredients);
-
-    expect(recipe.ingredients).to.deep.equal(ingredients);
   });
 
   it('should be able to return the names of its ingredients', function() {
