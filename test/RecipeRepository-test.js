@@ -20,17 +20,17 @@ describe('RecipeRepository', () => {
     expect(recipeRepository.filterByTag('side dish').length).to.equal(2)
   });
 
-  it('should return message when tag filter returns no results', () => {
+  it('should have no length when tag filter returns no results', () => {
     expect(recipeRepository.filterByTag('midnight snack').length).to.equal(0)
   });
 
-  it.only('should filter ingredients using a search term', () => {
+  it('should filter ingredients using a search term', () => {
     expect(recipeRepository.filterByIngredient('onions').length).to.equal(2)
 
   });
 
-  xit('should return message when ingredient filter returns no results', () => {
-    expect(recipeRepository.filterByIngredient(11111).length).to.equal(3)
+  it.only('should have no length when ingredient filter returns no results', () => {
+    expect(recipeRepository.filterByIngredient('chocolate').length).to.equal(0)
   });
 
 });

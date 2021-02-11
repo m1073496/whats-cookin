@@ -10,8 +10,6 @@ class RecipeRepository {
     return this.recipes.filter(recipe => {
       if (recipe.tags.includes(searchTerm)) {
         return recipe.id;
-      } else {
-        console.log('Sorry, no such tag exists');
       }
     })
   }
