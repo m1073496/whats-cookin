@@ -82,9 +82,14 @@ const displayAllRecipes = () => {
   })
 }
 
+function clicked() {
+  console.log("CLICKED !!!!!!")
+}
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 allRecipesButton.addEventListener('click', displayRecipeList);
+recipeListView.addEventListener('click', clicked);
 // console.log('Hello world');
 // const { recipeData } = require('../data/recipes');
 //
