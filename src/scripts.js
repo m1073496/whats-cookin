@@ -34,7 +34,7 @@ const displayRecipeList = () => {
 
   recipeListTitle.innerText = "All";
 
-  console.log(allRecipes);
+  
 
 }
 
