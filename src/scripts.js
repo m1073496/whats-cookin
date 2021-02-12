@@ -9,13 +9,21 @@ const recipeListContent1 = document.querySelector('.recipe-list-content1');
 const recipeListContent2 = document.querySelector('.recipe-list-content2');
 const recipeListTitle = document.querySelector('.recipe-list-h1');
 
+let allRecipes;
+
+window.addEventListener('load', function() {
+  console.log('🥺');
+  allRecipes = new RecipeRepository(recipeData);
+  console.log(allRecipes);
+});
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-hide = (element) => element.classList.add('hidden');
+const hide = (element) => element.classList.add('hidden');
 
-display = (element) => element.classList.remove('hidden');
+const display = (element) => element.classList.remove('hidden');
 
-displayRecipeList = () => {
+const displayRecipeList = () => {
   hide(landingView);
   hide(landingSection1);
   hide(landingSection2);
@@ -25,6 +33,9 @@ displayRecipeList = () => {
   display(recipeListContent2);
 
   recipeListTitle.innerText = "All";
+
+  console.log(allRecipes);
+
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

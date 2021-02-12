@@ -1,4 +1,4 @@
-const { ingredientsData } = require('../data/ingredients');
+// const { ingredientsData } = require('../data/ingredients');
 class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
@@ -17,14 +17,14 @@ class Recipe {
         unit: ingredient.quantity.unit,
       };
       formatIngredient.name = this.getIngredientData(
-        formatIngredient.id, 
+        formatIngredient.id,
         'name'
-      ); 
+      );
       formatIngredient.costPerUnit = this.getIngredientData(
-        formatIngredient.id, 
+        formatIngredient.id,
         'estimatedCostInCents'
       );
-      formatIngredient.totalCostInCents = 
+      formatIngredient.totalCostInCents =
         formatIngredient.amount * formatIngredient.costPerUnit;
 
       return formatIngredient;

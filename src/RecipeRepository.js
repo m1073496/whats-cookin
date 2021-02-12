@@ -1,4 +1,4 @@
-const Recipe = require('../src/Recipe');
+// const Recipe = require('./src/Recipe');
 
 class RecipeRepository {
   constructor(data) {
@@ -21,5 +21,5 @@ class RecipeRepository {
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = RecipeRepository
+  module.exports = RecipeRepository;
 }
