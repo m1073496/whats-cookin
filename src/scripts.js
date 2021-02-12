@@ -33,9 +33,55 @@ const displayRecipeList = () => {
   display(recipeListContent2);
 
   recipeListTitle.innerText = "All";
+  displayAllRecipes();
+}
 
-  
+const displayAllRecipes = () => {
+  allRecipes.recipes.forEach(recipe => {
+    let newRecipeItem = document.createElement('article');
+    let parent = document.querySelector('.recipe-list-content1')
+    newRecipeItem.className = 'recipe';
+    parent.appendChild(newRecipeItem);
 
+    newRecipeItem.innerHTML = `
+    <section class="item-container">
+      <div class="recipe-list__item">
+        <figure>
+          <img class="pantry__recipe-profile--img"
+               src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
+               alt="Chocolate chip cookies">
+        </figure>
+      </div>
+
+      <div class="recipe-list__item cooked-button hidden">
+        <button>Cooked It!</button>
+        <span>message</span>
+      </div>
+
+      <div class="recipe-list__item">
+        <span><i class="far fa-heart"></i></span>
+        <span><i class="far fa-calendar-check"></i></span>
+      </div>
+    </section>
+
+    <section class="recipe-list__item">
+      <ul class="ingredients-and-cost">
+        <li>
+          <i class="fal fa-ellipsis-h"></i> Recipe name
+        </li>
+        <li>
+          <i class="far fa-check-circle"></i> This ingredient
+        </li>
+        <li>
+          <i class="far fa-times-circle"></i> That ingredient
+        </li>
+        <li>
+          <i class="far fa-badge-dollar"></i> Cost
+        </li>
+      </ul>
+    </section>
+  `
+  })
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
