@@ -46,8 +46,8 @@ const displayAllRecipes = () => {
       <div class="recipe-list__item">
         <figure>
           <img class="pantry__recipe-profile--img"
-               src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-               alt="Chocolate chip cookies">
+               src="${recipe.image}"
+               alt="${recipe.name}">
         </figure>
       </div>
 
@@ -65,16 +65,16 @@ const displayAllRecipes = () => {
     <section class="recipe-list__item">
       <ul class="ingredients-and-cost">
         <li>
-          <i class="fal fa-ellipsis-h"></i> Recipe name
+          <i class="fal fa-ellipsis-h"></i>${recipe.name}
         </li>
         <li>
-          <i class="far fa-check-circle"></i> This ingredient
+          <i class="far fa-check-circle"></i>${recipe.ingredients[0].amount} ${recipe.ingredients[0].unit} ${recipe.ingredients[0].name}
         </li>
         <li>
-          <i class="far fa-times-circle"></i> That ingredient
+          <i class="far fa-times-circle"></i>${recipe.ingredients[1].amount} ${recipe.ingredients[1].unit} ${recipe.ingredients[1].name}
         </li>
         <li>
-          <i class="far fa-badge-dollar"></i> Cost
+          <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
         </li>
       </ul>
     </section>
