@@ -29,8 +29,8 @@ const displayRecipeList = () => {
   hide(landingSection2);
 
   display(recipeListView);
-  display(recipeListContent1);
-  display(recipeListContent2);
+  // display(recipeListContent1);
+  // display(recipeListContent2);
 
   recipeListTitle.innerText = "All";
   displayAllRecipes();
@@ -39,11 +39,12 @@ const displayRecipeList = () => {
 const displayAllRecipes = () => {
   allRecipes.recipes.forEach(recipe => {
     let newRecipeItem = document.createElement('article');
-    let parent = document.querySelector('.recipe-list-content1')
+    let parent = document.querySelector('.list-view')
     newRecipeItem.className = 'recipe';
     parent.appendChild(newRecipeItem);
 
-    newRecipeItem.innerHTML = `
+    newRecipeItem.innerHTML += `
+    <div class="content1">
     <section class="item-container">
       <div class="recipe-list__item">
         <figure>
@@ -80,6 +81,7 @@ const displayAllRecipes = () => {
         </li>
       </ul>
     </section>
+    </div>
   `
   })
 }
