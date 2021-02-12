@@ -32,12 +32,12 @@ const displayRecipeList = () => {
   hide(landingSection2);
 
   display(recipeListView);
-
-  recipeListTitle.innerText = "All";
-  displayAllRecipes();
 }
 
 const displayAllRecipes = () => {
+  displayRecipeList();
+  recipeListTitle.innerText = "All";
+
   allRecipes.recipes.forEach(recipe => {
     let newRecipeItem = document.createElement('article');
     let parent = document.querySelector('.list-view')
@@ -95,7 +95,7 @@ const displayRecipeDetailView = () => {
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-allRecipesButton.addEventListener('click', displayRecipeList);
+allRecipesButton.addEventListener('click', displayAllRecipes);
 recipeListView.addEventListener('click', displayRecipeDetailView);
 // console.log('Hello world');
 // const { recipeData } = require('../data/recipes');
