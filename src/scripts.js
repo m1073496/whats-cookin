@@ -103,3 +103,39 @@ recipeListView.addEventListener('click', displayRecipeDetailView);
 // var singleInstruction = recipeData.filter(recipe => recipe.instructions.length < 2)
 //
 // console.log(singleInstruction);
+
+
+
+/* 📌 Katie's Ticket 📌 */
+const searchBarInput = document.querySelector('.search-bar');
+const searchButton = document.querySelector('.search-button');	const searchButton = document.querySelector('.search-button');
+
+
+
+searchButton.addEventListener('click', search);	searchButton.addEventListener('click', function() {
+  search(searchBarInput);
+});
+
+function search(input) {
+  const words = formatInput(input);
+
+  // TODO: need to import RecipeRepository? Assign const allRecipes = recipeRepository.recipes?
+  // for each word, run filter by ingredient (recipe repository method)
+    // (will return array of recipe objects for each ingredient)
+  const foundRecipes = words.map(word => {
+    return allRecipes.filterByIngredient(word);
+  });
+
+
+
+  // use array.flat() to flatten the result into a single array of recipe objects
+    // (the flat method will remove any empty arrays if any word mapped to an empty array b/c no results)
+  // remove duplicates
+  // if array has anything in it,
+    // return resulting array of unique recipe objects
+    // else return error message saying the search got no results
+}
+
+function formatInput(input) {
+  return input.toLowerCase().split(' ');
+} 
