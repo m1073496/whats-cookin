@@ -208,8 +208,22 @@ const recipeData = [
     ],
     "instructions": [
       {
-        "instruction": "Season the pork chops with salt and pepper and grill or pan fry over medium high heat until cooked, about 3-5 minutes per side. (If grilling, baste the chops in the maple dijon apple cider sauce as you grill.)Meanwhile, mix the remaining ingredients except the apple slices, bring to a simmer and cook until the sauce thickens, about 2-5 minutes.Grill or saute the apple slices until just tender but still crisp.Toss the pork chops and apple slices in the maple dijon apple cider sauce and enjoy!",
+        "instruction": "Season the pork chops with salt and pepper and grill or pan fry over medium high heat until " +
+          "cooked, about 3-5 minutes per side. (If grilling, baste the chops in the maple dijon apple cider sauce as you grill.)",
         "number": 1
+      },
+      {
+        "instruction": "Meanwhile, mix the remaining ingredients except the apple slices, bring to a simmer and cook " +
+          "until the sauce thickens, about 2-5 minutes.",
+        "number": 2
+      },
+      {
+        "instruction": "Grill or saute the apple slices until just tender but still crisp.",
+        "number": 3
+      },
+      {
+        "instruction": "Toss the pork chops and apple slices in the maple dijon apple cider sauce and enjoy!",
+        "number": 4
       }
     ],
     "name": "Maple Dijon Apple Cider Grilled Pork Chops",
@@ -320,6 +334,10 @@ const recipeData = [
       {
         "instruction": "Mix the hot sauce, butter, mango habanero sauce, brown sugar, chili powder, garlic powder, onion powder, black pepper, cayenne pepper and seasoning salt in a bowl. Stir vigorously until completely combined.",
         "number": 1
+      },
+      {
+        "instruction": "Marinate your wings in this mixture for at least 30 minutes.",
+        "number": 2
       }
     ],
     "name": "Dirty Steve's Original Wing Sauce",
@@ -3543,8 +3561,16 @@ const recipeData = [
     ],
     "instructions": [
       {
-        "instruction": "Pour mixture into prepared pan, using your hands press to flatten. Set aside for 1-2 hours to set.In a separate bowl, combine powdered sugar with milk and stir to combine. Using a spoon, drizzle glaze on top of cereal bars and dust with colored sugar or sprinkles.",
+        "instruction": "Pour mixture into prepared pan, using your hands press to flatten. Set aside for 1-2 hours to set.",
         "number": 1
+      },
+      {
+        "instruction": "In a separate bowl, combine powdered sugar with milk and stir to combine.",
+        "number": 2
+      },
+      {
+        "instruction": "Using a spoon, drizzle glaze on top of cereal bars and dust with colored sugar or sprinkles.",
+        "number": 3
       }
     ],
     "name": "Cereal Marshmallow Bars",
@@ -5381,3 +5407,7 @@ const recipeData = [
     ]
   }
 ];
+
+if (typeof module !== 'undefined') {
+  module.exports = { recipeData };
+}
