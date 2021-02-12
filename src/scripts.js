@@ -1,13 +1,16 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Global Variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 const allRecipesButton = document.getElementById('all-recipes');
 const landingView = document.querySelector('.landing-view');
-// const recipeDetailView = document.querySelector('.recipe-detail-view');
+const recipeDetailView = document.querySelector('.recipe-detail-view');
 const landingSection1 = document.querySelector('.landing-content1');
 const landingSection2 = document.querySelector('.landing-content2');
 const recipeListView = document.querySelector('.list-view');
 const recipeListContent1 = document.querySelector('.recipe-list-content1');
 const recipeListContent2 = document.querySelector('.recipe-list-content2');
 const recipeListTitle = document.querySelector('.recipe-list-h1');
+const recipeDetailContent1 = document.querySelector('.recipe-detail__bottom--left');
+const recipeDetailContent2 = document.querySelector('.recipe-detail__bottom--right');
+
 
 let allRecipes;
 
@@ -82,14 +85,18 @@ const displayAllRecipes = () => {
   })
 }
 
-function clicked() {
-  console.log("CLICKED !!!!!!")
+const displayRecipeDetailView = () => {
+  hide(recipeListView);
+  display(recipeDetailContent1);
+  display(recipeDetailContent2);
+
+  display(recipeDetailView);
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 allRecipesButton.addEventListener('click', displayRecipeList);
-recipeListView.addEventListener('click', clicked);
+recipeListView.addEventListener('click', displayRecipeDetailView);
 // console.log('Hello world');
 // const { recipeData } = require('../data/recipes');
 //
