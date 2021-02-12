@@ -10,7 +10,7 @@ const recipeListContent2 = document.querySelector('.recipe-list-content2');
 const recipeListTitle = document.querySelector('.recipe-list-h1');
 const recipeDetailContent1 = document.querySelector('.recipe-detail__bottom--left');
 const recipeDetailContent2 = document.querySelector('.recipe-detail__bottom--right');
-
+const recipeTitle = document.querySelector('.recipe-title');
 
 let allRecipes;
 
@@ -42,7 +42,9 @@ const displayAllRecipes = () => {
     let newRecipeItem = document.createElement('article');
     let parent = document.querySelector('.list-view')
     newRecipeItem.className = 'recipe content1';
+    newRecipeItem.id = recipe.id;
     parent.appendChild(newRecipeItem);
+
 
     newRecipeItem.innerHTML += `
     <section class="item-container">
@@ -82,7 +84,11 @@ const displayAllRecipes = () => {
       </ul>
     </section>
   `
-  })
+  newRecipeItem.addEventListener('click', function(e) {
+    let target = e.target.id;
+    displayRecipe(target);
+  });
+})
 }
 
 const displayRecipeDetailView = () => {
@@ -93,10 +99,24 @@ const displayRecipeDetailView = () => {
   display(recipeDetailView);
 }
 
+const displayRecipe = (id) => {
+  displayRecipeDetailView();
+  let foundRecipe = allRecipes.recipes.find(recipe => recipe.id = id);
+  recipeTitle.innerText = foundRecipe.name;
+  foundRecipe.instructions.forEach(instruction => {
+    recipeDetailContent1.innerHTML += `
+      <ul>
+        <li>${instruction.number} ${instruction.instruction}</li>
+      </ul>
+    `
+  })
+
+}
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 allRecipesButton.addEventListener('click', displayAllRecipes);
-recipeListView.addEventListener('click', displayRecipeDetailView);
+// recipeListView.addEventListener('click', displayRecipe);
 // console.log('Hello world');
 // const { recipeData } = require('../data/recipes');
 //
