@@ -22,3 +22,12 @@ displayRecipeList = () => {
 }
 
 allRecipesButton.addEventListener('click', displayRecipeList);
+
+
+
+const searchBar = document.querySelector('.search-bar');
+const searchButton = document.querySelector('.search-button');
+
+
+
+searchButton.addEventListener('click', search);
