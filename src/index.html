@@ -21,10 +21,10 @@
   <body>
     <div class="grid-container">
       <header class="header">
-        <span class="header__left">
+        <a href="/" class="header__left">
           <img  class="header__left--logo"src="./images/wtffd.png" alt="Fork and spoon logo">
           <span class="header__left--text">What the FORK is for Dinner?!</span>
-        </span>
+        </a>
         <span class="header__right">
           <span class="header__right--text">Hello, User! </span>
           <i class="fas fa-user header__right--icon"></i>
@@ -46,6 +46,25 @@
         <section class="search-section">
           <h3>Search by ingredient, meal type, recipe, or whatever you feel like.</h3>
           <div class="search">Search bar goes here</div>
+
+          <!--          <form>-->
+          <fieldset id="filter-dropdown" class="dropdown">
+            <label for="tag-selector" class="dropdown__label">Choose a category:</label>
+
+            <select name="tags" id="tag-selector" class="dropdown__selector">
+              <option value="" class="dropdown__selector--item">-- Select --</option>
+              <option value="breakfast" class="dropdown__selector--item">Breakfast</option>
+              <option value="condiments" class="dropdown__selector--item">Condiments, sauces, and dips</option>
+              <option value="appetizers" class="dropdown__selector--item">Appetizers</option>
+              <option value="main-courses" class="dropdown__selector--item">Main Courses</option>
+              <option value="side-dishes" class="dropdown__selector--item">Side Dishes</option>
+              <option value="brunch" class="dropdown__selector--item">Brunch</option>
+            </select>
+            <button id="go" class="dropdown__button">Go</button>
+          </fieldset>
+          <!--          </form>-->
+        </section>
+
         </section>
 
         <section class="hero-section">

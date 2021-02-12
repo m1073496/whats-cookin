@@ -99,8 +99,6 @@ allRecipesButton.addEventListener('click', displayAllRecipes);
 recipeListView.addEventListener('click', displayRecipeDetailView);
 
 
-
-
 const dropdownSelection = document.querySelector('#tag-selector');
 const goButton = document.getElementById('go')
 
@@ -120,4 +118,8 @@ const filterByTag = (tag) => {
   return allRecipes.filterByTag(tag)
 }
 
-goButton.addEventListener('click', getSearchTerm);
+const viewSearchResults = () => {
+  getSearchTerm()
+}
+
+goButton.addEventListener('click', viewSearchResults);

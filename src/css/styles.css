@@ -15,6 +15,10 @@ body {
     margin: 20px;
 }
 
+img {
+    width: 100px;
+}
+
 /* *** Grid *** */
 .grid-container {
     display: grid;
@@ -32,35 +36,35 @@ body {
 }
 
 nav {
-    background: #a7ffeb;
+    /*background: #a7ffeb;*/
     grid-area: nav;
     border-radius: 10px;
     padding-top: 5px;
 }
 
 header {
-    background: #18ffff;
+    /*background: #18ffff;*/
     grid-area: header;
     border-radius: 10px;
     padding-top: 5px;
 }
 
 main {
-    background: #84ffff;
+    /*background: #84ffff;*/
     grid-area: main;
     border-radius: 10px;
     padding-top: 5px;
 }
 
 .content1 {
-    background: #6fffd2;
+    /*background: #6fffd2;*/
     grid-area: content1;
     border-radius: 10px;
     padding-top: 5px;
 }
 
 .content2 {
-    background: #64ffda;
+    /*background: #64ffda;*/
     grid-area: content2;
     border-radius: 10px;
     padding-top: 5px;
@@ -72,10 +76,6 @@ main {
     justify-content: space-between;
     align-items: center;
 }
-img {
-    width: 50px;
-    padding: 5px;
-}
 
 .header__left {
     display: flex;
@@ -85,7 +85,8 @@ img {
 
 .header__left--text {
     font-family: 'Alice', serif;
-    font-size: 1.5rem;
+    color: #03B0AA;
+    font-size: 1.6rem;
     padding: 5px;
 }
 
@@ -95,7 +96,36 @@ img {
     padding: 5px;
 }
 
+
+.header__left--logo {
+    width: 50px;
+    transition: 0.70s;
+    -webkit-transition: 0.70s;
+    -moz-transition: 0.70s;
+    -ms-transition: 0.70s;
+    -o-transition: 0.70s;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.header__left--logo:hover {
+    transition: 0.70s;
+    -webkit-transition: 0.70s;
+    -moz-transition: 0.70s;
+    -ms-transition: 0.70s;
+    -o-transition: 0.70s;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
 /* *** Navigation *** */
+a {
+    text-decoration: none;
+}
 .nav__right {
     padding-top: 10px;
     display: flex;
@@ -117,8 +147,34 @@ img {
 
 /* *** Main *** */
 main {
-    border: 1px solid lightblue;
     padding: 20px;
+}
+
+/* *** Search *** */
+.dropdown__selector {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
+    margin: 0 10px;
+    padding: 2px 5px;
+    border-radius: 7px;
+}
+
+option {
+    background: white;
+}
+
+fieldset {
+    border: none;
+}
+
+.dropdown__button {
+    font-family: 'Alice', serif;
+    font-size: 1.1em;
+    width: 50px;
+    height: 30px;
+    background: white;
+    border-radius: 7px;
+    border: 1px solid grey;
 }
 
 /* *** Recipe detail *** */
