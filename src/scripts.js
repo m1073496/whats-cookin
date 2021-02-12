@@ -97,9 +97,27 @@ const displayRecipeDetailView = () => {
 
 allRecipesButton.addEventListener('click', displayAllRecipes);
 recipeListView.addEventListener('click', displayRecipeDetailView);
-// console.log('Hello world');
-// const { recipeData } = require('../data/recipes');
-//
-// var singleInstruction = recipeData.filter(recipe => recipe.instructions.length < 2)
-//
-// console.log(singleInstruction);
+
+
+
+
+const dropdownSelection = document.querySelector('#tag-selector');
+const goButton = document.getElementById('go')
+
+const getSearchTerm = () => {
+  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex].value;
+
+  if (searchTerm === '') {
+    // todo ==> make this an actual message/response
+    alert("you must make a selection")
+  } else {
+    filterByTag(searchTerm);
+    displayRecipeList();
+  }
+}
+
+const filterByTag = (tag) => {
+  return allRecipes.filterByTag(tag)
+}
+
+goButton.addEventListener('click', getSearchTerm);
