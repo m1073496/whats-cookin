@@ -8,6 +8,8 @@ const recipeListContent2 = document.querySelector('.recipe-list-content2');
 const recipeListTitle = document.querySelector('.recipe-list-h1');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
+const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
+
 
 let allRecipes;
 
@@ -124,12 +126,15 @@ const displayRecipe = (id) => {
     return recipe.id === parseInt(id);
   });
   recipeTitle.innerText = foundRecipe.name;
+  recipeDetailImage.innerHTML = `
+    <img src="${foundRecipe.image}" alt="${foundRecipe.name}">
+    <figcaption>Meal cost: $${foundRecipe.name}</figcaption>
+  `;
   foundRecipe.instructions.forEach(instruction => {
     recipeInstructions.innerHTML += `
       <li>${instruction.number}. ${instruction.instruction}</li>
-    `
+    `;
   })
-  
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
