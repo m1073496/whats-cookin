@@ -9,6 +9,7 @@ const recipeListTitle = document.querySelector('.recipe-list-h1');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
+const ingredientsDetailList = document.querySelector('.ingredients-list');
 
 
 let allRecipes;
@@ -125,11 +126,20 @@ const displayRecipe = (id) => {
   let foundRecipe = allRecipes.recipes.find(recipe => {
     return recipe.id === parseInt(id);
   });
+
   recipeTitle.innerText = foundRecipe.name;
   recipeDetailImage.innerHTML = `
     <img src="${foundRecipe.image}" alt="${foundRecipe.name}">
     <figcaption>Meal cost: $${foundRecipe.name}</figcaption>
   `;
+  foundRecipe.ingredients.forEach(ingredient => {
+    ingredientsDetailList.innerHTML += `
+      <article class="ingredients__item">
+        <i class="far fa-times-circle"></i>
+        ${ingredient.name} <span class="ingredients__message">You'll need xyz more of this.</span>
+      </article>
+    `;
+  })
   foundRecipe.instructions.forEach(instruction => {
     recipeInstructions.innerHTML += `
       <li>${instruction.number}. ${instruction.instruction}</li>
