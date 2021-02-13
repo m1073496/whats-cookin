@@ -6,8 +6,8 @@ const recipeListView = document.querySelector('.list-view');
 const recipeListContent1 = document.querySelector('.recipe-list-content1');
 const recipeListContent2 = document.querySelector('.recipe-list-content2');
 const recipeListTitle = document.querySelector('.recipe-list-h1');
-const recipeDetailContent = document.querySelector('.recipe-detail__bottom');
 const recipeTitle = document.querySelector('.recipe-title');
+const recipeInstructions = document.querySelector('.instructions-details')
 
 let allRecipes;
 
@@ -106,31 +106,30 @@ const displayAllRecipes = () => {
       </ul>
     </section>
   `
-  newRecipeItem.addEventListener('click', function(e) {
-    let target = e.target.id;
+  newRecipeItem.addEventListener('click', function() {
+    let target = newRecipeItem.id;
     displayRecipe(target);
-  });
+  })
 })
 }
 
 const displayRecipeDetailView = () => {
   hide(recipeListView);
-
   display(recipeDetailView);
 }
 
 const displayRecipe = (id) => {
   displayRecipeDetailView();
-  let foundRecipe = allRecipes.recipes.find(recipe => recipe.id = id);
+  let foundRecipe = allRecipes.recipes.find(recipe => {
+    return recipe.id === parseInt(id);
+  });
   recipeTitle.innerText = foundRecipe.name;
   foundRecipe.instructions.forEach(instruction => {
-    recipeDetailContent.innerHTML += `
-      <ul>
-        <li>HELLO</li>
-      </ul>
+    recipeInstructions.innerHTML += `
+      <li>${instruction.number}. ${instruction.instruction}</li>
     `
   })
-
+  
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
