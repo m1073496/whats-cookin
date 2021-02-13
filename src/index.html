@@ -45,7 +45,13 @@
       <main id="landing-view" class="landing-view ">
         <section class="search-section">
           <h3>Search by ingredient, meal type, recipe, or whatever you feel like.</h3>
-          <div class="search">Search bar goes here</div>
+          <div class="search">
+            <label for="searchBar"></label>
+            <input type="search" class="search-bar" id="searchBar" name="search-bar" placeholder="Search by recipe name or ingredient">
+            <label for="searchButton"></label>
+            <button class="search-button" id="searchButton" name="search-button">Search</button>
+          </div>
+          <h4 class="search-error hidden">Your search didn't return any results.</h4>
         </section>
 
         <section class="hero-section">
@@ -190,7 +196,14 @@
         <h1><span class="recipe-list-h1"></span> Recipes</h1>
         <section class="search-section">
           <h3>Search by ingredient, meal type, recipe, or whatever you feel like.</h3>
-          <div class="search">Search bar goes here</div>
+          <!-- TODO need to make this the same as the search bar on landing page or else change "id= " lines to avoid duplicate ids -->
+          <div class="search">
+            <label for="searchBar"></label>
+            <input type="search" class="search-bar" id="searchBar" name="search-bar" placeholder="Search by recipe name or ingredient">
+            <label for="searchButton"></label>
+            <button class="search-button" id="searchButton" name="search-button">Search</button>
+          </div>
+          <h4 class="search-error hidden">Your search didn't return any results.</h4>
         </section>
       </main>
 
