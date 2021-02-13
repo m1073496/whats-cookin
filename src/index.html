@@ -21,10 +21,10 @@
   <body>
     <div class="grid-container">
       <header class="header">
-        <span class="header__left">
+        <a href="/" class="header__left">
           <img  class="header__left--logo"src="./images/wtffd.png" alt="Fork and spoon logo">
           <span class="header__left--text">What the FORK is for Dinner?!</span>
-        </span>
+        </a>
         <span class="header__right">
           <span class="header__right--text">Hello, User! </span>
           <i class="fas fa-user header__right--icon"></i>
@@ -34,7 +34,7 @@
       <nav class="nav">
         <div class="nav__right">
           <div class="nav-links">
-            <span class="nav-links__item">Featured</span>
+            <span class="nav-links__item">Your Favorites</span>
             <span class="nav-links__item">All recipes</span>
             <span class="nav-links__item">This week</span>
           </div>
@@ -44,14 +44,27 @@
 <!--      landing view  -->
       <main id="landing-view" class="landing-view ">
         <section class="search-section">
-          <h3>Search by ingredient, meal type, recipe, or whatever you feel like.</h3>
           <div class="search">Search bar goes here</div>
+
+          <!--          <form>-->
+          <fieldset id="filter-dropdown" class="dropdown">
+            <label for="tag-selector" class="dropdown__label">Choose a category:</label>
+
+            <select name="tags" id="tag-selector" class="dropdown__selector">
+              <option value="" class="dropdown__selector--item">-- Select --</option>
+              <option value="breakfast" class="dropdown__selector--item">Breakfast</option>
+              <option value="condiments" class="dropdown__selector--item">Condiments, sauces, and dips</option>
+              <option value="appetizers" class="dropdown__selector--item">Appetizers</option>
+              <option value="main-courses" class="dropdown__selector--item">Main Courses</option>
+              <option value="side-dishes" class="dropdown__selector--item">Side Dishes</option>
+              <option value="brunch" class="dropdown__selector--item">Brunch</option>
+            </select>
+            <button id="go" class="dropdown__button">Go</button>
+          </fieldset>
+          <!--          </form>-->
         </section>
 
         <section class="hero-section">
-          <figure class="hero-section__image">
-            <img src="https://spoonacular.com/recipeImages/623855-556x370.jpg">
-          </figure>
           <section class="hero-section__box">
             <section class="hero-section__box--recipe-name">
               Some awesome recipe
@@ -362,6 +375,8 @@
       </footer>
     </div>
 
+    <script src="./Recipe.js"></script>
+    <script src="./RecipeRepository.js"></script>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/recipes.js"></script>
     <script type="text/javascript" src="../data/ingredients.js"></script>
