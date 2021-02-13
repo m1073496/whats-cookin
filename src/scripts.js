@@ -118,8 +118,4 @@ const filterByTag = (tag) => {
   return allRecipes.filterByTag(tag)
 }
 
-const viewSearchResults = () => {
-  getSearchTerm()
-}
-
-goButton.addEventListener('click', viewSearchResults);
+goButton.addEventListener('click', getSearchTerm);
