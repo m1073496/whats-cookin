@@ -17,6 +17,7 @@ body {
 
 img {
     width: 150px;
+    border-radius: 5px;
 }
 
 /* *** Grid *** */
@@ -24,12 +25,11 @@ img {
     display: grid;
     height: 100vh;
     grid-template-columns: .5fr .5fr;
-    grid-template-rows: 0.4fr 0.2fr .2fr 1.2fr 0.4fr;
+    grid-template-rows: 0.4fr 0.2fr 2fr 0.4fr;
     grid-template-areas:
         "header header"
         "nav nav"
         "main main"
-        "content1 content2"
         "footer footer";
     grid-gap: 0.2rem;
     text-align: center;
@@ -186,6 +186,27 @@ main {
     font-family: 'Alice', serif;
     font-size: 1.2em;
 }
+
+/* *** Featured Sections *** */
+.featured-section__title {
+    text-align: left;
+    margin: 20px 0;
+}
+
+.featured-section {
+    margin: 0 auto;
+    background: #FFD8D7;
+    width: 90%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+}
+
+.featured-section__recipe-profile {
+    margin: 30px;
+}
+
 
 /* *** Search *** */
 .dropdown__selector {
