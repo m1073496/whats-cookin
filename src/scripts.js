@@ -108,11 +108,10 @@ recipeListView.addEventListener('click', displayRecipeDetailView);
 
 /* 📌 Katie's Ticket 📌 */
 const searchBarInput = document.querySelector('.search-bar');
-const searchButton = document.querySelector('.search-button');	const searchButton = document.querySelector('.search-button');
+const searchButton = document.querySelector('.search-button');	
 
 
-
-searchButton.addEventListener('click', search);	searchButton.addEventListener('click', function() {
+searchButton.addEventListener('click', function() {
   search(searchBarInput);
 });
 
