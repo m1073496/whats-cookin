@@ -15,52 +15,56 @@ body {
     margin: 20px;
 }
 
+img {
+    width: 150px;
+    border-radius: 5px;
+}
+
 /* *** Grid *** */
 .grid-container {
     display: grid;
     height: 100vh;
     grid-template-columns: .5fr .5fr;
-    grid-template-rows: 0.4fr 0.2fr .2fr 1.2fr 0.4fr;
+    grid-template-rows: 0.4fr 0.2fr 2fr 0.4fr;
     grid-template-areas:
         "header header"
         "nav nav"
         "main main"
-        "content1 content2"
         "footer footer";
     grid-gap: 0.2rem;
     text-align: center;
 }
 
 nav {
-    background: #a7ffeb;
+    /*background: #a7ffeb;*/
     grid-area: nav;
     border-radius: 10px;
     padding-top: 5px;
 }
 
 header {
-    background: #18ffff;
+    /*background: #18ffff;*/
     grid-area: header;
     border-radius: 10px;
     padding-top: 5px;
 }
 
 main {
-    background: #84ffff;
+    /*background: #84ffff;*/
     grid-area: main;
     border-radius: 10px;
     padding-top: 5px;
 }
 
 .content1 {
-    background: #6fffd2;
+    /*background: #6fffd2;*/
     grid-area: content1;
     border-radius: 10px;
     padding-top: 5px;
 }
 
 .content2 {
-    background: #64ffda;
+    /*background: #64ffda;*/
     grid-area: content2;
     border-radius: 10px;
     padding-top: 5px;
@@ -71,10 +75,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-img {
-    width: 50px;
-    padding: 5px;
+    padding: 20px;
 }
 
 .header__left {
@@ -85,8 +86,13 @@ img {
 
 .header__left--text {
     font-family: 'Alice', serif;
-    font-size: 1.5rem;
+    color: #03B0AA;
+    font-size: 1.6rem;
     padding: 5px;
+}
+
+.header__right {
+    margin-right: 10px;
 }
 
 .header__right--text {
@@ -95,7 +101,34 @@ img {
     padding: 5px;
 }
 
+.header__left--logo {
+    width: 50px;
+    transition: 0.70s;
+    -webkit-transition: 0.70s;
+    -moz-transition: 0.70s;
+    -o-transition: 0.70s;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.header__left--logo:hover {
+    transition: 0.70s;
+    -webkit-transition: 0.70s;
+    -moz-transition: 0.70s;
+    -o-transition: 0.70s;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
 /* *** Navigation *** */
+a {
+    text-decoration: none;
+}
+
 .nav__right {
     padding-top: 10px;
     display: flex;
@@ -117,8 +150,124 @@ img {
 
 /* *** Main *** */
 main {
-    border: 1px solid lightblue;
     padding: 20px;
+}
+
+.hero-section {
+    width: 100%;
+    height: 300px;
+    background-image: url("https://spoonacular.com/recipeImages/623855-556x370.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 7px;
+}
+
+.hero-section__box {
+    padding: 50px;
+    text-align: center;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    outline: 2px solid grey;
+    outline-offset: -15px;
+    display: flex;
+    flex-flow: column nowrap;
+    opacity: 0.7;
+    border-radius: 5px;
+}
+
+.hero-section__box--icons,
+.hero-section__box--recipe-name {
+    margin: 10px;
+    font-family: 'Alice', serif;
+    font-size: 1.2em;
+}
+
+/* *** Featured Sections *** */
+.featured-section__title {
+    text-align: left;
+    margin: 20px 0;
+}
+
+.featured-section {
+    margin: 0 auto;
+    background: #FFD8D7;
+    width: 90%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+
+}
+
+.featured-section__recipe-profile {
+    margin: 30px;
+}
+
+
+/* *** Search *** */
+.dropdown__selector {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
+    margin: 0 10px;
+    padding: 2px 5px;
+    border-radius: 7px;
+}
+
+option {
+    background: white;
+}
+
+fieldset {
+    border: none;
+    margin: 20px;
+}
+
+.dropdown__button {
+    font-family: 'Alice', serif;
+    font-size: 1.1em;
+    width: 50px;
+    height: 30px;
+    background: white;
+    border-radius: 7px;
+    border: 1px solid grey;
+}
+
+/* *** Pantry *** */
+.pantry__top {
+    margin-bottom: 20px;
+}
+.pantry__bottom {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.pantry__bottom--left {
+    margin-left: 20px;
+    text-align: left;
+}
+
+.pantry__bottom--right {
+    background: #FFD8D7;
+    border-radius: 7px;
+    width: 50%;
+    height: 400px;
+    position: relative;
+}
+
+.pantry__recipe-profile--img {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+}
+
+.pantry__item {
+    margin: 10px;
+    font-size: 1.2em;
 }
 
 /* *** Recipe detail *** */
@@ -129,12 +278,41 @@ main {
     align-items: center;
 }
 
+.recipe-detail__bottom {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.recipe-detail__bottom--left {
+
+}
+
+.instructions-title {
+    margin-bottom: 10px;
+}
+
 /* *** Ingredients *** */
 .pantry__top {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+}
+
+.ingredients-title {
+    padding: 10px;
+}
+
+.ingredients {
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.ingredients__item {
+    margin: 5px 15px;
 }
 
 /* *** Recipe list *** */
@@ -191,17 +369,15 @@ footer {
 
     .grid-container {
         grid-template-columns: .1fr 1.9fr;
-        grid-template-rows: .4fr .5fr 2.5fr 2.5fr .4fr;
+        grid-template-rows: .4fr 2.5fr .4fr;
         grid-template-areas:
             "header header"
             "nav main"
-            "nav content1"
-            "nav content2"
             "footer footer";
     }
 
     nav {
-        width: 100px;
+        width: 50px;
     }
 
     .nav__right {
@@ -210,17 +386,23 @@ footer {
     }
 
     .nav-links {
-        justify-content: flex-end;
-        align-items: center;
         transform: rotate(270deg);
     }
 
     .nav-links__item {
         width: 100px;
     }
+
+    .featured-section {
+        width: 100%;
+    }
+
+    .featured-section__recipe-profile {
+        margin: 10px;
+    }
 }
 
-/* *** breakpoint 600px *** */
-@media screen and (max-width: 600px) {
+/*!* *** breakpoint 600px *** *!*/
+/*@media screen and (max-width: 600px) {*/
 
-}
+/*}*/

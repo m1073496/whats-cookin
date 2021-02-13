@@ -18,6 +18,7 @@ window.addEventListener('load', function() {
   console.log('🥺');
   allRecipes = new RecipeRepository(recipeData);
   console.log(allRecipes);
+
   hide(searchError);
 });
 
@@ -34,6 +35,32 @@ const displayRecipeList = () => {
 
   display(recipeListView);
 }
+
+
+// *** START Nikki's work ***
+const dropdownSelection = document.querySelector('#tag-selector');
+const goButton = document.getElementById('go')
+
+// TODO compare with Katie stuff; maybe merge/refactor/etc.
+const getSearchTerm = () => {
+  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex].value;
+
+  if (searchTerm === '') {
+    // todo ==> make this an actual message/response
+    alert("you must make a selection")
+  } else {
+    filterByTag(searchTerm);
+    displayRecipeList();
+  }
+}
+
+const filterByTag = (tag) => {
+  return allRecipes.filterByTag(tag)
+}
+
+goButton.addEventListener('click', getSearchTerm);
+// *** END Nikki's work ***
+ 
 
 const displayAllRecipes = () => {
   displayRecipeList();
@@ -118,13 +145,6 @@ const displayRecipe = (id) => {
 
 allRecipesButton.addEventListener('click', displayAllRecipes);
 // recipeListView.addEventListener('click', displayRecipe);
-// console.log('Hello world');
-// const { recipeData } = require('../data/recipes');
-//
-// var singleInstruction = recipeData.filter(recipe => recipe.instructions.length < 2)
-//
-// console.log(singleInstruction);
-
 
 
 /* 📌 Katie's Ticket 📌 */
@@ -228,3 +248,4 @@ const displayRecipes = (recipeList) => {
   `
   })
 }
+/* 📌 End Katie's Ticket 📌 */
