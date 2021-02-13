@@ -133,7 +133,7 @@ const displayRecipe = (id) => {
     ingredientsDetailList.innerHTML += `
       <article class="ingredients__item">
         <i class="far fa-times-circle"></i>
-        ${ingredient.name} <span class="ingredients__message">You'll need xyz more of this.</span>
+        ${ingredient.amount} ${ingredient.unit} ${ingredient.name} <span class="ingredients__message">You'll need xyz more of this.</span>
       </article>
     `;
   })
