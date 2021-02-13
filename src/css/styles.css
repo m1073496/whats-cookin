@@ -244,12 +244,41 @@ fieldset {
     align-items: center;
 }
 
+.recipe-detail__bottom {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.recipe-detail__bottom--left {
+
+}
+
+.instructions-title {
+    margin-bottom: 10px;
+}
+
 /* *** Ingredients *** */
 .pantry__top {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+}
+
+.ingredients-title {
+    padding: 10px;
+}
+
+.ingredients {
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.ingredients__item {
+    margin: 5px 15px;
 }
 
 /* *** Recipe list *** */
