@@ -131,7 +131,7 @@ function search(input) {
   console.log("final result: ", result);
 
   if (result.length > 0) {
-    return result;
+    displayRecipes(result);
   } else {
     display(searchError);
   }
@@ -143,4 +143,60 @@ function formatInput(input) {
 
 function removeDuplicates(arr) {
   return [...new Set(arr)];
+}
+
+const displayRecipes = (recipeList) => {
+  displayRecipeList();
+
+  if (recipeList === 'allRecipes') {
+    recipeListTitle.innerText = "All recipes";
+  } else if (recipeList === 'searchResults') {
+    recipeListTitle.innerText = "Search results";
+  }
+
+  recipeList.forEach(recipe => {
+    let newRecipeItem = document.createElement('article');
+    let parent = document.querySelector('.list-view')
+    newRecipeItem.className = 'recipe content1';
+    parent.appendChild(newRecipeItem);
+
+    newRecipeItem.innerHTML += `
+    <section class="item-container">
+      <div class="recipe-list__item">
+        <figure>
+          <img class="pantry__recipe-profile--img"
+               src="${recipe.image}"
+               alt="${recipe.name}">
+        </figure>
+      </div>
+
+      <div class="recipe-list__item cooked-button hidden">
+        <button>Cooked It!</button>
+        <span>message</span>
+      </div>
+
+      <div class="recipe-list__item">
+        <span><i class="far fa-heart"></i></span>
+        <span><i class="far fa-calendar-check"></i></span>
+      </div>
+    </section>
+
+    <section class="recipe-list__item">
+      <ul class="ingredients-and-cost">
+        <li>
+          <i class="fal fa-ellipsis-h"></i>${recipe.name}
+        </li>
+        <li>
+          <i class="far fa-check-circle"></i>${recipe.ingredients[0].amount} ${recipe.ingredients[0].unit} ${recipe.ingredients[0].name}
+        </li>
+        <li>
+          <i class="far fa-times-circle"></i>${recipe.ingredients[1].amount} ${recipe.ingredients[1].unit} ${recipe.ingredients[1].name}
+        </li>
+        <li>
+          <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
+        </li>
+      </ul>
+    </section>
+  `
+  })
 }
