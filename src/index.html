@@ -35,7 +35,7 @@
         <div class="nav__right">
           <div class="nav-links">
             <span class="nav-links__item">Featured</span>
-            <span class="nav-links__item">All recipes</span>
+            <span id="all-recipes" class="nav-links__item">All recipes</span>
             <span class="nav-links__item">This week</span>
           </div>
         </div>
@@ -64,7 +64,7 @@
         </section>
       </main>
 
-      <section class="featured-section content1 ">
+      <section class="featured-section landing-content1 content1 ">
         <h2 class="featured-section__title">Featured Recipes</h2>
 
         <article class="featured-section__recipe-profile">
@@ -86,7 +86,7 @@
         </article>
       </section>
 
-      <section class="featured-section content2 ">
+      <section class="featured-section landing-content2 content2 ">
         <article class="featured-section__recipe-profile">
           <figure>
             <img class="featured-section__recipe-profile--img"
@@ -111,7 +111,7 @@
       <main id="recipe-detail-view" class="recipe-detail-view hidden">
         <section class="recipe-detail__top">
           <section class="recipe-detail__top--title">
-            <h1>Hamburgers</h1>
+            <h1 class="recipe-title"></h1>
           </section>
           <section class="recipe-detail__top--icons">
             <i class="far fa-heart"></i>
@@ -122,11 +122,6 @@
 
       <section class="recipe-detail__bottom--left content1 hidden">
         <h1>Instructions</h1>
-        <ul>
-          <li>1. Blah blah blah</li>
-          <li>2. Blah blah blah</li>
-          <li>3. Blah blah blah</li>
-        </ul>
       </section>
 
       <section class="recipe-detail__bottom--right content2 hidden">
@@ -192,14 +187,14 @@
 <!--      list view  -->
 
       <main class="list-view hidden">
-        <h1>Blah Blah Recipes</h1>
+        <h1><span class="recipe-list-h1"></span> Recipes</h1>
         <section class="search-section">
           <h3>Search by ingredient, meal type, recipe, or whatever you feel like.</h3>
           <div class="search">Search bar goes here</div>
         </section>
       </main>
 
-      <section class="recipe-list__item content1 hidden">
+      <section class="recipe-list__item recipe-list-content1 content1 hidden">
         <article class="recipe">
           <section class="item-container">
             <div class="recipe-list__item">
@@ -210,7 +205,7 @@
               </figure>
             </div>
 
-            <div class="recipe-list__item">
+            <div class="recipe-list__item cooked-button hidden">
               <button>Cooked It!</button>
               <span>message</span>
             </div>
@@ -248,7 +243,7 @@
               </figure>
             </div>
 
-            <div class="recipe-list__item">
+            <div class="recipe-list__item cooked-button hidden">
               <button>Cooked It!</button>
               <span>message</span>
             </div>
@@ -278,7 +273,7 @@
         </article>
       </section>
 
-      <section class="recipe-list__item content2 hidden">
+      <section class="recipe-list__item recipe-list-content2 content2 hidden">
         <article class="recipe">
           <section class="item-container">
             <div class="recipe-list__item">
@@ -289,7 +284,7 @@
               </figure>
             </div>
 
-            <div class="recipe-list__item">
+            <div class="recipe-list__item cooked-button hidden">
               <button>Cooked It!</button>
               <span>message</span>
             </div>
@@ -327,7 +322,7 @@
               </figure>
             </div>
 
-            <div class="recipe-list__item">
+            <div class="recipe-list__item cooked-button hidden">
               <button>Cooked It!</button>
               <span>message</span>
             </div>
@@ -362,6 +357,8 @@
       </footer>
     </div>
 
+    <script src="./Recipe.js"></script>
+    <script src="./RecipeRepository.js"></script>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/recipes.js"></script>
     <script type="text/javascript" src="../data/ingredients.js"></script>

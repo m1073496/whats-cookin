@@ -1,4 +1,4 @@
-const { ingredientsData } = require('../data/ingredients');
+// const { ingredientsData } = require('../data/ingredients');
 class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
@@ -13,18 +13,18 @@ class Recipe {
     const formatIngredients = ingredients.map(ingredient => {
       const formatIngredient = {
         id: ingredient.id,
-        amount: ingredient.quantity.amount,
+        amount: Math.round(ingredient.quantity.amount * 100) / 100,
         unit: ingredient.quantity.unit,
       };
       formatIngredient.name = this.getIngredientData(
-        formatIngredient.id, 
+        formatIngredient.id,
         'name'
-      ); 
+      );
       formatIngredient.costPerUnit = this.getIngredientData(
-        formatIngredient.id, 
+        formatIngredient.id,
         'estimatedCostInCents'
       );
-      formatIngredient.totalCostInCents = 
+      formatIngredient.totalCostInCents =
         formatIngredient.amount * formatIngredient.costPerUnit;
 
       return formatIngredient;
