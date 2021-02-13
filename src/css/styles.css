@@ -236,6 +236,40 @@ fieldset {
     border: 1px solid grey;
 }
 
+/* *** Pantry *** */
+.pantry__top {
+    margin-bottom: 20px;
+}
+.pantry__bottom {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.pantry__bottom--left {
+    margin-left: 20px;
+    text-align: left;
+}
+
+.pantry__bottom--right {
+    background: #FFD8D7;
+    border-radius: 7px;
+    width: 50%;
+    height: 400px;
+    position: relative;
+}
+
+.pantry__recipe-profile--img {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+}
+
+.pantry__item {
+    margin: 10px;
+    font-size: 1.2em;
+}
+
 /* *** Recipe detail *** */
 .recipe-detail__top {
     display: flex;

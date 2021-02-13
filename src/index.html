@@ -155,7 +155,7 @@
       </main>
 
       <!--      recipe detail view  -->
-      <main id="recipe-detail-view" class="recipe-detail-view ">
+      <main id="recipe-detail-view" class="recipe-detail-view hidden">
         <section class="recipe-detail__top">
           <section class="recipe-detail__top--title">
             <h1>Hamburgers</h1>
@@ -223,31 +223,29 @@
 
 
 <!--      pantry view  -->
-      <main class="pantry-view  hidden">
+      <main class="pantry-view  ">
         <section class="pantry__top">
-          <section class="pantry__top--title">
-            <h1>User's Pantry</h1>
+          <h1 class="pantry__top--title">User's Pantry</h1>
+        </section>
+
+        <section class="pantry__bottom">
+          <section class="pantry__bottom--left content1 ">
+            <ul>
+              <li class="pantry__item">Choc chips -- amount</li>
+              <li class="pantry__item">Butter -- amount</li>
+              <li class="pantry__item">Flour -- amount</li>
+            </ul>
+          </section>
+
+          <section class="pantry__bottom--right content2 ">
+            <figure>
+              <img class="pantry__recipe-profile--img"
+                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
+                   alt="Chocolate chip cookies">
+            </figure>
           </section>
         </section>
       </main>
-
-      <section class="pantry__bottom--left content1 hidden">
-        <ul>
-          <li>Choc chips -- amount</li>
-          <li>Butter -- amount</li>
-          <li>Flour -- amount</li>
-        </ul>
-      </section>
-
-      <section class="pantry__bottom--right content2 hidden">
-        <h4>Some random food image??</h4>
-        <figure>
-          <img class="pantry__recipe-profile--img"
-               src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-               alt="Chocolate chip cookies">
-        </figure>
-      </section>
-
 
 
 <!--      list view  -->
