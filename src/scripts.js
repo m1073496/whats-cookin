@@ -2,8 +2,8 @@
 const allRecipesButton = document.getElementById('all-recipes');
 const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
-const landingSection1 = document.querySelector('.landing-content1');
-const landingSection2 = document.querySelector('.landing-content2');
+// const landingSection1 = document.querySelector('.landing-content1');
+// const landingSection2 = document.querySelector('.landing-content2');
 const recipeListView = document.querySelector('.list-view');
 const recipeListContent1 = document.querySelector('.recipe-list-content1');
 const recipeListContent2 = document.querySelector('.recipe-list-content2');
@@ -30,8 +30,8 @@ const display = (element) => element.classList.remove('hidden');
 
 const displayRecipeList = () => {
   hide(landingView);
-  hide(landingSection1);
-  hide(landingSection2);
+  // hide(landingSection1);
+  // hide(landingSection2);
 
   display(recipeListView);
 }
@@ -60,7 +60,7 @@ const filterByTag = (tag) => {
 
 goButton.addEventListener('click', getSearchTerm);
 // *** END Nikki's work ***
- 
+
 
 const displayAllRecipes = () => {
   displayRecipeList();
@@ -149,8 +149,8 @@ allRecipesButton.addEventListener('click', displayAllRecipes);
 
 /* 📌 Katie's Ticket 📌 */
 const searchBarInput = document.querySelector('.search-bar');
-const searchButton = document.querySelector('.search-button');	
-const searchError = document.querySelector('.search-error');	
+const searchButton = document.querySelector('.search-button');
+const searchError = document.querySelector('.search-error');
 
 
 searchButton.addEventListener('click', function() {
@@ -187,7 +187,7 @@ function search(input) {
 
 function formatInput(input) {
   return input.value.toLowerCase().split(' ');
-} 
+}
 
 function removeDuplicates(arr) {
   return [...new Set(arr)];
