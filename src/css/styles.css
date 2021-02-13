@@ -175,6 +175,17 @@ main {
     transform: translate(-50%, -50%);
     outline: 2px solid grey;
     outline-offset: -15px;
+    display: flex;
+    flex-flow: column nowrap;
+    opacity: 0.7;
+    border-radius: 5px;
+}
+
+.hero-section__box--icons,
+.hero-section__box--recipe-name {
+    margin: 10px;
+    font-family: 'Alice', serif;
+    font-size: 1.2em;
 }
 
 /* *** Search *** */
