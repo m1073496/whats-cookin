@@ -66,7 +66,7 @@ const displayAllRecipes = () => {
   allRecipes.recipes.forEach(recipe => {
     let newRecipeItem = document.createElement('article');
     let parent = document.querySelector('.list-view')
-    newRecipeItem.className = 'recipe content1';
+    newRecipeItem.className = 'recipe';
     newRecipeItem.id = recipe.id;
     parent.appendChild(newRecipeItem);
 
@@ -130,7 +130,7 @@ const displayRecipe = (id) => {
   recipeTitle.innerText = foundRecipe.name;
   recipeDetailImage.innerHTML = `
     <img src="${foundRecipe.image}" alt="${foundRecipe.name}">
-    <figcaption>Meal cost: $${foundRecipe.name}</figcaption>
+    <figcaption>Meal cost: $${foundRecipe.getTotalCost()}</figcaption>
   `;
   foundRecipe.ingredients.forEach(ingredient => {
     ingredientsDetailList.innerHTML += `
