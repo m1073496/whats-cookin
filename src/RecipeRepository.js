@@ -18,6 +18,12 @@ class RecipeRepository {
       return recipe.ingredients.find(ingredient => ingredient.name.includes(searchTerm))
     })
   }
+
+  filterByName(searchTerm) {
+    return this.recipes.filter(recipe => {
+      return recipe.name.toLowerCase().includes(searchTerm);
+    });
+  }
 }
 
 if (typeof module !== 'undefined') {

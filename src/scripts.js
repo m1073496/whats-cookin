@@ -122,9 +122,17 @@ function search(input) {
   const words = formatInput(input);
   console.log("formatted input: ", words);
 
-  const foundRecipes = words.flatMap(word => {
+  const foundIngredientRecipes = words.flatMap(word => {
     return allRecipes.filterByIngredient(word);
   });
+  console.log("found ingredient recipes: ", foundIngredientRecipes);
+
+  const foundNameRecipes = words.flatMap(word => {
+    return allRecipes.filterByName(word);
+  });
+  console.log("found name recipes: ", foundNameRecipes);
+
+  const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes];
   console.log("found recipes: ", foundRecipes);
 
   const result = removeDuplicates(foundRecipes);
