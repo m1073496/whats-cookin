@@ -98,10 +98,7 @@ const displayAllRecipes = () => {
           <i class="fal fa-ellipsis-h"></i>${recipe.name}
         </li>
         <li>
-          <i class="far fa-check-circle"></i>${recipe.ingredients[0].amount} ${recipe.ingredients[0].unit} ${recipe.ingredients[0].name}
-        </li>
-        <li>
-          <i class="far fa-times-circle"></i>${recipe.ingredients[1].amount} ${recipe.ingredients[1].unit} ${recipe.ingredients[1].name}
+          <i class="far fa-check-circle"></i>You have everything needed to make this recipe!
         </li>
         <li>
           <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
