@@ -1,3 +1,5 @@
+// const Recipe = require('./src/Recipe');
+
 class RecipeRepository {
   constructor(data) {
     this.recipes = data.map(recipe => new Recipe(recipe));
@@ -16,8 +18,14 @@ class RecipeRepository {
       return recipe.ingredients.find(ingredient => ingredient.name.includes(searchTerm))
     })
   }
+
+  filterByName(searchTerm) {
+    return this.recipes.filter(recipe => {
+      return recipe.name.toLowerCase().includes(searchTerm);
+    });
+  }
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = RecipeRepository
+  module.exports = RecipeRepository;
 }

@@ -35,7 +35,7 @@
         <div class="nav__right">
           <div class="nav-links">
             <span class="nav-links__item">Your Favorites</span>
-            <span class="nav-links__item">All recipes</span>
+            <span id="all-recipes" class="nav-links__item">All recipes</span>
             <span class="nav-links__item">This week</span>
           </div>
         </div>
@@ -44,12 +44,16 @@
 <!--      landing view  -->
       <main id="landing-view" class="landing-view hidden">
         <section class="search-section">
-          <div class="search">Search bar goes here</div>
-
           <!--          <form>-->
+          <div class="search">
+            <label for="searchBar"></label>
+            <input type="search" class="search-bar" id="searchBar" name="search-bar" placeholder="Search by recipe name or ingredient">
+            <label for="searchButton"></label>
+            <button class="search-button" id="searchButton" name="search-button">Search</button>
+          </div>
+          <h4 class="search-error hidden">Your search didn't return any results.</h4>
           <fieldset id="filter-dropdown" class="dropdown">
             <label for="tag-selector" class="dropdown__label">Choose a category:</label>
-
             <select name="tags" id="tag-selector" class="dropdown__selector">
               <option value="" class="dropdown__selector--item">-- Select --</option>
               <option value="breakfast" class="dropdown__selector--item">Breakfast</option>
@@ -75,6 +79,7 @@
             </section>
           </section>
         </section>
+
 
         <h2 class="featured-section__title">Featured Recipes</h2>
         <section class="featured-section content1 ">
@@ -150,21 +155,51 @@
             </figure>
           </article>
         </section>
-
-
       </main>
 
       <!--      recipe detail view  -->
       <main id="recipe-detail-view" class="recipe-detail-view hidden">
         <section class="recipe-detail__top">
           <section class="recipe-detail__top--title">
-            <h1>Hamburgers</h1>
+            <h1 class="recipe-title"></h1>
           </section>
           <section class="recipe-detail__top--icons">
             <i class="far fa-heart"></i>
             <i class="far fa-calendar"></i>
           </section>
         </section>
+
+      <section class="recipe-detail__bottom--left content1 hidden">
+        <h1>Instructions</h1>
+      </section>
+
+      <section class="recipe-detail__bottom--right content2 hidden">
+        <figure>
+          <img class="featured-section__recipe-profile--img"
+               src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
+               alt="Chocolate chip cookies">
+          <figcaption>Meal cost: $10</figcaption>
+        </figure>
+
+        <h3 class="ingredients">Ingredients</h3>
+          <span class="ingredients__item"><i class="far fa-check-circle"></i> Butter</span>
+            <span class="ingredients__message"></span>
+
+          <span class="ingredients__item"><i class="far fa-check-circle"></i> Flour</span>
+            <span class="ingredients__message"></span>
+
+          <span class="ingredients__item"><i class="far fa-times-circle"></i> Sugar</span>
+            <span class="ingredients__message">You'll need xyz more of this.</span>
+
+          <span class="ingredients__item"><i class="far fa-times-circle"></i> Vanilla</span>
+            <span class="ingredients__message">You'll need xyz more of this.</span>
+
+          <span class="ingredients__item"><i class="far fa-check-circle"></i> Chocolate Chips</span>
+            <span class="ingredients__message"></span>
+
+          <span class="ingredients__item"><i class="far fa-times-circle"></i> Eggs</span>
+            <span class="ingredients__message">You'll need xyz more of this.</span>
+      </section>
 
         <section class="recipe-detail__bottom">
           <section class="recipe-detail__bottom--left content1 ">
@@ -249,16 +284,22 @@
 
 
 <!--      list view  -->
-
-      <main class="list-view ">
-        <h1>Blah Blah Recipes</h1>
+      <main class="list-view hidden">
+        <h1><span class="recipe-list-h1"></span> Recipes</h1>
         <section class="search-section">
           <h3>Search by ingredient, meal type, recipe, or whatever you feel like.</h3>
-          <div class="search">Search bar goes here</div>
+          <!-- TODO need to make this the same as the search bar on landing page or else change "id= " lines to avoid duplicate ids -->
+          <div class="search">
+            <label for="searchBar"></label>
+            <input type="search" class="search-bar" id="searchBar" name="search-bar" placeholder="Search by recipe name or ingredient">
+            <label for="searchButton"></label>
+            <button class="search-button" id="searchButton" name="search-button">Search</button>
+          </div>
+          <h4 class="search-error hidden">Your search didn't return any results.</h4>
         </section>
       </main>
 
-      <section class="recipe-list__item content1 ">
+      <section class="recipe-list__item recipe-list-content1 content1 hidden">
         <article class="recipe">
           <section class="item-container">
             <div class="recipe-list__item">
@@ -269,7 +310,7 @@
               </figure>
             </div>
 
-            <div class="recipe-list__item">
+            <div class="recipe-list__item cooked-button hidden">
               <button>Cooked It!</button>
               <span>message</span>
             </div>
@@ -307,7 +348,7 @@
               </figure>
             </div>
 
-            <div class="recipe-list__item">
+            <div class="recipe-list__item cooked-button hidden">
               <button>Cooked It!</button>
               <span>message</span>
             </div>
@@ -337,7 +378,7 @@
         </article>
       </section>
 
-      <section class="recipe-list__item content2 hidden">
+      <section class="recipe-list__item recipe-list-content2 content2 hidden">
         <article class="recipe">
           <section class="item-container">
             <div class="recipe-list__item">
@@ -348,7 +389,7 @@
               </figure>
             </div>
 
-            <div class="recipe-list__item">
+            <div class="recipe-list__item cooked-button hidden">
               <button>Cooked It!</button>
               <span>message</span>
             </div>
@@ -386,7 +427,7 @@
               </figure>
             </div>
 
-            <div class="recipe-list__item">
+            <div class="recipe-list__item cooked-button hidden">
               <button>Cooked It!</button>
               <span>message</span>
             </div>

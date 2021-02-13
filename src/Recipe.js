@@ -12,7 +12,7 @@ class Recipe {
     const formatIngredients = ingredients.map(ingredient => {
       const formatIngredient = {
         id: ingredient.id,
-        amount: ingredient.quantity.amount,
+        amount: Math.round(ingredient.quantity.amount * 100) / 100,
         unit: ingredient.quantity.unit,
       };
       formatIngredient.name = this.getIngredientData(
