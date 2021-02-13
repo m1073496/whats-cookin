@@ -2,14 +2,11 @@
 const allRecipesButton = document.getElementById('all-recipes');
 const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
-// const landingSection1 = document.querySelector('.landing-content1');
-// const landingSection2 = document.querySelector('.landing-content2');
 const recipeListView = document.querySelector('.list-view');
 const recipeListContent1 = document.querySelector('.recipe-list-content1');
 const recipeListContent2 = document.querySelector('.recipe-list-content2');
 const recipeListTitle = document.querySelector('.recipe-list-h1');
-const recipeDetailContent1 = document.querySelector('.recipe-detail__bottom--left');
-const recipeDetailContent2 = document.querySelector('.recipe-detail__bottom--right');
+const recipeDetailContent = document.querySelector('.recipe-detail__bottom');
 const recipeTitle = document.querySelector('.recipe-title');
 
 let allRecipes;
@@ -30,9 +27,6 @@ const display = (element) => element.classList.remove('hidden');
 
 const displayRecipeList = () => {
   hide(landingView);
-  // hide(landingSection1);
-  // hide(landingSection2);
-
   display(recipeListView);
 }
 
@@ -121,8 +115,6 @@ const displayAllRecipes = () => {
 
 const displayRecipeDetailView = () => {
   hide(recipeListView);
-  display(recipeDetailContent1);
-  display(recipeDetailContent2);
 
   display(recipeDetailView);
 }
@@ -132,9 +124,9 @@ const displayRecipe = (id) => {
   let foundRecipe = allRecipes.recipes.find(recipe => recipe.id = id);
   recipeTitle.innerText = foundRecipe.name;
   foundRecipe.instructions.forEach(instruction => {
-    recipeDetailContent1.innerHTML += `
+    recipeDetailContent.innerHTML += `
       <ul>
-        <li>${instruction.number} ${instruction.instruction}</li>
+        <li>HELLO</li>
       </ul>
     `
   })
