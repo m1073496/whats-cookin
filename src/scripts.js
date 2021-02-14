@@ -74,17 +74,15 @@ const displayPantry = () => {
 }
 
 const displayRandomFavorites = () => {
-  // find four random favorites and put them into an array
-  // put those into the html
+  let chunk = '';
   let fourRandomRecipes = [];
   for (let i = 0; i < 4; i++) {
     let randIndex = Math.floor(Math.random() * allRecipes.recipes.length)
     fourRandomRecipes.push(allRecipes.recipes[randIndex]);
   }
 
-  // map each of the recipes like this
   fourRandomRecipes.map(recipe => {
-    featuredSectionSelector.innerHTML = `
+    chunk += `
       <article class="featured-section__recipe-profile">
         <figure>
           <img class="featured-section__recipe-profile--img"
@@ -95,6 +93,8 @@ const displayRandomFavorites = () => {
       </article>
     `
   })
+
+  featuredSectionSelector.innerHTML = chunk;
 }
 // *** END 🦄 Nikki's work 🦄 ***
 
