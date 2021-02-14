@@ -1,8 +1,8 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const { 
-  testRecipeData, 
+const {
+  testRecipeData,
 } = require('../data/test-data');
 
 const Recipe = require('../src/Recipe');
@@ -20,15 +20,15 @@ describe('Recipe', function() {
 
   it('should be an instance of Recipe', function() {
     expect(recipe).to.be.an.instanceof(Recipe);
-  }); 
+  });
 
   it('should have an id', function() {
     expect(recipe.id).to.equal(testRecipeData[0].id);
-  });  
+  });
 
   it('should have an image', function() {
     expect(recipe.image).to.equal(testRecipeData[0].image);
-  });  
+  });
 
   it('should be able to get ingredient data', function() {
     const sampleIngs = testRecipeData[0].ingredients;
@@ -91,6 +91,6 @@ describe('Recipe', function() {
   it('should be able calculate the cost of its ingredients', function() {
     const total = recipe.getTotalCost();
 
-    expect(total).to.equal(14836);
+    expect(total).to.equal(148.33);
   });
 });
