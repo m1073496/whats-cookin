@@ -121,18 +121,18 @@ const displayRecipe = (id) => {
 }
 
 // TODO incorporate into search function so those results are restricted
-const getRecipesByTag = () => {
-  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex];
-  let tagResults;
+// const getRecipesByTag = () => {
+//   const tagSelection = dropdownSelection.options[dropdownSelection.selectedIndex];
+//   let tagResults;
 
-  if (searchTerm.value === 'all') {
-    tagResults = allRecipes.recipes;
-  } else {
-    tagResults = allRecipes.filterByTag(searchTerm.value);
-  }
+//   if (tagSelection.value === 'all') {
+//     tagResults = allRecipes.recipes;
+//   } else {
+//     tagResults = allRecipes.filterByTag(tagSelection.value);
+//   }
 
-  displayRecipes(tagResults, `${searchTerm.innerText} recipes`);
-}
+//   displayRecipes(tagResults, `${tagSelection.innerText} recipes`);
+// }
 
 function formatInput(input) {
   return input.value.toLowerCase().split(' ');
@@ -144,22 +144,50 @@ function removeDuplicates(arr) {
 
 function search(input) {
   hide(searchError);
+
+  const tagSelection = dropdownSelection.options[dropdownSelection.selectedIndex];
+
+  let tagResults;
+  // if (tagSelection.value === 'all') {
+  //   tagResults = allRecipes;
+  // } else {
+  //   tagResults = new RecipeRepository(allRecipes.filterByTag(tagSelection.value));
+  // }
+  // if (tagSelection.value !== 'all') {
+  //   tagResults = new RecipeRepository(allRecipes.filterByTag(tagSelection.value));
+  // } else {
+  //   tagResults = allRecipes;
+  // }
+    tagResults = new RecipeRepository(allRecipes.filterByTag(tagSelection.value));
+
+    if (!tagResults.recipes.length === 0) {
+      tagResults = allRecipes;
+    }
+
+  console.log("tagResults: ", tagResults);
+
   const words = formatInput(input);
+  console.log("words: ", words);
 
   const foundIngredientRecipes = words.flatMap(word => {
-    return allRecipes.filterByIngredient(word);
+    return tagResults.filterByIngredient(word);
   });
 
   const foundNameRecipes = words.flatMap(word => {
-    return allRecipes.filterByName(word);
+    return tagResults.filterByName(word);
   });
 
   const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes];
 
   const result = removeDuplicates(foundRecipes);
+  console.log(result);
+
+  // const result = uniqueRecipes.filterByTag(tagSelection.value);
+
 
   if (result.length > 0) {
     displayRecipes(result, `Recipes matching "${input.value}"`);
+    // displayRecipes(tagResults, `${tagSelection.innerText} recipes`);
   } else {
     display(searchError);
   }
@@ -178,4 +206,8 @@ searchButton.addEventListener('click', function() {
   search(searchBarInput);
 });
 
-goButton.addEventListener('click', getRecipesByTag);
+// goButton.addEventListener('click', getRecipesByTag);
+
+goButton.addEventListener('click', function() {
+  search(searchBarInput);
+});
