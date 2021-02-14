@@ -193,10 +193,10 @@ const displayRecipe = (id) => {
   });
 }
 
-const getSearchTerm = () => {
-  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex];
-  const tagResults = allRecipes.filterByTag(searchTerm.value);
-  displayRecipes(tagResults, `${searchTerm.innerText} recipes`);
+const getTaggedRecipes = () => {
+  const selection = dropdownSelection.options[dropdownSelection.selectedIndex];
+  const tagResults = allRecipes.filterByTag(selection.value);
+  displayRecipes(tagResults, `${selection.innerText} recipes`);
 }
 
 function splitInput(input) {
@@ -248,7 +248,7 @@ searchButton.addEventListener('click', function() {
   search(searchBarInput);
 });
 
-goButton.addEventListener('click', getSearchTerm);
+goButton.addEventListener('click', getTaggedRecipes);
 
 homeSelector.addEventListener('click', displayLanding);
 
