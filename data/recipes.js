@@ -109,12 +109,8 @@ const recipeData = [
     ],
     "name": "Loaded Chocolate Chip Pudding Cookie Cups",
     "tags": [
-      "antipasti",
-      "starter",
-      "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
+      "dessert",
+      "snack"
     ]
   },
   {
@@ -342,7 +338,9 @@ const recipeData = [
     ],
     "name": "Dirty Steve's Original Wing Sauce",
     "tags": [
-      "sauce"
+      "sauce",
+      "condiment",
+      "dip"
     ]
   },
   {
@@ -466,7 +464,10 @@ const recipeData = [
     ],
     "name": "Elvis Pancakes",
     "tags": [
-      "side dish"
+      "side dish",
+      "breakfast",
+      "brunch",
+      "vegetarian"
     ]
   },
   {
@@ -629,7 +630,12 @@ const recipeData = [
       }
     ],
     "name": "Mock Udi\u2019s Gluten Free Whole Grain Bread",
-    "tags": []
+    "tags": [
+      "side dish",
+      "breakfast",
+      "brunch",
+      "vegetarian"
+    ]
   },
   {
     "id": 507921,
@@ -722,7 +728,9 @@ const recipeData = [
     ],
     "name": "Ambrosia Cupcakes",
     "tags": [
-      "side dish"
+      "dessert",
+      "snack",
+      "vegetarian"
     ]
   },
   {
@@ -842,7 +850,11 @@ const recipeData = [
     ],
     "name": "Creamy Coconut Yogurt Bowl with Chocolate Granola (Video)",
     "tags": [
-      "side dish"
+      "breakfast",
+      "brunch",
+      "snack",
+      "dessert",
+      "vegetarian"
     ]
   },
   {
@@ -927,12 +939,9 @@ const recipeData = [
     ],
     "name": "Sesame Cookies",
     "tags": [
-      "antipasti",
-      "starter",
+      "dessert",
       "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
+      "vegetarian"
     ]
   },
   {
@@ -1199,7 +1208,8 @@ const recipeData = [
       "lunch",
       "main course",
       "main dish",
-      "dinner"
+      "dinner",
+      "vegetarian"
     ]
   },
   {
@@ -1385,7 +1395,9 @@ const recipeData = [
     "tags": [
       "morning meal",
       "brunch",
-      "breakfast"
+      "breakfast",
+      "healthy",
+      "vegetarian"
     ]
   },
   {
@@ -1506,7 +1518,11 @@ const recipeData = [
     ],
     "name": "Cinnamon Raisin Overnight French Toast w/ Apple Filling",
     "tags": [
-      "side dish"
+      "side dish",
+      "breakfast",
+      "brunch",
+      "snack",
+      "vegetarian"
     ]
   },
   {
@@ -1589,7 +1605,9 @@ const recipeData = [
       "lunch",
       "main course",
       "main dish",
-      "dinner"
+      "dinner",
+      "side dish",
+      "appetizer"
     ]
   },
   {
@@ -1701,12 +1719,11 @@ const recipeData = [
     "name": "Baked Stuffed Artichokes",
     "tags": [
       "side dish",
-      "antipasti",
       "starter",
       "snack",
       "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
+      "hor d'oeuvre",
+      "vegetarian"
     ]
   },
   {
@@ -1853,7 +1870,10 @@ const recipeData = [
     ],
     "name": "Puppy Chow Cookies",
     "tags": [
-      "side dish"
+      "side dish",
+      "snack",
+      "dessert",
+      "vegetarian"
     ]
   },
   {
@@ -1980,7 +2000,9 @@ const recipeData = [
     ],
     "name": "Easy Creamy Potato Salad with Yogurt",
     "tags": [
-      "salad"
+      "salad",
+      "side dish",
+      "vegetarian"
     ]
   },
   {
@@ -2075,7 +2097,10 @@ const recipeData = [
     ],
     "name": "Slow-Cooker Italian-Stuffed Peppers",
     "tags": [
-      "side dish"
+      "side dish",
+      "vegetarian",
+      "appetizer",
+      "starter"
     ]
   },
   {
@@ -2198,12 +2223,12 @@ const recipeData = [
     ],
     "name": "Whole Wheat Milk and Honey Sandwich Bread",
     "tags": [
-      "antipasti",
       "starter",
       "snack",
       "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
+      "hor d'oeuvre",
+      "side dish",
+      "vegetarian"
     ]
   },
   {
@@ -2297,7 +2322,10 @@ const recipeData = [
     ],
     "name": "The Ultimate Healthy Soft & Chewy Pumpkin Chocolate Chip Cookies",
     "tags": [
-      "side dish"
+      "dessert",
+      "healthy",
+      "snack",
+      "vegetarian"
     ]
   },
   {
@@ -2370,7 +2398,9 @@ const recipeData = [
     ],
     "name": "Butterscotch Pudding",
     "tags": [
-      "side dish"
+      "dessert",
+      "snack",
+      "vegetarian"
     ]
   },
   {
@@ -2454,7 +2484,10 @@ const recipeData = [
     ],
     "name": "quinoa tabbouleh",
     "tags": [
-      "side dish"
+      "side dish",
+      "healthy",
+      "snack",
+      "vegetarian"
     ]
   },
   {
@@ -2535,12 +2568,13 @@ const recipeData = [
     ],
     "name": "Birthday Cake Jello Shots",
     "tags": [
-      "antipasti",
       "starter",
       "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
+      "alcohol",
+      "alcoholic",
+      "event",
+      "holiday",
+      "birthday",
     ]
   },
   {
@@ -2648,9 +2682,11 @@ const recipeData = [
     ],
     "name": "Artichoke Spinach Dip Stuffed Mushrooms",
     "tags": [
-      "condiment",
-      "dip",
-      "spread"
+      "starter",
+      "snack",
+      "appetizer",
+      "side dish",
+      "vegetarian"
     ]
   },
   {
@@ -2953,12 +2989,13 @@ const recipeData = [
       "lunch",
       "main course",
       "main dish",
-      "dinner"
+      "dinner",
+      "vegetarian"
     ]
   },
   {
     "id": 698701,
-    "image": "https://spoonacular.com/recipeImages/698701-556x370.jpg",
+    "image": "https://www.abeautifulplate.com/wp-content/uploads/2014/06/raspberry-souffle-1-5.jpg",
     "ingredients": [
       {
         "id": 10014623,
@@ -3026,7 +3063,9 @@ const recipeData = [
     ],
     "name": "Double Raspberry Souffl\u00e9s",
     "tags": [
-      "side dish"
+      "dessert",
+      "snack",
+      "vegetarian"
     ]
   },
   {
@@ -3142,12 +3181,12 @@ const recipeData = [
     ],
     "name": "A Cake To Warm Any Heart \u2013 Banana Split Cake",
     "tags": [
-      "antipasti",
-      "starter",
+      "dessert",
+      "event",
+      "birthday",
+      "holiday",
       "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
+      "vegetarian"
     ]
   },
   {
@@ -3246,7 +3285,10 @@ const recipeData = [
     ],
     "name": "Avocado Chickpea Salad",
     "tags": [
-      "salad"
+      "salad",
+      "healthy",
+      "side dish",
+      "vegetarian"
     ]
   },
   {
@@ -3329,7 +3371,8 @@ const recipeData = [
     ],
     "name": "Slow Cooker Peach Cobbler",
     "tags": [
-      "side dish"
+      "dessert",
+      "snack"
     ]
   },
   {
@@ -3497,12 +3540,10 @@ const recipeData = [
     ],
     "name": "4 Cheese White Pizza",
     "tags": [
-      "antipasti",
-      "starter",
       "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
+      "main dish",
+      "main course",
+      "vegetarian"
     ]
   },
   {
@@ -3575,7 +3616,10 @@ const recipeData = [
     ],
     "name": "Cereal Marshmallow Bars",
     "tags": [
-      "side dish"
+      "snack",
+      "breakfast",
+      "brunch",
+      "dessert"
     ]
   },
   {
@@ -3645,7 +3689,11 @@ const recipeData = [
     ],
     "name": "Hummus Deviled Eggs",
     "tags": [
-      "side dish"
+      "side dish",
+      "starter",
+      "hor d'oeuvres",
+      "appetizer",
+      "vegetarian"
     ]
   },
   {
@@ -3740,7 +3788,10 @@ const recipeData = [
     ],
     "name": "Creamsicle Pie",
     "tags": [
-      "side dish"
+      "dessert",
+      "snack",
+      "event",
+      "birthday"
     ]
   },
   {
@@ -3809,7 +3860,9 @@ const recipeData = [
     ],
     "name": "Smothered Green Beans",
     "tags": [
-      "side dish"
+      "side dish",
+      "appetizer",
+      "vegetarian"
     ]
   },
   {
@@ -3914,7 +3967,11 @@ const recipeData = [
     ],
     "name": "Pear & Walnut Salad with a Pear Vinaigrette",
     "tags": [
-      "salad"
+      "salad",
+      "healthy",
+      "side dish",
+      "vegetarian",
+      "vegan"
     ]
   },
   {
@@ -4016,7 +4073,10 @@ const recipeData = [
     ],
     "name": "Mexican Vegetables on Cornbread",
     "tags": [
-      "side dish"
+      "side dish",
+      "starter",
+      "appetizer",
+      "vegetarian"
     ]
   },
   {
@@ -4231,7 +4291,10 @@ const recipeData = [
     ],
     "name": "Clayudas",
     "tags": [
-      "side dish"
+      "side dish",
+      "snack",
+      "vegetarian",
+      "vegan"
     ]
   },
   {
@@ -4336,7 +4399,10 @@ const recipeData = [
       "lunch",
       "main course",
       "main dish",
-      "dinner"
+      "dinner",
+      "healthy",
+      "vegetarian",
+      "vegan"
     ]
   },
   {
@@ -4569,7 +4635,8 @@ const recipeData = [
       "snack",
       "appetizer",
       "antipasto",
-      "hor d'oeuvre"
+      "hor d'oeuvre",
+      "side dish"
     ]
   },
   {
@@ -4670,7 +4737,10 @@ const recipeData = [
     ],
     "name": "Curried Strawberry Chicken Salad",
     "tags": [
-      "salad"
+      "salad",
+      "healthy",
+      "side dish",
+      "brunch"
     ]
   },
   {
@@ -4914,7 +4984,8 @@ const recipeData = [
     ],
     "name": "Rolo Cookie Bars",
     "tags": [
-      "side dish"
+      "snack",
+      "dessert"
     ]
   },
   {
@@ -4983,7 +5054,9 @@ const recipeData = [
       "lunch",
       "main course",
       "main dish",
-      "dinner"
+      "dinner",
+      "appetizer",
+      "starter"
     ]
   },
   {
@@ -5085,12 +5158,8 @@ const recipeData = [
     ],
     "name": "Reese's Pieces Peanut Butter Cookies",
     "tags": [
-      "antipasti",
-      "starter",
       "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
+      "dessert"
     ]
   },
   {
@@ -5152,7 +5221,11 @@ const recipeData = [
     ],
     "name": "Farmer\u2019s Market Flatbread Pizza",
     "tags": [
-      "side dish"
+      "side dish",
+      "starter",
+      "appetizer",
+      "snack",
+      "vegetarian"
     ]
   },
   {
@@ -5326,7 +5399,12 @@ const recipeData = [
     ],
     "name": "Vegan Lentil Loaf",
     "tags": [
-      "side dish"
+      "side dish",
+      "appetizer",
+      "starter",
+      "healthy",
+      "vegan",
+      "vegetarian"
     ]
   },
   {
@@ -5403,7 +5481,10 @@ const recipeData = [
     ],
     "name": "Pastry Cream",
     "tags": [
-      "side dish"
+      "snack",
+      "dessert",
+      "event",
+      "birthday"
     ]
   }
 ];
