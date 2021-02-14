@@ -1,0 +1,28 @@
+const chai = require('chai');
+const expect = chai.expect;
+
+const = {
+  testUsersData
+} = require('../data/test-data');
+
+const User = require('../src/User');
+
+describe('User', function() {
+  let user1;
+  let user2;
+
+  beforeEach(function() {
+    user1 = new User(testUsersData[0]);
+    user2 = new User(testUsersData[1]);
+  });
+
+
+
+
+
+
+
+
+
+
+});
