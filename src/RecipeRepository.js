@@ -1,4 +1,4 @@
-// const Recipe = require('./src/Recipe');
+// const Recipe = require('./Recipe');
 
 class RecipeRepository {
   constructor(data) {
@@ -20,9 +20,7 @@ class RecipeRepository {
   }
 
   filterByName(searchTerm) {
-    return this.recipes.filter(recipe => {
-      return recipe.name.toLowerCase().includes(searchTerm);
-    });
+    return this.recipes.filter(recipe => recipe.name.toLowerCase().includes(searchTerm.toLowerCase()));
   }
 }
 

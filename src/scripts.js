@@ -13,13 +13,16 @@ const recipeDetailImage = document.querySelector('.detail-section__recipe-profil
 const ingredientsDetailList = document.querySelector('.ingredients-list');
 const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
+const featuredSectionSelector = document.querySelector('.featured-section');
+const heroSectionSelector = document.querySelector('.hero-section');
 
 let allRecipes;
 
 window.addEventListener('load', function() {
   console.log('🥺');
   allRecipes = new RecipeRepository(recipeData);
-  console.log(allRecipes);
+  displayMYFavorite()
+  displayRandomFavorites();
 
   hide(searchError);
 });
@@ -36,7 +39,7 @@ const displayRecipeList = () => {
 }
 
 
-// *** START Nikki's work ***
+// *** START 🦄 Nikki's 🦄 work ***
 const dropdownSelection = document.querySelector('#tag-selector');
 const goButton = document.getElementById('go')
 
@@ -71,8 +74,52 @@ const displayPantry = () => {
   display(pantryView);
 }
 
+const displayRandomFavorites = () => {
+  let chunk = '';
+  let fourRandomRecipes = [];
+  for (let i = 0; i < 4; i++) {
+    let randIndex = Math.floor(Math.random() * allRecipes.recipes.length)
+    fourRandomRecipes.push(allRecipes.recipes[randIndex]);
+  }
 
-// *** END Nikki's work ***
+  fourRandomRecipes.map(recipe => {
+    chunk += `
+      <article class="featured-section__recipe-profile">
+        <figure>
+          <img class="featured-section__recipe-profile--img"
+               src=${recipe.image}
+               alt=${recipe.name}>
+          <figcaption>${recipe.name}</figcaption>
+        </figure>
+      </article>
+    `
+  })
+
+  featuredSectionSelector.innerHTML = chunk;
+}
+
+const displayMYFavorite = () => {
+  let chunk = '';
+
+  const favorite = allRecipes.recipes[Math.floor(Math.random() * allRecipes.recipes.length)]
+
+    chunk += `
+      <section class="hero-section__box" data-id=${favorite.id}>
+        <section class="hero-section__box--recipe-name">
+          <h3>${favorite.name}</h3>
+        </section>
+        <section class="hero-section__box--icons">
+          <i class="far fa-heart"></i>
+          <i class="far fa-calendar"></i>
+        </section>
+      </section>
+    `
+
+  console.log(favorite);
+  heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
+  heroSectionSelector.innerHTML = chunk;
+}
+// *** END 🦄 Nikki's work 🦄 ***
 
 
 const displayAllRecipes = () => {
