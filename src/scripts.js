@@ -5,7 +5,7 @@ const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
 const recipeListContent1 = document.querySelector('.recipe-list-content1');
 const recipeListContent2 = document.querySelector('.recipe-list-content2');
-const recipeListTitle = document.querySelector('.recipe-list-h1');
+const recipeListTitle = document.querySelector('.recipe-list-title');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
@@ -182,7 +182,7 @@ function search(input) {
   console.log("final result: ", result);
 
   if (result.length > 0) {
-    displayRecipes(result);
+    displayRecipes(result, `Recipes matching "${input.value}"`);
   } else {
     display(searchError);
   }
@@ -196,14 +196,9 @@ function removeDuplicates(arr) {
   return [...new Set(arr)];
 }
 
-const displayRecipes = (recipeList) => {
+const displayRecipes = (recipeList, title) => {
   displayRecipeList();
-
-  if (recipeList === 'allRecipes') {
-    recipeListTitle.innerText = "All recipes";
-  } else if (recipeList === 'searchResults') {
-    recipeListTitle.innerText = "Search results";
-  }
+  recipeListTitle.innerText = title;
 
   recipeList.forEach(recipe => {
     let newRecipeItem = document.createElement('article');
