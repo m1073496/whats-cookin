@@ -17,11 +17,11 @@ describe('RecipeRepository', () => {
   });
 
   it('should filter tags using a search term', () => {
-    expect(recipeRepository.filterByTag('side dish').length).to.equal(2)
+    expect(recipeRepository.filterByTag(['side dish', 'sauce']).length).to.equal(2)
   });
 
   it('should have no length when tag filter returns no results', () => {
-    expect(recipeRepository.filterByTag('midnight snack').length).to.equal(0)
+    expect(recipeRepository.filterByTag(['midnight snack']).length).to.equal(0)
   });
 
   it('should filter ingredients using a search term', () => {
