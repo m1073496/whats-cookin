@@ -120,33 +120,19 @@ const displayRecipe = (id) => {
   })
 }
 
-
-// *** START Nikki's work ***
-
-// TODO compare with Katie stuff; maybe merge/refactor/etc.
-const getSearchTerm = () => {
+// TODO incorporate into search function so those results are restricted
+const getRecipesByTag = () => {
   const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex];
-  console.log("dropdown selection: ", dropdownSelection);
-  console.log("dd sel options: ", dropdownSelection.options);
-  console.log("dd sel selectedIndex: ", dropdownSelection.selectedIndex);
+  let tagResults;
 
-  // if (searchTerm === '') {
-  //   // todo ==> make this an actual message/response
-  //   alert("you must make a selection")
-  // } else {
-    const tagResults = allRecipes.filterByTag(searchTerm.value);
-    displayRecipes(tagResults, `${searchTerm.innerText} recipes`);
-  // }
+  if (searchTerm.value === 'all') {
+    tagResults = allRecipes.recipes;
+  } else {
+    tagResults = allRecipes.filterByTag(searchTerm.value);
+  }
+
+  displayRecipes(tagResults, `${searchTerm.innerText} recipes`);
 }
-
-// const filterByTag = (tag) => {
-//   return allRecipes.filterByTag(tag);
-// }
-// *** END Nikki's work ***
-
-
-
-/* 📌 Katie's Ticket 📌 */
 
 function formatInput(input) {
   return input.value.toLowerCase().split(' ');
@@ -159,23 +145,18 @@ function removeDuplicates(arr) {
 function search(input) {
   hide(searchError);
   const words = formatInput(input);
-  console.log("formatted input: ", words);
 
   const foundIngredientRecipes = words.flatMap(word => {
     return allRecipes.filterByIngredient(word);
   });
-  console.log("found ingredient recipes: ", foundIngredientRecipes);
 
   const foundNameRecipes = words.flatMap(word => {
     return allRecipes.filterByName(word);
   });
-  console.log("found name recipes: ", foundNameRecipes);
 
   const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes];
-  console.log("found recipes: ", foundRecipes);
 
   const result = removeDuplicates(foundRecipes);
-  console.log("final result: ", result);
 
   if (result.length > 0) {
     displayRecipes(result, `Recipes matching "${input.value}"`);
@@ -183,7 +164,6 @@ function search(input) {
     display(searchError);
   }
 }
-/* 📌 End Katie's Ticket 📌 */
 
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -198,4 +178,4 @@ searchButton.addEventListener('click', function() {
   search(searchBarInput);
 });
 
-goButton.addEventListener('click', getSearchTerm);
+goButton.addEventListener('click', getRecipesByTag);
