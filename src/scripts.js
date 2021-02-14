@@ -13,6 +13,7 @@ const recipeDetailImage = document.querySelector('.detail-section__recipe-profil
 const ingredientsDetailList = document.querySelector('.ingredients-list');
 const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
+const featuredSectionSelector = document.querySelector('.featured-section');
 
 let allRecipes;
 
@@ -36,7 +37,7 @@ const displayRecipeList = () => {
 }
 
 
-// *** START Nikki's work ***
+// *** START 🦄 Nikki's 🦄 work ***
 const dropdownSelection = document.querySelector('#tag-selector');
 const goButton = document.getElementById('go')
 
@@ -71,8 +72,35 @@ const displayPantry = () => {
   display(pantryView);
 }
 
+const displayRandomFavorites = () => {
+  // find four random favorites and put them into an array
+  // put those into the html
+  let fourRandomRecipes = [];
+  const getFourRandomRecipes = () => {
+    for (let i = 0; i < 4; i++) {
+      fourRandomRecipes.push(allRecipes[Math.floor(Math.random() * allRecipes.length)]);
+    }
+    return fourRandomRecipes;
+  }
 
-// *** END Nikki's work ***
+  // map each of the recipes like this
+  fourRandomRecipes.map(recipe => {
+    featuredSectionSelector.innerHTML = `
+      <article class="featured-section__recipe-profile">
+        <figure>
+          <img class="featured-section__recipe-profile--img"
+               src=${recipe.image}
+               alt=${recipe.name}>
+          <figcaption>${recipe.name}</figcaption>
+        </figure>
+      </article>
+    `
+  })
+
+}
+
+
+// *** END 🦄 Nikki's work 🦄 ***
 
 
 const displayAllRecipes = () => {
