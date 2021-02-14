@@ -34,7 +34,7 @@ describe('RecipeRepository', () => {
   });
 
   it('should filter by recipe name', () => {
-    expect(recipeRepository.filterByName('Vegan Lentil Loaf').length).to.equal(1)
+    expect(recipeRepository.filterByName('Lentil').length).to.equal(1)
   });
 
   it('should have results of 0 if recipe name not found', () => {

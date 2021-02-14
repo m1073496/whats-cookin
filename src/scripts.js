@@ -14,13 +14,14 @@ const ingredientsDetailList = document.querySelector('.ingredients-list');
 const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
+const heroSectionSelector = document.querySelector('.hero-section');
 
 let allRecipes;
 
 window.addEventListener('load', function() {
   console.log('🥺');
   allRecipes = new RecipeRepository(recipeData);
-  console.log(allRecipes);
+  displayMYFavorite()
   displayRandomFavorites();
 
   hide(searchError);
@@ -95,6 +96,28 @@ const displayRandomFavorites = () => {
   })
 
   featuredSectionSelector.innerHTML = chunk;
+}
+
+const displayMYFavorite = () => {
+  let chunk = '';
+
+  const favorite = allRecipes.recipes[Math.floor(Math.random() * allRecipes.recipes.length)]
+
+    chunk += `
+      <section class="hero-section__box" data-id=${favorite.id}>
+        <section class="hero-section__box--recipe-name">
+          <h3>${favorite.name}</h3>
+        </section>
+        <section class="hero-section__box--icons">
+          <i class="far fa-heart"></i>
+          <i class="far fa-calendar"></i>
+        </section>
+      </section>
+    `
+
+  console.log(favorite);
+  heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
+  heroSectionSelector.innerHTML = chunk;
 }
 // *** END 🦄 Nikki's work 🦄 ***
 
