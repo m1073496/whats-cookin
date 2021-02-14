@@ -2,15 +2,15 @@
 const allRecipesButton = document.getElementById('all-recipes');
 const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
-const landingSection1 = document.querySelector('.landing-content1');
-const landingSection2 = document.querySelector('.landing-content2');
 const recipeListView = document.querySelector('.list-view');
 const recipeListContent1 = document.querySelector('.recipe-list-content1');
 const recipeListContent2 = document.querySelector('.recipe-list-content2');
 const recipeListTitle = document.querySelector('.recipe-list-h1');
-const recipeDetailContent1 = document.querySelector('.recipe-detail__bottom--left');
-const recipeDetailContent2 = document.querySelector('.recipe-detail__bottom--right');
 const recipeTitle = document.querySelector('.recipe-title');
+const recipeInstructions = document.querySelector('.instructions-details')
+const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
+const ingredientsDetailList = document.querySelector('.ingredients-list');
+
 
 let allRecipes;
 
@@ -30,9 +30,6 @@ const display = (element) => element.classList.remove('hidden');
 
 const displayRecipeList = () => {
   hide(landingView);
-  hide(landingSection1);
-  hide(landingSection2);
-
   display(recipeListView);
 }
 
@@ -60,7 +57,7 @@ const filterByTag = (tag) => {
 
 goButton.addEventListener('click', getSearchTerm);
 // *** END Nikki's work ***
- 
+
 
 const displayAllRecipes = () => {
   displayRecipeList();
@@ -69,7 +66,7 @@ const displayAllRecipes = () => {
   allRecipes.recipes.forEach(recipe => {
     let newRecipeItem = document.createElement('article');
     let parent = document.querySelector('.list-view')
-    newRecipeItem.className = 'recipe content1';
+    newRecipeItem.className = 'recipe';
     newRecipeItem.id = recipe.id;
     parent.appendChild(newRecipeItem);
 
@@ -101,10 +98,7 @@ const displayAllRecipes = () => {
           <i class="fal fa-ellipsis-h"></i>${recipe.name}
         </li>
         <li>
-          <i class="far fa-check-circle"></i>${recipe.ingredients[0].amount} ${recipe.ingredients[0].unit} ${recipe.ingredients[0].name}
-        </li>
-        <li>
-          <i class="far fa-times-circle"></i>${recipe.ingredients[1].amount} ${recipe.ingredients[1].unit} ${recipe.ingredients[1].name}
+          <i class="far fa-check-circle"></i>You have everything needed to make this recipe!
         </li>
         <li>
           <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
@@ -112,33 +106,42 @@ const displayAllRecipes = () => {
       </ul>
     </section>
   `
-  newRecipeItem.addEventListener('click', function(e) {
-    let target = e.target.id;
+  newRecipeItem.addEventListener('click', function() {
+    let target = newRecipeItem.id;
     displayRecipe(target);
-  });
+  })
 })
 }
 
 const displayRecipeDetailView = () => {
   hide(recipeListView);
-  display(recipeDetailContent1);
-  display(recipeDetailContent2);
-
   display(recipeDetailView);
 }
 
 const displayRecipe = (id) => {
   displayRecipeDetailView();
-  let foundRecipe = allRecipes.recipes.find(recipe => recipe.id = id);
-  recipeTitle.innerText = foundRecipe.name;
-  foundRecipe.instructions.forEach(instruction => {
-    recipeDetailContent1.innerHTML += `
-      <ul>
-        <li>${instruction.number} ${instruction.instruction}</li>
-      </ul>
-    `
-  })
+  let foundRecipe = allRecipes.recipes.find(recipe => {
+    return recipe.id === parseInt(id);
+  });
 
+  recipeTitle.innerText = foundRecipe.name;
+  recipeDetailImage.innerHTML = `
+    <img src="${foundRecipe.image}" alt="${foundRecipe.name}">
+    <figcaption>Meal cost: $${foundRecipe.getTotalCost()}</figcaption>
+  `;
+  foundRecipe.ingredients.forEach(ingredient => {
+    ingredientsDetailList.innerHTML += `
+      <article class="ingredients__item">
+        <i class="far fa-times-circle"></i>
+        ${ingredient.amount} ${ingredient.unit} ${ingredient.name} <span class="ingredients__message">You'll need xyz more of this.</span>
+      </article>
+    `;
+  })
+  foundRecipe.instructions.forEach(instruction => {
+    recipeInstructions.innerHTML += `
+      <li>${instruction.number}. ${instruction.instruction}</li>
+    `;
+  })
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -149,8 +152,8 @@ allRecipesButton.addEventListener('click', displayAllRecipes);
 
 /* 📌 Katie's Ticket 📌 */
 const searchBarInput = document.querySelector('.search-bar');
-const searchButton = document.querySelector('.search-button');	
-const searchError = document.querySelector('.search-error');	
+const searchButton = document.querySelector('.search-button');
+const searchError = document.querySelector('.search-error');
 
 
 searchButton.addEventListener('click', function() {
@@ -187,7 +190,7 @@ function search(input) {
 
 function formatInput(input) {
   return input.value.toLowerCase().split(' ');
-} 
+}
 
 function removeDuplicates(arr) {
   return [...new Set(arr)];
