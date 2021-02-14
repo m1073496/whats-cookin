@@ -1,3 +1,5 @@
+const { ingredientsData } = require('../data/ingredients');
+
 class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
@@ -44,10 +46,10 @@ class Recipe {
     let sum = 0;
 
     this.ingredients.forEach(ingredient => {
-      sum += ingredient.amount * ingredient.costPerUnit;
+      sum += ingredient.totalCostInCents;
     });
 
-    return sum;
+    return Math.round(sum) / 100;
   }
 }
 
