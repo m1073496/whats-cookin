@@ -138,7 +138,7 @@ const displayAllRecipes = () => {
       <section class="item-container">
         <div class="recipe-list__item">
           <figure>
-            <img class="pantry__recipe-profile--img"
+            <img class="recipe-list__item--img"
                  src="${recipe.image}"
                  alt="${recipe.name}">
           </figure>
