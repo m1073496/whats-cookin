@@ -204,8 +204,8 @@ const getSearchTerm = () => {
   displayRecipes(tagResults, `${searchTerm.innerText} recipes`);
 }
 
-function formatInput(input) {
-  return input.value.toLowerCase().split(' ');
+function splitInput(input) {
+  return input.value.split(' ');
 }
 
 function removeDuplicates(arr) {
@@ -214,7 +214,7 @@ function removeDuplicates(arr) {
 
 function search(input) {
   hide(searchError);
-  const words = formatInput(input);
+  const words = splitInput(input);
   console.log("formatted input: ", words);
 
   const foundIngredientRecipes = words.flatMap(word => {
