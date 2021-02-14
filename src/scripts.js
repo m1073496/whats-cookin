@@ -21,6 +21,7 @@ window.addEventListener('load', function() {
   console.log('🥺');
   allRecipes = new RecipeRepository(recipeData);
   console.log(allRecipes);
+  displayRandomFavorites();
 
   hide(searchError);
 });
@@ -76,11 +77,9 @@ const displayRandomFavorites = () => {
   // find four random favorites and put them into an array
   // put those into the html
   let fourRandomRecipes = [];
-  const getFourRandomRecipes = () => {
-    for (let i = 0; i < 4; i++) {
-      fourRandomRecipes.push(allRecipes[Math.floor(Math.random() * allRecipes.length)]);
-    }
-    return fourRandomRecipes;
+  for (let i = 0; i < 4; i++) {
+    let randIndex = Math.floor(Math.random() * allRecipes.recipes.length)
+    fourRandomRecipes.push(allRecipes.recipes[randIndex]);
   }
 
   // map each of the recipes like this
@@ -96,10 +95,7 @@ const displayRandomFavorites = () => {
       </article>
     `
   })
-
 }
-
-
 // *** END 🦄 Nikki's work 🦄 ***
 
 
