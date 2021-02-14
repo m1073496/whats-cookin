@@ -59,60 +59,6 @@ goButton.addEventListener('click', getSearchTerm);
 // *** END Nikki's work ***
 
 
-const displayAllRecipes = () => {
-  displayRecipeList();
-  recipeListTitle.innerText = "All";
-
-  allRecipes.recipes.forEach(recipe => {
-    let newRecipeItem = document.createElement('article');
-    let parent = document.querySelector('.list-view')
-    newRecipeItem.className = 'recipe';
-    newRecipeItem.id = recipe.id;
-    parent.appendChild(newRecipeItem);
-
-
-    newRecipeItem.innerHTML += `
-    <section class="item-container">
-      <div class="recipe-list__item">
-        <figure>
-          <img class="pantry__recipe-profile--img"
-               src="${recipe.image}"
-               alt="${recipe.name}">
-        </figure>
-      </div>
-
-      <div class="recipe-list__item cooked-button hidden">
-        <button>Cooked It!</button>
-        <span>message</span>
-      </div>
-
-      <div class="recipe-list__item">
-        <span><i class="far fa-heart"></i></span>
-        <span><i class="far fa-calendar-check"></i></span>
-      </div>
-    </section>
-
-    <section class="recipe-list__item">
-      <ul class="ingredients-and-cost">
-        <li>
-          <i class="fal fa-ellipsis-h"></i>${recipe.name}
-        </li>
-        <li>
-          <i class="far fa-check-circle"></i>You have everything needed to make this recipe!
-        </li>
-        <li>
-          <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
-        </li>
-      </ul>
-    </section>
-  `
-  newRecipeItem.addEventListener('click', function() {
-    let target = newRecipeItem.id;
-    displayRecipe(target);
-  })
-})
-}
-
 const displayRecipeDetailView = () => {
   hide(recipeListView);
   display(recipeDetailView);
@@ -146,7 +92,9 @@ const displayRecipe = (id) => {
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-allRecipesButton.addEventListener('click', displayAllRecipes);
+allRecipesButton.addEventListener('click', function() {
+  displayRecipes(allRecipes.recipes, 'All recipes');
+});
 // recipeListView.addEventListener('click', displayRecipe);
 
 
