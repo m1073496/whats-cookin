@@ -15,7 +15,7 @@ class RecipeRepository {
 
   filterByIngredient(searchTerm) {
     return this.recipes.filter(recipe => {
-      return recipe.ingredients.find(ingredient => ingredient.name.includes(searchTerm.toLowerCase()))
+      return recipe.ingredients.find(ingredient => ingredient.name.toLowerCase().includes(searchTerm.toLowerCase()))
     })
   }
 
