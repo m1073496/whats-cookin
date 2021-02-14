@@ -10,17 +10,21 @@ class RecipeRepository {
       if (recipe.tags.includes(searchTerm.toLowerCase())) {
         return recipe.id;
       }
-    })
+    });
   }
 
   filterByIngredient(searchTerm) {
     return this.recipes.filter(recipe => {
-      return recipe.ingredients.find(ingredient => ingredient.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    })
+      return recipe.ingredients.find(ingredient => {
+        return ingredient.name.toLowerCase().includes(searchTerm.toLowerCase());
+      });
+    });
   }
 
   filterByName(searchTerm) {
-    return this.recipes.filter(recipe => recipe.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    return this.recipes.filter(recipe => {
+      return recipe.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
   }
 }
 
