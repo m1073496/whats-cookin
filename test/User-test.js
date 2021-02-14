@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const = {
+const {
   testUsersData
 } = require('../data/test-data');
 
@@ -29,12 +29,12 @@ describe('User', function() {
   });
 
   it('should have a unique id', function() {
-    expect(user1.id).to.equal(testUsersData[0].id);
-    expect(user1.id).to.not.equal(user2.id);
+    expect(user1.userId).to.equal(testUsersData[0].id);
+    expect(user1.userId).to.not.equal(user2.userId);
   });
 
   it('should have a pantry of ingredients', function() {
-    expect(user1.pantry).to.deep.equal(testUsersData[0].pantry);
+    expect(user1.userPantry).to.deep.equal(testUsersData[0].pantry);
   });
 
 
