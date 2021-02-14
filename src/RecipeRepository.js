@@ -5,11 +5,13 @@ class RecipeRepository {
     this.recipes = data.map(recipe => new Recipe(recipe));
   }
 
-  filterByTag(searchTerm) {
-    return this.recipes.filter(recipe => {
-      if (recipe.tags.includes(searchTerm)) {
-        return recipe.id;
-      }
+  filterByTag(searchTerms) {
+    searchTerms.map(term => {
+      return this.recipes.filter(recipe => {
+        if (recipe.tags.includes(term)) {
+          return recipe.id;
+        }
+      })
     })
   }
 
