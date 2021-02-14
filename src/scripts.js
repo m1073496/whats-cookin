@@ -4,8 +4,6 @@ const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
 const pantryView = document.querySelector('.pantry-view');
-const recipeListContent1 = document.querySelector('.recipe-list-content1');
-const recipeListContent2 = document.querySelector('.recipe-list-content2');
 const recipeListTitle = document.querySelector('.recipe-list-title');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
@@ -67,6 +65,8 @@ const displayPantry = () => {
 const displayRandomFavorites = () => {
   let chunk = '';
   let fourRandomRecipes = [];
+
+  // TODO need to use one of the new prototype methods for this?
   for (let i = 0; i < 4; i++) {
     let randIndex = Math.floor(Math.random() * allRecipes.recipes.length)
     fourRandomRecipes.push(allRecipes.recipes[randIndex]);
@@ -83,7 +83,7 @@ const displayRandomFavorites = () => {
         </figure>
       </article>
     `
-  })
+  });
 
   featuredSectionSelector.innerHTML = chunk;
 }
@@ -91,19 +91,21 @@ const displayRandomFavorites = () => {
 const displayMYFavorite = () => {
   let chunk = '';
 
-  const favorite = allRecipes.recipes[Math.floor(Math.random() * allRecipes.recipes.length)]
+  const favorite = allRecipes.recipes[
+    Math.floor(Math.random() * allRecipes.recipes.length)
+  ];
 
-    chunk += `
-      <section class="hero-section__box" data-id=${favorite.id}>
-        <section class="hero-section__box--recipe-name">
-          <h3>${favorite.name}</h3>
-        </section>
-        <section class="hero-section__box--icons">
-          <i class="far fa-heart"></i>
-          <i class="far fa-calendar"></i>
-        </section>
+  chunk += `
+    <section class="hero-section__box" data-id=${favorite.id}>
+      <section class="hero-section__box--recipe-name">
+        <h3>${favorite.name}</h3>
       </section>
-    `
+      <section class="hero-section__box--icons">
+        <i class="far fa-heart"></i>
+        <i class="far fa-calendar"></i>
+      </section>
+    </section>
+  `;
 
   console.log(favorite);
   heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
@@ -149,19 +151,21 @@ const displayRecipes = (recipeList, title) => {
             <i class="fal fa-ellipsis-h"></i>${recipe.name}
           </li>
           <li>
-            <i class="far fa-check-circle"></i>You have everything needed to make this recipe!
+            <i class="far fa-check-circle"></i>
+            You have everything needed to make this recipe!
           </li>
           <li>
             <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
           </li>
         </ul>
       </section>
-    `
-  newRecipeItem.addEventListener('click', function() {
-    let target = newRecipeItem.id;
-    displayRecipe(target);
+    `;
+
+    newRecipeItem.addEventListener('click', function() {
+      let target = newRecipeItem.id;
+      displayRecipe(target);
+    });
   });
-});
 }
 
 const displayRecipe = (id) => {
@@ -190,51 +194,15 @@ const displayRecipe = (id) => {
   });
 }
 
-
-// TODO can this original version be cut?
-// Nikki's original filter by tag
-{/* // TODO compare with Katie stuff; maybe merge/refactor/etc.
-const getSearchTerm = () => {
-  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex].value;
-
-  if (searchTerm === '') {
-    // todo ==> make this an actual message/response
-    alert("you must make a selection")
-  } else {
-    filterByTag(searchTerm);
-    displayRecipeList();
-  }
-}
-
-const filterByTag = (tag) => {
-  return allRecipes.filterByTag(tag)
-} */}
-
-
 const getSearchTerm = () => {
   const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex];
   console.log("dropdown selection: ", dropdownSelection);
   console.log("dd sel options: ", dropdownSelection.options);
   console.log("dd sel selectedIndex: ", dropdownSelection.selectedIndex);
 
-  // if (searchTerm === '') {
-  //   // todo ==> make this an actual message/response
-  //   alert("you must make a selection")
-  // } else {
   const tagResults = allRecipes.filterByTag(searchTerm.value);
   displayRecipes(tagResults, `${searchTerm.innerText} recipes`);
-  // }
 }
-
-// TODO pretty sure this original chunk can be cut -- it's incorporated above
-// const filterByTag = (tag) => {
-//   return allRecipes.filterByTag(tag);
-// }
-
-
-
-
-/* 📌 Katie's Ticket 📌 */
 
 function formatInput(input) {
   return input.value.toLowerCase().split(' ');
@@ -271,7 +239,6 @@ function search(input) {
     display(searchError);
   }
 }
-/* 📌 End Katie's Ticket 📌 */
 
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
