@@ -22,8 +22,9 @@ const heroSectionSelector = document.querySelector('.hero-section');
 let allRecipes;
 
 window.addEventListener('load', function() {
-  console.log('🥺');
+  console.log('page loaded 🥺');
   allRecipes = new RecipeRepository(recipeData);
+  console.log("on page load allRecipes.recipes: ", allRecipes.recipes);
   displayMYFavorite();
   displayRandomFavorites();
   hide(searchError);
@@ -94,6 +95,8 @@ const displayMYFavorite = () => {
     Math.floor(Math.random() * allRecipes.recipes.length)
   ];
 
+  console.log("inside displayMYFavorite allRecipes.recipes: ", allRecipes.recipes);
+
   chunk += `
     <section class="hero-section__box" data-id=${favorite.id}>
       <section class="hero-section__box--recipe-name">
@@ -106,14 +109,16 @@ const displayMYFavorite = () => {
     </section>
   `;
 
-  console.log(favorite);
+  // console.log(favorite);
   heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
   heroSectionSelector.innerHTML = chunk;
 }
 // *** END 🦄 Nikki's work 🦄 ***
 
 
+
 const displayRecipes = (recipeList, title) => {
+  console.log("inside displayRecipes allRecipes.recipes: ", allRecipes.recipes);
   displayRecipeList();
   recipeListTitle.innerText = title;
 
@@ -168,6 +173,7 @@ const displayRecipes = (recipeList, title) => {
 }
 
 const displayRecipe = (id) => {
+  console.log("log3 allRecipes.recipes: ", allRecipes.recipes);
   displayRecipeDetailView();
   let foundRecipe = allRecipes.recipes.find(recipe => {
     return recipe.id === parseInt(id);
@@ -205,6 +211,37 @@ function splitInput(input) {
 
 function removeDuplicates(arr) {
   return [...new Set(arr)];
+}
+
+const filterByTag = (searchTag, recipes) => {
+  return recipes.filter(recipe => {
+    if (recipe.tags.includes(searchTag.toLowerCase())) {
+      return recipe.id;
+    }
+  });
+}
+
+// const testArray = [{id: 123, tags: ['aaaaa', 'blah']}, {id: 124, tags: ['aaaba', 'bah']}, {id: 125, tags: ['aaaca', 'boo']}];
+// const test0 = filterByTag('aaaba', testArray);
+// console.log("test0: ", test0);
+
+// console.log("allRecipes: ", allRecipes);
+// console.log("allRecipes.recipes: ", allRecipes.recipes); // not working
+// const test1 = filterByTag('breakfast', allRecipes.recipes);
+// console.log("test1: ", test1);
+
+const filterByIngredient = (searchIng, recipes) => {
+  return recipes.filter(recipe => {
+    return recipe.ingredients.find(ingredient => {
+      return ingredient.name.toLowerCase().includes(searchIng.toLowerCase());
+    });
+  });
+}
+
+const filterByName = (searchName, recipes) => {
+  return recipes.filter(recipe => {
+    return recipe.name.toLowerCase().includes(searchName.toLowerCase());
+  });
 }
 
 function search(input) {
