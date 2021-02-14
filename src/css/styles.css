@@ -289,6 +289,7 @@ select:focus {
 }
 
 /* *** Recipe detail *** */
+
 .recipe-detail__top {
     display: flex;
     flex-flow: row nowrap;
@@ -302,8 +303,8 @@ select:focus {
     justify-content: space-around;
 }
 
-.recipe-detail__bottom--left {
-
+.recipe-list__item--img {
+    margin: 0 20px;
 }
 
 .instructions-title {
@@ -338,14 +339,14 @@ select:focus {
     margin: 10px 5px;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: flex-start;
 }
 
 .item-container {
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -354,7 +355,6 @@ select:focus {
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
-
 }
 
 ul {
