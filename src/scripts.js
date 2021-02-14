@@ -125,20 +125,23 @@ const displayRecipe = (id) => {
 
 // TODO compare with Katie stuff; maybe merge/refactor/etc.
 const getSearchTerm = () => {
-  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex].value;
+  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex];
+  console.log("dropdown selection: ", dropdownSelection);
+  console.log("dd sel options: ", dropdownSelection.options);
+  console.log("dd sel selectedIndex: ", dropdownSelection.selectedIndex);
 
-  if (searchTerm === '') {
-    // todo ==> make this an actual message/response
-    alert("you must make a selection")
-  } else {
-    filterByTag(searchTerm);
-    displayRecipeList();
-  }
+  // if (searchTerm === '') {
+  //   // todo ==> make this an actual message/response
+  //   alert("you must make a selection")
+  // } else {
+    const tagResults = allRecipes.filterByTag(searchTerm.value);
+    displayRecipes(tagResults, `${searchTerm.innerText} recipes`);
+  // }
 }
 
-const filterByTag = (tag) => {
-  return allRecipes.filterByTag(tag)
-}
+// const filterByTag = (tag) => {
+//   return allRecipes.filterByTag(tag);
+// }
 // *** END Nikki's work ***
 
 
