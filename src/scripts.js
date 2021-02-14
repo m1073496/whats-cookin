@@ -10,6 +10,11 @@ const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
 const ingredientsDetailList = document.querySelector('.ingredients-list');
+const searchBarInput = document.querySelector('.search-bar');
+const searchButton = document.querySelector('.search-button');
+const searchError = document.querySelector('.search-error');
+const dropdownSelection = document.querySelector('#tag-selector');
+const goButton = document.getElementById('go')
 
 
 let allRecipes;
@@ -33,115 +38,9 @@ const displayRecipeList = () => {
   display(recipeListView);
 }
 
-
-// *** START Nikki's work ***
-const dropdownSelection = document.querySelector('#tag-selector');
-const goButton = document.getElementById('go')
-
-// TODO compare with Katie stuff; maybe merge/refactor/etc.
-const getSearchTerm = () => {
-  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex].value;
-
-  if (searchTerm === '') {
-    // todo ==> make this an actual message/response
-    alert("you must make a selection")
-  } else {
-    filterByTag(searchTerm);
-    displayRecipeList();
-  }
-}
-
-const filterByTag = (tag) => {
-  return allRecipes.filterByTag(tag)
-}
-
-goButton.addEventListener('click', getSearchTerm);
-// *** END Nikki's work ***
-
-
 const displayRecipeDetailView = () => {
   hide(recipeListView);
   display(recipeDetailView);
-}
-
-const displayRecipe = (id) => {
-  displayRecipeDetailView();
-  let foundRecipe = allRecipes.recipes.find(recipe => {
-    return recipe.id === parseInt(id);
-  });
-
-  recipeTitle.innerText = foundRecipe.name;
-  recipeDetailImage.innerHTML = `
-    <img src="${foundRecipe.image}" alt="${foundRecipe.name}">
-    <figcaption>Meal cost: $${foundRecipe.getTotalCost()}</figcaption>
-  `;
-  foundRecipe.ingredients.forEach(ingredient => {
-    ingredientsDetailList.innerHTML += `
-      <article class="ingredients__item">
-        <i class="far fa-times-circle"></i>
-        ${ingredient.amount} ${ingredient.unit} ${ingredient.name} <span class="ingredients__message">You'll need xyz more of this.</span>
-      </article>
-    `;
-  })
-  foundRecipe.instructions.forEach(instruction => {
-    recipeInstructions.innerHTML += `
-      <li>${instruction.number}. ${instruction.instruction}</li>
-    `;
-  })
-}
-
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-allRecipesButton.addEventListener('click', function() {
-  displayRecipes(allRecipes.recipes, 'All recipes');
-});
-// recipeListView.addEventListener('click', displayRecipe);
-
-
-/* 📌 Katie's Ticket 📌 */
-const searchBarInput = document.querySelector('.search-bar');
-const searchButton = document.querySelector('.search-button');
-const searchError = document.querySelector('.search-error');
-
-
-searchButton.addEventListener('click', function() {
-  search(searchBarInput);
-});
-
-function search(input) {
-  hide(searchError);
-  const words = formatInput(input);
-  console.log("formatted input: ", words);
-
-  const foundIngredientRecipes = words.flatMap(word => {
-    return allRecipes.filterByIngredient(word);
-  });
-  console.log("found ingredient recipes: ", foundIngredientRecipes);
-
-  const foundNameRecipes = words.flatMap(word => {
-    return allRecipes.filterByName(word);
-  });
-  console.log("found name recipes: ", foundNameRecipes);
-
-  const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes];
-  console.log("found recipes: ", foundRecipes);
-
-  const result = removeDuplicates(foundRecipes);
-  console.log("final result: ", result);
-
-  if (result.length > 0) {
-    displayRecipes(result, `Recipes matching "${input.value}"`);
-  } else {
-    display(searchError);
-  }
-}
-
-function formatInput(input) {
-  return input.value.toLowerCase().split(' ');
-}
-
-function removeDuplicates(arr) {
-  return [...new Set(arr)];
 }
 
 const displayRecipes = (recipeList, title) => {
@@ -194,4 +93,106 @@ const displayRecipes = (recipeList, title) => {
   `
   })
 }
+
+const displayRecipe = (id) => {
+  displayRecipeDetailView();
+  let foundRecipe = allRecipes.recipes.find(recipe => {
+    return recipe.id === parseInt(id);
+  });
+
+  recipeTitle.innerText = foundRecipe.name;
+  recipeDetailImage.innerHTML = `
+    <img src="${foundRecipe.image}" alt="${foundRecipe.name}">
+    <figcaption>Meal cost: $${foundRecipe.getTotalCost()}</figcaption>
+  `;
+  foundRecipe.ingredients.forEach(ingredient => {
+    ingredientsDetailList.innerHTML += `
+      <article class="ingredients__item">
+        <i class="far fa-times-circle"></i>
+        ${ingredient.amount} ${ingredient.unit} ${ingredient.name} <span class="ingredients__message">You'll need xyz more of this.</span>
+      </article>
+    `;
+  })
+  foundRecipe.instructions.forEach(instruction => {
+    recipeInstructions.innerHTML += `
+      <li>${instruction.number}. ${instruction.instruction}</li>
+    `;
+  })
+}
+
+
+// *** START Nikki's work ***
+
+// TODO compare with Katie stuff; maybe merge/refactor/etc.
+const getSearchTerm = () => {
+  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex].value;
+
+  if (searchTerm === '') {
+    // todo ==> make this an actual message/response
+    alert("you must make a selection")
+  } else {
+    filterByTag(searchTerm);
+    displayRecipeList();
+  }
+}
+
+const filterByTag = (tag) => {
+  return allRecipes.filterByTag(tag)
+}
+// *** END Nikki's work ***
+
+
+
+/* 📌 Katie's Ticket 📌 */
+
+function formatInput(input) {
+  return input.value.toLowerCase().split(' ');
+}
+
+function removeDuplicates(arr) {
+  return [...new Set(arr)];
+}
+
+function search(input) {
+  hide(searchError);
+  const words = formatInput(input);
+  console.log("formatted input: ", words);
+
+  const foundIngredientRecipes = words.flatMap(word => {
+    return allRecipes.filterByIngredient(word);
+  });
+  console.log("found ingredient recipes: ", foundIngredientRecipes);
+
+  const foundNameRecipes = words.flatMap(word => {
+    return allRecipes.filterByName(word);
+  });
+  console.log("found name recipes: ", foundNameRecipes);
+
+  const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes];
+  console.log("found recipes: ", foundRecipes);
+
+  const result = removeDuplicates(foundRecipes);
+  console.log("final result: ", result);
+
+  if (result.length > 0) {
+    displayRecipes(result, `Recipes matching "${input.value}"`);
+  } else {
+    display(searchError);
+  }
+}
 /* 📌 End Katie's Ticket 📌 */
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+allRecipesButton.addEventListener('click', function() {
+  displayRecipes(allRecipes.recipes, 'All recipes');
+});
+
+// recipeListView.addEventListener('click', displayRecipe);
+
+searchButton.addEventListener('click', function() {
+  search(searchBarInput);
+});
+
+goButton.addEventListener('click', getSearchTerm);
