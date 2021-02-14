@@ -7,7 +7,7 @@ class RecipeRepository {
 
   filterByTag(searchTerm) {
     return this.recipes.filter(recipe => {
-      if (recipe.tags.includes(searchTerm)) {
+      if (recipe.tags.includes(searchTerm.toLowerCase())) {
         return recipe.id;
       }
     })
