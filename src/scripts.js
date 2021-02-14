@@ -24,9 +24,8 @@ let allRecipes;
 window.addEventListener('load', function() {
   console.log('🥺');
   allRecipes = new RecipeRepository(recipeData);
-  displayMYFavorite()
+  displayMYFavorite();
   displayRandomFavorites();
-
   hide(searchError);
 });
 
@@ -196,10 +195,6 @@ const displayRecipe = (id) => {
 
 const getSearchTerm = () => {
   const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex];
-  console.log("dropdown selection: ", dropdownSelection);
-  console.log("dd sel options: ", dropdownSelection.options);
-  console.log("dd sel selectedIndex: ", dropdownSelection.selectedIndex);
-
   const tagResults = allRecipes.filterByTag(searchTerm.value);
   displayRecipes(tagResults, `${searchTerm.innerText} recipes`);
 }
