@@ -21,10 +21,10 @@
   <body>
     <div class="grid-container">
       <header class="header">
-        <a href="/" class="header__left">
+        <span class="header__left">
           <img  class="header__left--logo"src="./images/wtffd.png" alt="Fork and spoon logo">
           <span class="header__left--text">What the FORK is for Dinner?!</span>
-        </a>
+        </span>
         <span class="header__right">
           <span class="header__right--text">Hello, User! </span>
           <i class="fas fa-user header__right--icon"></i>
@@ -42,16 +42,23 @@
       </nav>
 
 <!--      landing view  -->
-      <main id="landing-view" class="landing-view">
+      <main id="landing-view" class="landing-view ">
         <section class="search-section">
           <!--          <form>-->
           <div class="search">
-            <label for="searchBar"></label>
-            <input type="search" class="search-bar" id="searchBar" name="search-bar" placeholder="Search by recipe name or ingredient">
-            <label for="searchButton"></label>
-            <button class="search-button" id="searchButton" name="search-button">Search</button>
+            <label for="searchBarLanding"></label>
+            <input type="text"
+                   class="search-bar"
+                   id="searchBarLanding"
+                   name="search-bar"
+                   placeholder="Search by recipe name or ingredient"
+                   size="90"
+            >
+
+            <button class="search-button" id="searchButtonLanding" name="search-button">Search</button>
           </div>
           <h4 class="search-error hidden">Your search didn't return any results.</h4>
+
           <fieldset id="filter-dropdown" class="dropdown">
             <label for="tag-selector" class="dropdown__label"></label>
             <select name="tags" id="tag-selector" class="dropdown__selector">
@@ -70,91 +77,47 @@
         </section>
 
         <section class="hero-section">
-          <section class="hero-section__box">
-            <section class="hero-section__box--recipe-name">
-              Some awesome recipe
-            </section>
-            <section class="hero-section__box--icons">
-              <i class="far fa-heart"></i>
-              <i class="far fa-calendar"></i>
-            </section>
-          </section>
+
         </section>
 
 
         <h2 class="featured-section__title">Featured Recipes</h2>
         <section class="featured-section content1 ">
-          <article class="featured-section__recipe-profile">
-            <figure>
-              <img class="featured-section__recipe-profile--img"
-                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-                   alt="Chocolate chip cookies">
-              <figcaption>Chocolate chip cookies 1</figcaption>
-            </figure>
-          </article>
+<!--          <article class="featured-section__recipe-profile">-->
+<!--            <figure>-->
+<!--              <img class="featured-section__recipe-profile&#45;&#45;img"-->
+<!--                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"-->
+<!--                   alt="Chocolate chip cookies">-->
+<!--              <figcaption>Chocolate chip cookies 1</figcaption>-->
+<!--            </figure>-->
+<!--          </article>-->
 
-          <article class="featured-section__recipe-profile">
-            <figure>
-              <img class="featured-section__recipe-profile--img"
-                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-                   alt="Chocolate chip cookies">
-              <figcaption>Chocolate chip cookies 1</figcaption>
-            </figure>
-          </article>
+<!--          <article class="featured-section__recipe-profile">-->
+<!--            <figure>-->
+<!--              <img class="featured-section__recipe-profile&#45;&#45;img"-->
+<!--                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"-->
+<!--                   alt="Chocolate chip cookies">-->
+<!--              <figcaption>Chocolate chip cookies 1</figcaption>-->
+<!--            </figure>-->
+<!--          </article>-->
 
-          <article class="featured-section__recipe-profile">
-            <figure>
-              <img class="featured-section__recipe-profile--img"
-                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-                   alt="Chocolate chip cookies">
-              <figcaption>Chocolate chip cookies 1</figcaption>
-            </figure>
-          </article>
+<!--          <article class="featured-section__recipe-profile">-->
+<!--            <figure>-->
+<!--              <img class="featured-section__recipe-profile&#45;&#45;img"-->
+<!--                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"-->
+<!--                   alt="Chocolate chip cookies">-->
+<!--              <figcaption>Chocolate chip cookies 1</figcaption>-->
+<!--            </figure>-->
+<!--          </article>-->
 
-          <article class="featured-section__recipe-profile">
-            <figure>
-              <img class="featured-section__recipe-profile--img"
-                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-                   alt="Chocolate chip cookies">
-              <figcaption>Chocolate chip cookies 1</figcaption>
-            </figure>
-          </article>
-
-          <article class="featured-section__recipe-profile">
-            <figure>
-              <img class="featured-section__recipe-profile--img"
-                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-                   alt="Chocolate chip cookies">
-              <figcaption>Chocolate chip cookies 1</figcaption>
-            </figure>
-          </article>
-
-          <article class="featured-section__recipe-profile">
-            <figure>
-              <img class="featured-section__recipe-profile--img"
-                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-                   alt="Chocolate chip cookies">
-              <figcaption>Chocolate chip cookies 1</figcaption>
-            </figure>
-          </article>
-
-          <article class="featured-section__recipe-profile">
-            <figure>
-              <img class="featured-section__recipe-profile--img"
-                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-                   alt="Chocolate chip cookies">
-              <figcaption>Chocolate chip cookies 1</figcaption>
-            </figure>
-          </article>
-
-          <article class="featured-section__recipe-profile">
-            <figure>
-              <img class="featured-section__recipe-profile--img"
-                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-                   alt="Chocolate chip cookies">
-              <figcaption>Chocolate chip cookies 2</figcaption>
-            </figure>
-          </article>
+<!--          <article class="featured-section__recipe-profile">-->
+<!--            <figure>-->
+<!--              <img class="featured-section__recipe-profile&#45;&#45;img"-->
+<!--                   src="https://spoonacular.com/recipeImages/623855-556x370.jpg"-->
+<!--                   alt="Chocolate chip cookies">-->
+<!--              <figcaption>Chocolate chip cookies 1</figcaption>-->
+<!--            </figure>-->
+<!--          </article>-->
         </section>
       </main>
 
@@ -170,37 +133,37 @@
           </section>
         </section>
 
-      <section class="recipe-detail__bottom--left content1 hidden">
-        <h1>Instructions</h1>
-      </section>
+        <section class="recipe-detail__bottom--left content1 hidden">
+          <h1>Instructions</h1>
+        </section>
 
-      <section class="recipe-detail__bottom--right content2 hidden">
-        <figure>
-          <img class="featured-section__recipe-profile--img"
-               src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-               alt="Chocolate chip cookies">
-          <figcaption>Meal cost: $10</figcaption>
-        </figure>
+        <section class="recipe-detail__bottom--right content2 hidden">
+          <figure>
+            <img class="featured-section__recipe-profile--img"
+                 src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
+                 alt="Chocolate chip cookies">
+            <figcaption>Meal cost: $10</figcaption>
+          </figure>
 
-        <h3 class="ingredients">Ingredients</h3>
-          <span class="ingredients__item"><i class="far fa-check-circle"></i> Butter</span>
-            <span class="ingredients__message"></span>
+          <h3 class="ingredients">Ingredients</h3>
+            <span class="ingredients__item"><i class="far fa-check-circle"></i> Butter</span>
+              <span class="ingredients__message"></span>
 
-          <span class="ingredients__item"><i class="far fa-check-circle"></i> Flour</span>
-            <span class="ingredients__message"></span>
+            <span class="ingredients__item"><i class="far fa-check-circle"></i> Flour</span>
+              <span class="ingredients__message"></span>
 
-          <span class="ingredients__item"><i class="far fa-times-circle"></i> Sugar</span>
-            <span class="ingredients__message">You'll need xyz more of this.</span>
+            <span class="ingredients__item"><i class="far fa-times-circle"></i> Sugar</span>
+              <span class="ingredients__message">You'll need xyz more of this.</span>
 
-          <span class="ingredients__item"><i class="far fa-times-circle"></i> Vanilla</span>
-            <span class="ingredients__message">You'll need xyz more of this.</span>
+            <span class="ingredients__item"><i class="far fa-times-circle"></i> Vanilla</span>
+              <span class="ingredients__message">You'll need xyz more of this.</span>
 
-          <span class="ingredients__item"><i class="far fa-check-circle"></i> Chocolate Chips</span>
-            <span class="ingredients__message"></span>
+            <span class="ingredients__item"><i class="far fa-check-circle"></i> Chocolate Chips</span>
+              <span class="ingredients__message"></span>
 
-          <span class="ingredients__item"><i class="far fa-times-circle"></i> Eggs</span>
-            <span class="ingredients__message">You'll need xyz more of this.</span>
-      </section>
+            <span class="ingredients__item"><i class="far fa-times-circle"></i> Eggs</span>
+              <span class="ingredients__message">You'll need xyz more of this.</span>
+        </section>
 
         <section class="recipe-detail__bottom">
           <section class="recipe-detail__bottom--left content1 ">
@@ -217,7 +180,7 @@
             <section class="ingredients-list">
             </section>
           </section>
-        </section>
+          </section>
       </main>
 
 
@@ -251,20 +214,22 @@
       <main class="list-view hidden">
         <h1 class="recipe-list-title">Placeholder Title</h1>
         <section class="search-section">
-          <h3>Search by ingredient, meal type, recipe, or whatever you feel like.</h3>
-          <!-- TODO need to make this the same as the search bar on landing page or else change "id= " lines to avoid duplicate ids -->
           <div class="search">
-            <label for="searchBar"></label>
-            <input type="search" class="search-bar" id="searchBar" name="search-bar" placeholder="Search by recipe name or ingredient">
-            <label for="searchButton"></label>
-            <button class="search-button" id="searchButton" name="search-button">Search</button>
+            <label for="searchBarList"></label>
+            <input type="text"
+                   class="search-bar"
+                   id="searchBarList"
+                   name="search-bar"
+                   placeholder="Search by recipe name or ingredient"
+                   size="90"
+            >
+
+            <button class="search-button" id="searchButtonList" name="search-button">Search</button>
           </div>
           <h4 class="search-error hidden">Your search didn't return any results.</h4>
         </section>
+        <section class="recipe-list__item recipe-list-content1 content1 "></section>
       </main>
-
-      <section class="recipe-list__item recipe-list-content1 content1 hidden">
-      </section>
 
       <footer>
         Created by Jessica, Katie, and Nikki, with ❤️.

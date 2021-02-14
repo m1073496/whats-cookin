@@ -76,6 +76,7 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    cursor: pointer;
 }
 
 .header__left {
@@ -146,6 +147,7 @@ a {
 .nav-links__item {
     flex-wrap: nowrap;
     margin: 0 20px;
+    cursor: pointer;
 }
 
 /* *** Main *** */
@@ -221,15 +223,31 @@ option {
     background: white;
 }
 
+.search {
+    margin: 20px;
+}
+
+input.search-bar {
+    line-height: 1.5em;
+    border-radius: 5px;
+    padding: 2px 5px;
+    font-family: 'Raleway', sans-serif;
+}
+
 fieldset {
     border: none;
     margin: 20px;
 }
 
-.dropdown__button {
+select:focus {
+    outline: none;
+}
+
+.dropdown__button,
+.search-button {
     font-family: 'Alice', serif;
     font-size: 1.1em;
-    width: 50px;
+    padding: 0 20px;
     height: 30px;
     background: white;
     border-radius: 7px;
@@ -271,6 +289,7 @@ fieldset {
 }
 
 /* *** Recipe detail *** */
+
 .recipe-detail__top {
     display: flex;
     flex-flow: row nowrap;
@@ -284,8 +303,8 @@ fieldset {
     justify-content: space-around;
 }
 
-.recipe-detail__bottom--left {
-
+.recipe-list__item--img {
+    margin: 0 20px;
 }
 
 .instructions-title {
@@ -320,14 +339,14 @@ fieldset {
     margin: 10px 5px;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: flex-start;
 }
 
 .item-container {
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -336,7 +355,6 @@ fieldset {
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
-
 }
 
 ul {

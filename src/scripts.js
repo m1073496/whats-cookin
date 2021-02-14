@@ -3,6 +3,7 @@ const allRecipesButton = document.getElementById('all-recipes');
 const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
+const pantryView = document.querySelector('.pantry-view');
 const recipeListContent1 = document.querySelector('.recipe-list-content1');
 const recipeListContent2 = document.querySelector('.recipe-list-content2');
 const recipeListTitle = document.querySelector('.recipe-list-title');
@@ -15,14 +16,18 @@ const searchButton = document.querySelector('.search-button');
 const searchError = document.querySelector('.search-error');
 const dropdownSelection = document.querySelector('#tag-selector');
 const goButton = document.getElementById('go')
-
+const homeSelector = document.querySelector('.header__left');
+const userSelector = document.querySelector('.header__right');
+const featuredSectionSelector = document.querySelector('.featured-section');
+const heroSectionSelector = document.querySelector('.hero-section');
 
 let allRecipes;
 
 window.addEventListener('load', function() {
   console.log('🥺');
   allRecipes = new RecipeRepository(recipeData);
-  console.log(allRecipes);
+  displayMYFavorite()
+  displayRandomFavorites();
 
   hide(searchError);
 });
@@ -43,55 +48,120 @@ const displayRecipeDetailView = () => {
   display(recipeDetailView);
 }
 
+// *** START 🦄 Nikki's 🦄 work ***
+
+const displayLanding = () => {
+  hide(recipeListView);
+  hide(recipeDetailView);
+  hide(pantryView);
+  display(landingView);
+}
+
+const displayPantry = () => {
+  hide(recipeListView);
+  hide(recipeDetailView);
+  hide(landingView);
+  display(pantryView);
+}
+
+const displayRandomFavorites = () => {
+  let chunk = '';
+  let fourRandomRecipes = [];
+  for (let i = 0; i < 4; i++) {
+    let randIndex = Math.floor(Math.random() * allRecipes.recipes.length)
+    fourRandomRecipes.push(allRecipes.recipes[randIndex]);
+  }
+
+  fourRandomRecipes.map(recipe => {
+    chunk += `
+      <article class="featured-section__recipe-profile">
+        <figure>
+          <img class="featured-section__recipe-profile--img"
+               src=${recipe.image}
+               alt=${recipe.name}>
+          <figcaption>${recipe.name}</figcaption>
+        </figure>
+      </article>
+    `
+  })
+
+  featuredSectionSelector.innerHTML = chunk;
+}
+
+const displayMYFavorite = () => {
+  let chunk = '';
+
+  const favorite = allRecipes.recipes[Math.floor(Math.random() * allRecipes.recipes.length)]
+
+    chunk += `
+      <section class="hero-section__box" data-id=${favorite.id}>
+        <section class="hero-section__box--recipe-name">
+          <h3>${favorite.name}</h3>
+        </section>
+        <section class="hero-section__box--icons">
+          <i class="far fa-heart"></i>
+          <i class="far fa-calendar"></i>
+        </section>
+      </section>
+    `
+
+  console.log(favorite);
+  heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
+  heroSectionSelector.innerHTML = chunk;
+}
+// *** END 🦄 Nikki's work 🦄 ***
+
+
 const displayRecipes = (recipeList, title) => {
   displayRecipeList();
   recipeListTitle.innerText = title;
 
   recipeList.forEach(recipe => {
     let newRecipeItem = document.createElement('article');
-    let parent = document.querySelector('.list-view')
+    let parent = document.querySelector('.list-view');
     newRecipeItem.className = 'recipe content1';
     parent.appendChild(newRecipeItem);
 
     newRecipeItem.innerHTML += `
-    <section class="item-container">
-      <div class="recipe-list__item">
-        <figure>
-          <img class="pantry__recipe-profile--img"
-               src="${recipe.image}"
-               alt="${recipe.name}">
-        </figure>
-      </div>
+      <section class="item-container">
+        <div class="recipe-list__item">
+          <figure>
+            <img class="recipe-list__item--img"
+                 src="${recipe.image}"
+                 alt="${recipe.name}">
+          </figure>
+        </div>
+  
+        <div class="recipe-list__item cooked-button hidden">
+          <button>Cooked It!</button>
+          <span>message</span>
+        </div>
+  
+        <div class="recipe-list__item">
+          <span><i class="far fa-heart"></i></span>
+          <span><i class="far fa-calendar-check"></i></span>
+        </div>
+      </section>
 
-      <div class="recipe-list__item cooked-button hidden">
-        <button>Cooked It!</button>
-        <span>message</span>
-      </div>
-
-      <div class="recipe-list__item">
-        <span><i class="far fa-heart"></i></span>
-        <span><i class="far fa-calendar-check"></i></span>
-      </div>
-    </section>
-
-    <section class="recipe-list__item">
-      <ul class="ingredients-and-cost">
-        <li>
-          <i class="fal fa-ellipsis-h"></i>${recipe.name}
-        </li>
-        <li>
-          <i class="far fa-check-circle"></i>${recipe.ingredients[0].amount} ${recipe.ingredients[0].unit} ${recipe.ingredients[0].name}
-        </li>
-        <li>
-          <i class="far fa-times-circle"></i>${recipe.ingredients[1].amount} ${recipe.ingredients[1].unit} ${recipe.ingredients[1].name}
-        </li>
-        <li>
-          <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
-        </li>
-      </ul>
-    </section>
-  `
-  })
+      <section class="recipe-list__item">
+        <ul class="ingredients-and-cost">
+          <li>
+            <i class="fal fa-ellipsis-h"></i>${recipe.name}
+          </li>
+          <li>
+            <i class="far fa-check-circle"></i>You have everything needed to make this recipe!
+          </li>
+          <li>
+            <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
+          </li>
+        </ul>
+      </section>
+    `
+  newRecipeItem.addEventListener('click', function() {
+    let target = newRecipeItem.id;
+    displayRecipe(target);
+  });
+});
 }
 
 const displayRecipe = (id) => {
@@ -112,18 +182,35 @@ const displayRecipe = (id) => {
         ${ingredient.amount} ${ingredient.unit} ${ingredient.name} <span class="ingredients__message">You'll need xyz more of this.</span>
       </article>
     `;
-  })
+  });
   foundRecipe.instructions.forEach(instruction => {
     recipeInstructions.innerHTML += `
       <li>${instruction.number}. ${instruction.instruction}</li>
     `;
-  })
+  });
 }
 
 
-// *** START Nikki's work ***
+// TODO can this original version be cut?
+// Nikki's original filter by tag
+{/* // TODO compare with Katie stuff; maybe merge/refactor/etc.
+const getSearchTerm = () => {
+  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex].value;
 
-// TODO compare with Katie stuff; maybe merge/refactor/etc.
+  if (searchTerm === '') {
+    // todo ==> make this an actual message/response
+    alert("you must make a selection")
+  } else {
+    filterByTag(searchTerm);
+    displayRecipeList();
+  }
+}
+
+const filterByTag = (tag) => {
+  return allRecipes.filterByTag(tag)
+} */}
+
+
 const getSearchTerm = () => {
   const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex];
   console.log("dropdown selection: ", dropdownSelection);
@@ -139,10 +226,11 @@ const getSearchTerm = () => {
   // }
 }
 
+// TODO pretty sure this original chunk can be cut -- it's incorporated above
 // const filterByTag = (tag) => {
 //   return allRecipes.filterByTag(tag);
 // }
-// *** END Nikki's work ***
+
 
 
 
@@ -199,3 +287,7 @@ searchButton.addEventListener('click', function() {
 });
 
 goButton.addEventListener('click', getSearchTerm);
+
+homeSelector.addEventListener('click', displayLanding);
+
+userSelector.addEventListener('click', displayPantry);

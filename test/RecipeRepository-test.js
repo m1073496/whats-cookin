@@ -33,4 +33,12 @@ describe('RecipeRepository', () => {
     expect(recipeRepository.filterByIngredient('chocolate').length).to.equal(0)
   });
 
+  it('should filter by recipe name', () => {
+    expect(recipeRepository.filterByName('Lentil').length).to.equal(1)
+  });
+
+  it('should have results of 0 if recipe name not found', () => {
+    expect(recipeRepository.filterByName('Chicken Pot Pie').length).to.equal(0)
+  });
+
 });
