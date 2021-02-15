@@ -22,7 +22,8 @@ let allRecipes;
 
 window.addEventListener('load', function() {
   console.log('page loaded 🥺');
-  allRecipes = new RecipeRepository(recipeData);
+  const recipeInstances = recipeData.map(recipe => new Recipe(recipe));
+  allRecipes = new RecipeRepository(recipeInstances);
   displayMYFavorite();
   displayRandomFavorites();
   hide(searchError);
@@ -110,8 +111,6 @@ const displayMYFavorite = () => {
 }
 // *** END 🦄 Nikki's work 🦄 ***
 
-
-
 const displayRecipes = (recipeList, title) => {
   displayRecipeList();
   recipeListTitle.innerText = title;
@@ -120,6 +119,7 @@ const displayRecipes = (recipeList, title) => {
     let newRecipeItem = document.createElement('article');
     let parent = document.querySelector('.list-view');
     newRecipeItem.className = 'recipe content1';
+    newRecipeItem.id = recipe.id;
     parent.appendChild(newRecipeItem);
 
     newRecipeItem.innerHTML += `
@@ -131,12 +131,12 @@ const displayRecipes = (recipeList, title) => {
                  alt="${recipe.name}">
           </figure>
         </div>
-  
+
         <div class="recipe-list__item cooked-button hidden">
           <button>Cooked It!</button>
           <span>message</span>
         </div>
-  
+
         <div class="recipe-list__item">
           <span><i class="far fa-heart"></i></span>
           <span><i class="far fa-calendar-check"></i></span>
@@ -192,46 +192,11 @@ const displayRecipe = (id) => {
   });
 }
 
-const splitInput = (input) => {
-  return input.value.split(' ');
-}
-
-const removeDuplicates = (arr) => {
-  return [...new Set(arr)];
-}
-
-const filterByTags = (searchTags, recipes) => {
-  const results = [];
-  for (let i = 0; i < searchTags.length; i++) {
-    recipes.filter(recipe => {
-      if (recipe.tags.includes(searchTags[i].toLowerCase())) {
-        results.push(recipe);
-      }
-    })
-  }
-
-  return [...new Set(results)];
-}
-
-const filterByIngredient = (searchIng, recipes) => {
-  return recipes.filter(recipe => {
-    return recipe.ingredients.find(ingredient => {
-      return ingredient.name.toLowerCase().includes(searchIng.toLowerCase());
-    });
-  });
-}
-
-const filterByName = (searchName, recipes) => {
-  return recipes.filter(recipe => {
-    return recipe.name.toLowerCase().includes(searchName.toLowerCase());
-  });
-}
-
 const getTagsToSearchFor = (choices) => {
   console.log("choices passed in to getTagsToSearchFor: ", choices);
   console.log('check out these choices');
   let searchFor = [];
-  
+
   choices.forEach(choice => {
     if (choice === 'appetizers') {
       searchFor.push('appetizer', 'hor d\'oeuvre', 'hor d\'oeuvres', 'antipasti', 'antipasto');
@@ -253,11 +218,11 @@ const searchByTags = (tags) => {
   if (tags.includes('all')) {
     return allRecipes.recipes;
   } else {
-    return filterByTags(tags, allRecipes.recipes);
+    return allRecipes.filterByTags(tags);
   }
 }
 
-// TODO force choice of "all" if no choice is made 
+// TODO force choice of "all" if no choice is made
 // -- but could solve this in the UI instead?
 const parseSelections = (selections) => {
   if (selections.length) {
@@ -267,52 +232,34 @@ const parseSelections = (selections) => {
   }
 }
 
-const search = (input) => {
+const splitInput = (input) => {
+  return input.value.split(' ');
+}
+
+const removeDuplicates = (arr) => {
+  return [...new Set(arr)];
+}
+
+const search = (searchInput, dropDownInput) => {
   hide(searchError);
 
-  const words = splitInput(input);
-  // console.log("words: ", words);
+  const words = splitInput(searchInput);
 
-  const selections = [...dropdownSelection.selectedOptions].map(option => option.value);
-  // console.log("selections: ", selections);
-
+  const selections = [...dropDownInput.selectedOptions].map(option => option.value);
   const parsedSelections = parseSelections(selections);
-  // console.log("parsedSelections: ", parsedSelections)
-
   const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
-  // console.log("tagsToSearchFor: ", tagsToSearchFor);
-
   const tagMatches = searchByTags(tagsToSearchFor);
-  // console.log("tagMatches: ", tagMatches);
+  const tagMatchesRepository = new RecipeRepository(tagMatches);
 
-  const foundIngredientRecipes = words.flatMap(word => {
-    return filterByIngredient(word, tagMatches);
-  });
-  // console.log("found ingredient recipes: ", foundIngredientRecipes);
+  const results = tagMatchesRepository.findRecipes(words);
+  displayResults(searchInput, results.recipes);
+}
 
-  const foundNameRecipes = words.flatMap(word => {
-    return filterByName(word, tagMatches);
-  });
-  // console.log("found name recipes: ", foundNameRecipes);
-
-  const foundTagRecipes = words.flatMap(word => {
-    return filterByTags([word], tagMatches);
-  });
-  // console.log("found tag recipes: ", foundTagRecipes);
-
-  const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes, ...foundTagRecipes];
-  // console.log("found recipes: ", foundRecipes);
-
-  const result = removeDuplicates(foundRecipes);
-  console.log("final result: ", result);
-
-  if (result.length > 0 && input.value) {
-    // TODO could make this display all selected tags ... or not
-    // displayRecipes(result, `${selections.innerText} recipes matching "${input.value}"`);
-    displayRecipes(result, `Search results matching "${input.value}"`);
-  } else if (result.length) {
-    // displayRecipes(result, `${selections.innerText} recipes`);
-    displayRecipes(result, `Search results`);
+const displayResults = (searchInput, recipes) => {
+  if (recipes.length > 0 && searchInput.value) {
+    displayRecipes(recipes, `Search results matching "${searchInput.value}"`);
+  } else if (recipes.length) {
+    displayRecipes(recipes, `Search results`);
   } else {
     display(searchError);
   }
@@ -327,7 +274,7 @@ allRecipesButton.addEventListener('click', function() {
 
 
 goButton.addEventListener('click', function() {
-  search(searchBarInput);
+  search(searchBarInput, dropdownSelection);
 });
 
 homeSelector.addEventListener('click', displayLanding);
