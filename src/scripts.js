@@ -39,13 +39,14 @@ const displayRecipeList = () => {
   display(recipeListView);
 }
 
+
 const displayRecipeDetailView = () => {
   hide(recipeListView);
   display(recipeDetailView);
 }
 
-// *** START 🦄 Nikki's 🦄 work ***
 
+// *** START 🦄 Nikki's 🦄 work ***
 const displayLanding = () => {
   hide(recipeListView);
   hide(recipeDetailView);
@@ -224,22 +225,24 @@ const filterByName = (searchName, recipes) => {
 
 // TODO make searchFor be an array of possible search terms ('appetizer', 'starter', etc.)
 // // which may blend well with the multi-selection that Nikki built
-const getTagToSearchFor = (choice) => {
-  let searchFor = '';
-  if (choice === 'appetizers') {
-    searchFor = 'appetizer';
-    // TODO also starter, hor d'oeuvre, hor d'oevres, antipasti, antipasto
-  } else if (choice === 'side-dishes') {
-    searchFor = 'side dish';
-  } else if (choice === 'main-courses') {
-    searchFor = 'main dish';
-    // TODO also main course, lunch, dinner
-  } else if (choice === 'desserts') {
-    searchFor = 'dessert';
-  } else {
-    searchFor = choice;
+const getTagsToSearchFor = (choices) => {
+  let searchFor = [];
+  
+  choices.forEach(choice => {
+    if (choice === 'appetizers') {
+      searchFor.push('appetizer');
+      // TODO also starter, hor d'oeuvre, hor d'oevres, antipasti, antipasto
+    } else if (choice === 'side-dishes') {
+      searchFor.push('side dish');
+    } else if (choice === 'main-courses') {
+      searchFor.push('main dish');
+      // TODO also main course, lunch, dinner
+    } else if (choice === 'desserts') {
+      searchFor.push('dessert');
+    } else {
+      searchFor.push(choice);
+    }
   }
-
   return searchFor;
 }
 
@@ -256,12 +259,12 @@ const search = (input) => {
 
   const words = splitInput(input);
 
-  const selection = dropdownSelection.options[dropdownSelection.selectedIndex];
+  const selections = [...dropdownSelection.selectedOptions].map(option => option.value);
 
-  const tagToSearchFor = getTagToSearchFor(selection.value);
-  console.log("tagToSearchFor: ", tagToSearchFor);
+  const tagsToSearchFor = getTagsToSearchFor(selections);
+  console.log("tagsToSearchFor: ", tagsToSearchFor);
 
-  const tagMatches = searchByTag(tagToSearchFor);
+  const tagMatches = searchByTag(tagsToSearchFor);
 
   const foundIngredientRecipes = words.flatMap(word => {
     return filterByIngredient(word, tagMatches);

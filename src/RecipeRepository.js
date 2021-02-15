@@ -5,12 +5,17 @@ class RecipeRepository {
     this.recipes = data.map(recipe => new Recipe(recipe));
   }
 
-  filterByTag(searchTerm) {
-    return this.recipes.filter(recipe => {
-      if (recipe.tags.includes(searchTerm.toLowerCase())) {
-        return recipe.id;
-      }
-    });
+  filterByTag(searchTerms) {
+    const results = [];
+    for (let i = 0; i < searchTerms.length; i++) {
+      this.recipes.filter(recipe => {
+        if (recipe.tags.includes(searchTerms[i].toLowerCase())) {
+          results.push(recipe.id);
+        }
+      })
+    }
+
+    return [...new Set(results)];
   }
 
   filterByIngredient(searchTerm) {
