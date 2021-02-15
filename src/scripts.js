@@ -120,6 +120,7 @@ const displayRecipes = (recipeList, title) => {
     let newRecipeItem = document.createElement('article');
     let parent = document.querySelector('.list-view');
     newRecipeItem.className = 'recipe content1';
+    newRecipeItem.id = recipe.id;
     parent.appendChild(newRecipeItem);
 
     newRecipeItem.innerHTML += `
