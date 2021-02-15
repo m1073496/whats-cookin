@@ -15,6 +15,10 @@ const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
 const heroSectionSelector = document.querySelector('.hero-section');
+const favoritedHeart = document.querySelector('.unfavorite-heart'); // already on favorites array, can be removed
+const notFavoritedHeart = document.querySelector('.favorite-heart'); // not favorited yet
+const onWeekly = document.querySelector('.remove-calendar'); // already on weekly array, can be removed
+const notOnWeekly = document.querySelector('.add-calendar');
 
 let allRecipes;
 
@@ -109,8 +113,10 @@ const displayMYFavorite = () => {
           <h3>${favorite.name}</h3>
         </section>
         <section class="hero-section__box--icons">
-          <i class="far fa-heart"></i>
-          <i class="far fa-calendar"></i>
+          <i class="far fa-heart favorite-heart"></i>
+          <i class="fas fa-heart unfavorite-heart"></i>
+          <i class="far fa-calendar add-calendar"></i>
+          <i class="far fa-calendar-check remove-calendar"></i>
         </section>
       </section>
     `
@@ -119,6 +125,53 @@ const displayMYFavorite = () => {
   heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
   heroSectionSelector.innerHTML = chunk;
 }
+
+favoritedHeart.addEventListener('click', () => {
+  updateFavorites('remove')
+}) // already on favorites array, can be removed
+
+notFavoritedHeart.addEventListener('click', () => {
+  updateFavorites('add')
+})  // not favorited yet
+
+onWeekly.addEventListener('click', () => {
+  updateWeekly('remove')
+})  // already on weekly array, can be removed
+
+notOnWeekly.addEventListener('click', () => {
+  updateWeekly('remove')
+})  // not on weekly yet
+
+// should all of these be one function, with params of add/remove, and the list passed in???
+const updateFavorites = (direction) => {
+  if (direction === 'remove') {
+    // hide full red heart
+    // show empty heart -- color??
+    // remove from array
+  } else {
+    // hide empty heart -- color??
+    // show full red heart
+    // add to array
+  }
+
+  // refresh list of favorites
+}
+
+const updateWeekly = (direction) => {
+  if (direction === 'remove') {
+    // hide calendar with check
+    // show empty calendar -- color??
+    // remove from array
+  } else {
+    // hide empty calendar -- color??
+    // show calendar with check
+    // add to array
+  }
+
+  // refresh list of favorites
+}
+
+
 // *** END 🦄 Nikki's work 🦄 ***
 
 
@@ -150,8 +203,8 @@ const displayAllRecipes = () => {
         </div>
   
         <div class="recipe-list__item">
-          <span><i class="far fa-heart"></i></span>
-          <span><i class="far fa-calendar-check"></i></span>
+          <span><i class="far fa-heart favorite-heart"></i></span>
+          <span><i class="far fa-calendar-check remove-calendar"></i></span>
         </div>
       </section>
 
@@ -293,8 +346,8 @@ const displayRecipes = (recipeList) => {
       </div>
 
       <div class="recipe-list__item">
-        <span><i class="far fa-heart"></i></span>
-        <span><i class="far fa-calendar-check"></i></span>
+        <span><i class="far fa-heart favorite-heart"></i></span>
+        <span><i class="far fa-calendar-check add-calendar"></i></span>
       </div>
     </section>
 
