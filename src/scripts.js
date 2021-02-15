@@ -24,7 +24,6 @@ let allRecipes;
 window.addEventListener('load', function() {
   console.log('page loaded 🥺');
   allRecipes = new RecipeRepository(recipeData);
-  console.log("on page load allRecipes.recipes: ", allRecipes.recipes);
   displayMYFavorite();
   displayRandomFavorites();
   hide(searchError);
@@ -95,8 +94,6 @@ const displayMYFavorite = () => {
     Math.floor(Math.random() * allRecipes.recipes.length)
   ];
 
-  console.log("inside displayMYFavorite allRecipes.recipes: ", allRecipes.recipes);
-
   chunk += `
     <section class="hero-section__box" data-id=${favorite.id}>
       <section class="hero-section__box--recipe-name">
@@ -109,7 +106,6 @@ const displayMYFavorite = () => {
     </section>
   `;
 
-  // console.log(favorite);
   heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
   heroSectionSelector.innerHTML = chunk;
 }
@@ -118,7 +114,6 @@ const displayMYFavorite = () => {
 
 
 const displayRecipes = (recipeList, title) => {
-  console.log("inside displayRecipes allRecipes.recipes: ", allRecipes.recipes);
   displayRecipeList();
   recipeListTitle.innerText = title;
 
@@ -173,7 +168,6 @@ const displayRecipes = (recipeList, title) => {
 }
 
 const displayRecipe = (id) => {
-  console.log("log3 allRecipes.recipes: ", allRecipes.recipes);
   displayRecipeDetailView();
   let foundRecipe = allRecipes.recipes.find(recipe => {
     return recipe.id === parseInt(id);
@@ -199,13 +193,14 @@ const displayRecipe = (id) => {
   });
 }
 
-const getTaggedRecipes = () => {
-  const selection = dropdownSelection.options[dropdownSelection.selectedIndex];
-  const tagResults = allRecipes.filterByTag(selection.value);
-  displayRecipes(tagResults, `${selection.innerText} recipes`);
-}
+// const getTaggedRecipes = () => {
+//   const selection = dropdownSelection.options[dropdownSelection.selectedIndex];
+//   const tagResults = allRecipes.filterByTag(selection.value);
+//   displayRecipes(tagResults, `${selection.innerText} recipes`);
+// }
 
 function splitInput(input) {
+  console.log("input.value: ", input.value);
   return input.value.split(' ');
 }
 
@@ -221,15 +216,6 @@ const filterByTag = (searchTag, recipes) => {
   });
 }
 
-// const testArray = [{id: 123, tags: ['aaaaa', 'blah']}, {id: 124, tags: ['aaaba', 'bah']}, {id: 125, tags: ['aaaca', 'boo']}];
-// const test0 = filterByTag('aaaba', testArray);
-// console.log("test0: ", test0);
-
-// console.log("allRecipes: ", allRecipes);
-// console.log("allRecipes.recipes: ", allRecipes.recipes); // not working
-// const test1 = filterByTag('breakfast', allRecipes.recipes);
-// console.log("test1: ", test1);
-
 const filterByIngredient = (searchIng, recipes) => {
   return recipes.filter(recipe => {
     return recipe.ingredients.find(ingredient => {
@@ -244,18 +230,44 @@ const filterByName = (searchName, recipes) => {
   });
 }
 
+// TODO build this translator
+const getTagToSearchFor = (selection) => {
+  // TODO actually make this into a translator
+  return selection;
+}
+
+const searchByTag = (tag) => {
+  if (tag === 'all') {
+    return allRecipes.recipes;
+  } else {
+    return filterByTag(tag, allRecipes.recipes);
+  }
+}
+
 function search(input) {
   hide(searchError);
+
   const words = splitInput(input);
   console.log("formatted input: ", words);
 
+  const selection = dropdownSelection.options[dropdownSelection.selectedIndex].value;
+  console.log("selection: ", selection);
+
+  // TODO build translator above
+  const tagToSearchFor = getTagToSearchFor(selection);
+  console.log("tagToSearchFor: ", tagToSearchFor);
+
+  const tagMatches = searchByTag(tagToSearchFor);
+
   const foundIngredientRecipes = words.flatMap(word => {
-    return allRecipes.filterByIngredient(word);
+    // return allRecipes.filterByIngredient(word);
+    return filterByIngredient(word, tagMatches);
   });
   console.log("found ingredient recipes: ", foundIngredientRecipes);
 
   const foundNameRecipes = words.flatMap(word => {
-    return allRecipes.filterByName(word);
+    // return allRecipes.filterByName(word);
+    return filterByName(word, tagMatches);
   });
   console.log("found name recipes: ", foundNameRecipes);
 
@@ -265,8 +277,10 @@ function search(input) {
   const result = removeDuplicates(foundRecipes);
   console.log("final result: ", result);
 
+  // TODO: fix display message so that it handles empty search, "all" tag selection, etc.
   if (result.length > 0) {
-    displayRecipes(result, `Recipes matching "${input.value}"`);
+    displayRecipes(result, `${selection.innerText} recipes matching "${input.value}"`);
+    // displayRecipes(tagResults, `${selection.innerText} recipes`);
   } else {
     display(searchError);
   }
@@ -281,11 +295,13 @@ allRecipesButton.addEventListener('click', function() {
 
 // recipeListView.addEventListener('click', displayRecipe);
 
-searchButton.addEventListener('click', function() {
+// searchButton.addEventListener('click', function() {
+//   search(searchBarInput);
+// });
+
+goButton.addEventListener('click', function() {
   search(searchBarInput);
 });
-
-goButton.addEventListener('click', getTaggedRecipes);
 
 homeSelector.addEventListener('click', displayLanding);
 
