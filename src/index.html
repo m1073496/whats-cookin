@@ -55,20 +55,22 @@
                    size="90"
             >
 
-            <button class="search-button" id="searchButtonLanding" name="search-button">Search</button>
+            <!-- <button class="search-button" id="searchButtonLanding" name="search-button">Search</button> -->
           </div>
           <h4 class="search-error hidden">Your search didn't return any results.</h4>
 
           <fieldset id="filter-dropdown" class="dropdown">
-            <label for="tag-selector" class="dropdown__label">Choose a category:</label>
+            <label for="tag-selector" class="dropdown__label"></label>
             <select name="tags" id="tag-selector" class="dropdown__selector" multiple>
-              <option value="" class="dropdown__selector--item">-- Select --</option>
+              <option value="all" class="dropdown__selector--item">All</option>
               <option value="breakfast" class="dropdown__selector--item">Breakfast</option>
-              <option value="condiments" class="dropdown__selector--item">Condiments, sauces, and dips</option>
-              <option value="appetizers" class="dropdown__selector--item">Appetizers</option>
-              <option value="main-courses" class="dropdown__selector--item">Main Courses</option>
-              <option value="side-dishes" class="dropdown__selector--item">Side Dishes</option>
               <option value="brunch" class="dropdown__selector--item">Brunch</option>
+              <option value="appetizers" class="dropdown__selector--item">Appetizers</option>
+              <option value="side-dishes" class="dropdown__selector--item">Side dishes</option>
+              <option value="main-courses" class="dropdown__selector--item">Main courses</option>
+              <option value="desserts" class="dropdown__selector--item">Desserts</option>
+              <option value="healthy" class="dropdown__selector--item">Healthy</option>
+              <option value="vegetarian" class="dropdown__selector--item">Vegetarian</option>
             </select>
             <button id="go" class="dropdown__button">Go</button>
           </fieldset>
@@ -172,7 +174,7 @@
 
 <!--      list view  -->
       <main class="list-view hidden">
-        <h1><span class="recipe-list-h1"></span> Recipes</h1>
+        <h1 class="recipe-list-title">Placeholder Title</h1>
         <section class="search-section">
           <div class="search">
             <label for="searchBarList"></label>
