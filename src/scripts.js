@@ -45,7 +45,7 @@ const goButton = document.getElementById('go')
 // TODO compare with Katie stuff; maybe merge/refactor/etc.
 const getSearchTerm = () => {
   const dropdownSelection = document.getElementById('tag-selector');
-  var searchTerms = [...dropdownSelection.options].filter(option => option.selected).map(option => option.value);
+  var searchTerms = [...dropdownSelection.selectedOptions].map(option => option.value);
 
   console.log(searchTerms)
 
