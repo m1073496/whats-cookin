@@ -131,12 +131,12 @@ const displayRecipes = (recipeList, title) => {
                  alt="${recipe.name}">
           </figure>
         </div>
-  
+
         <div class="recipe-list__item cooked-button hidden">
           <button>Cooked It!</button>
           <span>message</span>
         </div>
-  
+
         <div class="recipe-list__item">
           <span><i class="far fa-heart"></i></span>
           <span><i class="far fa-calendar-check"></i></span>
@@ -192,46 +192,11 @@ const displayRecipe = (id) => {
   });
 }
 
-const splitInput = (input) => {
-  return input.value.split(' ');
-}
-
-const removeDuplicates = (arr) => {
-  return [...new Set(arr)];
-}
-
-const filterByTags = (searchTags, recipes) => {
-  const results = [];
-  for (let i = 0; i < searchTags.length; i++) {
-    recipes.filter(recipe => {
-      if (recipe.tags.includes(searchTags[i].toLowerCase())) {
-        results.push(recipe);
-      }
-    })
-  }
-
-  return [...new Set(results)];
-}
-
-const filterByIngredient = (searchIng, recipes) => {
-  return recipes.filter(recipe => {
-    return recipe.ingredients.find(ingredient => {
-      return ingredient.name.toLowerCase().includes(searchIng.toLowerCase());
-    });
-  });
-}
-
-const filterByName = (searchName, recipes) => {
-  return recipes.filter(recipe => {
-    return recipe.name.toLowerCase().includes(searchName.toLowerCase());
-  });
-}
-
 const getTagsToSearchFor = (choices) => {
   console.log("choices passed in to getTagsToSearchFor: ", choices);
   console.log('check out these choices');
   let searchFor = [];
-  
+
   choices.forEach(choice => {
     if (choice === 'appetizers') {
       searchFor.push('appetizer', 'hor d\'oeuvre', 'hor d\'oeuvres', 'antipasti', 'antipasto');
@@ -257,7 +222,7 @@ const searchByTags = (tags) => {
   }
 }
 
-// TODO force choice of "all" if no choice is made 
+// TODO force choice of "all" if no choice is made
 // -- but could solve this in the UI instead?
 const parseSelections = (selections) => {
   if (selections.length) {
