@@ -232,13 +232,19 @@ const parseSelections = (selections) => {
   }
 }
 
-const search = (input) => {
+const search = (searchInput, dropDownInput) => {
   hide(searchError);
+  //DOM STUFF
+  //collect data from user - search bar & tags clicked
+  //determines the recipes to search among
+  //displays that big ole array to the DOM with the appropriate title
 
-  const words = splitInput(input);
+  //clean and format data collected by calling helper function
+  const words = splitInput(searchInput);
   // console.log("words: ", words);
 
-  const selections = [...dropdownSelection.selectedOptions].map(option => option.value);
+  //determines the recipes to search among
+  const selections = [...dropDownInput.selectedOptions].map(option => option.value);
   // console.log("selections: ", selections);
 
   const parsedSelections = parseSelections(selections);
@@ -249,32 +255,14 @@ const search = (input) => {
 
   const tagMatches = searchByTags(tagsToSearchFor);
   // console.log("tagMatches: ", tagMatches);
+  //END ^^determines the recipes to search among^^
+  const result = findRecipes(words, tagMatches);
 
-  const foundIngredientRecipes = words.flatMap(word => {
-    return filterByIngredient(word, tagMatches);
-  });
-  // console.log("found ingredient recipes: ", foundIngredientRecipes);
 
-  const foundNameRecipes = words.flatMap(word => {
-    return filterByName(word, tagMatches);
-  });
-  // console.log("found name recipes: ", foundNameRecipes);
-
-  const foundTagRecipes = words.flatMap(word => {
-    return filterByTags([word], tagMatches);
-  });
-  // console.log("found tag recipes: ", foundTagRecipes);
-
-  const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes, ...foundTagRecipes];
-  // console.log("found recipes: ", foundRecipes);
-
-  const result = removeDuplicates(foundRecipes);
-  console.log("final result: ", result);
-
-  if (result.length > 0 && input.value) {
+  if (result.length > 0 && searchInput.value) {
     // TODO could make this display all selected tags ... or not
     // displayRecipes(result, `${selections.innerText} recipes matching "${input.value}"`);
-    displayRecipes(result, `Search results matching "${input.value}"`);
+    displayRecipes(result, `Search results matching "${searchInput.value}"`);
   } else if (result.length) {
     // displayRecipes(result, `${selections.innerText} recipes`);
     displayRecipes(result, `Search results`);
@@ -292,7 +280,7 @@ allRecipesButton.addEventListener('click', function() {
 
 
 goButton.addEventListener('click', function() {
-  search(searchBarInput);
+  search(searchBarInput, dropdownSelection);
 });
 
 homeSelector.addEventListener('click', displayLanding);
