@@ -250,11 +250,11 @@ function search(input) {
   const words = splitInput(input);
   console.log("formatted input: ", words);
 
-  const selection = dropdownSelection.options[dropdownSelection.selectedIndex].value;
+  const selection = dropdownSelection.options[dropdownSelection.selectedIndex];
   console.log("selection: ", selection);
 
   // TODO build translator above
-  const tagToSearchFor = getTagToSearchFor(selection);
+  const tagToSearchFor = getTagToSearchFor(selection.value);
   console.log("tagToSearchFor: ", tagToSearchFor);
 
   const tagMatches = searchByTag(tagToSearchFor);
@@ -278,9 +278,11 @@ function search(input) {
   console.log("final result: ", result);
 
   // TODO: fix display message so that it handles empty search, "all" tag selection, etc.
-  if (result.length > 0) {
+
+  if (result.length > 0 && input.value) {
     displayRecipes(result, `${selection.innerText} recipes matching "${input.value}"`);
-    // displayRecipes(tagResults, `${selection.innerText} recipes`);
+  } else if (result.length) {
+    displayRecipes(result, `${selection.innerText} recipes`);
   } else {
     display(searchError);
   }
