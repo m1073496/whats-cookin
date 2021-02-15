@@ -229,6 +229,7 @@ const filterByName = (searchName, recipes) => {
 
 const getTagsToSearchFor = (choices) => {
   console.log("choices passed in to getTagsToSearchFor: ", choices);
+  console.log('check out these choices');
   let searchFor = [];
   
   choices.forEach(choice => {
