@@ -10,7 +10,6 @@ const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
 const ingredientsDetailList = document.querySelector('.ingredients-list');
 const searchBarInput = document.querySelector('.search-bar');
-const searchButton = document.querySelector('.search-button');
 const searchError = document.querySelector('.search-error');
 const dropdownSelection = document.querySelector('#tag-selector');
 const goButton = document.getElementById('go')
@@ -193,14 +192,7 @@ const displayRecipe = (id) => {
   });
 }
 
-// const getTaggedRecipes = () => {
-//   const selection = dropdownSelection.options[dropdownSelection.selectedIndex];
-//   const tagResults = allRecipes.filterByTag(selection.value);
-//   displayRecipes(tagResults, `${selection.innerText} recipes`);
-// }
-
 function splitInput(input) {
-  console.log("input.value: ", input.value);
   return input.value.split(' ');
 }
 
@@ -230,10 +222,25 @@ const filterByName = (searchName, recipes) => {
   });
 }
 
-// TODO build this translator
-const getTagToSearchFor = (selection) => {
-  // TODO actually make this into a translator
-  return selection;
+// TODO make searchFor be an array of possible search terms ('appetizer', 'starter', etc.)
+// // which may blend well with the multi-selection that Nikki built
+const getTagToSearchFor = (choice) => {
+  let searchFor = '';
+  if (choice === 'appetizers') {
+    searchFor = 'appetizer';
+    // TODO also starter, hor d'oeuvre, hor d'oevres, antipasti, antipasto
+  } else if (choice === 'side-dishes') {
+    searchFor = 'side dish';
+  } else if (choice === 'main-courses') {
+    searchFor = 'main dish';
+    // TODO also main course, lunch, dinner
+  } else if (choice === 'desserts') {
+    searchFor = 'dessert';
+  } else {
+    searchFor = choice;
+  }
+
+  return searchFor;
 }
 
 const searchByTag = (tag) => {
@@ -248,25 +255,20 @@ function search(input) {
   hide(searchError);
 
   const words = splitInput(input);
-  console.log("formatted input: ", words);
 
   const selection = dropdownSelection.options[dropdownSelection.selectedIndex];
-  console.log("selection: ", selection);
 
-  // TODO build translator above
   const tagToSearchFor = getTagToSearchFor(selection.value);
   console.log("tagToSearchFor: ", tagToSearchFor);
 
   const tagMatches = searchByTag(tagToSearchFor);
 
   const foundIngredientRecipes = words.flatMap(word => {
-    // return allRecipes.filterByIngredient(word);
     return filterByIngredient(word, tagMatches);
   });
   console.log("found ingredient recipes: ", foundIngredientRecipes);
 
   const foundNameRecipes = words.flatMap(word => {
-    // return allRecipes.filterByName(word);
     return filterByName(word, tagMatches);
   });
   console.log("found name recipes: ", foundNameRecipes);
@@ -276,8 +278,6 @@ function search(input) {
 
   const result = removeDuplicates(foundRecipes);
   console.log("final result: ", result);
-
-  // TODO: fix display message so that it handles empty search, "all" tag selection, etc.
 
   if (result.length > 0 && input.value) {
     displayRecipes(result, `${selection.innerText} recipes matching "${input.value}"`);
@@ -295,11 +295,6 @@ allRecipesButton.addEventListener('click', function() {
   displayRecipes(allRecipes.recipes, 'All recipes');
 });
 
-// recipeListView.addEventListener('click', displayRecipe);
-
-// searchButton.addEventListener('click', function() {
-//   search(searchBarInput);
-// });
 
 goButton.addEventListener('click', function() {
   search(searchBarInput);
