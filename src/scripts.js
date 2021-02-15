@@ -22,7 +22,8 @@ let allRecipes;
 
 window.addEventListener('load', function() {
   console.log('page loaded 🥺');
-  allRecipes = new RecipeRepository(recipeData);
+  const recipeInstances = recipeData.map(recipe => new Recipe(recipe));
+  allRecipes = new RecipeRepository(recipeInstances);
   displayMYFavorite();
   displayRandomFavorites();
   hide(searchError);

@@ -1,8 +1,11 @@
 // const Recipe = require('./Recipe');
 
 class RecipeRepository {
-  constructor(data) {
-    this.recipes = data.map(recipe => new Recipe(recipe));
+  // constructor(data) {
+  //   this.recipes = data.map(recipe => new Recipe(recipe));
+  // }
+  constructor(recipeInstances) {
+    this.recipes = recipeInstances;
   }
 
   filterByTag(searchTerms) {
@@ -11,7 +14,7 @@ class RecipeRepository {
       this.recipes.filter(recipe => {
         if (recipe.tags.includes(searchTerms[i].toLowerCase())) {
           // question for the group
-          // TODO need to remove the ".id" here?? 
+          // TODO need to remove the ".id" here??
           // so that it will return entire Recipe object, not just id
           // (Katie removed the ".id" in the scripts.js version)
           results.push(recipe.id);
