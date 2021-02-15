@@ -114,9 +114,9 @@ const displayMYFavorite = () => {
         </section>
         <section class="hero-section__box--icons">
           <i class="far fa-heart favorite-heart"></i>
-          <i class="fas fa-heart unfavorite-heart"></i>
+          <i class="fas fa-heart unfavorite-heart hidden"></i>
           <i class="far fa-calendar add-calendar"></i>
-          <i class="far fa-calendar-check remove-calendar"></i>
+          <i class="far fa-calendar-check remove-calendar hidden"></i>
         </section>
       </section>
     `
@@ -126,8 +126,13 @@ const displayMYFavorite = () => {
   heroSectionSelector.innerHTML = chunk;
 }
 
-favoritedHeart.addEventListener('click', () => {
-  updateFavorites('remove')
+favoritedHeart.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  if (event.target.className === 'favorite-heart') {
+    updateFavorites('remove')
+  }
+
 }) // already on favorites array, can be removed
 
 notFavoritedHeart.addEventListener('click', () => {
@@ -146,11 +151,15 @@ notOnWeekly.addEventListener('click', () => {
 const updateFavorites = (direction) => {
   if (direction === 'remove') {
     // hide full red heart
+    favoritedHeart.classList.add('hidden')
     // show empty heart -- color??
+    notFavoritedHeart.classList.remove('hidden')
     // remove from array
   } else {
     // hide empty heart -- color??
+    notFavoritedHeart.classList.add('hidden')
     // show full red heart
+    favoritedHeart.classList.remove('hidden')
     // add to array
   }
 
