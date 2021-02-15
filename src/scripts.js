@@ -192,11 +192,11 @@ const displayRecipe = (id) => {
   });
 }
 
-function splitInput(input) {
+const splitInput = (input) => {
   return input.value.split(' ');
 }
 
-function removeDuplicates(arr) {
+const removeDuplicates = (arr) => {
   return [...new Set(arr)];
 }
 
@@ -251,7 +251,7 @@ const searchByTag = (tag) => {
   }
 }
 
-function search(input) {
+const search = (input) => {
   hide(searchError);
 
   const words = splitInput(input);
