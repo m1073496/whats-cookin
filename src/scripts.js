@@ -65,7 +65,6 @@ const displayRandomFavorites = () => {
   let chunk = '';
   let fourRandomRecipes = [];
 
-  // TODO need to use one of the new prototype methods for this?
   for (let i = 0; i < 4; i++) {
     let randIndex = Math.floor(Math.random() * allRecipes.recipes.length)
     fourRandomRecipes.push(allRecipes.recipes[randIndex]);
@@ -201,16 +200,6 @@ const removeDuplicates = (arr) => {
   return [...new Set(arr)];
 }
 
-// old version -- delete?
-// const filterByTags = (searchTags, recipes) => {
-//   return recipes.filter(recipe => {
-//     if (recipe.tags.includes(searchTag.toLowerCase())) {
-//       return recipe.id;
-//     }
-//   });
-// }
-
-// copied from RecipeRepository
 const filterByTags = (searchTags, recipes) => {
   const results = [];
   for (let i = 0; i < searchTags.length; i++) {
@@ -225,9 +214,7 @@ const filterByTags = (searchTags, recipes) => {
 }
 
 const filterByIngredient = (searchIng, recipes) => {
-  console.log("recipes passing through filterByIngredient: ", recipes);
   return recipes.filter(recipe => {
-    console.log("recipe passing through filter method in filterByIngredient: ", recipe);
     return recipe.ingredients.find(ingredient => {
       return ingredient.name.toLowerCase().includes(searchIng.toLowerCase());
     });
@@ -240,21 +227,17 @@ const filterByName = (searchName, recipes) => {
   });
 }
 
-// TODO make searchFor be an array of possible search terms ('appetizer', 'starter', etc.)
-// // (see TODOs inside forEach below)
 const getTagsToSearchFor = (choices) => {
   console.log("choices passed in to getTagsToSearchFor: ", choices);
   let searchFor = [];
   
   choices.forEach(choice => {
     if (choice === 'appetizers') {
-      searchFor.push('appetizer');
-      // TODO also starter, hor d'oeuvre, hor d'oevres, antipasti, antipasto
+      searchFor.push('appetizer', 'hor d\'oeuvre', 'hor d\'oeuvres', 'antipasti', 'antipasto');
     } else if (choice === 'side-dishes') {
       searchFor.push('side dish');
     } else if (choice === 'main-courses') {
-      searchFor.push('main dish');
-      // TODO also main course, lunch, dinner
+      searchFor.push('main dish', 'main course', 'lunch', 'dinner');
     } else if (choice === 'desserts') {
       searchFor.push('dessert');
     } else {
@@ -287,39 +270,37 @@ const search = (input) => {
   hide(searchError);
 
   const words = splitInput(input);
-  console.log("words: ", words);
+  // console.log("words: ", words);
 
   const selections = [...dropdownSelection.selectedOptions].map(option => option.value);
-  console.log("selections: ", selections);
+  // console.log("selections: ", selections);
 
   const parsedSelections = parseSelections(selections);
-  console.log("parsedSelections: ", parsedSelections)
+  // console.log("parsedSelections: ", parsedSelections)
 
   const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
-  console.log("tagsToSearchFor: ", tagsToSearchFor);
+  // console.log("tagsToSearchFor: ", tagsToSearchFor);
 
   const tagMatches = searchByTags(tagsToSearchFor);
-  console.log("tagMatches: ", tagMatches);
+  // console.log("tagMatches: ", tagMatches);
 
   const foundIngredientRecipes = words.flatMap(word => {
     return filterByIngredient(word, tagMatches);
   });
-  console.log("found ingredient recipes: ", foundIngredientRecipes);
+  // console.log("found ingredient recipes: ", foundIngredientRecipes);
 
   const foundNameRecipes = words.flatMap(word => {
     return filterByName(word, tagMatches);
   });
-  console.log("found name recipes: ", foundNameRecipes);
+  // console.log("found name recipes: ", foundNameRecipes);
 
   const foundTagRecipes = words.flatMap(word => {
-    console.log("word passed in to foundTagRecipes: ", word);
-    console.log("length of tagMatches inside foundTagRecipes: ", tagMatches.length);
     return filterByTags([word], tagMatches);
   });
-  console.log("found tag recipes: ", foundTagRecipes);
+  // console.log("found tag recipes: ", foundTagRecipes);
 
   const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes, ...foundTagRecipes];
-  console.log("found recipes: ", foundRecipes);
+  // console.log("found recipes: ", foundRecipes);
 
   const result = removeDuplicates(foundRecipes);
   console.log("final result: ", result);
