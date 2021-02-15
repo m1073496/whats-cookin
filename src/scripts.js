@@ -201,16 +201,33 @@ const removeDuplicates = (arr) => {
   return [...new Set(arr)];
 }
 
-const filterByTag = (searchTag, recipes) => {
-  return recipes.filter(recipe => {
-    if (recipe.tags.includes(searchTag.toLowerCase())) {
-      return recipe.id;
-    }
-  });
+// old version -- delete?
+// const filterByTags = (searchTags, recipes) => {
+//   return recipes.filter(recipe => {
+//     if (recipe.tags.includes(searchTag.toLowerCase())) {
+//       return recipe.id;
+//     }
+//   });
+// }
+
+// copied from RecipeRepository
+const filterByTags = (searchTags, recipes) => {
+  const results = [];
+  for (let i = 0; i < searchTags.length; i++) {
+    recipes.filter(recipe => {
+      if (recipe.tags.includes(searchTags[i].toLowerCase())) {
+        results.push(recipe);
+      }
+    })
+  }
+
+  return [...new Set(results)];
 }
 
 const filterByIngredient = (searchIng, recipes) => {
+  console.log("recipes passing through filterByIngredient: ", recipes);
   return recipes.filter(recipe => {
+    console.log("recipe passing through filter method in filterByIngredient: ", recipe);
     return recipe.ingredients.find(ingredient => {
       return ingredient.name.toLowerCase().includes(searchIng.toLowerCase());
     });
@@ -224,8 +241,9 @@ const filterByName = (searchName, recipes) => {
 }
 
 // TODO make searchFor be an array of possible search terms ('appetizer', 'starter', etc.)
-// // which may blend well with the multi-selection that Nikki built
+// // (see TODOs inside forEach below)
 const getTagsToSearchFor = (choices) => {
+  console.log("choices passed in to getTagsToSearchFor: ", choices);
   let searchFor = [];
   
   choices.forEach(choice => {
@@ -242,15 +260,26 @@ const getTagsToSearchFor = (choices) => {
     } else {
       searchFor.push(choice);
     }
-  }
+  });
+
   return searchFor;
 }
 
-const searchByTag = (tag) => {
-  if (tag === 'all') {
+const searchByTags = (tags) => {
+  if (tags.includes('all')) {
     return allRecipes.recipes;
   } else {
-    return filterByTag(tag, allRecipes.recipes);
+    return filterByTags(tags, allRecipes.recipes);
+  }
+}
+
+// TODO force choice of "all" if no choice is made 
+// -- but could solve this in the UI instead?
+const parseSelections = (selections) => {
+  if (selections.length) {
+    return selections;
+  } else {
+    return ['all'];
   }
 }
 
@@ -258,13 +287,19 @@ const search = (input) => {
   hide(searchError);
 
   const words = splitInput(input);
+  console.log("words: ", words);
 
   const selections = [...dropdownSelection.selectedOptions].map(option => option.value);
+  console.log("selections: ", selections);
 
-  const tagsToSearchFor = getTagsToSearchFor(selections);
+  const parsedSelections = parseSelections(selections);
+  console.log("parsedSelections: ", parsedSelections)
+
+  const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
   console.log("tagsToSearchFor: ", tagsToSearchFor);
 
-  const tagMatches = searchByTag(tagsToSearchFor);
+  const tagMatches = searchByTags(tagsToSearchFor);
+  console.log("tagMatches: ", tagMatches);
 
   const foundIngredientRecipes = words.flatMap(word => {
     return filterByIngredient(word, tagMatches);
@@ -276,11 +311,10 @@ const search = (input) => {
   });
   console.log("found name recipes: ", foundNameRecipes);
 
-  // broadens search to include any tag words typed in search bar
-  // for example, a recipe with only the 'snack' tag wouldn't get caught by the dropdown 
-  // but will now get caught in search
   const foundTagRecipes = words.flatMap(word => {
-    return filterByTag(word, tagMatches);
+    console.log("word passed in to foundTagRecipes: ", word);
+    console.log("length of tagMatches inside foundTagRecipes: ", tagMatches.length);
+    return filterByTags([word], tagMatches);
   });
   console.log("found tag recipes: ", foundTagRecipes);
 
@@ -291,9 +325,12 @@ const search = (input) => {
   console.log("final result: ", result);
 
   if (result.length > 0 && input.value) {
-    displayRecipes(result, `${selection.innerText} recipes matching "${input.value}"`);
+    // TODO could make this display all selected tags ... or not
+    // displayRecipes(result, `${selections.innerText} recipes matching "${input.value}"`);
+    displayRecipes(result, `Search results matching "${input.value}"`);
   } else if (result.length) {
-    displayRecipes(result, `${selection.innerText} recipes`);
+    // displayRecipes(result, `${selections.innerText} recipes`);
+    displayRecipes(result, `Search results`);
   } else {
     display(searchError);
   }

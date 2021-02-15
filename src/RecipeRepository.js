@@ -10,6 +10,9 @@ class RecipeRepository {
     for (let i = 0; i < searchTerms.length; i++) {
       this.recipes.filter(recipe => {
         if (recipe.tags.includes(searchTerms[i].toLowerCase())) {
+          // TODO need to remove the ".id" here?? 
+          // so that it will return entire Recipe object, not just id
+          // (Katie removed the ".id" in the scripts.js version)
           results.push(recipe.id);
         }
       })
