@@ -273,7 +273,15 @@ const search = (input) => {
   });
   console.log("found name recipes: ", foundNameRecipes);
 
-  const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes];
+  // broadens search to include any tag words typed in search bar
+  // for example, a recipe with only the 'snack' tag wouldn't get caught by the dropdown 
+  // but will now get caught in search
+  const foundTagRecipes = words.flatMap(word => {
+    return filterByTag(word, tagMatches);
+  });
+  console.log("found tag recipes: ", foundTagRecipes);
+
+  const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes, ...foundTagRecipes];
   console.log("found recipes: ", foundRecipes);
 
   const result = removeDuplicates(foundRecipes);
