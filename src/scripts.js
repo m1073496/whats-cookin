@@ -40,24 +40,27 @@ const displayRecipeList = () => {
 
 
 // *** START 🦄 Nikki's 🦄 work ***
-const dropdownSelection = document.querySelector('#tag-selector');
 const goButton = document.getElementById('go')
 
 // TODO compare with Katie stuff; maybe merge/refactor/etc.
 const getSearchTerm = () => {
-  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex].value;
+  const dropdownSelection = document.getElementById('tag-selector');
+  var searchTerms = [...dropdownSelection.selectedOptions].map(option => option.value);
 
-  if (searchTerm === '') {
-    // todo ==> make this an actual message/response
+  console.log(searchTerms)
+
+
+  if (searchTerms.length === 0) {
+    // todo ==> this would end up being select all??
     alert("you must make a selection")
   } else {
-    filterByTag(searchTerm);
+    filterByTag(searchTerms);
     displayRecipeList();
   }
 }
 
-const filterByTag = (tag) => {
-  return allRecipes.filterByTag(tag)
+const filterByTag = (tags) => {
+  return allRecipes.filterByTag(tags)
 }
 
 const displayLanding = () => {
