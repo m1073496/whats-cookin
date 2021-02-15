@@ -111,8 +111,6 @@ const displayMYFavorite = () => {
 }
 // *** END 🦄 Nikki's work 🦄 ***
 
-
-
 const displayRecipes = (recipeList, title) => {
   displayRecipeList();
   recipeListTitle.innerText = title;
@@ -220,7 +218,7 @@ const searchByTags = (tags) => {
   if (tags.includes('all')) {
     return allRecipes.recipes;
   } else {
-    return filterByTags(tags, allRecipes.recipes);
+    return allRecipes.filterByTags(tags);
   }
 }
 
@@ -234,6 +232,14 @@ const parseSelections = (selections) => {
   }
 }
 
+const splitInput = (input) => {
+  return input.value.split(' ');
+}
+
+const removeDuplicates = (arr) => {
+  return [...new Set(arr)];
+}
+
 const search = (searchInput, dropDownInput) => {
   hide(searchError);
 
@@ -243,8 +249,9 @@ const search = (searchInput, dropDownInput) => {
   const parsedSelections = parseSelections(selections);
   const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
   const tagMatches = searchByTags(tagsToSearchFor);
+  const tagMatchesRepository = new RecipeRepository(tagMatches);
 
-  const results = findRecipes(words, tagMatches);
+  const results = tagMatchesRepository.findRecipes(words);
   displayResults(searchInput, results);
 }
 
