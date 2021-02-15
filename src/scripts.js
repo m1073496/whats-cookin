@@ -252,14 +252,14 @@ const search = (searchInput, dropDownInput) => {
   const tagMatchesRepository = new RecipeRepository(tagMatches);
 
   const results = tagMatchesRepository.findRecipes(words);
-  displayResults(searchInput, results);
+  displayResults(searchInput, results.recipes);
 }
 
-const displayResults = (searchInput, results) => {
-  if (results.length > 0 && searchInput.value) {
-    displayRecipes(results, `Search results matching "${searchInput.value}"`);
-  } else if (results.length) {
-    displayRecipes(results, `Search results`);
+const displayResults = (searchInput, recipes) => {
+  if (recipes.length > 0 && searchInput.value) {
+    displayRecipes(recipes, `Search results matching "${searchInput.value}"`);
+  } else if (recipes.length) {
+    displayRecipes(recipes, `Search results`);
   } else {
     display(searchError);
   }
