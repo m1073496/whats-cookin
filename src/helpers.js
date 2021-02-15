@@ -57,7 +57,7 @@ const findRecipes = (words, recipes) => {
   const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes, ...foundTagRecipes];
   // console.log("found recipes: ", foundRecipes);
 
-  const result = removeDuplicates(foundRecipes);
-  console.log("final result: ", result);
-  return result;
+  const results = removeDuplicates(foundRecipes);
+  console.log("final result: ", results);
+  return results;
 }

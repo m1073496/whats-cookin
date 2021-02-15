@@ -234,38 +234,23 @@ const parseSelections = (selections) => {
 
 const search = (searchInput, dropDownInput) => {
   hide(searchError);
-  //DOM STUFF
-  //collect data from user - search bar & tags clicked
-  //determines the recipes to search among
-  //displays that big ole array to the DOM with the appropriate title
 
-  //clean and format data collected by calling helper function
   const words = splitInput(searchInput);
-  // console.log("words: ", words);
 
-  //determines the recipes to search among
   const selections = [...dropDownInput.selectedOptions].map(option => option.value);
-  // console.log("selections: ", selections);
-
   const parsedSelections = parseSelections(selections);
-  // console.log("parsedSelections: ", parsedSelections)
-
   const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
-  // console.log("tagsToSearchFor: ", tagsToSearchFor);
-
   const tagMatches = searchByTags(tagsToSearchFor);
-  // console.log("tagMatches: ", tagMatches);
-  //END ^^determines the recipes to search among^^
-  const result = findRecipes(words, tagMatches);
 
+  const results = findRecipes(words, tagMatches);
+  displayResults(searchInput, results);
+}
 
-  if (result.length > 0 && searchInput.value) {
-    // TODO could make this display all selected tags ... or not
-    // displayRecipes(result, `${selections.innerText} recipes matching "${input.value}"`);
-    displayRecipes(result, `Search results matching "${searchInput.value}"`);
-  } else if (result.length) {
-    // displayRecipes(result, `${selections.innerText} recipes`);
-    displayRecipes(result, `Search results`);
+const displayResults = (searchInput, results) => {
+  if (results.length > 0 && searchInput.value) {
+    displayRecipes(results, `Search results matching "${searchInput.value}"`);
+  } else if (results.length) {
+    displayRecipes(results, `Search results`);
   } else {
     display(searchError);
   }
