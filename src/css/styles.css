@@ -211,6 +211,10 @@ main {
 
 
 /* *** Search *** */
+.dropdown__label {
+    width: 50%;
+}
+
 .dropdown__selector {
     font-family: 'Raleway', sans-serif;
     font-size: 1em;
@@ -219,8 +223,8 @@ main {
     border-radius: 7px;
 }
 
-option {
-    background: white;
+.dropdown__selector--item {
+    padding: 0 5px;
 }
 
 .search {
