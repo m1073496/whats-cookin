@@ -10,10 +10,6 @@ const {
   testRecipeData
 } = require('../data/test-data');
 
-// const User = require('../src/User');
-// const RecipeRepository = require('../src/RecipeRepository');
-// const Recipe = require('../src/Recipe');
-
 describe('User', function() {
   let user1;
   let user2;
@@ -74,18 +70,18 @@ describe('User', function() {
     user1.updateCookList(recipeRepository.recipes[1]);
 
     expect(user1.recipesToCook.length).to.equal(2);
-    expect(user1.recipesToCook[0]).to.deep.equal(recipeRepository[0]);
-    expect(user1.favoriteRecipes[0]).to.be.an.instanceOf(Recipe);
+    expect(user1.recipesToCook[0]).to.deep.equal(recipeRepository.recipes[0]);
+    expect(user1.recipesToCook[0]).to.be.an.instanceOf(Recipe);
   });
 
   it('should remove recipes from `recipes to cook` list', function() {
     user1.updateCookList(recipeRepository.recipes[0]);
     user1.updateCookList(recipeRepository.recipes[1]);
-    user1.updateCookList(recipeRepository[1]);
+    user1.updateCookList(recipeRepository.recipes[1]);
 
     expect(user1.recipesToCook.length).to.equal(1);
-    expect(user1.favoriteRecipes[0]).to.deep.equal(recipeRepository.recipes[0]);
-    expect(user1.favoriteRecipes).to.deep.equal([recipeRepository.recipes[0]]);
+    expect(user1.recipesToCook[0]).to.deep.equal(recipeRepository.recipes[0]);
+    expect(user1.recipesToCook).to.deep.equal([recipeRepository.recipes[0]]);
   });
 
   it('should filter favorite recipes by tags', function() {
