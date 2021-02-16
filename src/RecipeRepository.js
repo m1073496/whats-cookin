@@ -3,7 +3,7 @@ class RecipeRepository {
     this.recipes = recipeInstances;
   }
 
-  filterByTags = (searchTags) => {
+  filterByTags(searchTags) {
     const results = [];
     for (let i = 0; i < searchTags.length; i++) {
       this.recipes.filter(recipe => {
@@ -15,7 +15,7 @@ class RecipeRepository {
     return [...new Set(results)];
   }
 
-  filterByIngredient = (searchIng) => {
+  filterByIngredient(searchIng) {
     return this.recipes.filter(recipe => {
       return recipe.ingredients.find(ingredient => {
         return ingredient.name.toLowerCase().includes(searchIng.toLowerCase());
@@ -23,32 +23,33 @@ class RecipeRepository {
     });
   }
 
-  filterByName = (searchName) => {
+  filterByName(searchName) {
     return this.recipes.filter(recipe => {
       return recipe.name.toLowerCase().includes(searchName.toLowerCase());
     });
   }
 
-  findRecipes = (words) => {
+  findRecipes(words) {
     const foundIngredientRecipes = words.flatMap(word => {
       return this.filterByIngredient(word);
     });
-
     const foundNameRecipes = words.flatMap(word => {
       return this.filterByName(word);
     });
-
     const foundTagRecipes = words.flatMap(word => {
       return this.filterByTags([word]);
     });
+    const foundRecipes = [
+      ...foundIngredientRecipes, 
+      ...foundNameRecipes, 
+      ...foundTagRecipes
+    ];
+    const results = this.removeDuplicates(foundRecipes);
+    return new RecipeRepository(results);
+  }
 
-    const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes, ...foundTagRecipes];
-
-    const results = removeDuplicates(foundRecipes);
-
-    const resultsRepository = new RecipeRepository(results);
-    console.log("final result: ", results);
-    return resultsRepository;
+  removeDuplicates(arr) {
+    return [...new Set(arr)];
   }
 }
 
