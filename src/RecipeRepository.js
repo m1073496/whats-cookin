@@ -1,5 +1,3 @@
-// const { ingredientsData } = require('../data/ingredients');
-
 class RecipeRepository {
   constructor(recipeInstances) {
     this.recipes = recipeInstances;
