@@ -218,7 +218,7 @@ main {
 .dropdown__selector {
     font-family: 'Raleway', sans-serif;
     font-size: 1em;
-    margin: 0 10px;
+    margin: 0;
     padding: 2px 5px;
     border-radius: 7px;
 }
@@ -227,8 +227,15 @@ main {
     padding: 0 5px;
 }
 
+.search-section {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
 .search {
-    margin: 20px;
+    margin: 10px;
 }
 
 input.search-bar {
@@ -240,7 +247,7 @@ input.search-bar {
 
 fieldset {
     border: none;
-    margin: 20px;
+    margin: 10px;
 }
 
 select:focus {
@@ -251,6 +258,7 @@ select:focus {
 .search-button {
     font-family: 'Alice', serif;
     font-size: 1.1em;
+    margin: 10px;
     padding: 0 20px;
     height: 30px;
     background: white;
