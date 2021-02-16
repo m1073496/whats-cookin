@@ -87,7 +87,8 @@ main {
 
 .header__left--text {
     font-family: 'Alice', serif;
-    color: #03B0AA;
+    color: #026B81;
+    font-weight: 700;
     font-size: 1.6rem;
     padding: 5px;
 }
@@ -168,6 +169,7 @@ main {
 
 .hero-section__box {
     padding: 50px;
+    width: 40%;
     text-align: center;
     background: white;
     position: absolute;
@@ -187,6 +189,24 @@ main {
     margin: 10px;
     font-family: 'Alice', serif;
     font-size: 1.2em;
+}
+
+.heart,
+.calendar {
+    font-size: 1.5em;
+}
+
+.unfavorite-heart {
+    color: #f56666;
+}
+
+.remove-calendar {
+    color: #4f4ff3;
+}
+
+.icon {
+    margin: 2px 5px;
+    cursor: pointer;
 }
 
 /* *** Featured Sections *** */

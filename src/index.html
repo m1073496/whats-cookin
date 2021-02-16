@@ -77,7 +77,24 @@
           <!--          </form>-->
         </section>
 
-        <section class="hero-section"></section>
+        <section class="hero-section">
+
+          <section class="hero-section__box" data-id=${favorite.id}>
+            <section class="hero-section__box--recipe-name">
+
+            </section>
+            <section class="hero-section__box--icons">
+              <span class="heart">
+                <i class="far fa-heart favorite-heart icon"></i>
+                <i class="fas fa-heart unfavorite-heart icon hidden"></i>
+              </span>
+              <span class="calendar">
+                <i class="far fa-calendar add-calendar icon"></i>
+                <i class="far fa-calendar-check remove-calendar icon hidden"></i>
+              </span>
+            </section>
+          </section>
+        </section>
 
         <h2 class="featured-section__title">Featured Recipes</h2>
         <section class="featured-section content1"></section>

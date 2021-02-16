@@ -17,10 +17,9 @@ const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
 const heroSectionSelector = document.querySelector('.hero-section');
-const favoritedHeart = document.querySelector('.unfavorite-heart'); // already on favorites array, can be removed
-const notFavoritedHeart = document.querySelector('.favorite-heart'); // not favorited yet
-const onWeekly = document.querySelector('.remove-calendar'); // already on weekly array, can be removed
-const notOnWeekly = document.querySelector('.add-calendar');
+const heartSelector = document.querySelector('.heart');
+const calendarSelector = document.querySelector('.calendar');
+
 
 let allRecipes;
 
@@ -91,94 +90,37 @@ const displayRandomFavorites = () => {
 }
 
 const displayMYFavorite = () => {
-  let chunk = '';
-
   const favorite = allRecipes.recipes[
     Math.floor(Math.random() * allRecipes.recipes.length)
   ];
 
-    chunk += `
-      <section class="hero-section__box" data-id=${favorite.id}>
-        <section class="hero-section__box--recipe-name">
-          <h3>${favorite.name}</h3>
-        </section>
-        <section class="hero-section__box--icons">
-          <i class="far fa-heart favorite-heart"></i>
-          <i class="fas fa-heart unfavorite-heart hidden"></i>
-          <i class="far fa-calendar add-calendar"></i>
-          <i class="far fa-calendar-check remove-calendar hidden"></i>
-        </section>
-
-      </section>
-      <section class="hero-section__box--icons">
-        <i class="far fa-heart"></i>
-        <i class="far fa-calendar"></i>
-      </section>
-    </section>
-  `;
+  const heroName = document.querySelector('.hero-section__box--recipe-name');
 
   heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
-  heroSectionSelector.innerHTML = chunk;
+  heroName.innerHTML = `<h3>${favorite.name}</h3>`
+
 }
 
-favoritedHeart.addEventListener('click', (event) => {
-  event.preventDefault();
-
-  if (event.target.className === 'favorite-heart') {
-    updateFavorites('remove')
-  }
-
-}) // already on favorites array, can be removed
-
-notFavoritedHeart.addEventListener('click', () => {
-  updateFavorites('add')
-})  // not favorited yet
-
-onWeekly.addEventListener('click', () => {
-  updateWeekly('remove')
-})  // already on weekly array, can be removed
-
-notOnWeekly.addEventListener('click', () => {
-  updateWeekly('remove')
-})  // not on weekly yet
-
-// should all of these be one function, with params of add/remove, and the list passed in???
-const updateFavorites = (direction) => {
-  if (direction === 'remove') {
-    // hide full red heart
-    favoritedHeart.classList.add('hidden')
-    // show empty heart -- color??
-    notFavoritedHeart.classList.remove('hidden')
-    // remove from array
-  } else {
-    // hide empty heart -- color??
-    notFavoritedHeart.classList.add('hidden')
-    // show full red heart
-    favoritedHeart.classList.remove('hidden')
-    // add to array
-  }
+const toggleFavorites = () => {
+  console.log('this far')
+  document.querySelector('.favorite-heart').classList.toggle('hidden');
+  document.querySelector('.unfavorite-heart').classList.toggle('hidden');
 
   // refresh list of favorites
 }
 
-const updateWeekly = (direction) => {
-  if (direction === 'remove') {
-    // hide calendar with check
-    // show empty calendar -- color??
-    // remove from array
-  } else {
-    // hide empty calendar -- color??
-    // show calendar with check
-    // add to array
-  }
+const toggleCalendar = () => {
+  console.log('this far')
+  document.querySelector('.add-calendar').classList.toggle('hidden');
+  document.querySelector('.remove-calendar').classList.toggle('hidden');
 
-  // refresh list of favorites
+  // refresh list of weekly recipes to cook
 }
 
+heartSelector.addEventListener('click', toggleFavorites);
+calendarSelector.addEventListener('click', toggleCalendar);
 
 // *** END 🦄 Nikki's work 🦄 ***
-
-
 
 const displayRecipes = (recipeList, title) => {
   displayRecipeList();
