@@ -117,9 +117,12 @@ describe('User', function() {
     expect(thirdResult.recipes).to.deep.equal([recipeRepository.recipes[0], recipeRepository.recipes[2]])
   });
 
-  // it('should ')
+  it('should determine missing ingredients needed to cook recipe', function() {
 
+  });
 
+  it('should remove ingredients from pantry', function() {
 
-
+  });
+  
 });
