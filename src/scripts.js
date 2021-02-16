@@ -109,9 +109,7 @@ const displayMYFavorite = () => {
     Math.floor(Math.random() * allRecipes.recipes.length)
   ];
 
-
-  heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
-  heroName.innerHTML = `<h3 data-id=${favorite.id}>${favorite.name}</h3>`
+  heroName.innerHTML = `<h3 data-id='698701'>Double Raspberry Soufflé</h3>`
 }
 
 heroTitleSelector.addEventListener('click', (event) => {
