@@ -2,13 +2,16 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const { testRecipeData } = require('../data/test-data');
+const Recipe = require('../src/Recipe');
 const RecipeRepository = require('../src/RecipeRepository');
 
 describe('RecipeRepository', () => {
-  let recipeRepository;
+  let testRecipes, recipeRepository;
+
 
   beforeEach(() => {
-    recipeRepository = new RecipeRepository(testRecipeData)
+    testRecipes = testRecipeData.map(recipe => new Recipe(recipe));
+    recipeRepository = new RecipeRepository(testRecipes);
   });
 
   it('should be a function', () => {
