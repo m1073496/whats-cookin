@@ -54,6 +54,7 @@ const displayRecipeDetailView = () => {
 
 // *** START 🦄 Nikki's 🦄 work ***
 const displayLanding = () => {
+  displayMYFavorite();
   hide(recipeListView);
   hide(recipeDetailView);
   hide(pantryView);
@@ -103,7 +104,6 @@ const displayMYFavorite = () => {
   heroName.innerHTML = `<h3 data-id=${favorite.id}>${favorite.name}</h3>`
 }
 
-// event listener for hero image take you to that recipe displayRecipe
 heroSectionSelector.addEventListener('click', (event) => {
   event.preventDefault();
   let id = event.target.getAttribute('data-id');
@@ -112,7 +112,6 @@ heroSectionSelector.addEventListener('click', (event) => {
 })
 
 const toggleFavorites = () => {
-  console.log('this far')
   document.querySelector('.favorite-heart').classList.toggle('hidden');
   document.querySelector('.unfavorite-heart').classList.toggle('hidden');
 
@@ -120,7 +119,6 @@ const toggleFavorites = () => {
 }
 
 const toggleCalendar = () => {
-  console.log('this far')
   document.querySelector('.add-calendar').classList.toggle('hidden');
   document.querySelector('.remove-calendar').classList.toggle('hidden');
 

@@ -204,8 +204,9 @@ main {
     color: #4f4ff3;
 }
 
+.hero-section__box--recipe-name,
 .icon {
-    margin: 2px 5px;
+    margin: 2px 15px;
     cursor: pointer;
 }
 
