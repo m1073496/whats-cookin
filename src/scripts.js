@@ -26,17 +26,24 @@ const recipeCalendarSelector = document.querySelector('.calendar-recipe');
 // const listCalendarSelector = document.querySelector('.calendar-list');
 
 let allRecipes;
+let currentUser;
 
 window.addEventListener('load', function() {
   console.log('page loaded 🥺');
   const recipeInstances = recipeData.map(recipe => new Recipe(recipe));
   allRecipes = new RecipeRepository(recipeInstances);
+  currentUser = new User(usersData[getRandomIndex(usersData.length)]);
+  console.log(currentUser);
   displayMYFavorite();
   displayRandomFavorites();
   hide(searchError);
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+const getRandomIndex = (max) => {
+  return Math.floor(Math.random() * Math.floor(max));
+}
 
 const hide = (element) => element.classList.add('hidden');
 
@@ -221,12 +228,12 @@ const displayRecipes = (recipeList, title) => {
             <span class="ingredients-and-cost__item--icon"><i class="fal fa-ellipsis-h"></i></span>
             <span class="ingredients-and-cost__item--name">${recipe.name}</span>
           </li>
-          
+
           <li>
             <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
             <span class="ingredients-and-cost__item--isInPantry">You have everything needed to make this recipe!</span>
           </li>
-          
+
           <li>
             <span class="ingredients-and-cost__item--icon"><i class="far fa-badge-dollar"></i></span>
             <span class="ingredients-and-cost__item--cost">${recipe.getTotalCost()}</span>
