@@ -17,7 +17,6 @@ const goListButton = document.getElementById('goListButton');
 const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
-const heroSectionSelector = document.querySelector('.hero-section');
 const heroTitleSelector = document.querySelector('.hero-section__box--recipe-name');
 const heartSelector = document.querySelector('.heart');
 const recipeHeartSelector = document.querySelector('.heart-recipe');
@@ -102,13 +101,7 @@ const displayRandomFavorites = () => {
 }
 
 const displayMYFavorite = () => {
-  // todo ==> will need to check whether this is on favorites, and if not, maybe don't use it??
-  // in other words, should we only show recipes not on favorites? maybe use a different repository for this??
   const heroName = document.querySelector('.hero-section__box--recipe-name');
-  const favorite = allRecipes.recipes[
-    Math.floor(Math.random() * allRecipes.recipes.length)
-  ];
-
   heroName.innerHTML = `<h3 data-id='698701'>Double Raspberry Soufflé</h3>`
 }
 
@@ -190,48 +183,50 @@ const displayRecipes = (recipeList, title) => {
     newRecipeItem.innerHTML += `
       <section class="item-container">
         <div class="recipe-list__item">
+          <div class="cooked-button hidden">
+            <button>Cooked It!</button>
+            <span>message</span>
+          </div>
+        
           <figure>
             <img class="recipe-list__item--img"
                  src="${recipe.image}"
                  alt="${recipe.name}"
                  style="width:250px;">
           </figure>
+          
+          <div>
+            <ul class="ingredients-and-cost">
+              <li>
+                <span class="ingredients-and-cost__item--icon"><i class="fal fa-ellipsis-h"></i></span>
+                <span class="ingredients-and-cost__item--name">${recipe.name}</span>
+              </li>
+              
+              <li>
+                <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
+                <span class="ingredients-and-cost__item--isInPantry">You have everything needed to make this recipe!</span>
+              </li>
+              
+              <li>
+                <span class="ingredients-and-cost__item--icon"><i class="far fa-badge-dollar"></i></span>
+                <span class="ingredients-and-cost__item--cost">${recipe.getTotalCost()}</span>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="recipe-list__item cooked-button hidden">
-          <button>Cooked It!</button>
-          <span>message</span>
-        </div>
-
+        
         <div class="recipe-list__item">
-              <span class="heart">
-                <i class="far fa-heart favorite-heart-list icon"></i>
-                <i class="fas fa-heart unfavorite-heart-list icon hidden"></i>
-              </span>
-              <span class="calendar">
-                <i class="far fa-calendar add-calendar-list icon"></i>
-                <i class="far fa-calendar-check remove-calendar-list icon hidden"></i>
-              </span>
+          <span class="heart">
+            <i class="far fa-heart favorite-heart-list icon"></i>
+            <i class="fas fa-heart unfavorite-heart-list icon hidden"></i>
+          </span>
+          <span class="calendar">
+            <i class="far fa-calendar add-calendar-list icon"></i>
+            <i class="far fa-calendar-check remove-calendar-list icon hidden"></i>
+          </span>
         </div>
       </section>
 
-      <section class="recipe-list__item">
-        <ul class="ingredients-and-cost">
-          <li>
-            <span class="ingredients-and-cost__item--icon"><i class="fal fa-ellipsis-h"></i></span>
-            <span class="ingredients-and-cost__item--name">${recipe.name}</span>
-          </li>
-          
-          <li>
-            <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
-            <span class="ingredients-and-cost__item--isInPantry">You have everything needed to make this recipe!</span>
-          </li>
-          
-          <li>
-            <span class="ingredients-and-cost__item--icon"><i class="far fa-badge-dollar"></i></span>
-            <span class="ingredients-and-cost__item--cost">${recipe.getTotalCost()}</span>
-          </li>
-        </ul>
-      </section>
     `;
 
     newRecipeItem.addEventListener('click', function() {
