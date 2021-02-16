@@ -24,6 +24,7 @@ const recipeHeartSelector = document.querySelector('.heart-recipe');
 const calendarSelector = document.querySelector('.calendar');
 const recipeCalendarSelector = document.querySelector('.calendar-recipe');
 // const listCalendarSelector = document.querySelector('.calendar-list');
+const userGreeting = document.querySelector('.header__right--text');
 
 let allRecipes;
 let currentUser;
@@ -33,7 +34,7 @@ window.addEventListener('load', function() {
   const recipeInstances = recipeData.map(recipe => new Recipe(recipe));
   allRecipes = new RecipeRepository(recipeInstances);
   currentUser = new User(usersData[getRandomIndex(usersData.length)]);
-  console.log(currentUser);
+  userGreeting.innerText = `Hello, ${currentUser.userName}!`;
   displayMYFavorite();
   displayRandomFavorites();
   hide(searchError);
