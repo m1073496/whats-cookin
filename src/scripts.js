@@ -97,6 +97,8 @@ const displayRandomFavorites = () => {
 }
 
 const displayMYFavorite = () => {
+  // todo ==> will need to check whether this is on favorites, and if not, maybe don't use it??
+  // in other words, should we only show recipes not on favorites? maybe use a different repository for this??
   const heroName = document.querySelector('.hero-section__box--recipe-name');
   const favorite = allRecipes.recipes[
     Math.floor(Math.random() * allRecipes.recipes.length)
@@ -215,6 +217,7 @@ const displayRecipe = (id) => {
     <img src="${foundRecipe.image}" alt="${foundRecipe.name}" style="width:250px;">
     <figcaption>Meal cost: $${foundRecipe.getTotalCost()}</figcaption>
   `;
+
   foundRecipe.ingredients.forEach(ingredient => {
     ingredientsDetailList.innerHTML += `
       <article class="ingredients__item">
@@ -223,6 +226,7 @@ const displayRecipe = (id) => {
       </article>
     `;
   });
+
   foundRecipe.instructions.forEach(instruction => {
     recipeInstructions.innerHTML += `
       <li class="instructions-details__item"><span class="instructions-details__number">${instruction.number}.</span> ${instruction.instruction}</li>

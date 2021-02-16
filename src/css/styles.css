@@ -384,6 +384,14 @@ select:focus {
     margin: 5px 15px;
 }
 
+.ingredients-list {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+}
+
 /* *** Recipe list *** */
 .recipe {
     margin: 10px 5px;
