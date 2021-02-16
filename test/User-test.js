@@ -114,7 +114,7 @@ describe('User', function() {
     expect(secondResult.recipes).to.deep.equal([recipeRepository.recipes[0]]);
 
     expect(thirdResult.recipes.length).to.equal(2);
-    expect(thirdResult.recipes).to.deep.equal([recipeRepository.recipes[0], recipeRepository.recipes[2]])
+    expect(thirdResult.recipes).to.deep.equal([recipeRepository.recipes[0], recipeRepository.recipes[2]]);
   });
 
   it('should determine missing ingredients needed to cook recipe', function() {
@@ -124,354 +124,407 @@ describe('User', function() {
     let badResultUser2 = user2.findMissingIngredients(recipes[0]);
     let goodResultUser2 = user1.findMissingIngredients(recipes[1]);
 
-    expect(badResultUser1).to.equal([
-      {  "id": 6150,
-       "quantity": {
-         "amount": 1,
-         "unit": "cup"
-       }
-     },
-     {
-       "id": 6194,
-       "quantity": {
-         "amount": 1,
-         "unit": "cup"
-       }
-     },
-     {
-       "id": 93627,
-       "quantity": {
-         "amount": 3,
-         "unit": "tbsp"
-       }
-     },
-     {
-       "id": 2028,
-       "quantity": {
-         "amount": 8,
-         "unit": "servings"
-       }
-     },
-     {
-       "id": 10072,
-       "quantity": {
-         "amount": 6,
-         "unit": "lbs"
-       }
-     },
-     {
-       "id": 6971,
-       "quantity": {
-         "amount": 2,
-         "unit": "tbsp"
-       }
-     }
-    ]);
-    expect(goodResultUser1).to.equal([
+    // expect(badResultUser1).to.equal([
+    //   {
+    //    id: 1001,
+    //    amount: 2,
+    //    unit: 'tablespoons',
+    //    name: 'butter',
+    //    costPerUnit: 618,
+    //    totalCostInCents: 1236
+    //   },
+    //   {
+    //    id: 20027,
+    //    amount: 0.25,
+    //    unit: 'cup',
+    //    name: 'corn starch',
+    //    costPerUnit: 236,
+    //    totalCostInCents: 59
+    //   },
+    //   {
+    //    id: 1123,
+    //    amount: 1,
+    //    unit: '',
+    //    name: 'eggs',
+    //    costPerUnit: 472,
+    //    totalCostInCents: 472
+    //   },
+    //   {
+    //    id: 1125,
+    //    amount: 2,
+    //    unit: '',
+    //    name: 'egg yolks',
+    //    costPerUnit: 889,
+    //    totalCostInCents: 1778
+    //   },
+    //   {
+    //    id: 1077,
+    //    amount: 2,
+    //    unit: 'cups',
+    //    name: 'full-fat milk',
+    //    costPerUnit: 276,
+    //    totalCostInCents: 552
+    //   },
+    //   {
+    //    id: 2050,
+    //    amount: 1,
+    //    unit: 'teaspoon',
+    //    name: 'vanilla',
+    //    costPerUnit: 926,
+    //    totalCostInCents: 926
+    //   }
+    // ]);
+
+    expect(goodResultUser1).to.deep.equal([
       {
-        "id": 9019,
-        "quantity": {
-          "amount": 2,
-          "unit": "tablespoons"
-        }
+        id: 9019,
+        amount: 2,
+        unit: 'tablespoons',
+        name: 'unsweetened apple sauce',
+        costPerUnit: 154,
+        totalCostInCents: 308
       },
       {
-        "id": 18079,
-        "quantity": {
-          "amount": 1,
-          "unit": "cup"
-        }
+        id: 18079,
+        amount: 1,
+        unit: 'cup',
+        name: 'dry breadcrumbs',
+        costPerUnit: 167,
+        totalCostInCents: 167
       },
       {
-        "id": 16069,
-        "quantity": {
-          "amount": 1,
-          "unit": "cup"
-        }
+        id: 16069,
+        amount: 1,
+        unit: 'cup',
+        name: 'legumes',
+        costPerUnit: 903,
+        totalCostInCents: 903
       },
       {
-        "id": 19334,
-        "quantity": {
-          "amount": 2,
-          "unit": "tablespoons"
-        }
+        id: 19334,
+        amount: 2,
+        unit: 'tablespoons',
+        name: 'brown sugar',
+        costPerUnit: 559,
+        totalCostInCents: 1118
       },
       {
-        "id": 11124,
-        "quantity": {
-          "amount": 1,
-          "unit": "cup"
-        }
+        id: 11124,
+        amount: 1,
+        unit: 'cup',
+        name: 'carrots',
+        costPerUnit: 136,
+        totalCostInCents: 136
       },
       {
-        "id": 2009,
-        "quantity": {
-          "amount": 0.25,
-          "unit": "teaspoon"
-        }
+        id: 2009,
+        amount: 0.25,
+        unit: 'teaspoon',
+        name: 'red chili powder',
+        costPerUnit: 499,
+        totalCostInCents: 124.75
       },
       {
-        "id": 9079,
-        "quantity": {
-          "amount": 0.3333333333333333,
-          "unit": "cup"
-        }
+        id: 9079,
+        amount: 0.33,
+        unit: 'cup',
+        name: 'dried cranberries',
+        costPerUnit: 921,
+        totalCostInCents: 303.93
       },
       {
-        "id": 11165,
-        "quantity": {
-          "amount": 0.25,
-          "unit": "cup"
-        }
+        id: 11165,
+        amount: 0.25,
+        unit: 'cup',
+        name: 'cilantro',
+        costPerUnit: 159,
+        totalCostInCents: 39.75
       },
       {
-        "id": 11215,
-        "quantity": {
-          "amount": 3,
-          "unit": ""
-        }
+        id: 11215,
+        amount: 3,
+        unit: '',
+        name: 'whole garlic clove',
+        costPerUnit: 220,
+        totalCostInCents: 660
       },
       {
-        "id": 1002014,
-        "quantity": {
-          "amount": 0.5,
-          "unit": "teaspoon"
-        }
+        id: 1002014,
+        amount: 0.5,
+        unit: 'teaspoon',
+        name: 'comino',
+        costPerUnit: 547,
+        totalCostInCents: 273.5
       },
       {
-        "id": 2042,
-        "quantity": {
-          "amount": 0.5,
-          "unit": "teaspoon"
-        }
+       id: 2042,
+       amount: 0.5,
+       unit: 'teaspoon',
+       name: 'dried thyme',
+       costPerUnit: 307,
+       totalCostInCents: 153.5
       },
       {
-        "id": 11935,
-        "quantity": {
-          "amount": 2,
-          "unit": "tablespoons"
-        }
+       id: 11935,
+       amount: 2,
+       unit: 'tablespoons',
+       name: 'catsup',
+       costPerUnit: 666,
+       totalCostInCents: 1332
       },
       {
-        "id": 4053,
-        "quantity": {
-          "amount": 2,
-          "unit": "tablespoon"
-        }
+       id: 4053,
+       amount: 2,
+       unit: 'tablespoon',
+       name: 'pure olive oil',
+       costPerUnit: 705,
+       totalCostInCents: 1410
       },
       {
-        "id": 11282,
-        "quantity": {
-          "amount": 1,
-          "unit": "cup"
-        }
+       id: 11282,
+       amount: 1,
+       unit: 'cup',
+       name: 'onions',
+       costPerUnit: 439,
+       totalCostInCents: 439
       },
       {
-        "id": 12151,
-        "quantity": {
-          "amount": 0.5,
-          "unit": "cup"
-        }
+       id: 12151,
+       amount: 0.5,
+       unit: 'cup',
+       name: 'pistachio',
+       costPerUnit: 813,
+       totalCostInCents: 406.5
       },
       {
-        "id": 11821,
-        "quantity": {
-          "amount": 1,
-          "unit": "cup"
-        }
+        id: 11821,
+        amount: 1,
+        unit: 'cup',
+        name: 'red sweet peppers',
+        costPerUnit: 1027,
+        totalCostInCents: 1027
       },
       {
-        "id": 1102047,
-        "quantity": {
-          "amount": 8,
-          "unit": "servings"
-        }
+        id: 1102047,
+        amount: 8,
+        unit: 'servings',
+        name: 's&p',
+        costPerUnit: 524,
+        totalCostInCents: 4192
       },
       {
-        "id": 6615,
-        "quantity": {
-          "amount": 3,
-          "unit": "cups"
-        }
+        id: 6615,
+        amount: 3,
+        unit: 'cups',
+        name: 'vegetable stock',
+        costPerUnit: 613,
+        totalCostInCents: 1839
       }
     ]);
 
-    expect(badResultUser2).to.equal([
+    expect(badResultUser2).to.deep.equal([
       {
-       "id": 9019,
-       "quantity": {
-         "amount": 2,
-         "unit": "tablespoons"
-       }
-     },
-     {
-       "id": 18079,
-       "quantity": {
-         "amount": 1,
-         "unit": "cup"
-       }
-     },
-     {
-       "id": 16069,
-       "quantity": {
-         "amount": 1,
-         "unit": "cup"
-       }
-     },
-     {
-       "id": 19334,
-       "quantity": {
-         "amount": 2,
-         "unit": "tablespoons"
-       }
-     },
-     {
-       "id": 11124,
-       "quantity": {
-         "amount": 1,
-         "unit": "cup"
-       }
-     },
-     {
-       "id": 2009,
-       "quantity": {
-         "amount": 0.25,
-         "unit": "teaspoon"
-       }
-     },
-     {
-       "id": 9079,
-       "quantity": {
-         "amount": 0.3333333333333333,
-         "unit": "cup"
-       }
-     },
-     {
-       "id": 11165,
-       "quantity": {
-         "amount": 0.25,
-         "unit": "cup"
-       }
-     },
-     {
-       "id": 11215,
-       "quantity": {
-         "amount": 3,
-         "unit": ""
-       }
-     },
-     {
-       "id": 1002014,
-       "quantity": {
-         "amount": 0.5,
-         "unit": "teaspoon"
-       }
-     },
-     {
-       "id": 2042,
-       "quantity": {
-         "amount": 0.5,
-         "unit": "teaspoon"
-       }
-     },
-     {
-       "id": 11935,
-       "quantity": {
-         "amount": 2,
-         "unit": "tablespoons"
-       }
-     },
-     {
-       "id": 4053,
-       "quantity": {
-         "amount": 2,
-         "unit": "tablespoon"
-       }
-     },
-     {
-       "id": 11282,
-       "quantity": {
-         "amount": 1,
-         "unit": "cup"
-       }
-     },
-     {
-       "id": 12151,
-       "quantity": {
-         "amount": 0.5,
-         "unit": "cup"
-       }
-     },
-     {
-       "id": 11821,
-       "quantity": {
-         "amount": 1,
-         "unit": "cup"
-       }
-     },
-     {
-       "id": 1102047,
-       "quantity": {
-         "amount": 8,
-         "unit": "servings"
-       }
-     },
-     {
-       "id": 6615,
-       "quantity": {
-         "amount": 3,
-         "unit": "cups"
-       }
-    ]);
-    expect(goodResultUser2).to.equal([
-      {
-        "id": 1001,
-        "quantity": {
-          "amount": 2,
-          "unit": "tablespoons"
-        }
+       id: 9019,
+       amount: 2,
+       unit: 'tablespoons',
+       name: 'unsweetened apple sauce',
+       costPerUnit: 154,
+       totalCostInCents: 308
       },
       {
-        "id": 20027,
-        "quantity": {
-          "amount": 0.25,
-          "unit": "cup"
-        }
+       id: 18079,
+       amount: 1,
+       unit: 'cup',
+       name: 'dry breadcrumbs',
+       costPerUnit: 167,
+       totalCostInCents: 167
+     },
+     {
+       id: 16069,
+       amount: 1,
+       unit: 'cup',
+       name: 'legumes',
+       costPerUnit: 903,
+       totalCostInCents: 903
+     },
+     {
+       id: 19334,
+       amount: 2,
+       unit: 'tablespoons',
+       name: 'brown sugar',
+       costPerUnit: 559,
+       totalCostInCents: 1118
+     },
+     {
+       id: 11124,
+       amount: 1,
+       unit: 'cup',
+       name: 'carrots',
+       costPerUnit: 136,
+       totalCostInCents: 136
+     },
+     {
+      id: 2009,
+      amount: 0.25,
+      unit: 'teaspoon',
+      name: 'red chili powder',
+      costPerUnit: 499,
+      totalCostInCents: 124.75
+     },
+     {
+      id: 9079,
+      amount: 0.33,
+      unit: 'cup',
+      name: 'dried cranberries',
+      costPerUnit: 921,
+      totalCostInCents: 303.93
+     },
+     {
+      id: 11165,
+      amount: 0.25,
+      unit: 'cup',
+      name: 'cilantro',
+      costPerUnit: 159,
+      totalCostInCents: 39.75
+     },
+     {
+      id: 11215,
+      amount: 3,
+      unit: '',
+      name: 'whole garlic clove',
+      costPerUnit: 220,
+      totalCostInCents: 660
+     },
+     {
+      id: 1002014,
+      amount: 0.5,
+      unit: 'teaspoon',
+      name: 'comino',
+      costPerUnit: 547,
+      totalCostInCents: 273.5
+     },
+     {
+      id: 2042,
+      amount: 0.5,
+      unit: 'teaspoon',
+      name: 'dried thyme',
+      costPerUnit: 307,
+      totalCostInCents: 153.5
+     },
+     {
+      id: 11935,
+      amount: 2,
+      unit: 'tablespoons',
+      name: 'catsup',
+      costPerUnit: 666,
+      totalCostInCents: 1332
+     },
+     {
+       id: 4053,
+       amount: 2,
+       unit: 'tablespoon',
+       name: 'pure olive oil',
+       costPerUnit: 705,
+       totalCostInCents: 1410
+     },
+     {
+       id: 11282,
+       amount: 1,
+       unit: 'cup',
+       name: 'onions',
+       costPerUnit: 439,
+       totalCostInCents: 439
+     },
+     {
+       id: 12151,
+       amount: 0.5,
+       unit: 'cup',
+       name: 'pistachio',
+       costPerUnit: 813,
+       totalCostInCents: 406.5
+     },
+     {
+       id: 11821,
+       amount: 1,
+       unit: 'cup',
+       name: 'red sweet peppers',
+       costPerUnit: 1027,
+       totalCostInCents: 1027
+     },
+     {
+       id: 1102047,
+       amount: 8,
+       unit: 'servings',
+       name: 's&p',
+       costPerUnit: 524,
+       totalCostInCents: 4192
+     },
+     {
+       id: 6615,
+       amount: 3,
+       unit: 'cups',
+       name: 'vegetable stock',
+       costPerUnit: 613,
+       totalCostInCents: 1839
+     }
+  ]);
+
+    expect(goodResultUser2).to.deep.equal([
+      {
+       id: 1001,
+       amount: 2,
+       unit: 'tablespoons',
+       name: 'butter',
+       costPerUnit: 618,
+       totalCostInCents: 1236
       },
       {
-        "id": 1123,
-        "quantity": {
-          "amount": 1,
-          "unit": ""
-        }
+       id: 20027,
+       amount: 0.25,
+       unit: 'cup',
+       name: 'corn starch',
+       costPerUnit: 236,
+       totalCostInCents: 59
       },
       {
-        "id": 1125,
-        "quantity": {
-          "amount": 2,
-          "unit": ""
-        }
+       id: 1123,
+       amount: 1,
+       unit: '',
+       name: 'eggs',
+       costPerUnit: 472,
+       totalCostInCents: 472
       },
       {
-        "id": 1077,
-        "quantity": {
-          "amount": 2,
-          "unit": "cups"
-        }
+       id: 1125,
+       amount: 2,
+       unit: '',
+       name: 'egg yolks',
+       costPerUnit: 889,
+       totalCostInCents: 1778
       },
       {
-        "id": 2050,
-        "quantity": {
-          "amount": 1,
-          "unit": "teaspoon"
-        }
+       id: 1077,
+       amount: 2,
+       unit: 'cups',
+       name: 'full-fat milk',
+       costPerUnit: 276,
+       totalCostInCents: 552
       },
       {
-        "id": 19335,
-        "quantity": {
-          "amount": 0.3333333333333333,
-          "unit": "cup"
-        }
+       id: 2050,
+       amount: 1,
+       unit: 'teaspoon',
+       name: 'vanilla',
+       costPerUnit: 926,
+       totalCostInCents: 926
+      },
+      {
+       id: 19335,
+       amount: 0.33,
+       unit: 'cup',
+       name: 'sucrose',
+       costPerUnit: 902,
+       totalCostInCents: 297.66
       }
     ]);
   });

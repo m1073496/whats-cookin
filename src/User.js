@@ -31,6 +31,26 @@ class User {
     return this.favoriteRecipes.findRecipes(searchTerm);
   };
 
+  findMissingIngredients = (recipe) => {
+    let recipeIngredients = recipe.ingredients;
+    let result = [];
+    // let pantryIngredients = this.userPantry.map(item => item.ingredient);
+    //
+    // let missingIngredients = recipeIngredients.map(item => {
+    //   if(!pantryIngredients.includes(item)) {
+    //     result.push(item);
+    // }})
+    // return result;
+
+
+    let missingIngredients = recipeIngredients.filter(item => {
+        if (!this.userPantry.includes(item.id)) {
+          result.push(item);
+        }
+      })
+    return result;
+  }
+
 };
 
 
