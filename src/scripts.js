@@ -183,48 +183,36 @@ const displayRecipes = (recipeList, title) => {
     newRecipeItem.innerHTML += `
       <section class="item-container">
         <div class="recipe-list__item">
-          <div class="cooked-button hidden">
-            <button>Cooked It!</button>
-            <span>message</span>
-          </div>
-        
           <figure>
             <img class="recipe-list__item--img"
                  src="${recipe.image}"
                  alt="${recipe.name}"
                  style="width:250px;">
           </figure>
+        </div>
+        <div class="recipe-list__item cooked-button hidden">
+          <button>Cooked It!</button>
+          <span>message</span>
+        </div>
+      </section>
+
+      <section class="recipe-list__item">
+        <ul class="ingredients-and-cost">
+          <li>
+            <span class="ingredients-and-cost__item--icon"><i class="fal fa-ellipsis-h"></i></span>
+            <span class="ingredients-and-cost__item--name">${recipe.name}</span>
+          </li>
           
-          <div>
-            <ul class="ingredients-and-cost">
-              <li>
-                <span class="ingredients-and-cost__item--icon"><i class="fal fa-ellipsis-h"></i></span>
-                <span class="ingredients-and-cost__item--name">${recipe.name}</span>
-              </li>
-              
-              <li>
-                <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
-                <span class="ingredients-and-cost__item--isInPantry">You have everything needed to make this recipe!</span>
-              </li>
-              
-              <li>
-                <span class="ingredients-and-cost__item--icon"><i class="far fa-badge-dollar"></i></span>
-                <span class="ingredients-and-cost__item--cost">${recipe.getTotalCost()}</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="recipe-list__item">
-          <span class="heart">
-            <i class="far fa-heart favorite-heart-list icon"></i>
-            <i class="fas fa-heart unfavorite-heart-list icon hidden"></i>
-          </span>
-          <span class="calendar">
-            <i class="far fa-calendar add-calendar-list icon"></i>
-            <i class="far fa-calendar-check remove-calendar-list icon hidden"></i>
-          </span>
-        </div>
+          <li>
+            <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
+            <span class="ingredients-and-cost__item--isInPantry">You have everything needed to make this recipe!</span>
+          </li>
+          
+          <li>
+            <span class="ingredients-and-cost__item--icon"><i class="far fa-badge-dollar"></i></span>
+            <span class="ingredients-and-cost__item--cost">${recipe.getTotalCost()}</span>
+          </li>
+        </ul>
       </section>
 
     `;
