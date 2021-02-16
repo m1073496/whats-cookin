@@ -44,7 +44,6 @@
 <!--      landing view  -->
       <main id="landing-view" class="landing-view">
         <section class="search-wrapper">
-
           <div class="search">
             <label for="searchBarLanding"></label>
             <input type="text"
@@ -163,7 +162,7 @@
       <main class="list-view hidden">
         <h1 class="recipe-list-title">Placeholder Title</h1>
 
-        <section class="search-section">
+        <section class="search-wrapper">
           <div class="search">
             <label for="searchBarList"></label>
             <input type="text"
@@ -173,10 +172,25 @@
                    placeholder="Search by recipe name or ingredient"
                    size="90"
             >
-
-            <button class="search-button" id="searchButtonList" name="search-button">Search</button>
+            <h4 class="search-error hidden">Your search didn't return any results.</h4>
           </div>
-          <h4 class="search-error hidden">Your search didn't return any results.</h4>
+
+          <fieldset id="filter-dropdown-list" class="dropdown">
+            <label for="tag-selector" class="dropdown__label"></label>
+            <select name="tags" id="tag-selector-list" class="dropdown__selector" size="9" multiple>
+              <option value="all" class="dropdown__selector--item">All</option>
+              <option value="breakfast" class="dropdown__selector--item">Breakfast</option>
+              <option value="brunch" class="dropdown__selector--item">Brunch</option>
+              <option value="appetizers" class="dropdown__selector--item">Appetizers</option>
+              <option value="side-dishes" class="dropdown__selector--item">Side dishes</option>
+              <option value="main-courses" class="dropdown__selector--item">Main courses</option>
+              <option value="desserts" class="dropdown__selector--item">Desserts</option>
+              <option value="healthy" class="dropdown__selector--item">Healthy</option>
+              <option value="vegetarian" class="dropdown__selector--item">Vegetarian</option>
+            </select>
+            <button id="goListButton" class="dropdown__button">Go</button>
+          </fieldset>
+
         </section>
         <section class="recipe-list__item recipe-list-content1 content1 "></section>
       </main>

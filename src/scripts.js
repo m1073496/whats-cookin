@@ -12,7 +12,8 @@ const ingredientsDetailList = document.querySelector('.ingredients-list');
 const searchBarInput = document.querySelector('.search-bar');
 const searchError = document.querySelector('.search-error');
 const dropdownSelection = document.querySelector('#tag-selector');
-const goButton = document.getElementById('go')
+const goButton = document.getElementById('go');
+const goListButton = document.getElementById('goListButton');
 const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
@@ -348,6 +349,10 @@ allRecipesButton.addEventListener('click', function() {
 
 
 goButton.addEventListener('click', function() {
+  search(searchBarInput, dropdownSelection);
+});
+
+goListButton.addEventListener('click',function() {
   search(searchBarInput, dropdownSelection);
 });
 

@@ -243,7 +243,7 @@ main {
     align-items: flex-start;
 }
 
-#go {
+.dropdown__button {
     align-self: flex-start;
 }
 
