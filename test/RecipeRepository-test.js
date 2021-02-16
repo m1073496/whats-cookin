@@ -19,28 +19,35 @@ describe('RecipeRepository', () => {
   });
 
   it('should filter tags using a search term', () => {
-    expect(recipeRepository.filterByTags(['side dish', 'sauce']).length).to.equal(2)
+    expect(recipeRepository.filterByTags(['side dish', 'sauce']).length).to.equal(2);
   });
 
   it('should have no length when tag filter returns no results', () => {
-    expect(recipeRepository.filterByTags(['midnight snack']).length).to.equal(0)
+    expect(recipeRepository.filterByTags(['midnight snack']).length).to.equal(0);
   });
 
   it('should filter ingredients using a search term', () => {
-    expect(recipeRepository.filterByIngredient('onions').length).to.equal(2)
+    expect(recipeRepository.filterByIngredient('onions').length).to.equal(2);
 
   });
 
   it('should have no length when ingredient filter returns no results', () => {
-    expect(recipeRepository.filterByIngredient('chocolate').length).to.equal(0)
+    expect(recipeRepository.filterByIngredient('chocolate').length).to.equal(0);
   });
 
   it('should filter by recipe name', () => {
-    expect(recipeRepository.filterByName('Lentil').length).to.equal(1)
+    expect(recipeRepository.filterByName('Lentil').length).to.equal(1);
   });
 
   it('should have results of 0 if recipe name not found', () => {
-    expect(recipeRepository.filterByName('Chicken Pot Pie').length).to.equal(0)
+    expect(recipeRepository.filterByName('Chicken Pot Pie').length).to.equal(0);
   });
 
+  it('should find recipes matching one or more search words', () => {
+    // console.log("test result: ", recipeRepository.findRecipes(['lentil']));
+    expect(recipeRepository.findRecipes(['lentil']).recipes.length).to.equal(1);
+    console.log("test result for cake: ", recipeRepository.findRecipes(['cake']).recipes);
+    // expect(recipeRepository.findRecipes(['cake']).recipes.length).to.equal(8);
+    expect(recipeRepository.findRecipes(['zombie']).recipes.length).to.equal(0);
+  });
 });

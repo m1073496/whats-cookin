@@ -236,10 +236,6 @@ const splitInput = (input) => {
   return input.value.split(' ');
 }
 
-const removeDuplicates = (arr) => {
-  return [...new Set(arr)];
-}
-
 const search = (searchInput, dropDownInput) => {
   hide(searchError);
 

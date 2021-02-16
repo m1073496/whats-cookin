@@ -44,13 +44,20 @@ class RecipeRepository {
 
     const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes, ...foundTagRecipes];
 
-    const results = removeDuplicates(foundRecipes);
+    const results = this.removeDuplicates(foundRecipes);
+    // console.log("results in class file: ", results);
 
     const resultsRepository = new RecipeRepository(results);
-    console.log("final result: ", results);
+    // console.log("resultsRepository in class file: ", results);
     return resultsRepository;
   }
+
+  removeDuplicates = (arr) => {
+    return [...new Set(arr)];
+  }
 }
+
+
 
 
 if (typeof module !== 'undefined') {
