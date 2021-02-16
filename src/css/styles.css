@@ -406,6 +406,8 @@ select:focus {
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
+    margin: 20px;
+
 }
 
 .ingredients-and-cost {
@@ -413,10 +415,20 @@ select:focus {
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
+    margin: 10px;
+    font-size: 1.2em;
+}
+
+.ingredients-and-cost__item--icon {
+    margin: 0 5px;
 }
 
 ul {
     list-style-type: none;
+}
+
+.ingredients-and-cost > li {
+    margin: 5px 10px;
 }
 
 /* *** Footer *** */

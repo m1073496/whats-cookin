@@ -20,9 +20,10 @@ const heroSectionSelector = document.querySelector('.hero-section');
 const heroTitleSelector = document.querySelector('.hero-section__box--recipe-name');
 const heartSelector = document.querySelector('.heart');
 const recipeHeartSelector = document.querySelector('.heart-recipe');
+// const listHeartSelector = document.querySelector('.heart-list');
 const calendarSelector = document.querySelector('.calendar');
 const recipeCalendarSelector = document.querySelector('.calendar-recipe');
-
+// const listCalendarSelector = document.querySelector('.calendar-list');
 
 let allRecipes;
 
@@ -57,6 +58,8 @@ const displayRecipeDetailView = () => {
 
 // *** START 🦄 Nikki's 🦄 work ***
 const displayLanding = () => {
+  // todo ==> not sure how to clear that form out, because this isn't working
+  // searchBarInput.textContent = '';
   displayMYFavorite();
   hide(recipeListView);
   hide(recipeDetailView);
@@ -116,38 +119,60 @@ heroTitleSelector.addEventListener('click', (event) => {
   displayRecipe(id);
 })
 
-const toggleFavorites = () => {
-  document.querySelector('.favorite-heart').classList.toggle('hidden');
-  document.querySelector('.unfavorite-heart').classList.toggle('hidden');
+const toggleFavorites = (qualifier) => {
+  if (qualifier === 'none') {
+    document.querySelector('.favorite-heart').classList.toggle('hidden');
+    document.querySelector('.unfavorite-heart').classList.toggle('hidden');
+  } else if (qualifier === 'recipe') {
+    document.querySelector('.favorite-heart-recipe').classList.toggle('hidden');
+    document.querySelector('.unfavorite-heart-recipe').classList.toggle('hidden');
+  } else if (qualifier === 'list') {
+    document.querySelector('.favorite-heart-list').classList.toggle('hidden');
+    document.querySelector('.unfavorite-heart-list').classList.toggle('hidden');
+  }
 
   // refresh list of favorites
 }
 
-const toggleFavoritesRecipe = () => {
-  document.querySelector('.favorite-heart-recipe').classList.toggle('hidden');
-  document.querySelector('.unfavorite-heart-recipe').classList.toggle('hidden');
+const toggleCalendar = (qualifier) => {
+  if (qualifier === 'none') {
+    document.querySelector('.add-calendar').classList.toggle('hidden');
+    document.querySelector('.remove-calendar').classList.toggle('hidden');
+  } else if (qualifier === 'recipe') {
+    document.querySelector('.add-calendar-recipe').classList.toggle('hidden');
+    document.querySelector('.remove-calendar-recipe').classList.toggle('hidden');
+  } else if (qualifier === 'list') {
+    document.querySelector('.add-calendar-list').classList.toggle('hidden');
+    document.querySelector('.remove-calendar-list').classList.toggle('hidden');
+  }
 
   // refresh list of favorites
 }
 
-const toggleCalendar = () => {
-  document.querySelector('.add-calendar').classList.toggle('hidden');
-  document.querySelector('.remove-calendar').classList.toggle('hidden');
+heartSelector.addEventListener('click', () => {
+  toggleFavorites('none')
+});
 
-  // refresh list of weekly recipes to cook
-}
+recipeHeartSelector.addEventListener('click', () => {
+  toggleFavorites('recipe')
+});
 
-const toggleCalendarRecipe = () => {
-  document.querySelector('.add-calendar-recipe').classList.toggle('hidden');
-  document.querySelector('.remove-calendar-recipe').classList.toggle('hidden');
+calendarSelector.addEventListener('click', () => {
+  toggleCalendar('none')
+});
 
-  // refresh list of weekly recipes to cook
-}
+recipeCalendarSelector.addEventListener('click', () => {
+  toggleCalendar('recipe')
+});
 
-heartSelector.addEventListener('click', toggleFavorites);
-recipeHeartSelector.addEventListener('click', toggleFavoritesRecipe);
-calendarSelector.addEventListener('click', toggleCalendar);
-recipeCalendarSelector.addEventListener('click', toggleCalendarRecipe)
+// todo ==> need to get bubbling set up for these?? they don't exist when page is loaded
+// listHeartSelector.addEventListener('click', () => {
+//   toggleFavorites('list')
+// });
+
+// listCalendarSelector.addEventListener('click', () => {
+//   toggleCalendar('list')
+// });
 
 // *** END 🦄 Nikki's work 🦄 ***
 
@@ -172,28 +197,38 @@ const displayRecipes = (recipeList, title) => {
           </figure>
         </div>
   
-        <div class="recipe-list__item cooked-button hidden">
+        <div class="recipe-list__item cooked-button ">
           <button>Cooked It!</button>
           <span>message</span>
         </div>
   
         <div class="recipe-list__item">
-          <span><i class="far fa-heart favorite-heart"></i></span>
-          <span><i class="far fa-calendar-check remove-calendar"></i></span>
+              <span class="heart">
+                <i class="far fa-heart favorite-heart-list icon"></i>
+                <i class="fas fa-heart unfavorite-heart-list icon hidden"></i>
+              </span>
+              <span class="calendar">
+                <i class="far fa-calendar add-calendar-list icon"></i>
+                <i class="far fa-calendar-check remove-calendar-list icon hidden"></i>
+              </span>
         </div>
       </section>
 
       <section class="recipe-list__item">
         <ul class="ingredients-and-cost">
           <li>
-            <i class="fal fa-ellipsis-h"></i>${recipe.name}
+            <span class="ingredients-and-cost__item--icon"><i class="fal fa-ellipsis-h"></i></span>
+            <span class="ingredients-and-cost__item--name">${recipe.name}</span>
           </li>
+          
           <li>
-            <i class="far fa-check-circle"></i>
-            You have everything needed to make this recipe!
+            <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
+            <span class="ingredients-and-cost__item--isInPantry">You have everything needed to make this recipe!</span>
           </li>
+          
           <li>
-            <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
+            <span class="ingredients-and-cost__item--icon"><i class="far fa-badge-dollar"></i></span>
+            <span class="ingredients-and-cost__item--cost">${recipe.getTotalCost()}</span>
           </li>
         </ul>
       </section>
