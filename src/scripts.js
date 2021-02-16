@@ -4,13 +4,15 @@ const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
 const pantryView = document.querySelector('.pantry-view');
-const recipeListContent1 = document.querySelector('.recipe-list-content1');
-const recipeListContent2 = document.querySelector('.recipe-list-content2');
-const recipeListTitle = document.querySelector('.recipe-list-h1');
+const recipeListTitle = document.querySelector('.recipe-list-title');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
 const ingredientsDetailList = document.querySelector('.ingredients-list');
+const searchBarInput = document.querySelector('.search-bar');
+const searchError = document.querySelector('.search-error');
+const dropdownSelection = document.querySelector('#tag-selector');
+const goButton = document.getElementById('go')
 const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
@@ -19,11 +21,11 @@ const heroSectionSelector = document.querySelector('.hero-section');
 let allRecipes;
 
 window.addEventListener('load', function() {
-  console.log('🥺');
-  allRecipes = new RecipeRepository(recipeData);
-  displayMYFavorite()
+  console.log('page loaded 🥺');
+  const recipeInstances = recipeData.map(recipe => new Recipe(recipe));
+  allRecipes = new RecipeRepository(recipeInstances);
+  displayMYFavorite();
   displayRandomFavorites();
-
   hide(searchError);
 });
 
@@ -39,27 +41,13 @@ const displayRecipeList = () => {
 }
 
 
+const displayRecipeDetailView = () => {
+  hide(recipeListView);
+  display(recipeDetailView);
+}
+
+
 // *** START 🦄 Nikki's 🦄 work ***
-const dropdownSelection = document.querySelector('#tag-selector');
-const goButton = document.getElementById('go')
-
-// TODO compare with Katie stuff; maybe merge/refactor/etc.
-const getSearchTerm = () => {
-  const searchTerm = dropdownSelection.options[dropdownSelection.selectedIndex].value;
-
-  if (searchTerm === '') {
-    // todo ==> make this an actual message/response
-    alert("you must make a selection")
-  } else {
-    filterByTag(searchTerm);
-    displayRecipeList();
-  }
-}
-
-const filterByTag = (tag) => {
-  return allRecipes.filterByTag(tag)
-}
-
 const displayLanding = () => {
   hide(recipeListView);
   hide(recipeDetailView);
@@ -77,6 +65,7 @@ const displayPantry = () => {
 const displayRandomFavorites = () => {
   let chunk = '';
   let fourRandomRecipes = [];
+
   for (let i = 0; i < 4; i++) {
     let randIndex = Math.floor(Math.random() * allRecipes.recipes.length)
     fourRandomRecipes.push(allRecipes.recipes[randIndex]);
@@ -93,7 +82,7 @@ const displayRandomFavorites = () => {
         </figure>
       </article>
     `
-  })
+  });
 
   featuredSectionSelector.innerHTML = chunk;
 }
@@ -101,38 +90,37 @@ const displayRandomFavorites = () => {
 const displayMYFavorite = () => {
   let chunk = '';
 
-  const favorite = allRecipes.recipes[Math.floor(Math.random() * allRecipes.recipes.length)]
+  const favorite = allRecipes.recipes[
+    Math.floor(Math.random() * allRecipes.recipes.length)
+  ];
 
-    chunk += `
-      <section class="hero-section__box" data-id=${favorite.id}>
-        <section class="hero-section__box--recipe-name">
-          <h3>${favorite.name}</h3>
-        </section>
-        <section class="hero-section__box--icons">
-          <i class="far fa-heart"></i>
-          <i class="far fa-calendar"></i>
-        </section>
+  chunk += `
+    <section class="hero-section__box" data-id=${favorite.id}>
+      <section class="hero-section__box--recipe-name">
+        <h3>${favorite.name}</h3>
       </section>
-    `
+      <section class="hero-section__box--icons">
+        <i class="far fa-heart"></i>
+        <i class="far fa-calendar"></i>
+      </section>
+    </section>
+  `;
 
-  console.log(favorite);
   heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
   heroSectionSelector.innerHTML = chunk;
 }
 // *** END 🦄 Nikki's work 🦄 ***
 
-
-const displayAllRecipes = () => {
+const displayRecipes = (recipeList, title) => {
   displayRecipeList();
-  recipeListTitle.innerText = "All";
+  recipeListTitle.innerText = title;
 
-  allRecipes.recipes.forEach(recipe => {
+  recipeList.forEach(recipe => {
     let newRecipeItem = document.createElement('article');
-    let parent = document.querySelector('.list-view')
-    newRecipeItem.className = 'recipe';
+    let parent = document.querySelector('.list-view');
+    newRecipeItem.className = 'recipe content1';
     newRecipeItem.id = recipe.id;
     parent.appendChild(newRecipeItem);
-
 
     newRecipeItem.innerHTML += `
       <section class="item-container">
@@ -143,12 +131,12 @@ const displayAllRecipes = () => {
                  alt="${recipe.name}">
           </figure>
         </div>
-  
+
         <div class="recipe-list__item cooked-button hidden">
           <button>Cooked It!</button>
           <span>message</span>
         </div>
-  
+
         <div class="recipe-list__item">
           <span><i class="far fa-heart"></i></span>
           <span><i class="far fa-calendar-check"></i></span>
@@ -161,24 +149,21 @@ const displayAllRecipes = () => {
             <i class="fal fa-ellipsis-h"></i>${recipe.name}
           </li>
           <li>
-            <i class="far fa-check-circle"></i>You have everything needed to make this recipe!
+            <i class="far fa-check-circle"></i>
+            You have everything needed to make this recipe!
           </li>
           <li>
             <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
           </li>
         </ul>
       </section>
-    `
-  newRecipeItem.addEventListener('click', function() {
-    let target = newRecipeItem.id;
-    displayRecipe(target);
-  })
-})
-}
+    `;
 
-const displayRecipeDetailView = () => {
-  hide(recipeListView);
-  display(recipeDetailView);
+    newRecipeItem.addEventListener('click', function() {
+      let target = newRecipeItem.id;
+      displayRecipe(target);
+    });
+  });
 }
 
 const displayRecipe = (id) => {
@@ -199,122 +184,99 @@ const displayRecipe = (id) => {
         ${ingredient.amount} ${ingredient.unit} ${ingredient.name} <span class="ingredients__message">You'll need xyz more of this.</span>
       </article>
     `;
-  })
+  });
   foundRecipe.instructions.forEach(instruction => {
     recipeInstructions.innerHTML += `
       <li>${instruction.number}. ${instruction.instruction}</li>
     `;
-  })
+  });
 }
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+const getTagsToSearchFor = (choices) => {
+  console.log("choices passed in to getTagsToSearchFor: ", choices);
+  console.log('check out these choices');
+  let searchFor = [];
 
-allRecipesButton.addEventListener('click', displayAllRecipes);
-// recipeListView.addEventListener('click', displayRecipe);
-goButton.addEventListener('click', getSearchTerm);
-homeSelector.addEventListener('click', displayLanding);
-userSelector.addEventListener('click', displayPantry)
+  choices.forEach(choice => {
+    if (choice === 'appetizers') {
+      searchFor.push('appetizer', 'hor d\'oeuvre', 'hor d\'oeuvres', 'antipasti', 'antipasto');
+    } else if (choice === 'side-dishes') {
+      searchFor.push('side dish');
+    } else if (choice === 'main-courses') {
+      searchFor.push('main dish', 'main course', 'lunch', 'dinner');
+    } else if (choice === 'desserts') {
+      searchFor.push('dessert');
+    } else {
+      searchFor.push(choice);
+    }
+  });
 
+  return searchFor;
+}
 
-/* 📌 Katie's Ticket 📌 */
-const searchBarInput = document.querySelector('.search-bar');
-const searchButton = document.querySelector('.search-button');
-const searchError = document.querySelector('.search-error');
+const searchByTags = (tags) => {
+  if (tags.includes('all')) {
+    return allRecipes.recipes;
+  } else {
+    return allRecipes.filterByTags(tags);
+  }
+}
 
+// TODO force choice of "all" if no choice is made
+// -- but could solve this in the UI instead?
+const parseSelections = (selections) => {
+  if (selections.length) {
+    return selections;
+  } else {
+    return ['all'];
+  }
+}
 
-searchButton.addEventListener('click', function() {
-  search(searchBarInput);
-});
+const splitInput = (input) => {
+  return input.value.split(' ');
+}
 
-function search(input) {
+const removeDuplicates = (arr) => {
+  return [...new Set(arr)];
+}
+
+const search = (searchInput, dropDownInput) => {
   hide(searchError);
-  const words = formatInput(input);
-  console.log("formatted input: ", words);
 
-  const foundIngredientRecipes = words.flatMap(word => {
-    return allRecipes.filterByIngredient(word);
-  });
-  console.log("found ingredient recipes: ", foundIngredientRecipes);
+  const words = splitInput(searchInput);
 
-  const foundNameRecipes = words.flatMap(word => {
-    return allRecipes.filterByName(word);
-  });
-  console.log("found name recipes: ", foundNameRecipes);
+  const selections = [...dropDownInput.selectedOptions].map(option => option.value);
+  const parsedSelections = parseSelections(selections);
+  const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
+  const tagMatches = searchByTags(tagsToSearchFor);
+  const tagMatchesRepository = new RecipeRepository(tagMatches);
 
-  const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes];
-  console.log("found recipes: ", foundRecipes);
+  const results = tagMatchesRepository.findRecipes(words);
+  displayResults(searchInput, results.recipes);
+}
 
-  const result = removeDuplicates(foundRecipes);
-  console.log("final result: ", result);
-
-  if (result.length > 0) {
-    displayRecipes(result);
+const displayResults = (searchInput, recipes) => {
+  if (recipes.length > 0 && searchInput.value) {
+    displayRecipes(recipes, `Search results matching "${searchInput.value}"`);
+  } else if (recipes.length) {
+    displayRecipes(recipes, `Search results`);
   } else {
     display(searchError);
   }
 }
 
-function formatInput(input) {
-  return input.value.toLowerCase().split(' ');
-}
 
-function removeDuplicates(arr) {
-  return [...new Set(arr)];
-}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-const displayRecipes = (recipeList) => {
-  displayRecipeList();
+allRecipesButton.addEventListener('click', function() {
+  displayRecipes(allRecipes.recipes, 'All recipes');
+});
 
-  if (recipeList === 'allRecipes') {
-    recipeListTitle.innerText = "All recipes";
-  } else if (recipeList === 'searchResults') {
-    recipeListTitle.innerText = "Search results";
-  }
 
-  recipeList.forEach(recipe => {
-    let newRecipeItem = document.createElement('article');
-    let parent = document.querySelector('.list-view')
-    newRecipeItem.className = 'recipe content1';
-    parent.appendChild(newRecipeItem);
+goButton.addEventListener('click', function() {
+  search(searchBarInput, dropdownSelection);
+});
 
-    newRecipeItem.innerHTML += `
-    <section class="item-container">
-      <div class="recipe-list__item">
-        <figure>
-          <img class="pantry__recipe-profile--img"
-               src="${recipe.image}"
-               alt="${recipe.name}">
-        </figure>
-      </div>
+homeSelector.addEventListener('click', displayLanding);
 
-      <div class="recipe-list__item cooked-button hidden">
-        <button>Cooked It!</button>
-        <span>message</span>
-      </div>
-
-      <div class="recipe-list__item">
-        <span><i class="far fa-heart"></i></span>
-        <span><i class="far fa-calendar-check"></i></span>
-      </div>
-    </section>
-
-    <section class="recipe-list__item">
-      <ul class="ingredients-and-cost">
-        <li>
-          <i class="fal fa-ellipsis-h"></i>${recipe.name}
-        </li>
-        <li>
-          <i class="far fa-check-circle"></i>${recipe.ingredients[0].amount} ${recipe.ingredients[0].unit} ${recipe.ingredients[0].name}
-        </li>
-        <li>
-          <i class="far fa-times-circle"></i>${recipe.ingredients[1].amount} ${recipe.ingredients[1].unit} ${recipe.ingredients[1].name}
-        </li>
-        <li>
-          <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
-        </li>
-      </ul>
-    </section>
-  `
-  })
-}
-/* 📌 End Katie's Ticket 📌 */
+userSelector.addEventListener('click', displayPantry);

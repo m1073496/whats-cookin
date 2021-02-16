@@ -26,7 +26,7 @@ class User {
   };
 
   filterFavorites = (searchTerm) => {
-
+    
   };
 
 };
