@@ -17,6 +17,7 @@ const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
 const heroSectionSelector = document.querySelector('.hero-section');
+const heroTitleSelector = document.querySelector('.hero-section__box--recipe-name');
 const heartSelector = document.querySelector('.heart');
 const calendarSelector = document.querySelector('.calendar');
 
@@ -104,7 +105,7 @@ const displayMYFavorite = () => {
   heroName.innerHTML = `<h3 data-id=${favorite.id}>${favorite.name}</h3>`
 }
 
-heroSectionSelector.addEventListener('click', (event) => {
+heroTitleSelector.addEventListener('click', (event) => {
   event.preventDefault();
   let id = event.target.getAttribute('data-id');
 
@@ -112,6 +113,7 @@ heroSectionSelector.addEventListener('click', (event) => {
 })
 
 const toggleFavorites = () => {
+  console.log("click works to toggle favorites")
   document.querySelector('.favorite-heart').classList.toggle('hidden');
   document.querySelector('.unfavorite-heart').classList.toggle('hidden');
 
@@ -119,6 +121,7 @@ const toggleFavorites = () => {
 }
 
 const toggleCalendar = () => {
+  console.log("click works to toggle calendar")
   document.querySelector('.add-calendar').classList.toggle('hidden');
   document.querySelector('.remove-calendar').classList.toggle('hidden');
 
@@ -147,7 +150,7 @@ const displayRecipes = (recipeList, title) => {
             <img class="recipe-list__item--img"
                  src="${recipe.image}"
                  alt="${recipe.name}"
-                 style="width:350px;">
+                 style="width:250px;">
           </figure>
         </div>
   
