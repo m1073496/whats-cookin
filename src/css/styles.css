@@ -213,7 +213,7 @@ main {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
-
+    border-radius: 7px;
 }
 
 .featured-section__recipe-profile {
@@ -478,6 +478,7 @@ footer {
 
     nav {
         width: 50px;
+        background: #b0f1ef;
     }
 
     .nav__right {
@@ -499,6 +500,18 @@ footer {
 
     .featured-section__recipe-profile {
         margin: 10px;
+    }
+
+    .pantry__bottom--left {
+        margin-left: 10px;
+    }
+
+    .recipe {
+        margin: 10px 30px;
+        flex-flow: column nowrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
     }
 }
 
