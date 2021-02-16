@@ -83,7 +83,6 @@ class User {
     //     }
     //   })
     // return result;
-  };
 
   cookMeal = (recipe) => {
     if (this.findMissingIngredients(recipe)) {
@@ -99,6 +98,7 @@ class User {
     }
 
   };
+};
 
 if (typeof module !== 'undefined') {
   module.exports = User;
