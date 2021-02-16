@@ -1,18 +1,20 @@
+const RecipeRepository = require('../src/RecipeRepository');
+
 class User {
   constructor(user) {
     this.userName = user.name;
     this.userId = user.id;
     this.userPantry = user.pantry;
-    this.favoriteRecipes = [];
+    this.favoriteRecipes = new RecipeRepository([]);
     this.recipesToCook = [];
   }
 
-  updateFavorites = (recipe) => {
-    if(this.favoriteRecipes.includes(recipe)) {
-      let indexToRemove = this.favoriteRecipes.indexOf(recipe);
-      this.favoriteRecipes.splice(indexToRemove, 1);
+  updateFavorites = (recipeInstance) => {
+    if(this.favoriteRecipes.recipes.includes(recipeInstance)) {
+      let indexToRemove = this.favoriteRecipes.recipes.indexOf(recipeInstance);
+      this.favoriteRecipes.recipes.splice(indexToRemove, 1);
     } else {
-      this.favoriteRecipes.push(recipe);
+      this.favoriteRecipes.recipes.push(recipeInstance);
     }
   };
 
@@ -26,7 +28,7 @@ class User {
   };
 
   filterFavorites = (searchTerm) => {
-    
+    return this.favoriteRecipes.findRecipes(searchTerm);
   };
 
 };

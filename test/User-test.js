@@ -14,11 +14,13 @@ describe('User', function() {
   let user1;
   let user2;
   let recipeRepository;
+  let recipes;
 
   beforeEach(function() {
     user1 = new User(testUsersData[0]);
     user2 = new User(testUsersData[1]);
-    recipeRepository = new RecipeRepository(testRecipeData);
+    recipes = testRecipeData.map(recipe => new Recipe(recipe));
+    recipeRepository = new RecipeRepository(recipes);
   });
 
   it('should be a function', function() {
@@ -43,16 +45,17 @@ describe('User', function() {
   });
 
   it('should add recipes to list of favorites', function() {
-    user2.updateFavorites(recipeRepository.recipes[0]);
+    user2.updateFavorites(recipes[0]);
 
-    expect(user2.favoriteRecipes[0]).to.be.an.instanceOf(Recipe);
-    expect(user2.favoriteRecipes.length).to.equal(1);
-    expect(user2.favoriteRecipes[0]).to.deep.equal(recipeRepository.recipes[0]);
+    expect(user2.favoriteRecipes.recipes[0]).to.be.an.instanceOf(Recipe);
+    expect(user2.favoriteRecipes.recipes.length).to.equal(1);
+    expect(user2.favoriteRecipes.recipes[0]).to.deep.equal(recipeRepository.recipes[0]);
 
     user2.updateFavorites(recipeRepository.recipes[1]);
-    expect(user2.favoriteRecipes.length).to.equal(2);
-    expect(user2.favoriteRecipes[1]).to.deep.equal(recipeRepository.recipes[1]);
-    expect(user2.favoriteRecipes).to.deep.equal([recipeRepository.recipes[0], recipeRepository.recipes[1]]);
+
+    expect(user2.favoriteRecipes.recipes.length).to.equal(2);
+    expect(user2.favoriteRecipes.recipes[1]).to.deep.equal(recipeRepository.recipes[1]);
+    expect(user2.favoriteRecipes.recipes).to.deep.equal([recipeRepository.recipes[0], recipeRepository.recipes[1]]);
   });
 
   it('should remove recipes from list of favorites', function() {
@@ -60,9 +63,9 @@ describe('User', function() {
     user2.updateFavorites(recipeRepository.recipes[1]);
     user2.updateFavorites(recipeRepository.recipes[0]);
 
-    expect(user2.favoriteRecipes.length).to.equal(1);
-    expect(user2.favoriteRecipes[0]).to.deep.equal(recipeRepository.recipes[1]);
-    expect(user2.favoriteRecipes).to.deep.equal([recipeRepository.recipes[1]]);
+    expect(user2.favoriteRecipes.recipes.length).to.equal(1);
+    expect(user2.favoriteRecipes.recipes[0]).to.deep.equal(recipeRepository.recipes[1]);
+    expect(user2.favoriteRecipes.recipes).to.deep.equal([recipeRepository.recipes[1]]);
   });
 
   it('should add recipes to `recipes to cook` list', function() {
@@ -87,31 +90,31 @@ describe('User', function() {
   it('should filter favorite recipes by tags', function() {
     user2.updateFavorites(recipeRepository.recipes[0]);
     user2.updateFavorites(recipeRepository.recipes[1]);
-    let firstResult = user2.filterFavorites('sauce');
-    let secondResult = user2.filterFavorites('side dish');
+    let firstResult = user2.filterFavorites(['onions']);
+    let secondResult = user2.filterFavorites(['side dish']);
 
-    expect(firstResult.length).to.equal(1);
-    expect(firstResult).to.deep.equal(recipeRepository.recipes[1]);
+    expect(firstResult.recipes.length).to.equal(1);
+    expect(firstResult.recipes).to.deep.equal([recipeRepository.recipes[0]]);
 
-    expect(secondResult.length).to.equal(2);
-    expect(secondResult).to.deep.equal([recipeRepository.recipes[0], recipeRepository.recipes[1]]);
+    expect(secondResult.recipes.length).to.equal(2);
+    expect(secondResult.recipes).to.deep.equal([recipeRepository.recipes[0], recipeRepository.recipes[1]]);
   });
 
   it('should filter favorite recipes by name/ingredient using a search term', function() {
     user1.updateFavorites(recipeRepository.recipes[0]);
     user1.updateFavorites(recipeRepository.recipes[2]);
-    let firstResult = user1.filterFavorites('vegan lentil loaf');
-    let secondResult = user1.filterFavorites('lentil');
-    let thirdResult = user1.filterFavorites('s&p');
+    let firstResult = user1.filterFavorites(['vegan lentil loaf']);
+    let secondResult = user1.filterFavorites(['lentil']);
+    let thirdResult = user1.filterFavorites(['s&p']);
 
-    expect(firstResult.length).to.equal(1);
-    expect(firstResult).to.dep.equal(recipeRepository.recipes[0]);
+    expect(firstResult.recipes.length).to.equal(1);
+    expect(firstResult.recipes).to.deep.equal([recipeRepository.recipes[0]]);
 
-    expect(secondResult.length).to.equal(1);
-    expect(firstResult).to.dep.equal(recipeRepository.recipes[0]);
+    expect(secondResult.recipes.length).to.equal(1);
+    expect(secondResult.recipes).to.deep.equal([recipeRepository.recipes[0]]);
 
-    expect(thirdResult.length).to.equal(2);
-    expect(firstResult).to.dep.equal([recipeRepository.recipes[0], recipeRepository.recipes[2]])
+    expect(thirdResult.recipes.length).to.equal(2);
+    expect(thirdResult.recipes).to.deep.equal([recipeRepository.recipes[0], recipeRepository.recipes[2]])
   });
 
   // it('should ')

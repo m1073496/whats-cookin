@@ -44,11 +44,19 @@ class RecipeRepository {
 
     const foundRecipes = [...foundIngredientRecipes, ...foundNameRecipes, ...foundTagRecipes];
 
-    const results = removeDuplicates(foundRecipes);
+    const results = this.removeDuplicates(foundRecipes);
 
     const resultsRepository = new RecipeRepository(results);
-    console.log("final result: ", results);
+    // console.log("final result: ", results);
     return resultsRepository;
+  }
+
+  splitInput = (input) => {
+    return input.value.split(' ');
+  }
+
+  removeDuplicates = (arr) => {
+    return [...new Set(arr)];
   }
 }
 
