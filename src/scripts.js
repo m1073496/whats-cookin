@@ -19,7 +19,9 @@ const featuredSectionSelector = document.querySelector('.featured-section');
 const heroSectionSelector = document.querySelector('.hero-section');
 const heroTitleSelector = document.querySelector('.hero-section__box--recipe-name');
 const heartSelector = document.querySelector('.heart');
+const recipeHeartSelector = document.querySelector('.heart-recipe');
 const calendarSelector = document.querySelector('.calendar');
+const recipeCalendarSelector = document.querySelector('.calendar-recipe');
 
 
 let allRecipes;
@@ -113,23 +115,37 @@ heroTitleSelector.addEventListener('click', (event) => {
 })
 
 const toggleFavorites = () => {
-  console.log("click works to toggle favorites")
   document.querySelector('.favorite-heart').classList.toggle('hidden');
   document.querySelector('.unfavorite-heart').classList.toggle('hidden');
 
   // refresh list of favorites
 }
 
+const toggleFavoritesRecipe = () => {
+  document.querySelector('.favorite-heart-recipe').classList.toggle('hidden');
+  document.querySelector('.unfavorite-heart-recipe').classList.toggle('hidden');
+
+  // refresh list of favorites
+}
+
 const toggleCalendar = () => {
-  console.log("click works to toggle calendar")
   document.querySelector('.add-calendar').classList.toggle('hidden');
   document.querySelector('.remove-calendar').classList.toggle('hidden');
 
   // refresh list of weekly recipes to cook
 }
 
+const toggleCalendarRecipe = () => {
+  document.querySelector('.add-calendar-recipe').classList.toggle('hidden');
+  document.querySelector('.remove-calendar-recipe').classList.toggle('hidden');
+
+  // refresh list of weekly recipes to cook
+}
+
 heartSelector.addEventListener('click', toggleFavorites);
+recipeHeartSelector.addEventListener('click', toggleFavoritesRecipe);
 calendarSelector.addEventListener('click', toggleCalendar);
+recipeCalendarSelector.addEventListener('click', toggleCalendarRecipe)
 
 // *** END 🦄 Nikki's work 🦄 ***
 
