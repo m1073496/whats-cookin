@@ -39,12 +39,15 @@ const display = (element) => element.classList.remove('hidden');
 
 const displayRecipeList = () => {
   hide(landingView);
+  hide(pantryView);
+  hide(recipeDetailView);
   display(recipeListView);
 }
 
-
 const displayRecipeDetailView = () => {
   hide(recipeListView);
+  hide(landingView);
+  hide(pantryView);
   display(recipeDetailView);
 }
 
@@ -90,16 +93,23 @@ const displayRandomFavorites = () => {
 }
 
 const displayMYFavorite = () => {
+  const heroName = document.querySelector('.hero-section__box--recipe-name');
   const favorite = allRecipes.recipes[
     Math.floor(Math.random() * allRecipes.recipes.length)
   ];
 
-  const heroName = document.querySelector('.hero-section__box--recipe-name');
 
   heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
-  heroName.innerHTML = `<h3>${favorite.name}</h3>`
-
+  heroName.innerHTML = `<h3 data-id=${favorite.id}>${favorite.name}</h3>`
 }
+
+// event listener for hero image take you to that recipe displayRecipe
+heroSectionSelector.addEventListener('click', (event) => {
+  event.preventDefault();
+  let id = event.target.getAttribute('data-id');
+
+  displayRecipe(id);
+})
 
 const toggleFavorites = () => {
   console.log('this far')
