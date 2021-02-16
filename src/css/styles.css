@@ -87,7 +87,8 @@ main {
 
 .header__left--text {
     font-family: 'Alice', serif;
-    color: #03B0AA;
+    color: #026B81;
+    font-weight: 700;
     font-size: 1.6rem;
     padding: 5px;
 }
@@ -168,6 +169,7 @@ main {
 
 .hero-section__box {
     padding: 50px;
+    width: 40%;
     text-align: center;
     background: white;
     position: absolute;
@@ -187,6 +189,29 @@ main {
     margin: 10px;
     font-family: 'Alice', serif;
     font-size: 1.2em;
+}
+
+.heart,
+.calendar,
+.heart-recipe,
+.calendar-recipe {
+    font-size: 1.5em;
+}
+
+.unfavorite-heart,
+.unfavorite-heart-recipe {
+    color: #f56666;
+}
+
+.remove-calendar,
+.remove-calendar-recipe {
+    color: #4f4ff3;
+}
+
+.hero-section__box--recipe-name,
+.icon {
+    margin: 2px 15px;
+    cursor: pointer;
 }
 
 /* *** Featured Sections *** */
@@ -211,14 +236,14 @@ main {
 
 
 /* *** Search *** */
-.dropdown__label {
-    width: 50%;
+.dropdown {
+    margin: 0;
 }
 
 .dropdown__selector {
     font-family: 'Raleway', sans-serif;
     font-size: 1em;
-    margin: 0 10px;
+    margin: 10px;
     padding: 2px 5px;
     border-radius: 7px;
 }
@@ -227,8 +252,15 @@ main {
     padding: 0 5px;
 }
 
+.search-section {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
 .search {
-    margin: 20px;
+    margin: 10px;
 }
 
 input.search-bar {
@@ -240,7 +272,11 @@ input.search-bar {
 
 fieldset {
     border: none;
-    margin: 20px;
+    margin: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 select:focus {
@@ -251,6 +287,7 @@ select:focus {
 .search-button {
     font-family: 'Alice', serif;
     font-size: 1.1em;
+    margin: 10px;
     padding: 0 20px;
     height: 30px;
     background: white;
@@ -299,20 +336,41 @@ select:focus {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    margin: 30px;
 }
 
 .recipe-detail__bottom {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
+    margin: 30px;
 }
 
-.recipe-list__item--img {
+.recipe-list__item--img > img {
     margin: 0 20px;
+    border-radius: 5px;
 }
 
 .instructions-title {
     margin-bottom: 10px;
+}
+
+.recipe-detail__bottom--right {
+    width: 45%;
+}
+
+.recipe-detail__bottom--left {
+    width: 45%;
+}
+
+.instructions-details__number {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.instructions-details__item {
+    padding: 10px;
+    text-align: left;
 }
 
 /* *** Ingredients *** */
@@ -338,6 +396,14 @@ select:focus {
     margin: 5px 15px;
 }
 
+.ingredients-list {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+}
+
 /* *** Recipe list *** */
 .recipe {
     margin: 10px 5px;
@@ -352,6 +418,8 @@ select:focus {
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
+    margin: 20px;
+
 }
 
 .ingredients-and-cost {
@@ -359,10 +427,20 @@ select:focus {
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
+    margin: 10px;
+    font-size: 1.2em;
+}
+
+.ingredients-and-cost__item--icon {
+    margin: 0 5px;
 }
 
 ul {
     list-style-type: none;
+}
+
+.ingredients-and-cost > li {
+    margin: 5px 10px;
 }
 
 /* *** Footer *** */
