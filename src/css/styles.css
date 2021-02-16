@@ -236,8 +236,21 @@ main {
 
 
 /* *** Search *** */
+.search-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#go {
+    align-self: flex-start;
+}
+
 .dropdown {
     margin: 0;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .dropdown__selector {

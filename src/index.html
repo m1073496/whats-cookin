@@ -42,9 +42,9 @@
       </nav>
 
 <!--      landing view  -->
-      <main id="landing-view" class="landing-view hidden">
-        <section class="search-section">
-          <!--          <form>-->
+      <main id="landing-view" class="landing-view">
+        <section class="search-wrapper">
+
           <div class="search">
             <label for="searchBarLanding"></label>
             <input type="text"
@@ -54,10 +54,8 @@
                    placeholder="Search by recipe name or ingredient"
                    size="90"
             >
-
-            <!-- <button class="search-button" id="searchButtonLanding" name="search-button">Search</button> -->
+            <h4 class="search-error hidden">Your search didn't return any results.</h4>
           </div>
-          <h4 class="search-error hidden">Your search didn't return any results.</h4>
 
           <fieldset id="filter-dropdown" class="dropdown">
             <label for="tag-selector" class="dropdown__label"></label>
@@ -74,11 +72,9 @@
             </select>
             <button id="go" class="dropdown__button">Go</button>
           </fieldset>
-          <!--          </form>-->
         </section>
 
         <section class="hero-section">
-
           <section class="hero-section__box">
             <section class="hero-section__box--recipe-name">
 
@@ -164,8 +160,9 @@
 
 
 <!--      list view  -->
-      <main class="list-view ">
+      <main class="list-view hidden">
         <h1 class="recipe-list-title">Placeholder Title</h1>
+
         <section class="search-section">
           <div class="search">
             <label for="searchBarList"></label>
