@@ -42,7 +42,7 @@
       </nav>
 
 <!--      landing view  -->
-      <main id="landing-view" class="landing-view ">
+      <main id="landing-view" class="landing-view hidden">
         <section class="search-section">
           <!--          <form>-->
           <div class="search">
@@ -77,54 +77,45 @@
           <!--          </form>-->
         </section>
 
-        <section class="hero-section"></section>
+        <section class="hero-section">
+
+          <section class="hero-section__box">
+            <section class="hero-section__box--recipe-name">
+
+            </section>
+            <section class="hero-section__box--icons">
+              <span class="heart">
+                <i class="far fa-heart favorite-heart icon"></i>
+                <i class="fas fa-heart unfavorite-heart icon hidden"></i>
+              </span>
+              <span class="calendar">
+                <i class="far fa-calendar add-calendar icon"></i>
+                <i class="far fa-calendar-check remove-calendar icon hidden"></i>
+              </span>
+            </section>
+          </section>
+        </section>
 
         <h2 class="featured-section__title">Featured Recipes</h2>
         <section class="featured-section content1"></section>
       </main>
 
-      <!--      recipe detail view  -->
+<!--      recipe detail view  -->
       <main id="recipe-detail-view" class="recipe-detail-view hidden">
         <section class="recipe-detail__top">
           <section class="recipe-detail__top--title">
             <h1 class="recipe-title"></h1>
           </section>
           <section class="recipe-detail__top--icons">
-            <i class="far fa-heart"></i>
-            <i class="far fa-calendar"></i>
+            <span class="heart-recipe">
+              <i class="far fa-heart favorite-heart-recipe icon"></i>
+              <i class="fas fa-heart unfavorite-heart-recipe icon hidden"></i>
+            </span>
+            <span class="calendar-recipe">
+              <i class="far fa-calendar add-calendar-recipe icon"></i>
+              <i class="far fa-calendar-check remove-calendar-recipe icon hidden"></i>
+            </span>
           </section>
-        </section>
-
-        <section class="recipe-detail__bottom--left content1 hidden">
-          <h1>Instructions</h1>
-        </section>
-
-        <section class="recipe-detail__bottom--right content2 hidden">
-          <figure>
-            <img class="featured-section__recipe-profile--img"
-                 src="https://spoonacular.com/recipeImages/623855-556x370.jpg"
-                 alt="Chocolate chip cookies">
-            <figcaption>Meal cost: $10</figcaption>
-          </figure>
-
-          <h3 class="ingredients">Ingredients</h3>
-            <span class="ingredients__item"><i class="far fa-check-circle"></i> Butter</span>
-              <span class="ingredients__message"></span>
-
-            <span class="ingredients__item"><i class="far fa-check-circle"></i> Flour</span>
-              <span class="ingredients__message"></span>
-
-            <span class="ingredients__item"><i class="far fa-times-circle"></i> Sugar</span>
-              <span class="ingredients__message">You'll need xyz more of this.</span>
-
-            <span class="ingredients__item"><i class="far fa-times-circle"></i> Vanilla</span>
-              <span class="ingredients__message">You'll need xyz more of this.</span>
-
-            <span class="ingredients__item"><i class="far fa-check-circle"></i> Chocolate Chips</span>
-              <span class="ingredients__message"></span>
-
-            <span class="ingredients__item"><i class="far fa-times-circle"></i> Eggs</span>
-              <span class="ingredients__message">You'll need xyz more of this.</span>
         </section>
 
         <section class="recipe-detail__bottom">
@@ -173,7 +164,7 @@
 
 
 <!--      list view  -->
-      <main class="list-view hidden">
+      <main class="list-view ">
         <h1 class="recipe-list-title">Placeholder Title</h1>
         <section class="search-section">
           <div class="search">

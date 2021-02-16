@@ -17,6 +17,13 @@ const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
 const heroSectionSelector = document.querySelector('.hero-section');
+const heroTitleSelector = document.querySelector('.hero-section__box--recipe-name');
+const heartSelector = document.querySelector('.heart');
+const recipeHeartSelector = document.querySelector('.heart-recipe');
+// const listHeartSelector = document.querySelector('.heart-list');
+const calendarSelector = document.querySelector('.calendar');
+const recipeCalendarSelector = document.querySelector('.calendar-recipe');
+// const listCalendarSelector = document.querySelector('.calendar-list');
 
 let allRecipes;
 
@@ -37,18 +44,24 @@ const display = (element) => element.classList.remove('hidden');
 
 const displayRecipeList = () => {
   hide(landingView);
+  hide(pantryView);
+  hide(recipeDetailView);
   display(recipeListView);
 }
 
-
 const displayRecipeDetailView = () => {
   hide(recipeListView);
+  hide(landingView);
+  hide(pantryView);
   display(recipeDetailView);
 }
 
 
 // *** START 🦄 Nikki's 🦄 work ***
 const displayLanding = () => {
+  // todo ==> not sure how to clear that form out, because this isn't working
+  // searchBarInput.textContent = '';
+  displayMYFavorite();
   hide(recipeListView);
   hide(recipeDetailView);
   hide(pantryView);
@@ -88,27 +101,80 @@ const displayRandomFavorites = () => {
 }
 
 const displayMYFavorite = () => {
-  let chunk = '';
-
+  // todo ==> will need to check whether this is on favorites, and if not, maybe don't use it??
+  // in other words, should we only show recipes not on favorites? maybe use a different repository for this??
+  const heroName = document.querySelector('.hero-section__box--recipe-name');
   const favorite = allRecipes.recipes[
     Math.floor(Math.random() * allRecipes.recipes.length)
   ];
 
-  chunk += `
-    <section class="hero-section__box" data-id=${favorite.id}>
-      <section class="hero-section__box--recipe-name">
-        <h3>${favorite.name}</h3>
-      </section>
-      <section class="hero-section__box--icons">
-        <i class="far fa-heart"></i>
-        <i class="far fa-calendar"></i>
-      </section>
-    </section>
-  `;
 
   heroSectionSelector.style.backgroundImage = `url(${favorite.image})`;
-  heroSectionSelector.innerHTML = chunk;
+  heroName.innerHTML = `<h3 data-id=${favorite.id}>${favorite.name}</h3>`
 }
+
+heroTitleSelector.addEventListener('click', (event) => {
+  event.preventDefault();
+  let id = event.target.getAttribute('data-id');
+
+  displayRecipe(id);
+})
+
+const toggleFavorites = (qualifier) => {
+  if (qualifier === 'none') {
+    document.querySelector('.favorite-heart').classList.toggle('hidden');
+    document.querySelector('.unfavorite-heart').classList.toggle('hidden');
+  } else if (qualifier === 'recipe') {
+    document.querySelector('.favorite-heart-recipe').classList.toggle('hidden');
+    document.querySelector('.unfavorite-heart-recipe').classList.toggle('hidden');
+  } else if (qualifier === 'list') {
+    document.querySelector('.favorite-heart-list').classList.toggle('hidden');
+    document.querySelector('.unfavorite-heart-list').classList.toggle('hidden');
+  }
+
+  // refresh list of favorites
+}
+
+const toggleCalendar = (qualifier) => {
+  if (qualifier === 'none') {
+    document.querySelector('.add-calendar').classList.toggle('hidden');
+    document.querySelector('.remove-calendar').classList.toggle('hidden');
+  } else if (qualifier === 'recipe') {
+    document.querySelector('.add-calendar-recipe').classList.toggle('hidden');
+    document.querySelector('.remove-calendar-recipe').classList.toggle('hidden');
+  } else if (qualifier === 'list') {
+    document.querySelector('.add-calendar-list').classList.toggle('hidden');
+    document.querySelector('.remove-calendar-list').classList.toggle('hidden');
+  }
+
+  // refresh list of favorites
+}
+
+heartSelector.addEventListener('click', () => {
+  toggleFavorites('none')
+});
+
+recipeHeartSelector.addEventListener('click', () => {
+  toggleFavorites('recipe')
+});
+
+calendarSelector.addEventListener('click', () => {
+  toggleCalendar('none')
+});
+
+recipeCalendarSelector.addEventListener('click', () => {
+  toggleCalendar('recipe')
+});
+
+// todo ==> need to get bubbling set up for these?? they don't exist when page is loaded
+// listHeartSelector.addEventListener('click', () => {
+//   toggleFavorites('list')
+// });
+
+// listCalendarSelector.addEventListener('click', () => {
+//   toggleCalendar('list')
+// });
+
 // *** END 🦄 Nikki's work 🦄 ***
 
 const displayRecipes = (recipeList, title) => {
@@ -128,32 +194,42 @@ const displayRecipes = (recipeList, title) => {
           <figure>
             <img class="recipe-list__item--img"
                  src="${recipe.image}"
-                 alt="${recipe.name}">
+                 alt="${recipe.name}"
+                 style="width:250px;">
           </figure>
         </div>
-
         <div class="recipe-list__item cooked-button hidden">
           <button>Cooked It!</button>
           <span>message</span>
         </div>
 
         <div class="recipe-list__item">
-          <span><i class="far fa-heart"></i></span>
-          <span><i class="far fa-calendar-check"></i></span>
+              <span class="heart">
+                <i class="far fa-heart favorite-heart-list icon"></i>
+                <i class="fas fa-heart unfavorite-heart-list icon hidden"></i>
+              </span>
+              <span class="calendar">
+                <i class="far fa-calendar add-calendar-list icon"></i>
+                <i class="far fa-calendar-check remove-calendar-list icon hidden"></i>
+              </span>
         </div>
       </section>
 
       <section class="recipe-list__item">
         <ul class="ingredients-and-cost">
           <li>
-            <i class="fal fa-ellipsis-h"></i>${recipe.name}
+            <span class="ingredients-and-cost__item--icon"><i class="fal fa-ellipsis-h"></i></span>
+            <span class="ingredients-and-cost__item--name">${recipe.name}</span>
           </li>
+          
           <li>
-            <i class="far fa-check-circle"></i>
-            You have everything needed to make this recipe!
+            <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
+            <span class="ingredients-and-cost__item--isInPantry">You have everything needed to make this recipe!</span>
           </li>
+          
           <li>
-            <i class="far fa-badge-dollar"></i>${recipe.getTotalCost()}
+            <span class="ingredients-and-cost__item--icon"><i class="far fa-badge-dollar"></i></span>
+            <span class="ingredients-and-cost__item--cost">${recipe.getTotalCost()}</span>
           </li>
         </ul>
       </section>
@@ -174,9 +250,10 @@ const displayRecipe = (id) => {
 
   recipeTitle.innerText = foundRecipe.name;
   recipeDetailImage.innerHTML = `
-    <img src="${foundRecipe.image}" alt="${foundRecipe.name}">
+    <img src="${foundRecipe.image}" alt="${foundRecipe.name}" style="width:250px;">
     <figcaption>Meal cost: $${foundRecipe.getTotalCost()}</figcaption>
   `;
+
   foundRecipe.ingredients.forEach(ingredient => {
     ingredientsDetailList.innerHTML += `
       <article class="ingredients__item">
@@ -185,9 +262,10 @@ const displayRecipe = (id) => {
       </article>
     `;
   });
+
   foundRecipe.instructions.forEach(instruction => {
     recipeInstructions.innerHTML += `
-      <li>${instruction.number}. ${instruction.instruction}</li>
+      <li class="instructions-details__item"><span class="instructions-details__number">${instruction.number}.</span> ${instruction.instruction}</li>
     `;
   });
 }
