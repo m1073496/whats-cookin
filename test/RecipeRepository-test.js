@@ -44,10 +44,8 @@ describe('RecipeRepository', () => {
   });
 
   it('should find recipes matching one or more search words', () => {
-    // console.log("test result: ", recipeRepository.findRecipes(['lentil']));
     expect(recipeRepository.findRecipes(['lentil']).recipes.length).to.equal(1);
-    console.log("test result for cake: ", recipeRepository.findRecipes(['cake']).recipes);
-    // expect(recipeRepository.findRecipes(['cake']).recipes.length).to.equal(8);
     expect(recipeRepository.findRecipes(['zombie']).recipes.length).to.equal(0);
+    expect(recipeRepository.findRecipes(['brown sugar']).recipes.length).to.equal(2);
   });
 });
