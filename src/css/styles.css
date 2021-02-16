@@ -320,20 +320,41 @@ select:focus {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    margin: 30px;
 }
 
 .recipe-detail__bottom {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
+    margin: 30px;
 }
 
-.recipe-list__item--img {
+.recipe-list__item--img > img {
     margin: 0 20px;
+    border-radius: 5px;
 }
 
 .instructions-title {
     margin-bottom: 10px;
+}
+
+.recipe-detail__bottom--right {
+    width: 20%;
+}
+
+.recipe-detail__bottom--left {
+    width: 45%;
+}
+
+.instructions-details__number {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.instructions-details__item {
+    padding: 5px;
+    text-align: left;
 }
 
 /* *** Ingredients *** */

@@ -146,7 +146,8 @@ const displayRecipes = (recipeList, title) => {
           <figure>
             <img class="recipe-list__item--img"
                  src="${recipe.image}"
-                 alt="${recipe.name}">
+                 alt="${recipe.name}"
+                 style="width:350px;">
           </figure>
         </div>
   
@@ -192,7 +193,7 @@ const displayRecipe = (id) => {
 
   recipeTitle.innerText = foundRecipe.name;
   recipeDetailImage.innerHTML = `
-    <img src="${foundRecipe.image}" alt="${foundRecipe.name}">
+    <img src="${foundRecipe.image}" alt="${foundRecipe.name}" style="width:250px;">
     <figcaption>Meal cost: $${foundRecipe.getTotalCost()}</figcaption>
   `;
   foundRecipe.ingredients.forEach(ingredient => {
@@ -205,7 +206,7 @@ const displayRecipe = (id) => {
   });
   foundRecipe.instructions.forEach(instruction => {
     recipeInstructions.innerHTML += `
-      <li>${instruction.number}. ${instruction.instruction}</li>
+      <li class="instructions-details__item"><span class="instructions-details__number">${instruction.number}.</span> ${instruction.instruction}</li>
     `;
   });
 }
