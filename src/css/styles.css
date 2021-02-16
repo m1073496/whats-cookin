@@ -56,20 +56,6 @@ main {
     padding-top: 5px;
 }
 
-/*.content1 {*/
-/*    !*background: #6fffd2;*!*/
-/*    grid-area: content1;*/
-/*    border-radius: 10px;*/
-/*    padding-top: 5px;*/
-/*}*/
-
-/*.content2 {*/
-/*    !*background: #64ffda;*!*/
-/*    grid-area: content2;*/
-/*    border-radius: 10px;*/
-/*    padding-top: 5px;*/
-/*}*/
-
 /* *** Header *** */
 .header {
     display: flex;
@@ -419,11 +405,12 @@ select:focus {
 
 /* *** Recipe list *** */
 .recipe {
-    margin: 10px 5px;
+    margin: 10px 80px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: flex-start;
+    cursor: pointer;
 }
 
 .item-container {
