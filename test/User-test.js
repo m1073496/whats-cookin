@@ -118,11 +118,366 @@ describe('User', function() {
   });
 
   it('should determine missing ingredients needed to cook recipe', function() {
+    let badResultUser1 = user1.findMissingIngredients(recipes[1]);
+    let goodResultUser1 = user1.findMissingIngredients(recipes[0]);
 
+    let badResultUser2 = user2.findMissingIngredients(recipes[0]);
+    let goodResultUser2 = user1.findMissingIngredients(recipes[1]);
+
+    expect(badResultUser1).to.equal([
+      {  "id": 6150,
+       "quantity": {
+         "amount": 1,
+         "unit": "cup"
+       }
+     },
+     {
+       "id": 6194,
+       "quantity": {
+         "amount": 1,
+         "unit": "cup"
+       }
+     },
+     {
+       "id": 93627,
+       "quantity": {
+         "amount": 3,
+         "unit": "tbsp"
+       }
+     },
+     {
+       "id": 2028,
+       "quantity": {
+         "amount": 8,
+         "unit": "servings"
+       }
+     },
+     {
+       "id": 10072,
+       "quantity": {
+         "amount": 6,
+         "unit": "lbs"
+       }
+     },
+     {
+       "id": 6971,
+       "quantity": {
+         "amount": 2,
+         "unit": "tbsp"
+       }
+     }
+    ]);
+    expect(goodResultUser1).to.equal([
+      {
+        "id": 9019,
+        "quantity": {
+          "amount": 2,
+          "unit": "tablespoons"
+        }
+      },
+      {
+        "id": 18079,
+        "quantity": {
+          "amount": 1,
+          "unit": "cup"
+        }
+      },
+      {
+        "id": 16069,
+        "quantity": {
+          "amount": 1,
+          "unit": "cup"
+        }
+      },
+      {
+        "id": 19334,
+        "quantity": {
+          "amount": 2,
+          "unit": "tablespoons"
+        }
+      },
+      {
+        "id": 11124,
+        "quantity": {
+          "amount": 1,
+          "unit": "cup"
+        }
+      },
+      {
+        "id": 2009,
+        "quantity": {
+          "amount": 0.25,
+          "unit": "teaspoon"
+        }
+      },
+      {
+        "id": 9079,
+        "quantity": {
+          "amount": 0.3333333333333333,
+          "unit": "cup"
+        }
+      },
+      {
+        "id": 11165,
+        "quantity": {
+          "amount": 0.25,
+          "unit": "cup"
+        }
+      },
+      {
+        "id": 11215,
+        "quantity": {
+          "amount": 3,
+          "unit": ""
+        }
+      },
+      {
+        "id": 1002014,
+        "quantity": {
+          "amount": 0.5,
+          "unit": "teaspoon"
+        }
+      },
+      {
+        "id": 2042,
+        "quantity": {
+          "amount": 0.5,
+          "unit": "teaspoon"
+        }
+      },
+      {
+        "id": 11935,
+        "quantity": {
+          "amount": 2,
+          "unit": "tablespoons"
+        }
+      },
+      {
+        "id": 4053,
+        "quantity": {
+          "amount": 2,
+          "unit": "tablespoon"
+        }
+      },
+      {
+        "id": 11282,
+        "quantity": {
+          "amount": 1,
+          "unit": "cup"
+        }
+      },
+      {
+        "id": 12151,
+        "quantity": {
+          "amount": 0.5,
+          "unit": "cup"
+        }
+      },
+      {
+        "id": 11821,
+        "quantity": {
+          "amount": 1,
+          "unit": "cup"
+        }
+      },
+      {
+        "id": 1102047,
+        "quantity": {
+          "amount": 8,
+          "unit": "servings"
+        }
+      },
+      {
+        "id": 6615,
+        "quantity": {
+          "amount": 3,
+          "unit": "cups"
+        }
+      }
+    ]);
+
+    expect(badResultUser2).to.equal([
+      {
+       "id": 9019,
+       "quantity": {
+         "amount": 2,
+         "unit": "tablespoons"
+       }
+     },
+     {
+       "id": 18079,
+       "quantity": {
+         "amount": 1,
+         "unit": "cup"
+       }
+     },
+     {
+       "id": 16069,
+       "quantity": {
+         "amount": 1,
+         "unit": "cup"
+       }
+     },
+     {
+       "id": 19334,
+       "quantity": {
+         "amount": 2,
+         "unit": "tablespoons"
+       }
+     },
+     {
+       "id": 11124,
+       "quantity": {
+         "amount": 1,
+         "unit": "cup"
+       }
+     },
+     {
+       "id": 2009,
+       "quantity": {
+         "amount": 0.25,
+         "unit": "teaspoon"
+       }
+     },
+     {
+       "id": 9079,
+       "quantity": {
+         "amount": 0.3333333333333333,
+         "unit": "cup"
+       }
+     },
+     {
+       "id": 11165,
+       "quantity": {
+         "amount": 0.25,
+         "unit": "cup"
+       }
+     },
+     {
+       "id": 11215,
+       "quantity": {
+         "amount": 3,
+         "unit": ""
+       }
+     },
+     {
+       "id": 1002014,
+       "quantity": {
+         "amount": 0.5,
+         "unit": "teaspoon"
+       }
+     },
+     {
+       "id": 2042,
+       "quantity": {
+         "amount": 0.5,
+         "unit": "teaspoon"
+       }
+     },
+     {
+       "id": 11935,
+       "quantity": {
+         "amount": 2,
+         "unit": "tablespoons"
+       }
+     },
+     {
+       "id": 4053,
+       "quantity": {
+         "amount": 2,
+         "unit": "tablespoon"
+       }
+     },
+     {
+       "id": 11282,
+       "quantity": {
+         "amount": 1,
+         "unit": "cup"
+       }
+     },
+     {
+       "id": 12151,
+       "quantity": {
+         "amount": 0.5,
+         "unit": "cup"
+       }
+     },
+     {
+       "id": 11821,
+       "quantity": {
+         "amount": 1,
+         "unit": "cup"
+       }
+     },
+     {
+       "id": 1102047,
+       "quantity": {
+         "amount": 8,
+         "unit": "servings"
+       }
+     },
+     {
+       "id": 6615,
+       "quantity": {
+         "amount": 3,
+         "unit": "cups"
+       }
+    ]);
+    expect(goodResultUser2).to.equal([
+      {
+        "id": 1001,
+        "quantity": {
+          "amount": 2,
+          "unit": "tablespoons"
+        }
+      },
+      {
+        "id": 20027,
+        "quantity": {
+          "amount": 0.25,
+          "unit": "cup"
+        }
+      },
+      {
+        "id": 1123,
+        "quantity": {
+          "amount": 1,
+          "unit": ""
+        }
+      },
+      {
+        "id": 1125,
+        "quantity": {
+          "amount": 2,
+          "unit": ""
+        }
+      },
+      {
+        "id": 1077,
+        "quantity": {
+          "amount": 2,
+          "unit": "cups"
+        }
+      },
+      {
+        "id": 2050,
+        "quantity": {
+          "amount": 1,
+          "unit": "teaspoon"
+        }
+      },
+      {
+        "id": 19335,
+        "quantity": {
+          "amount": 0.3333333333333333,
+          "unit": "cup"
+        }
+      }
+    ]);
   });
 
   it('should remove ingredients from pantry', function() {
 
   });
-  
+
 });
