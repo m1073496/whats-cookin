@@ -1,41 +1,58 @@
-// const Recipe = require('./Recipe');
-
 class RecipeRepository {
-  constructor(data) {
-    this.recipes = data.map(recipe => new Recipe(recipe));
+  constructor(recipeInstances) {
+    this.recipes = recipeInstances;
   }
 
-  filterByTag(searchTerms) {
+  filterByTags(searchTags) {
     const results = [];
-    for (let i = 0; i < searchTerms.length; i++) {
+    for (let i = 0; i < searchTags.length; i++) {
       this.recipes.filter(recipe => {
-        if (recipe.tags.includes(searchTerms[i].toLowerCase())) {
-          // question for the group
-          // TODO need to remove the ".id" here?? 
-          // so that it will return entire Recipe object, not just id
-          // (Katie removed the ".id" in the scripts.js version)
-          results.push(recipe.id);
+        if (recipe.tags.includes(searchTags[i].toLowerCase())) {
+          results.push(recipe);
         }
       })
     }
-
     return [...new Set(results)];
   }
 
-  filterByIngredient(searchTerm) {
+  filterByIngredient(searchIng) {
     return this.recipes.filter(recipe => {
       return recipe.ingredients.find(ingredient => {
-        return ingredient.name.toLowerCase().includes(searchTerm.toLowerCase());
+        return ingredient.name.toLowerCase().includes(searchIng.toLowerCase());
       });
     });
   }
 
-  filterByName(searchTerm) {
+  filterByName(searchName) {
     return this.recipes.filter(recipe => {
-      return recipe.name.toLowerCase().includes(searchTerm.toLowerCase());
+      return recipe.name.toLowerCase().includes(searchName.toLowerCase());
     });
   }
+
+  findRecipes(words) {
+    const foundIngredientRecipes = words.flatMap(word => {
+      return this.filterByIngredient(word);
+    });
+    const foundNameRecipes = words.flatMap(word => {
+      return this.filterByName(word);
+    });
+    const foundTagRecipes = words.flatMap(word => {
+      return this.filterByTags([word]);
+    });
+    const foundRecipes = [
+      ...foundIngredientRecipes, 
+      ...foundNameRecipes, 
+      ...foundTagRecipes
+    ];
+    const results = this.removeDuplicates(foundRecipes);
+    return new RecipeRepository(results);
+  }
+
+  removeDuplicates(arr) {
+    return [...new Set(arr)];
+  }
 }
+
 
 if (typeof module !== 'undefined') {
   module.exports = RecipeRepository;
