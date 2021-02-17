@@ -2,7 +2,7 @@
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Global Variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 const allRecipesButton = document.getElementById('all-recipes');
-const yourFavoritesButton = document.getElementById('your-favorites');
+const myFavoritesButton = document.getElementById('my-favorites');
 const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
@@ -358,7 +358,7 @@ const searchByTags = (tags, listName) => {
   } else if (listName === 'favorites') {
     return currentUser.favoriteRecipes.filterByTags(tags);
   } else {
-    return allRecipes.recipes;
+    return allRecipes.filterByTags(tags);
   }
 }
 
@@ -441,4 +441,4 @@ homeSelector.addEventListener('click', displayLanding);
 
 userSelector.addEventListener('click', displayPantry);
 
-yourFavoritesButton.addEventListener('click', displayFavorites);
+myFavoritesButton.addEventListener('click', displayFavorites);
