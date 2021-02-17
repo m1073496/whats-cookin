@@ -10,6 +10,7 @@ const favoritesView = document.querySelector('.favorites-view');
 const pantryView = document.querySelector('.pantry-view');
 const recipeListTitle = document.querySelector('.recipe-list-title');
 const recipeListSearchMessage = document.querySelector('.recipe-list-search-message');
+const recipeListContainer = document.querySelector('.recipe-list-content1');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
@@ -239,13 +240,13 @@ const findAppropriateMessage = (recipe) => {
 const displayRecipes = (recipeList, title) => {
   displayRecipeList();
   recipeListSearchMessage.innerText = title;
+  recipeListContainer.innerHTML = '';
 
   recipeList.forEach(recipe => {
     let newRecipeItem = document.createElement('article');
-    let parent = document.querySelector('.list-view');
     newRecipeItem.className = 'recipe content1';
     newRecipeItem.id = recipe.id;
-    parent.appendChild(newRecipeItem);
+    recipeListContainer.appendChild(newRecipeItem);
 
     findAppropriateMessage(recipe);
 
@@ -396,6 +397,7 @@ const displayResults = (searchInput, recipes, listName) => {
 }
 
 const determineListTitle = (listName) => {
+  // TODO change listTitle in here to recipeListTitle ... I think
   const listTitle = '';
 
   if (listName === 'favorites') {
