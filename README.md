@@ -1,51 +1,119 @@
-# What's Cookin'? Starter Kit 
+# What's Cookin'?
 
-The details of this project are outlined in the <a href="https://frontend.turing.io/projects/whats-cookin.html" target="\__blank">project spec</a>.
-
-## Set Up 
-
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. Both group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run npm install to install project dependencies.
-4. Run open src/index.html in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page)
-5. Make sure both members of your team are collaborators on the forked repo.
-
-## Testing 
-
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran npm install, then the tooling you need to start testing is already installed (mocha and chai).
-
-## Linting Your Code 
-
-Run the command in your terminal npm run lint to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
-
-Your linter will look only at the JavaScript files you have within the src and the test directories.
+A [Front-End Project](https://frontend.turing.io/projects/whats-cookin.html) by [Nikki Petersen](https://github.com/piknikki), [Katie B](https://github.com/knees4bees) and [Jessica Justice](https://github.com/m1073496)
 
 
-## Data Model
-### Users
-```js
-{
-  "id": [number],
-  "name": [string],
-  "pantry": [array of objects with amount and ingredient id properties]
-},
-```
+1. [Overview](#overview)
+2. [Set Up](#set-up)
+3. [Learning Goals](#learning-goals)
+4. [Technologies](#technologies)
+5. [Features](#features)
+6. [Challenges](#challenges)
+7. [Wins](#wins)
+8. [Future Additions](#future-additions)
 
-### Recipes
-```js
-{
-  "ingredients" [array of objects with ingredients ids(connection to ingredients), ingredient names, and quantity data],
-  "instructions": [array of objects with instructions properties and numbered steps],
-  "name": [string],
-  "tags": [array of strings representing info about the recipes]
-}
-```
 
-### Ingredients
-```js
-{
-  "estimatedCostInCents": [number],
-  "id": [number -- connection to users and recipes],
-  "name": [string]
-}
-```
+## Overview
+
+This is a Turing School of Software and Design - Module 2 group project.
+
+*
+*
+* 
+* 
+
+
+## Set Up
+
+
+
+
+
+## Learning Goals
+
+*
+*
+*
+
+
+## Technologies
+
+* HTML
+* CSS
+* Javascript
+* Git
+* GitHub
+* [Netlify Deployment Site](insert link here)
+
+---
+## Features
+
++ [Landing Page](#landing-page)
++ [All Recipes list](#all-recipes-list)
++ [Search Recipes](#search-recipes)
++ [Search Favorites](#search-favorites)
++ [View Recipes to Cook](#view-recipes-to-cook)
++ [View Pantry](#view-pantry)
+
+
+## Landing Page
+
+
+
+![](insert gif here)
+
+
+## All Recipes List
+
+
+
+![](insert gif here)
+
+
+## Search Recipes
+
+
+![](insert gif here)
+
+
+## Search Favorites
+
+
+![](insert gif here)
+
+
+## View Recipes to Cook
+
+
+
+![](insert gif here)
+
+
+## View Pantry
+
+
+![](insert gif here)
+
+
+---
+## Challenges
+
+*
+*
+*
+
+---
+## Wins
+
+*
+*
+*
+*
+
+---
+## Future Iterations
+
+*
+*
+*
+
