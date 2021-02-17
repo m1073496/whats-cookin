@@ -8,7 +8,6 @@ const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
 const favoritesView = document.querySelector('.favorites-view');
 const pantryView = document.querySelector('.pantry-view');
-// const recipeListTitle = document.querySelector('.recipe-list-title');
 const recipeListSearchMessage = document.querySelector('.recipe-list-search-message');
 const favoritesSearchMessage = document.querySelector('.favorites-search-message');
 const recipeListContainer = document.querySelector('.recipe-list-content1');
@@ -35,15 +34,6 @@ const recipeCalendarSelector = document.querySelector('.calendar-recipe');
 const userGreeting = document.querySelector('.header__right--text');
 const userPantryList = document.querySelector('.pantry__bottom--left');
 
-
-// TODO trash this later; here just to have something for testing
-// const currentUser = new User({
-//   name: 'Bob',
-//   id: 123,
-//   pantry: [],
-//   favoriteRecipes: [],
-//   recipesToCook: []
-// });
 
 let allRecipes;
 let currentUser;
@@ -367,8 +357,6 @@ const searchByTags = (tags, listName) => {
   }
 }
 
-// TODO force choice of "all" if no choice is made
-// -- but could solve this in the UI instead?
 const parseSelections = (selections) => {
   if (selections.length) {
     return selections;
@@ -408,29 +396,12 @@ const displayResults = (searchInput, recipes, listName) => {
   }
 }
 
-// const determineListTitle = (listName) => {
-//   // TODO change listTitle in here to recipeListTitle ... I think
-//   const listTitle = '';
-
-//   if (listName === 'favorites') {
-//     listTitle = 'My favorite recipes';
-//     display(recipeListTitle);
-//   } else if (listName === 'all') {
-//     hide(recipeListTitle);
-//   } else if (listName === 'recipesToCook') {
-//     listTitle = 'Recipes to cook this week';
-//     display(recipeListTitle);
-//   }
-// }
-
-// TODO chase through how this affects what Katie did w/ determineListTitle, etc.
 const displayFavorites = () => {
   displayFavoritesList();
   console.log(currentUser.favoriteRecipes);
   if (currentUser.favoriteRecipes.recipes.length === 0) {
     favoritesSearchMessage.innerText = `You don't have any favorites 😢`
   } else {
-    // TODO need to fix this: recipes aren't showing and "Favorites" is showing up where searchMessage thingy should be
     displayRecipes(currentUser.favoriteRecipes.recipes, '');
   }
 }
