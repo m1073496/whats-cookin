@@ -2,6 +2,7 @@
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Global Variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 const allRecipesButton = document.getElementById('all-recipes');
+const yourFavoritesButton = document.getElementById('your-favorites');
 const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
@@ -29,29 +30,41 @@ const recipeHeartSelector = document.querySelector('.heart-recipe');
 const calendarSelector = document.querySelector('.calendar');
 const recipeCalendarSelector = document.querySelector('.calendar-recipe');
 // const listCalendarSelector = document.querySelector('.calendar-list');
+const userGreeting = document.querySelector('.header__right--text');
+const userPantryList = document.querySelector('.pantry__bottom--left');
 
 
 // TODO trash this later; here just to have something for testing
-const currentUser = new User({
-  name: 'Bob',
-  id: 123,
-  pantry: [],
-  favoriteRecipes: [],
-  recipesToCook: []
-});
+// const currentUser = new User({
+//   name: 'Bob',
+//   id: 123,
+//   pantry: [],
+//   favoriteRecipes: [],
+//   recipesToCook: []
+// });
 
 let allRecipes;
+let currentUser;
 
 window.addEventListener('load', function() {
   console.log('page loaded 🥺');
   const recipeInstances = recipeData.map(recipe => new Recipe(recipe));
   allRecipes = new RecipeRepository(recipeInstances);
+
+  currentUser = new User(usersData.find(user => user.name === "Earline Von"));
+
+  // currentUser = new User(usersData[getRandomIndex(usersData.length)]);
+  userGreeting.innerText = `Hello, ${currentUser.userName}!`;
   displayMYFavorite();
   displayRandomFavorites();
   hide(searchError);
 });
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+const getRandomIndex = (max) => {
+  return Math.floor(Math.random() * Math.floor(max));
+}
 
 const hide = (element) => element.classList.add('hidden');
 
@@ -94,6 +107,18 @@ const displayPantry = () => {
   hide(landingView);
   hide(favoritesView);
   display(pantryView);
+
+
+  currentUser.userPantry.forEach(item => {
+    let ingredient = ingredientsData.find(element => element['id'] === item['ingredient']);
+    userPantryList.innerHTML += `
+      <ul>
+        <li class="pantry__item">${ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1)} -- Quantity: ${item['amount']}</li>
+      </ul>
+    `
+  })
+
+
 }
 
 const displayRandomFavorites = () => {
@@ -163,12 +188,22 @@ const toggleCalendar = (qualifier) => {
   // refresh list of favorites
 }
 
+const addRecipeToFavorites = () => {
+  console.log(document.querySelector('.recipe-title').innerText);
+  let recipe = allRecipes.recipes.find(element => element.name === document.querySelector('.recipe-title').innerText);
+  console.log(recipe);
+    currentUser.updateFavorites(recipe);
+    console.log(currentUser.favoriteRecipes);
+}
+
 heartSelector.addEventListener('click', () => {
-  toggleFavorites('none')
+  toggleFavorites('none');
+  addRecipeToFavorites();
 });
 
 recipeHeartSelector.addEventListener('click', () => {
-  toggleFavorites('recipe')
+  toggleFavorites('recipe');
+  addRecipeToFavorites();
 });
 
 calendarSelector.addEventListener('click', () => {
@@ -189,6 +224,17 @@ recipeCalendarSelector.addEventListener('click', () => {
 // });
 
 // *** END 🦄 Nikki's work 🦄 ***
+const findAppropriateMessage = (recipe) => {
+  let appropriateMessage;
+
+  if (currentUser.findMissingIngredients(recipe).length === 0) {
+    appropriateMessage = `You have everything needed to make this recipe!`;
+  } else {
+    appropriateMessage = `You're a few ingredients short.`;
+  }
+  return appropriateMessage;
+}
+
 
 const displayRecipes = (recipeList, title) => {
   displayRecipeList();
@@ -200,6 +246,10 @@ const displayRecipes = (recipeList, title) => {
     newRecipeItem.className = 'recipe content1';
     newRecipeItem.id = recipe.id;
     parent.appendChild(newRecipeItem);
+
+    findAppropriateMessage(recipe);
+
+
 
     newRecipeItem.innerHTML += `
       <section class="item-container">
@@ -222,12 +272,12 @@ const displayRecipes = (recipeList, title) => {
           <li>
             <span class="ingredients-and-cost__item--name">${recipe.name}</span>
           </li>
-          
+
           <li>
             <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
-            <span class="ingredients-and-cost__item--isInPantry">You have everything needed to make this recipe!</span>
+            <span class="ingredients-and-cost__item--isInPantry">${findAppropriateMessage(recipe)}</span>
           </li>
-          
+
           <li>
             <span class="ingredients-and-cost__item--icon"><i class="far fa-badge-dollar"></i></span>
             <span class="ingredients-and-cost__item--cost">${recipe.getTotalCost()}</span>
@@ -359,6 +409,17 @@ const determineListTitle = (listName) => {
   }
 }
 
+// TODO chase through how this affects what Katie did w/ determineListTitle, etc.
+const displayFavorites = () => {
+  displayRecipeList();
+  console.log(currentUser.favoriteRecipes);
+  if (currentUser.favoriteRecipes.recipes.length === 0) {
+    recipeListTitle.innerText = `You don't have any favorites 😢`
+  } else {
+    displayRecipes(currentUser.favoriteRecipes.recipes, 'Favorites');
+  }
+}
+
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -382,3 +443,5 @@ goFavoritesButton.addEventListener('click', function() {
 homeSelector.addEventListener('click', displayLanding);
 
 userSelector.addEventListener('click', displayPantry);
+
+yourFavoritesButton.addEventListener('click', displayFavorites);

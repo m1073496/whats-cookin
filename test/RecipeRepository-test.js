@@ -1,9 +1,9 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const { testRecipeData } = require('../data/test-data');
-const Recipe = require('../src/Recipe');
-const RecipeRepository = require('../src/RecipeRepository');
+// const { testRecipeData } = require('../data/test-data');
+// const Recipe = require('../src/Recipe');
+// const RecipeRepository = require('../src/RecipeRepository');
 
 describe('RecipeRepository', () => {
   let testRecipes, recipeRepository;
