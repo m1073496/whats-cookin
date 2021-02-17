@@ -34,11 +34,7 @@ class User {
   findMissingIngredients = (recipe) => {
     let recipeIngredients = recipe.ingredients;
     let missingIngredients = [];
-    // console.log("recipe ingredients:", recipe.name, recipeIngredients);
-    // console.log(this.userPantry);
-
     let pantryIngredients = this.userPantry.map(item => item.ingredient);
-    // console.log('pantry ingredients:', this.userName, pantryIngredients);
 
     recipeIngredients.forEach(item => {
       const recipeAmount = item.amount;
@@ -62,15 +58,42 @@ class User {
   cookMeal = (recipe) => {
     // console.log(this.findMissingIngredients(recipe))
     if (this.findMissingIngredients(recipe).length === 0) {
-      let ingredientsToRemoveFromPantry = this.findMissingIngredients(recipe);
-      let ingredientIndexes = ingredientsToRemoveFromPantry.map(item => {
-        ingredientsToRemoveFromPantry.indexOf(item);
+      // let ingredientsToRemoveFromPantry = recipe.ingredients.map(ingredient => {
+      //   return this.userPantry.find(element => element.ingredient === ingredient.id);
+      // });
+      // console.log("ings to remove: ", ingredientsToRemoveFromPantry);
+
+      recipe.ingredients.forEach(ingredient => {
+        const recipeAmount = ingredient.amount;
+        const pantryAmount = this.userPantry.find(element => element.ingredient === ingredient.id).amount;
+        const extraAmount = pantryAmount - recipeAmount;
+
+        const match = this.userPantry.find(element => element.ingredient === ingredient.id);
+
+        if (recipeAmount === pantryAmount) {
+          this.userPantry.splice(match);
+        } else {
+          this.userPantry.find(element => element.ingredient === ingredient.id).amount = extraAmount;
+        }
       });
-      this.userPantry.forEach(item => {
-        this.userPantry.splice(ingredientsToRemoveFromPantry.forEach(ingredient => ingredient[ingredientIndexes]))
-      });
-      let recipeToRemove = this.recipesToCook.indexOf(recipe);
-        this.recipesToCook.splice(recipeToRemove, 1);
+      // if the recipeAmount === pantryAmount, splice pantry ingredient entirely
+      // else if the pantryAmount > recipeAmount, subtract recipeAmount from pantryAmount in pantry
+
+      // let ingredientIndexes = ingredientsToRemoveFromPantry.map(item => {
+      //   ingredientsToRemoveFromPantry.indexOf(item);
+      // });
+      // console.log(ingredientIndexes);
+
+      // console.log(this.userName, this.userPantry)
+      // this.userPantry.forEach(item => {
+      //   // this.userPantry.splice(ingredientsToRemoveFromPantry.forEach(ingredient => ingredient[ingredientIndexes]))
+      //   this.userPantry.splice(ingredientsToRemoveFromPantry);
+      //   // forEach(element => element[[1, 4, 5]]);
+      // });
+      // console.log(this.userName, this.userPantry)
+
+      // let recipeToRemove = this.recipesToCook.indexOf(recipe);
+      //   this.recipesToCook.splice(recipeToRemove, 1);
     }
   };
 };
