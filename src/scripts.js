@@ -335,15 +335,6 @@ const displayRecipe = (id) => {
   ingredientsDetailList.innerHTML = '';
   recipeInstructions.innerHTML = '';
 
-  // todo heart-recipe add data-id to the span and to both icons
-  recipeHeartSelector.setAttribute('data-id', foundRecipe.id);
-  document.querySelector('.favorite-heart-recipe').setAttribute('data-id', foundRecipe.id);
-  document.querySelector('.unfavorite-heart-recipe').setAttribute('data-id', foundRecipe.id);
-
-  recipeCalendarSelector.setAttribute('data-id', foundRecipe.id);
-  document.querySelector('.add-calendar-recipe').setAttribute('data-id', foundRecipe.id);
-  document.querySelector('.remove-calendar-recipe').setAttribute('data-id', foundRecipe.id);
-
   foundRecipe.ingredients.forEach(ingredient => {
     let amount;
     let amounts = allMissingIngredients.map(element => element.amount);
@@ -362,6 +353,14 @@ const displayRecipe = (id) => {
       <li class="instructions-details__item"><span class="instructions-details__number">${instruction.number}.</span> ${instruction.instruction}</li>
     `;
   });
+
+  recipeHeartSelector.setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.favorite-heart-recipe').setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.unfavorite-heart-recipe').setAttribute('data-id', foundRecipe.id);
+
+  recipeCalendarSelector.setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.add-calendar-recipe').setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.remove-calendar-recipe').setAttribute('data-id', foundRecipe.id);
 }
 
 const getTagsToSearchFor = (choices) => {
