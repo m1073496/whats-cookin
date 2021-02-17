@@ -9,7 +9,7 @@ const recipeListView = document.querySelector('.list-view');
 const favoritesView = document.querySelector('.favorites-view');
 const pantryView = document.querySelector('.pantry-view');
 const recipeListSearchMessage = document.querySelector('.recipe-list-search-message');
-const favoritesSearchMessage = document.querySelector('.favorites-search-message');
+const favoritesListSearchMessage = document.querySelector('.favorites-list-search-message');
 const recipeListContainer = document.querySelector('.recipe-list-content1');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
@@ -62,7 +62,7 @@ const hide = (element) => element.classList.add('hidden');
 
 const display = (element) => element.classList.remove('hidden');
 
-const displayRecipeList = () => {
+const displayRecipeListView = () => {
   hide(landingView);
   hide(pantryView);
   hide(recipeDetailView);
@@ -70,7 +70,7 @@ const displayRecipeList = () => {
   display(recipeListView);
 }
 
-const displayFavoritesList = () => {
+const displayFavoritesListView = () => {
   hide(landingView);
   hide(pantryView);
   hide(recipeDetailView);
@@ -284,9 +284,14 @@ const createRecipeListContent = (recipeList) => {
   });
 }
 
-const displayRecipes = (recipeList, searchMessage) => {
-  displayRecipeList();
-  recipeListSearchMessage.innerText = searchMessage;
+const displayRecipes = (recipeList, searchMessage, listName) => {
+  // TODO later will need to incorporate recipesToCook
+  if (listName === 'favorites') {
+    favoritesListSearchMessage.innerText = searchMessage;
+  } else {
+    recipeListSearchMessage.innerText = searchMessage;
+  }
+
   recipeListContainer.innerHTML = '';
   createRecipeListContent(recipeList);
 }
@@ -385,24 +390,28 @@ const search = (searchInput, dropDownInput, listName) => {
 }
 
 const displayResults = (searchInput, recipes, listName) => {
-  determineListTitle(listName);
+  // TODO later will need to incorporate recipesToCook
+  if (listName === 'favorites') {
+    displayFavoritesListView();
+  } else {
+    displayRecipeListView();
+  }
 
   if (recipes.length > 0 && searchInput.value) {
-    displayRecipes(recipes, `Search results matching "${searchInput.value}"`);
+    displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
   } else if (recipes.length) {
-    displayRecipes(recipes, `Search results`);
+    displayRecipes(recipes, `Search results`, listName);
   } else {
     display(searchError);
   }
 }
 
 const displayFavorites = () => {
-  displayFavoritesList();
-  console.log(currentUser.favoriteRecipes);
+  displayFavoritesListView();
   if (currentUser.favoriteRecipes.recipes.length === 0) {
-    favoritesSearchMessage.innerText = `You don't have any favorites 😢`
+    favoritesListSearchMessage.innerText = `You don't have any favorites 😢`
   } else {
-    displayRecipes(currentUser.favoriteRecipes.recipes, '');
+    displayRecipes(currentUser.favoriteRecipes.recipes, '', 'favorites');
   }
 }
 
@@ -410,7 +419,9 @@ const displayFavorites = () => {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 allRecipesButton.addEventListener('click', function() {
-  displayRecipes(allRecipes.recipes, '');
+  // TODO need to make this a separate named function now that it's more than one line?
+  displayRecipeListView();
+  displayRecipes(allRecipes.recipes, '', 'all');
 });
 
 

@@ -408,7 +408,8 @@ select:focus {
 }
 
 /* *** Recipe list *** */
-.recipe-list-search-message {
+.recipe-list-search-message,
+.favorites-list-search-message {
     text-align: left;
 }
 
