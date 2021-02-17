@@ -1,11 +1,16 @@
+// const User = require("./User");
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Global Variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 const allRecipesButton = document.getElementById('all-recipes');
-const yourFavoritesButton = document.getElementById('your-favorites');
+const myFavoritesButton = document.getElementById('my-favorites');
 const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
+const favoritesView = document.querySelector('.favorites-view');
 const pantryView = document.querySelector('.pantry-view');
-const recipeListTitle = document.querySelector('.recipe-list-title');
+const recipeListSearchMessage = document.querySelector('.recipe-list-search-message');
+const favoritesListSearchMessage = document.querySelector('.favorites-list-search-message');
+const recipeListContainer = document.querySelector('.recipe-list-content1');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
@@ -15,6 +20,7 @@ const searchError = document.querySelector('.search-error');
 const dropdownSelection = document.querySelector('#tag-selector');
 const goButton = document.getElementById('go');
 const goListButton = document.getElementById('goListButton');
+const goFavoritesButton = document.getElementById('goFavoritesButton');
 const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
@@ -27,6 +33,8 @@ const recipeCalendarSelector = document.querySelector('.calendar-recipe');
 // const listCalendarSelector = document.querySelector('.calendar-list');
 const userGreeting = document.querySelector('.header__right--text');
 const userPantryList = document.querySelector('.pantry__bottom--left');
+const userPantryTitle = document.querySelector('.pantry__top--title');
+
 
 let allRecipes;
 let currentUser;
@@ -55,20 +63,29 @@ const hide = (element) => element.classList.add('hidden');
 
 const display = (element) => element.classList.remove('hidden');
 
-const displayRecipeList = () => {
+const displayRecipeListView = () => {
   hide(landingView);
   hide(pantryView);
   hide(recipeDetailView);
+  hide(favoritesView);
   display(recipeListView);
+}
+
+const displayFavoritesListView = () => {
+  hide(landingView);
+  hide(pantryView);
+  hide(recipeDetailView);
+  display(favoritesView);
+  hide(recipeListView);
 }
 
 const displayRecipeDetailView = () => {
   hide(recipeListView);
   hide(landingView);
   hide(pantryView);
+  hide(favoritesView);
   display(recipeDetailView);
 }
-
 
 // *** START 🦄 Nikki's 🦄 work ***
 const displayLanding = () => {
@@ -78,6 +95,7 @@ const displayLanding = () => {
   hide(recipeListView);
   hide(recipeDetailView);
   hide(pantryView);
+  hide(favoritesView);
   display(landingView);
 }
 
@@ -85,8 +103,11 @@ const displayPantry = () => {
   hide(recipeListView);
   hide(recipeDetailView);
   hide(landingView);
+  hide(favoritesView);
   display(pantryView);
 
+  userPantryTitle.innerHTML = `${currentUser.userName}'s Pantry`;
+  userPantryList.innerHTML = '';
 
   currentUser.userPantry.forEach(item => {
     let ingredient = ingredientsData.find(element => element['id'] === item['ingredient']);
@@ -171,8 +192,8 @@ const addRecipeToFavorites = () => {
   console.log(document.querySelector('.recipe-title').innerText);
   let recipe = allRecipes.recipes.find(element => element.name === document.querySelector('.recipe-title').innerText);
   console.log(recipe);
-    currentUser.updateFavorites(recipe);
-    console.log(currentUser.favoriteRecipes);
+  currentUser.updateFavorites(recipe);
+  console.log(currentUser.favoriteRecipes);
 }
 
 heartSelector.addEventListener('click', () => {
@@ -183,8 +204,7 @@ heartSelector.addEventListener('click', () => {
 recipeHeartSelector.addEventListener('click', () => {
   toggleFavorites('recipe');
   addRecipeToFavorites();
-  })
-// });
+});
 
 calendarSelector.addEventListener('click', () => {
   toggleCalendar('none')
@@ -204,6 +224,7 @@ recipeCalendarSelector.addEventListener('click', () => {
 // });
 
 // *** END 🦄 Nikki's work 🦄 ***
+
 const findAppropriateMessage = (recipe) => {
   let appropriateMessage;
 
@@ -215,30 +236,23 @@ const findAppropriateMessage = (recipe) => {
   return appropriateMessage;
 }
 
-
-const displayRecipes = (recipeList, title) => {
-  displayRecipeList();
-  recipeListTitle.innerText = title;
-
+const createRecipeListContent = (recipeList) => {
   recipeList.forEach(recipe => {
     let newRecipeItem = document.createElement('article');
-    let parent = document.querySelector('.list-view');
     newRecipeItem.className = 'recipe content1';
     newRecipeItem.id = recipe.id;
-    parent.appendChild(newRecipeItem);
+    recipeListContainer.appendChild(newRecipeItem);
 
     findAppropriateMessage(recipe);
-
-
 
     newRecipeItem.innerHTML += `
       <section class="item-container">
         <div class="recipe-list__item">
           <figure>
             <img class="recipe-list__item--img"
-                 src="${recipe.image}"
-                 alt="${recipe.name}"
-                 style="width:250px;">
+                src="${recipe.image}"
+                alt="${recipe.name}"
+                style="width:250px;">
           </figure>
         </div>
         <div class="recipe-list__item cooked-button hidden">
@@ -264,7 +278,6 @@ const displayRecipes = (recipeList, title) => {
           </li>
         </ul>
       </section>
-
     `;
 
     newRecipeItem.addEventListener('click', function() {
@@ -272,6 +285,18 @@ const displayRecipes = (recipeList, title) => {
       displayRecipe(target);
     });
   });
+}
+
+const displayRecipes = (recipeList, searchMessage, listName) => {
+  // TODO later will need to incorporate recipesToCook
+  if (listName === 'favorites') {
+    favoritesListSearchMessage.innerText = searchMessage;
+  } else {
+    recipeListSearchMessage.innerText = searchMessage;
+  }
+
+  recipeListContainer.innerHTML = '';
+  createRecipeListContent(recipeList);
 }
 
 const displayRecipe = (id) => {
@@ -287,6 +312,9 @@ const displayRecipe = (id) => {
   `;
 
   let allMissingIngredients = currentUser.findMissingIngredients(foundRecipe);
+
+  ingredientsDetailList.innerHTML = '';
+  recipeInstructions.innerHTML = '';
 
   foundRecipe.ingredients.forEach(ingredient => {
     let amount;
@@ -330,16 +358,16 @@ const getTagsToSearchFor = (choices) => {
   return searchFor;
 }
 
-const searchByTags = (tags) => {
+const searchByTags = (tags, listName) => {
   if (tags.includes('all')) {
     return allRecipes.recipes;
+  } else if (listName === 'favorites') {
+    return currentUser.favoriteRecipes.filterByTags(tags);
   } else {
     return allRecipes.filterByTags(tags);
   }
 }
 
-// TODO force choice of "all" if no choice is made
-// -- but could solve this in the UI instead?
 const parseSelections = (selections) => {
   if (selections.length) {
     return selections;
@@ -352,7 +380,7 @@ const splitInput = (input) => {
   return input.value.split(' ');
 }
 
-const search = (searchInput, dropDownInput) => {
+const search = (searchInput, dropDownInput, listName) => {
   hide(searchError);
 
   const words = splitInput(searchInput);
@@ -360,30 +388,36 @@ const search = (searchInput, dropDownInput) => {
   const selections = [...dropDownInput.selectedOptions].map(option => option.value);
   const parsedSelections = parseSelections(selections);
   const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
-  const tagMatches = searchByTags(tagsToSearchFor);
+  const tagMatches = searchByTags(tagsToSearchFor, listName);
   const tagMatchesRepository = new RecipeRepository(tagMatches);
 
   const results = tagMatchesRepository.findRecipes(words);
-  displayResults(searchInput, results.recipes);
+  displayResults(searchInput, results.recipes, listName);
 }
 
-const displayResults = (searchInput, recipes) => {
+const displayResults = (searchInput, recipes, listName) => {
+  // TODO later will need to incorporate recipesToCook
+  if (listName === 'favorites') {
+    displayFavoritesListView();
+  } else {
+    displayRecipeListView();
+  }
+
   if (recipes.length > 0 && searchInput.value) {
-    displayRecipes(recipes, `Search results matching "${searchInput.value}"`);
+    displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
   } else if (recipes.length) {
-    displayRecipes(recipes, `Search results`);
+    displayRecipes(recipes, `Search results`, listName);
   } else {
     display(searchError);
   }
 }
 
 const displayFavorites = () => {
-  displayRecipeList();
-  console.log(currentUser.favoriteRecipes);
+  displayFavoritesListView();
   if (currentUser.favoriteRecipes.recipes.length === 0) {
-    recipeListTitle.innerText = `You don't have any favorites 😢`
+    favoritesListSearchMessage.innerText = `You don't have any favorites 😢`
   } else {
-    displayRecipes(currentUser.favoriteRecipes.recipes, 'Favorites');
+    displayRecipes(currentUser.favoriteRecipes.recipes, '', 'favorites');
   }
 }
 
@@ -391,20 +425,26 @@ const displayFavorites = () => {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 allRecipesButton.addEventListener('click', function() {
-  displayRecipes(allRecipes.recipes, 'All recipes');
+  // TODO need to make this a separate named function now that it's more than one line?
+  displayRecipeListView();
+  displayRecipes(allRecipes.recipes, '', 'all');
 });
 
 
 goButton.addEventListener('click', function() {
-  search(searchBarInput, dropdownSelection);
+  search(searchBarInput, dropdownSelection, 'all');
 });
 
-goListButton.addEventListener('click',function() {
-  search(searchBarInput, dropdownSelection);
+goListButton.addEventListener('click', function() {
+  search(searchBarInput, dropdownSelection, 'all');
+});
+
+goFavoritesButton.addEventListener('click', function() {
+  search(searchBarInput, dropdownSelection, 'favorites');
 });
 
 homeSelector.addEventListener('click', displayLanding);
 
 userSelector.addEventListener('click', displayPantry);
 
-yourFavoritesButton.addEventListener('click', displayFavorites);
+myFavoritesButton.addEventListener('click', displayFavorites);
