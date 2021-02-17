@@ -1,5 +1,6 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Global Variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 const allRecipesButton = document.getElementById('all-recipes');
+const yourFavoritesButton = document.getElementById('your-favorites');
 const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
@@ -167,8 +168,8 @@ const addRecipeToFavorites = () => {
   console.log(document.querySelector('.recipe-title').innerText);
   let recipe = allRecipes.recipes.find(element => element.name === document.querySelector('.recipe-title').innerText);
   console.log(recipe);
-    currentUser.updateFavorites(recipe);
-    console.log(currentUser.favoriteRecipes);
+  currentUser.updateFavorites(recipe);
+  console.log(currentUser.favoriteRecipes);
 }
 
 heartSelector.addEventListener('click', () => {
@@ -352,6 +353,16 @@ const displayResults = (searchInput, recipes) => {
   }
 }
 
+const displayFavorites = () => {
+  displayRecipeList();
+  console.log(currentUser.favoriteRecipes);
+  if (currentUser.favoriteRecipes.recipes.length === 0) {
+    recipeListTitle.innerText = `You don't have any favorites 😢`
+  } else {
+    displayRecipes(currentUser.favoriteRecipes.recipes, 'Favorites');
+  }
+}
+
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -371,3 +382,5 @@ goListButton.addEventListener('click',function() {
 homeSelector.addEventListener('click', displayLanding);
 
 userSelector.addEventListener('click', displayPantry);
+
+yourFavoritesButton.addEventListener('click', displayFavorites);
