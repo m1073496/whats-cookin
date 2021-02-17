@@ -286,11 +286,17 @@ const displayRecipe = (id) => {
     <figcaption>Meal cost: $${foundRecipe.getTotalCost()}</figcaption>
   `;
 
+  let allMissingIngredients = currentUser.findMissingIngredients(foundRecipe);
+
   foundRecipe.ingredients.forEach(ingredient => {
+    let amount;
+    let amounts = allMissingIngredients.map(element => element.amount);
+    amounts.forEach(element => amount = element)
+
     ingredientsDetailList.innerHTML += `
       <article class="ingredients__item">
         <i class="far fa-times-circle"></i>
-        ${ingredient.amount} ${ingredient.unit} ${ingredient.name} <span class="ingredients__message">You'll need xyz more of this.</span>
+        ${ingredient.amount} ${ingredient.unit} ${ingredient.name} <span class="ingredients__message">You'll need ${amount} more of this.</span>
       </article>
     `;
   });
