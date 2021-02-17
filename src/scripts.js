@@ -13,7 +13,9 @@ const cookitListView = document.querySelector('.cookit-view');
 const recipeListSearchMessage = document.querySelector('.recipe-list-search-message');
 const favoritesListSearchMessage = document.querySelector('.favorites-list-search-message');
 const cookitListSearchMessage = document.querySelector('.cookit-list-search-message');
-const recipeListContainer = document.querySelector('.recipe-list-content1');
+const recipeListContainer = document.querySelector('.recipe-list-content1-basic');
+const recipeListFavoritesContainer = document.querySelector('.recipe-list-content1-favorite');
+const recipeListCookitContainer = document.querySelector('.recipe-list-content1-cookit');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
@@ -180,8 +182,6 @@ const toggleFavorites = (qualifier) => {
     document.querySelector(`.favorite-heart-${qualifier}`).classList.toggle('hidden');
     document.querySelector(`.unfavorite-heart-${qualifier}`).classList.toggle('hidden');
   }
-  // todo ==> refresh list of favorites
-
 }
 
 const toggleCalendar = (qualifier) => {
@@ -193,9 +193,6 @@ const toggleCalendar = (qualifier) => {
     document.querySelector(`.add-calendar-${qualifier}`).classList.toggle('hidden');
     document.querySelector(`.remove-calendar-${qualifier}`).classList.toggle('hidden');
   }
-
-  // todo ==> refresh list of recipesToCook
-
 }
 
 const addRecipeToFavorites = (targetId) => {
@@ -256,14 +253,23 @@ const findAppropriateMessage = (recipe) => {
   return appropriateMessage;
 }
 
-const createRecipeListContent = (recipeList) => {
+const createRecipeListContent = (recipeList, listName) => {
+  let container;
+  if (listName === 'favorites') {
+    container = recipeListFavoritesContainer
+  } else if (listName === 'cookit') {
+    container = recipeListCookitContainer
+  } else {
+    container = recipeListContainer
+  }
+
   recipeList.forEach(recipe => {
-    console.log(recipe)
+    console.log(recipe.id)
     // todo ==> this is where property id isn't recognized, for displaying favorites. find out why.
     let newRecipeItem = document.createElement('article');
     newRecipeItem.className = 'recipe content1';
     newRecipeItem.id = recipe.id;
-    recipeListContainer.appendChild(newRecipeItem);
+    container.appendChild(newRecipeItem);
 
     findAppropriateMessage(recipe);
 
@@ -319,7 +325,9 @@ const displayRecipes = (recipeList, searchMessage, listName) => {
   }
 
   recipeListContainer.innerHTML = '';
-  createRecipeListContent(recipeList);
+  recipeListFavoritesContainer.innerHTML = '';
+  recipeListCookitContainer.innerHTML = '';
+  createRecipeListContent(recipeList, listName);
 }
 
 const displayRecipe = (id) => {
