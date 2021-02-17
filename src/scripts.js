@@ -8,12 +8,11 @@ const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
 const favoritesView = document.querySelector('.favorites-view');
 const pantryView = document.querySelector('.pantry-view');
-const recipeListTitle = document.querySelector('.recipe-list-title');
+// const recipeListTitle = document.querySelector('.recipe-list-title');
 const recipeListSearchMessage = document.querySelector('.recipe-list-search-message');
 const favoritesSearchMessage = document.querySelector('.favorites-search-message');
 const recipeListContainer = document.querySelector('.recipe-list-content1');
 const recipeTitle = document.querySelector('.recipe-title');
-const favoritesTitle = document.querySelector('.favorites-title');
 const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
 const ingredientsDetailList = document.querySelector('.ingredients-list');
@@ -200,8 +199,8 @@ const addRecipeToFavorites = () => {
   console.log(document.querySelector('.recipe-title').innerText);
   let recipe = allRecipes.recipes.find(element => element.name === document.querySelector('.recipe-title').innerText);
   console.log(recipe);
-    currentUser.updateFavorites(recipe);
-    console.log(currentUser.favoriteRecipes);
+  currentUser.updateFavorites(recipe);
+  console.log(currentUser.favoriteRecipes);
 }
 
 heartSelector.addEventListener('click', () => {
@@ -409,20 +408,20 @@ const displayResults = (searchInput, recipes, listName) => {
   }
 }
 
-const determineListTitle = (listName) => {
-  // TODO change listTitle in here to recipeListTitle ... I think
-  const listTitle = '';
+// const determineListTitle = (listName) => {
+//   // TODO change listTitle in here to recipeListTitle ... I think
+//   const listTitle = '';
 
-  if (listName === 'favorites') {
-    listTitle = 'My favorite recipes';
-    display(recipeListTitle);
-  } else if (listName === 'all') {
-    hide(recipeListTitle);
-  } else if (listName === 'recipesToCook') {
-    listTitle = 'Recipes to cook this week';
-    display(recipeListTitle);
-  }
-}
+//   if (listName === 'favorites') {
+//     listTitle = 'My favorite recipes';
+//     display(recipeListTitle);
+//   } else if (listName === 'all') {
+//     hide(recipeListTitle);
+//   } else if (listName === 'recipesToCook') {
+//     listTitle = 'Recipes to cook this week';
+//     display(recipeListTitle);
+//   }
+// }
 
 // TODO chase through how this affects what Katie did w/ determineListTitle, etc.
 const displayFavorites = () => {
