@@ -33,70 +33,68 @@ class User {
 
   findMissingIngredients = (recipe) => {
     let recipeIngredients = recipe.ingredients;
-    let result = [];
-    console.log("recipe ingredients:", recipeIngredients);
-    // console.log(this.userPantry);
-
-
-
-
-
+    let missingIngredients = [];
     let pantryIngredients = this.userPantry.map(item => item.ingredient);
-    console.log('pantry ingredient:', pantryIngredients);
 
-    let missingIngredients = recipeIngredients.forEach(item => {
-      // console.log(item);
-      if(!pantryIngredients.includes(item['id'])) {
-        result.push(item);
-    }})
-    return result;
+    recipeIngredients.forEach(item => {
+      const recipeAmount = item.amount;
+      let pantryAmount;
 
-    //I need to match recipe ingredient items with pantry ingredient items by id
-    //Then I need to compare those two things by amount -- pantry item amount must be larger or equal to recipe item amount
-    //If the recipe ingredient id cannot be found in pantry, push that recipe item/amount
-    //If id is there but the recipe ingredient amount is larger, then push that recipe item/amount --> push the difference between the amounts
+      pantryIngredients.includes(item['id']) ? pantryAmount = this.userPantry.find(element => element['ingredient'] === item['id']).amount : pantryAmount = 0;
 
-    // let ingredientsMissing = []; /* compare recipe ingredient ids with  pantry ingredient ids, store recipe ingredients that are missing, then compare found ingredients with */
-    //
-    // recipeIngredients.forEach(ingredient => {
-    //   if(!this.userPantry.includes(ingredient)) {
-    //     ingredientsMissing.push(ingredient);
-    //   }
-    //
-    //   console.log(ingredientsMissing);
+      const missingAmount = recipeAmount - pantryAmount;
+
+      if (!pantryIngredients.includes(item['id'])) {
+        missingIngredients.push(item);
+      } else if (pantryAmount < recipeAmount) {
+        const itemCopy = item;
+        itemCopy.amount = missingAmount;
+        missingIngredients.push(itemCopy);
+      }
+    });
+    return missingIngredients;
   }
 
-
-    // if (/* recipe ingredient is NOT in pantry OR recipe ingredient is in pantry but recipe ingredient amount is smaller or equal to pantry ingredient amount*/) {
-    //   //push that recipe item into the result
-    //   //result should contain only items that pantry does not have or does not have enough of
-    // }
-
-    //   if (item !== find.!recipeIngredients.includes(this.userPantry.includes(item['id'])) {
-    //     console.log(item['id']);
-    //   }
-    // })
-
-    // let missingIngredients = recipeIngredients.filter(item => {
-    //     if (!this.userPantry.includes(item.id) && this.userPantry) {
-    //       result.push(item);
-    //     }
-    //   })
-    // return result;
-
   cookMeal = (recipe) => {
-    if (this.findMissingIngredients(recipe)) {
-      let ingredientsToRemoveFromPantry = this.findMissingIngredients(recipe);
-      let ingredientIndexes = ingredientsToRemoveFromPantry.map(item => {
-        ingredientsToRemoveFromPantry.indexOf(item);
-      })
-      this.userPantry.forEach(item => {
-        this.userPantry.splice(ingredientsToRemoveFromPantry.forEach(ingredient => ingredient[ingredientIndexes]))
-      })
-      let recipeToRemove = this.recipesToCook.indexOf(recipe);
-        this.recipesToCook.splice(recipeToRemove, 1);
-    }
+    // console.log(this.findMissingIngredients(recipe))
+    if (this.findMissingIngredients(recipe).length === 0) {
+      // let ingredientsToRemoveFromPantry = recipe.ingredients.map(ingredient => {
+      //   return this.userPantry.find(element => element.ingredient === ingredient.id);
+      // });
+      // console.log("ings to remove: ", ingredientsToRemoveFromPantry);
 
+      recipe.ingredients.forEach(ingredient => {
+        const recipeAmount = ingredient.amount;
+        const pantryAmount = this.userPantry.find(element => element.ingredient === ingredient.id).amount;
+        const extraAmount = pantryAmount - recipeAmount;
+
+        const match = this.userPantry.find(element => element.ingredient === ingredient.id);
+
+        if (recipeAmount === pantryAmount) {
+          this.userPantry.splice(match);
+        } else {
+          this.userPantry.find(element => element.ingredient === ingredient.id).amount = extraAmount;
+        }
+      });
+      // if the recipeAmount === pantryAmount, splice pantry ingredient entirely
+      // else if the pantryAmount > recipeAmount, subtract recipeAmount from pantryAmount in pantry
+
+      // let ingredientIndexes = ingredientsToRemoveFromPantry.map(item => {
+      //   ingredientsToRemoveFromPantry.indexOf(item);
+      // });
+      // console.log(ingredientIndexes);
+
+      // console.log(this.userName, this.userPantry)
+      // this.userPantry.forEach(item => {
+      //   // this.userPantry.splice(ingredientsToRemoveFromPantry.forEach(ingredient => ingredient[ingredientIndexes]))
+      //   this.userPantry.splice(ingredientsToRemoveFromPantry);
+      //   // forEach(element => element[[1, 4, 5]]);
+      // });
+      // console.log(this.userName, this.userPantry)
+
+      // let recipeToRemove = this.recipesToCook.indexOf(recipe);
+      //   this.recipesToCook.splice(recipeToRemove, 1);
+    }
   };
 };
 
