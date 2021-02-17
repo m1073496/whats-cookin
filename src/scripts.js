@@ -182,7 +182,6 @@ const toggleFavorites = (qualifier) => {
   }
   // todo ==> refresh list of favorites
 
-  displayFavorites();
 }
 
 const toggleCalendar = (qualifier) => {
@@ -198,33 +197,46 @@ const toggleCalendar = (qualifier) => {
 
   // todo ==> refresh list of recipesToCook
 
-  displayCookit();
 }
 
-const addRecipeToFavorites = () => {
-  console.log(document.querySelector('.recipe-title').innerText);
-  let recipe = allRecipes.recipes.find(element => element.name === document.querySelector('.recipe-title').innerText);
-  console.log(recipe);
+const addRecipeToFavorites = (targetId) => {
+  targetId = Number(targetId);
+  let recipe = allRecipes.recipes.find(recipe => recipe.id === targetId);
   currentUser.updateFavorites(recipe);
-  console.log(currentUser.favoriteRecipes);
 }
 
-heartSelector.addEventListener('click', () => {
+const addRecipeToCookit = (targetId) => {
+  targetId = Number(targetId);
+  let recipe = allRecipes.recipes.find(recipe => recipe.id === targetId);
+  currentUser.updateFavorites(recipe);
+}
+
+heartSelector.addEventListener('click', (e) => {
+  e.preventDefault();
+  const targetId = e.target.getAttribute('data-id');
   toggleFavorites('none');
-  addRecipeToFavorites();
+  addRecipeToFavorites(targetId);
 });
 
-recipeHeartSelector.addEventListener('click', () => {
+recipeHeartSelector.addEventListener('click', (e) => {
+  e.preventDefault();
+  const targetId = e.target.getAttribute('data-id');
   toggleFavorites('recipe');
-  addRecipeToFavorites();
+  addRecipeToFavorites(targetId);
 });
 
-calendarSelector.addEventListener('click', () => {
-  toggleCalendar('none')
+calendarSelector.addEventListener('click', (e) => {
+  e.preventDefault();
+  const targetId = e.target.getAttribute('data-id');
+  toggleCalendar('none');
+  addRecipeToCookit(targetId);
 });
 
-recipeCalendarSelector.addEventListener('click', () => {
-  toggleCalendar('recipe')
+recipeCalendarSelector.addEventListener('click', (e) => {
+  e.preventDefault();
+  const targetId = e.target.getAttribute('data-id');
+  toggleCalendar('recipe');
+  addRecipeToCookit(targetId);
 });
 
 
