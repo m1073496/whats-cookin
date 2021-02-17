@@ -1,3 +1,5 @@
+// const User = require("./User");
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Global Variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 const allRecipesButton = document.getElementById('all-recipes');
 const landingView = document.querySelector('.landing-view');
@@ -5,6 +7,7 @@ const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
 const pantryView = document.querySelector('.pantry-view');
 const recipeListTitle = document.querySelector('.recipe-list-title');
+const recipeListSearchMessage = document.querySelector('.recipe-list-search-message');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
@@ -24,6 +27,16 @@ const recipeHeartSelector = document.querySelector('.heart-recipe');
 const calendarSelector = document.querySelector('.calendar');
 const recipeCalendarSelector = document.querySelector('.calendar-recipe');
 // const listCalendarSelector = document.querySelector('.calendar-list');
+
+
+// TODO trash this later; here just to have something for testing
+const currentUser = new User({
+  name: 'Bob',
+  id: 123,
+  pantry: [],
+  favoriteRecipes: [],
+  recipesToCook: []
+});
 
 let allRecipes;
 
@@ -171,7 +184,7 @@ recipeCalendarSelector.addEventListener('click', () => {
 
 const displayRecipes = (recipeList, title) => {
   displayRecipeList();
-  recipeListTitle.innerText = title;
+  recipeListSearchMessage.innerText = title;
 
   recipeList.forEach(recipe => {
     let newRecipeItem = document.createElement('article');
@@ -307,16 +320,32 @@ const search = (searchInput, dropDownInput, repository) => {
   const tagMatchesRepository = new RecipeRepository(tagMatches);
 
   const results = tagMatchesRepository.findRecipes(words);
-  displayResults(searchInput, results.recipes);
+  displayResults(searchInput, results.recipes, repository);
 }
 
-const displayResults = (searchInput, recipes) => {
+const displayResults = (searchInput, recipes, repository) => {
+  determineListTitle(repository);
+
   if (recipes.length > 0 && searchInput.value) {
     displayRecipes(recipes, `Search results matching "${searchInput.value}"`);
   } else if (recipes.length) {
     displayRecipes(recipes, `Search results`);
   } else {
     display(searchError);
+  }
+}
+
+const determineListTitle = (repository) => {
+  const listTitle = '';
+
+  if (repository === currentUser.favoriteRecipes) {
+    listTitle = 'My favorite recipes';
+    display(recipeListTitle);
+  } else if (repository === allRecipes) {
+    hide(recipeListTitle);
+  } else if (repository === recipesToCook) {
+    listTitle = 'Recipes to cook this week';
+    display(recipeListTitle);
   }
 }
 
@@ -333,7 +362,7 @@ goButton.addEventListener('click', function() {
 });
 
 goListButton.addEventListener('click',function() {
-  // TODO change allRecipes to favorites or whatever
+  // TODO change allRecipes to favorites or whatever: currentUser.favoriteRecipes
   search(searchBarInput, dropdownSelection, allRecipes);
 });
 
