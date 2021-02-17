@@ -3,13 +3,16 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Global Variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 const allRecipesButton = document.getElementById('all-recipes');
 const myFavoritesButton = document.getElementById('my-favorites');
+const cookitButton = document.getElementById('cookit');
 const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
 const favoritesView = document.querySelector('.favorites-view');
 const pantryView = document.querySelector('.pantry-view');
+const cookitListView = document.querySelector('.cookit-view');
 const recipeListSearchMessage = document.querySelector('.recipe-list-search-message');
 const favoritesListSearchMessage = document.querySelector('.favorites-list-search-message');
+const cookitListSearchMessage = document.querySelector('.cookit-list-search-message');
 const recipeListContainer = document.querySelector('.recipe-list-content1');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
@@ -21,16 +24,15 @@ const dropdownSelection = document.querySelector('#tag-selector');
 const goButton = document.getElementById('go');
 const goListButton = document.getElementById('goListButton');
 const goFavoritesButton = document.getElementById('goFavoritesButton');
+const goCookitButton = document.getElementById('goCookitButton');
 const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
 const heroTitleSelector = document.querySelector('.hero-section__box--recipe-name');
 const heartSelector = document.querySelector('.heart');
 const recipeHeartSelector = document.querySelector('.heart-recipe');
-// const listHeartSelector = document.querySelector('.heart-list');
 const calendarSelector = document.querySelector('.calendar');
 const recipeCalendarSelector = document.querySelector('.calendar-recipe');
-// const listCalendarSelector = document.querySelector('.calendar-list');
 const userGreeting = document.querySelector('.header__right--text');
 const userPantryList = document.querySelector('.pantry__bottom--left');
 const userPantryTitle = document.querySelector('.pantry__top--title');
@@ -63,6 +65,15 @@ const hide = (element) => element.classList.add('hidden');
 
 const display = (element) => element.classList.remove('hidden');
 
+const displayCookitListView = () => {
+  hide(landingView);
+  hide(pantryView);
+  hide(recipeDetailView);
+  hide(favoritesView);
+  hide(recipeListView);
+  display(cookitListView);
+}
+
 const displayRecipeListView = () => {
   hide(landingView);
   hide(pantryView);
@@ -89,8 +100,6 @@ const displayRecipeDetailView = () => {
 
 // *** START 🦄 Nikki's 🦄 work ***
 const displayLanding = () => {
-  // todo ==> not sure how to clear that form out, because this isn't working
-  // searchBarInput.textContent = '';
   displayMYFavorite();
   hide(recipeListView);
   hide(recipeDetailView);
@@ -170,7 +179,7 @@ const toggleFavorites = (qualifier) => {
     document.querySelector('.unfavorite-heart-list').classList.toggle('hidden');
   }
 
-  // refresh list of favorites
+  // todo ==> refresh list of favorites
 }
 
 const toggleCalendar = (qualifier) => {
@@ -185,7 +194,7 @@ const toggleCalendar = (qualifier) => {
     document.querySelector('.remove-calendar-list').classList.toggle('hidden');
   }
 
-  // refresh list of favorites
+  // todo ==> refresh list of recipesToCook
 }
 
 const addRecipeToFavorites = () => {
@@ -214,14 +223,6 @@ recipeCalendarSelector.addEventListener('click', () => {
   toggleCalendar('recipe')
 });
 
-// todo ==> need to get bubbling set up for these?? they don't exist when page is loaded
-// listHeartSelector.addEventListener('click', () => {
-//   toggleFavorites('list')
-// });
-
-// listCalendarSelector.addEventListener('click', () => {
-//   toggleCalendar('list')
-// });
 
 // *** END 🦄 Nikki's work 🦄 ***
 
@@ -238,9 +239,10 @@ const findAppropriateMessage = (recipe) => {
 
 const createRecipeListContent = (recipeList) => {
   recipeList.forEach(recipe => {
+    // todo ==> this is where property id isn't recognized, for displaying favorites. find out why.
     let newRecipeItem = document.createElement('article');
     newRecipeItem.className = 'recipe content1';
-    newRecipeItem.id = recipe.id;
+    newRecipeItem.id = recipe.id; //  specifically,  here
     recipeListContainer.appendChild(newRecipeItem);
 
     findAppropriateMessage(recipe);
@@ -288,8 +290,9 @@ const createRecipeListContent = (recipeList) => {
 }
 
 const displayRecipes = (recipeList, searchMessage, listName) => {
-  // TODO later will need to incorporate recipesToCook
   if (listName === 'favorites') {
+    favoritesListSearchMessage.innerText = searchMessage;
+  } else if (listName === 'cookit') {
     favoritesListSearchMessage.innerText = searchMessage;
   } else {
     recipeListSearchMessage.innerText = searchMessage;
@@ -421,6 +424,15 @@ const displayFavorites = () => {
   }
 }
 
+const displayCookit = () => {
+  displayCookitListView();
+  if (currentUser.recipesToCook.length === 0) {
+    cookitListSearchMessage.innerText = `You don't have any recipes on this week's list. 😢`
+  } else {
+    displayRecipes(currentUser.recipesToCook, '', 'cookit');
+  }
+}
+
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -433,14 +445,22 @@ allRecipesButton.addEventListener('click', function() {
 
 goButton.addEventListener('click', function() {
   search(searchBarInput, dropdownSelection, 'all');
+  document.getElementById('searchBarLanding').value = '';
 });
 
 goListButton.addEventListener('click', function() {
   search(searchBarInput, dropdownSelection, 'all');
+  document.getElementById('searchBarList').value = '';
 });
 
 goFavoritesButton.addEventListener('click', function() {
   search(searchBarInput, dropdownSelection, 'favorites');
+  document.getElementById('searchBarFavorites').value = '';
+});
+
+goCookitButton.addEventListener('click', function() {
+  search(searchBarInput, dropdownSelection, 'cookit');
+  document.getElementById('searchBarCookit').value = '';
 });
 
 homeSelector.addEventListener('click', displayLanding);
@@ -448,3 +468,4 @@ homeSelector.addEventListener('click', displayLanding);
 userSelector.addEventListener('click', displayPantry);
 
 myFavoritesButton.addEventListener('click', displayFavorites);
+cookitButton.addEventListener('click', displayCookit);

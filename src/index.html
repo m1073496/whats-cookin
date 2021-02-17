@@ -36,7 +36,7 @@
           <div class="nav-links">
             <span id="my-favorites" class="nav-links__item">My favorites</span>
             <span id="all-recipes" class="nav-links__item">All recipes</span>
-            <span class="nav-links__item">This week</span>
+            <span id="cookit" class="nav-links__item">This week</span>
           </div>
         </div>
       </nav>
@@ -139,11 +139,6 @@
 
         <section class="pantry__bottom">
           <section class="pantry__bottom--left content1 ">
-            <!-- <ul>
-              <li class="pantry__item">Choc chips -- amount</li>
-              <li class="pantry__item">Butter -- amount</li>
-              <li class="pantry__item">Flour -- amount</li>
-            </ul> -->
           </section>
 
           <section class="pantry__bottom--right content2 ">
@@ -194,7 +189,7 @@
         <section class="recipe-list-content1 content1 "></section>
       </main>
 
-      <!--      favorites view  -->
+<!--      favorites view  -->
       <main class="favorites-view hidden">
         <h1 class="recipe-list-title">My favorite recipes</h1>
 
@@ -231,13 +226,50 @@
         <h2 class="favorites-list-search-message">Placeholder Search Results</h2>
         <section class="recipe-list-content1 content1 "></section>
       </main>
-      
+
+<!--      cookit view  -->
+      <main class="cookit-view hidden">
+        <h1 class="recipe-list-title">Recipes to cook this week</h1>
+
+        <section class="search-wrapper hidden">
+          <div class="search">
+            <label for="searchBarCookit"><i class="far fa-search"></i></label>
+            <input type="text"
+                   class="search-bar"
+                   id="searchBarCookit"
+                   name="search-bar"
+                   placeholder="Search by recipe name or ingredient"
+                   size="40"
+            >
+            <h4 class="search-error hidden">Your search didn't return any results.</h4>
+          </div>
+
+          <fieldset id="filter-dropdown-cookit" class="dropdown">
+            <select name="tags" id="tag-selector-cookit" class="dropdown__selector" size="9" multiple>
+              <option value="all" class="dropdown__selector--item">All</option>
+              <option value="breakfast" class="dropdown__selector--item">Breakfast</option>
+              <option value="brunch" class="dropdown__selector--item">Brunch</option>
+              <option value="appetizers" class="dropdown__selector--item">Appetizers</option>
+              <option value="side-dishes" class="dropdown__selector--item">Side dishes</option>
+              <option value="main-courses" class="dropdown__selector--item">Main courses</option>
+              <option value="desserts" class="dropdown__selector--item">Desserts</option>
+              <option value="healthy" class="dropdown__selector--item">Healthy</option>
+              <option value="vegetarian" class="dropdown__selector--item">Vegetarian</option>
+            </select>
+            <button id="goCookitButton" class="dropdown__button">Go</button>
+          </fieldset>
+        </section>
+
+        <h2 class="cookit-list-search-message">Placeholder Search Results</h2>
+        <section class="recipe-list-content1 content1 "></section>
+      </main>
+
       <footer>
         Created by Jessica, Katie, and Nikki, with ❤️.
       </footer>
     </div>
 
-    <script src="./User.js"></script>
+<!--    <script src="./User.js"></script>-->
     <script src="./Recipe.js"></script>
     <script src="./RecipeRepository.js"></script>
     <script src="./User.js"></script>
