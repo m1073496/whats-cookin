@@ -1,4 +1,4 @@
-const RecipeRepository = require('../src/RecipeRepository');
+// const RecipeRepository = require('../src/RecipeRepository');
 
 class User {
   constructor(user) {
@@ -52,6 +52,7 @@ class User {
         missingIngredients.push(itemCopy);
       }
     });
+    console.log(missingIngredients);
     return missingIngredients;
   }
 
