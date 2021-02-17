@@ -225,6 +225,7 @@ recipeCalendarSelector.addEventListener('click', () => {
 // });
 
 // *** END 🦄 Nikki's work 🦄 ***
+
 const findAppropriateMessage = (recipe) => {
   let appropriateMessage;
 
@@ -236,12 +237,7 @@ const findAppropriateMessage = (recipe) => {
   return appropriateMessage;
 }
 
-
-const displayRecipes = (recipeList, title) => {
-  displayRecipeList();
-  recipeListSearchMessage.innerText = title;
-  recipeListContainer.innerHTML = '';
-
+const createRecipeListContent = (recipeList) => {
   recipeList.forEach(recipe => {
     let newRecipeItem = document.createElement('article');
     newRecipeItem.className = 'recipe content1';
@@ -250,16 +246,14 @@ const displayRecipes = (recipeList, title) => {
 
     findAppropriateMessage(recipe);
 
-
-
     newRecipeItem.innerHTML += `
       <section class="item-container">
         <div class="recipe-list__item">
           <figure>
             <img class="recipe-list__item--img"
-                 src="${recipe.image}"
-                 alt="${recipe.name}"
-                 style="width:250px;">
+                src="${recipe.image}"
+                alt="${recipe.name}"
+                style="width:250px;">
           </figure>
         </div>
         <div class="recipe-list__item cooked-button hidden">
@@ -285,7 +279,6 @@ const displayRecipes = (recipeList, title) => {
           </li>
         </ul>
       </section>
-
     `;
 
     newRecipeItem.addEventListener('click', function() {
@@ -293,6 +286,13 @@ const displayRecipes = (recipeList, title) => {
       displayRecipe(target);
     });
   });
+}
+
+const displayRecipes = (recipeList, title) => {
+  displayRecipeList();
+  recipeListSearchMessage.innerText = title;
+  recipeListContainer.innerHTML = '';
+  createRecipeListContent(recipeList);
 }
 
 const displayRecipe = (id) => {
