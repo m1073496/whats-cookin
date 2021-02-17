@@ -169,12 +169,12 @@ const displayMYFavorite = () => {
 
 heroTitleSelector.addEventListener('click', (event) => {
   event.preventDefault();
-  let id = event.target.getAttribute('data-id'); // todo ==> should we change the other id to data attribute?
-
+  let id = event.target.getAttribute('data-id');
   displayRecipe(id);
 })
 
 const toggleFavorites = (qualifier) => {
+
   if (qualifier === 'none') {
     document.querySelector('.favorite-heart').classList.toggle('hidden');
     document.querySelector('.unfavorite-heart').classList.toggle('hidden');
@@ -198,43 +198,39 @@ const toggleCalendar = (qualifier) => {
 const addRecipeToFavorites = (targetId) => {
   targetId = Number(targetId);
   let recipe = allRecipes.recipes.find(recipe => recipe.id === targetId);
-  if (!currentUser.favoriteRecipes.recipes.includes(targetId)) {
-    currentUser.updateFavorites(recipe);
-  }
+  currentUser.updateFavorites(recipe);
 }
 
 const addRecipeToCookit = (targetId) => {
   targetId = Number(targetId);
   let recipe = allRecipes.recipes.find(recipe => recipe.id === targetId);
-  if (!currentUser.recipesToCook.includes(targetId)) {
-    currentUser.updateCookList(recipe);
-  }
+  currentUser.updateCookList(recipe);
 }
 
 heartSelector.addEventListener('click', (e) => {
   e.preventDefault();
-  const targetId = e.target.getAttribute('data-id');
-  toggleFavorites('none');
+  const targetId = Number(e.target.getAttribute('data-id'));
   addRecipeToFavorites(targetId);
+  toggleFavorites('none');
 });
 
 recipeHeartSelector.addEventListener('click', (e) => {
   e.preventDefault();
-  const targetId = e.target.getAttribute('data-id');
-  toggleFavorites('recipe');
+  const targetId = Number(e.target.getAttribute('data-id'));
   addRecipeToFavorites(targetId);
+  toggleFavorites('recipe');
 });
 
 calendarSelector.addEventListener('click', (e) => {
   e.preventDefault();
-  const targetId = e.target.getAttribute('data-id');
+  const targetId = Number(e.target.getAttribute('data-id'));
   toggleCalendar('none');
   addRecipeToCookit(targetId);
 });
 
 recipeCalendarSelector.addEventListener('click', (e) => {
   e.preventDefault();
-  const targetId = e.target.getAttribute('data-id');
+  const targetId = Number(e.target.getAttribute('data-id'));
   toggleCalendar('recipe');
   addRecipeToCookit(targetId);
 });
@@ -264,8 +260,6 @@ const createRecipeListContent = (recipeList, listName) => {
   }
 
   recipeList.forEach(recipe => {
-    console.log(recipe.id)
-    // todo ==> this is where property id isn't recognized, for displaying favorites. find out why.
     let newRecipeItem = document.createElement('article');
     newRecipeItem.className = 'recipe content1';
     newRecipeItem.id = recipe.id;
@@ -299,7 +293,6 @@ const createRecipeListContent = (recipeList, listName) => {
             <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
             <span class="ingredients-and-cost__item--isInPantry">${findAppropriateMessage(recipe)}</span>
           </li>
-
           <li>
             <span class="ingredients-and-cost__item--icon"><i class="far fa-badge-dollar"></i></span>
             <span class="ingredients-and-cost__item--cost">${recipe.getTotalCost()}</span>
@@ -396,8 +389,6 @@ const displayAppropriateIcons = (id) => {
 }
 
 const getTagsToSearchFor = (choices) => {
-  console.log("choices passed in to getTagsToSearchFor: ", choices);
-  console.log('check out these choices');
   let searchFor = [];
 
   choices.forEach(choice => {
