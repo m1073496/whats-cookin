@@ -3,14 +3,19 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Global Variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 const allRecipesButton = document.getElementById('all-recipes');
 const myFavoritesButton = document.getElementById('my-favorites');
+const cookitButton = document.getElementById('cookit');
 const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
 const favoritesView = document.querySelector('.favorites-view');
 const pantryView = document.querySelector('.pantry-view');
+const cookitListView = document.querySelector('.cookit-view');
 const recipeListSearchMessage = document.querySelector('.recipe-list-search-message');
 const favoritesListSearchMessage = document.querySelector('.favorites-list-search-message');
-const recipeListContainer = document.querySelector('.recipe-list-content1');
+const cookitListSearchMessage = document.querySelector('.cookit-list-search-message');
+const recipeListContainer = document.querySelector('.recipe-list-content1-basic');
+const recipeListFavoritesContainer = document.querySelector('.recipe-list-content1-favorite');
+const recipeListCookitContainer = document.querySelector('.recipe-list-content1-cookit');
 const recipeTitle = document.querySelector('.recipe-title');
 const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
@@ -21,16 +26,15 @@ const dropdownSelection = document.querySelector('#tag-selector');
 const goButton = document.getElementById('go');
 const goListButton = document.getElementById('goListButton');
 const goFavoritesButton = document.getElementById('goFavoritesButton');
+const goCookitButton = document.getElementById('goCookitButton');
 const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
 const heroTitleSelector = document.querySelector('.hero-section__box--recipe-name');
 const heartSelector = document.querySelector('.heart');
 const recipeHeartSelector = document.querySelector('.heart-recipe');
-// const listHeartSelector = document.querySelector('.heart-list');
 const calendarSelector = document.querySelector('.calendar');
 const recipeCalendarSelector = document.querySelector('.calendar-recipe');
-// const listCalendarSelector = document.querySelector('.calendar-list');
 const userGreeting = document.querySelector('.header__right--text');
 const userPantryList = document.querySelector('.pantry__bottom--left');
 const userPantryTitle = document.querySelector('.pantry__top--title');
@@ -63,11 +67,21 @@ const hide = (element) => element.classList.add('hidden');
 
 const display = (element) => element.classList.remove('hidden');
 
+const displayCookitListView = () => {
+  hide(landingView);
+  hide(pantryView);
+  hide(recipeDetailView);
+  hide(favoritesView);
+  hide(recipeListView);
+  display(cookitListView);
+}
+
 const displayRecipeListView = () => {
   hide(landingView);
   hide(pantryView);
   hide(recipeDetailView);
   hide(favoritesView);
+  hide(cookitListView);
   display(recipeListView);
 }
 
@@ -75,8 +89,9 @@ const displayFavoritesListView = () => {
   hide(landingView);
   hide(pantryView);
   hide(recipeDetailView);
-  display(favoritesView);
   hide(recipeListView);
+  hide(cookitListView);
+  display(favoritesView);
 }
 
 const displayRecipeDetailView = () => {
@@ -84,18 +99,18 @@ const displayRecipeDetailView = () => {
   hide(landingView);
   hide(pantryView);
   hide(favoritesView);
+  hide(cookitListView);
   display(recipeDetailView);
 }
 
 // *** START 🦄 Nikki's 🦄 work ***
 const displayLanding = () => {
-  // todo ==> not sure how to clear that form out, because this isn't working
-  // searchBarInput.textContent = '';
   displayMYFavorite();
   hide(recipeListView);
   hide(recipeDetailView);
   hide(pantryView);
   hide(favoritesView);
+  hide(cookitListView);
   display(landingView);
 }
 
@@ -104,6 +119,7 @@ const displayPantry = () => {
   hide(recipeDetailView);
   hide(landingView);
   hide(favoritesView);
+  hide(cookitListView);
   display(pantryView);
 
   userPantryTitle.innerHTML = `${currentUser.userName}'s Pantry`;
@@ -153,7 +169,7 @@ const displayMYFavorite = () => {
 
 heroTitleSelector.addEventListener('click', (event) => {
   event.preventDefault();
-  let id = event.target.getAttribute('data-id');
+  let id = event.target.getAttribute('data-id'); // todo ==> should we change the other id to data attribute?
 
   displayRecipe(id);
 })
@@ -162,66 +178,67 @@ const toggleFavorites = (qualifier) => {
   if (qualifier === 'none') {
     document.querySelector('.favorite-heart').classList.toggle('hidden');
     document.querySelector('.unfavorite-heart').classList.toggle('hidden');
-  } else if (qualifier === 'recipe') {
-    document.querySelector('.favorite-heart-recipe').classList.toggle('hidden');
-    document.querySelector('.unfavorite-heart-recipe').classList.toggle('hidden');
-  } else if (qualifier === 'list') {
-    document.querySelector('.favorite-heart-list').classList.toggle('hidden');
-    document.querySelector('.unfavorite-heart-list').classList.toggle('hidden');
+  } else {
+    document.querySelector(`.favorite-heart-${qualifier}`).classList.toggle('hidden');
+    document.querySelector(`.unfavorite-heart-${qualifier}`).classList.toggle('hidden');
   }
-
-  // refresh list of favorites
 }
 
 const toggleCalendar = (qualifier) => {
+
   if (qualifier === 'none') {
     document.querySelector('.add-calendar').classList.toggle('hidden');
     document.querySelector('.remove-calendar').classList.toggle('hidden');
-  } else if (qualifier === 'recipe') {
-    document.querySelector('.add-calendar-recipe').classList.toggle('hidden');
-    document.querySelector('.remove-calendar-recipe').classList.toggle('hidden');
-  } else if (qualifier === 'list') {
-    document.querySelector('.add-calendar-list').classList.toggle('hidden');
-    document.querySelector('.remove-calendar-list').classList.toggle('hidden');
+  } else {
+    document.querySelector(`.add-calendar-${qualifier}`).classList.toggle('hidden');
+    document.querySelector(`.remove-calendar-${qualifier}`).classList.toggle('hidden');
   }
-
-  // refresh list of favorites
 }
 
-const addRecipeToFavorites = () => {
-  console.log(document.querySelector('.recipe-title').innerText);
-  let recipe = allRecipes.recipes.find(element => element.name === document.querySelector('.recipe-title').innerText);
-  console.log(recipe);
-  currentUser.updateFavorites(recipe);
-  console.log(currentUser.favoriteRecipes);
+const addRecipeToFavorites = (targetId) => {
+  targetId = Number(targetId);
+  let recipe = allRecipes.recipes.find(recipe => recipe.id === targetId);
+  if (!currentUser.favoriteRecipes.recipes.includes(targetId)) {
+    currentUser.updateFavorites(recipe);
+  }
 }
 
-heartSelector.addEventListener('click', () => {
+const addRecipeToCookit = (targetId) => {
+  targetId = Number(targetId);
+  let recipe = allRecipes.recipes.find(recipe => recipe.id === targetId);
+  if (!currentUser.recipesToCook.includes(targetId)) {
+    currentUser.updateCookList(recipe);
+  }
+}
+
+heartSelector.addEventListener('click', (e) => {
+  e.preventDefault();
+  const targetId = e.target.getAttribute('data-id');
   toggleFavorites('none');
-  addRecipeToFavorites();
+  addRecipeToFavorites(targetId);
 });
 
-recipeHeartSelector.addEventListener('click', () => {
+recipeHeartSelector.addEventListener('click', (e) => {
+  e.preventDefault();
+  const targetId = e.target.getAttribute('data-id');
   toggleFavorites('recipe');
-  addRecipeToFavorites();
+  addRecipeToFavorites(targetId);
 });
 
-calendarSelector.addEventListener('click', () => {
-  toggleCalendar('none')
+calendarSelector.addEventListener('click', (e) => {
+  e.preventDefault();
+  const targetId = e.target.getAttribute('data-id');
+  toggleCalendar('none');
+  addRecipeToCookit(targetId);
 });
 
-recipeCalendarSelector.addEventListener('click', () => {
-  toggleCalendar('recipe')
+recipeCalendarSelector.addEventListener('click', (e) => {
+  e.preventDefault();
+  const targetId = e.target.getAttribute('data-id');
+  toggleCalendar('recipe');
+  addRecipeToCookit(targetId);
 });
 
-// todo ==> need to get bubbling set up for these?? they don't exist when page is loaded
-// listHeartSelector.addEventListener('click', () => {
-//   toggleFavorites('list')
-// });
-
-// listCalendarSelector.addEventListener('click', () => {
-//   toggleCalendar('list')
-// });
 
 // *** END 🦄 Nikki's work 🦄 ***
 
@@ -236,12 +253,23 @@ const findAppropriateMessage = (recipe) => {
   return appropriateMessage;
 }
 
-const createRecipeListContent = (recipeList) => {
+const createRecipeListContent = (recipeList, listName) => {
+  let container;
+  if (listName === 'favorites') {
+    container = recipeListFavoritesContainer
+  } else if (listName === 'cookit') {
+    container = recipeListCookitContainer
+  } else {
+    container = recipeListContainer
+  }
+
   recipeList.forEach(recipe => {
+    console.log(recipe.id)
+    // todo ==> this is where property id isn't recognized, for displaying favorites. find out why.
     let newRecipeItem = document.createElement('article');
     newRecipeItem.className = 'recipe content1';
     newRecipeItem.id = recipe.id;
-    recipeListContainer.appendChild(newRecipeItem);
+    container.appendChild(newRecipeItem);
 
     findAppropriateMessage(recipe);
 
@@ -288,15 +316,18 @@ const createRecipeListContent = (recipeList) => {
 }
 
 const displayRecipes = (recipeList, searchMessage, listName) => {
-  // TODO later will need to incorporate recipesToCook
   if (listName === 'favorites') {
     favoritesListSearchMessage.innerText = searchMessage;
+  } else if (listName === 'cookit') {
+    cookitListSearchMessage.innerText = searchMessage;
   } else {
     recipeListSearchMessage.innerText = searchMessage;
   }
 
   recipeListContainer.innerHTML = '';
-  createRecipeListContent(recipeList);
+  recipeListFavoritesContainer.innerHTML = '';
+  recipeListCookitContainer.innerHTML = '';
+  createRecipeListContent(recipeList, listName);
 }
 
 const displayRecipe = (id) => {
@@ -334,6 +365,34 @@ const displayRecipe = (id) => {
       <li class="instructions-details__item"><span class="instructions-details__number">${instruction.number}.</span> ${instruction.instruction}</li>
     `;
   });
+
+  recipeHeartSelector.setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.favorite-heart-recipe').setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.unfavorite-heart-recipe').setAttribute('data-id', foundRecipe.id);
+
+  recipeCalendarSelector.setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.add-calendar-recipe').setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.remove-calendar-recipe').setAttribute('data-id', foundRecipe.id);
+
+  displayAppropriateIcons(foundRecipe.id)
+}
+
+const displayAppropriateIcons = (id) => {
+  if (currentUser.favoriteRecipes.recipes.find(recipe => recipe.id === id)) {
+    document.querySelector('.favorite-heart-recipe').classList.add('hidden');
+    document.querySelector('.unfavorite-heart-recipe').classList.remove('hidden');
+  } else {
+    document.querySelector('.favorite-heart-recipe').classList.remove('hidden');
+    document.querySelector('.unfavorite-heart-recipe').classList.add('hidden');
+  }
+
+  if (currentUser.recipesToCook.find(recipe => recipe.id === id)) {
+    document.querySelector('.add-calendar-recipe').classList.add('hidden');
+    document.querySelector('.remove-calendar-recipe').classList.remove('hidden');
+  } else {
+    document.querySelector('.add-calendar-recipe').classList.remove('hidden');
+    document.querySelector('.remove-calendar-recipe').classList.add('hidden');
+  }
 }
 
 const getTagsToSearchFor = (choices) => {
@@ -399,6 +458,8 @@ const displayResults = (searchInput, recipes, listName) => {
   // TODO later will need to incorporate recipesToCook
   if (listName === 'favorites') {
     displayFavoritesListView();
+  } else if (listName === 'cookit') {
+    displayCookitListView();
   } else {
     displayRecipeListView();
   }
@@ -421,6 +482,15 @@ const displayFavorites = () => {
   }
 }
 
+const displayCookit = () => {
+  displayCookitListView();
+  if (currentUser.recipesToCook.length === 0) {
+    cookitListSearchMessage.innerText = `You don't have any recipes on this week's list. 😢`
+  } else {
+    displayRecipes(currentUser.recipesToCook, '', 'cookit');
+  }
+}
+
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -433,14 +503,22 @@ allRecipesButton.addEventListener('click', function() {
 
 goButton.addEventListener('click', function() {
   search(searchBarInput, dropdownSelection, 'all');
+  document.getElementById('searchBarLanding').value = '';
 });
 
 goListButton.addEventListener('click', function() {
   search(searchBarInput, dropdownSelection, 'all');
+  document.getElementById('searchBarList').value = '';
 });
 
 goFavoritesButton.addEventListener('click', function() {
   search(searchBarInput, dropdownSelection, 'favorites');
+  document.getElementById('searchBarFavorites').value = '';
+});
+
+goCookitButton.addEventListener('click', function() {
+  search(searchBarInput, dropdownSelection, 'cookit');
+  document.getElementById('searchBarCookit').value = '';
 });
 
 homeSelector.addEventListener('click', displayLanding);
@@ -448,3 +526,4 @@ homeSelector.addEventListener('click', displayLanding);
 userSelector.addEventListener('click', displayPantry);
 
 myFavoritesButton.addEventListener('click', displayFavorites);
+cookitButton.addEventListener('click', displayCookit);
