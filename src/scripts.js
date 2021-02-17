@@ -310,6 +310,9 @@ const displayRecipe = (id) => {
 
   let allMissingIngredients = currentUser.findMissingIngredients(foundRecipe);
 
+  ingredientsDetailList.innerHTML = '';
+  recipeInstructions.innerHTML = '';
+
   foundRecipe.ingredients.forEach(ingredient => {
     let amount;
     let amounts = allMissingIngredients.map(element => element.amount);
