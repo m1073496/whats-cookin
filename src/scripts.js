@@ -79,6 +79,7 @@ const displayRecipeListView = () => {
   hide(pantryView);
   hide(recipeDetailView);
   hide(favoritesView);
+  hide(cookitListView);
   display(recipeListView);
 }
 
@@ -86,8 +87,9 @@ const displayFavoritesListView = () => {
   hide(landingView);
   hide(pantryView);
   hide(recipeDetailView);
-  display(favoritesView);
   hide(recipeListView);
+  hide(cookitListView);
+  display(favoritesView);
 }
 
 const displayRecipeDetailView = () => {
@@ -95,6 +97,7 @@ const displayRecipeDetailView = () => {
   hide(landingView);
   hide(pantryView);
   hide(favoritesView);
+  hide(cookitListView);
   display(recipeDetailView);
 }
 
@@ -105,6 +108,7 @@ const displayLanding = () => {
   hide(recipeDetailView);
   hide(pantryView);
   hide(favoritesView);
+  hide(cookitListView);
   display(landingView);
 }
 
@@ -113,6 +117,7 @@ const displayPantry = () => {
   hide(recipeDetailView);
   hide(landingView);
   hide(favoritesView);
+  hide(cookitListView);
   display(pantryView);
 
   userPantryTitle.innerHTML = `${currentUser.userName}'s Pantry`;
@@ -162,7 +167,7 @@ const displayMYFavorite = () => {
 
 heroTitleSelector.addEventListener('click', (event) => {
   event.preventDefault();
-  let id = event.target.getAttribute('data-id');
+  let id = event.target.getAttribute('data-id'); // todo ==> should we change the other id to data attribute?
 
   displayRecipe(id);
 })
@@ -171,30 +176,29 @@ const toggleFavorites = (qualifier) => {
   if (qualifier === 'none') {
     document.querySelector('.favorite-heart').classList.toggle('hidden');
     document.querySelector('.unfavorite-heart').classList.toggle('hidden');
-  } else if (qualifier === 'recipe') {
-    document.querySelector('.favorite-heart-recipe').classList.toggle('hidden');
-    document.querySelector('.unfavorite-heart-recipe').classList.toggle('hidden');
-  } else if (qualifier === 'list') {
-    document.querySelector('.favorite-heart-list').classList.toggle('hidden');
-    document.querySelector('.unfavorite-heart-list').classList.toggle('hidden');
+  } else {
+    document.querySelector(`.favorite-heart-${qualifier}`).classList.toggle('hidden');
+    document.querySelector(`.unfavorite-heart-${qualifier}`).classList.toggle('hidden');
   }
-
   // todo ==> refresh list of favorites
+
+  displayFavorites();
 }
 
 const toggleCalendar = (qualifier) => {
+  // qualifier could be recipe or list
+
   if (qualifier === 'none') {
     document.querySelector('.add-calendar').classList.toggle('hidden');
     document.querySelector('.remove-calendar').classList.toggle('hidden');
-  } else if (qualifier === 'recipe') {
-    document.querySelector('.add-calendar-recipe').classList.toggle('hidden');
-    document.querySelector('.remove-calendar-recipe').classList.toggle('hidden');
-  } else if (qualifier === 'list') {
-    document.querySelector('.add-calendar-list').classList.toggle('hidden');
-    document.querySelector('.remove-calendar-list').classList.toggle('hidden');
+  } else {
+    document.querySelector(`.add-calendar-${qualifier}`).classList.toggle('hidden');
+    document.querySelector(`.remove-calendar-${qualifier}`).classList.toggle('hidden');
   }
 
   // todo ==> refresh list of recipesToCook
+
+  displayCookit();
 }
 
 const addRecipeToFavorites = () => {
