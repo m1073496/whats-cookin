@@ -33,19 +33,30 @@ class User {
 
   findMissingIngredients = (recipe) => {
     let recipeIngredients = recipe.ingredients;
-    let result = [];
+    let missingIngredients = [];
     // console.log("recipe ingredients:", recipe.name, recipeIngredients);
     // console.log(this.userPantry);
 
     let pantryIngredients = this.userPantry.map(item => item.ingredient);
     // console.log('pantry ingredients:', this.userName, pantryIngredients);
 
-    let missingIngredients = recipeIngredients.forEach(item => {
-      // console.log(item);
-      if(!pantryIngredients.includes(item['id'])) {
-        result.push(item);
-    }});
-    return result;
+    recipeIngredients.forEach(item => {
+      const recipeAmount = item.amount;
+      let pantryAmount;
+
+      pantryIngredients.includes(item['id']) ? pantryAmount = this.userPantry.find(element => element['ingredient'] === item['id']).amount : pantryAmount = 0;
+
+      const missingAmount = recipeAmount - pantryAmount;
+
+      if (!pantryIngredients.includes(item['id'])) {
+        missingIngredients.push(item);
+      } else if (pantryAmount < recipeAmount) {
+        const itemCopy = item;
+        itemCopy.amount = missingAmount;
+        missingIngredients.push(itemCopy);
+      }
+    });
+    return missingIngredients;
   }
 
   cookMeal = (recipe) => {

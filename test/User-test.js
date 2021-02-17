@@ -138,7 +138,7 @@ describe('User', function() {
     expect(badResultUser1).to.deep.equal([
       {
        id: 1001,
-       amount: 2,
+       amount: 1,
        unit: 'tablespoons',
        name: 'butter',
        costPerUnit: 618,

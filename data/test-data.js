@@ -366,6 +366,10 @@ const testUsersData = [
     "id": 48,
     "pantry": [
       {
+        "ingredient": 1001,
+        "amount": 1
+      },
+      {
         "ingredient": 9019,
         "amount": 2
       },
