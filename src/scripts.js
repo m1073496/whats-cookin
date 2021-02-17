@@ -86,7 +86,6 @@ const displayPantry = () => {
 
   currentUser.userPantry.forEach(item => {
     let ingredient = ingredientsData.find(element => element['id'] === item['ingredient']);
-  
     userPantryList.innerHTML += `
       <ul>
         <li class="pantry__item">${ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1)} -- Quantity: ${item['amount']}</li>
@@ -177,8 +176,14 @@ heartSelector.addEventListener('click', () => {
 });
 
 recipeHeartSelector.addEventListener('click', () => {
-  toggleFavorites('recipe')
-});
+  toggleFavorites('recipe');
+  console.log(document.querySelector('.recipe-title').innerText);
+  let recipe = allRecipes.recipes.find(element => element.name === document.querySelector('.recipe-title').innerText);
+  console.log(recipe);
+    currentUser.updateFavorites(recipe);
+    console.log(currentUser.favoriteRecipes);
+  })
+// });
 
 calendarSelector.addEventListener('click', () => {
   toggleCalendar('none')

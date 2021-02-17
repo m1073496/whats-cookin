@@ -1,11 +1,11 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const {
-  testRecipeData,
-} = require('../data/test-data');
+// const {
+//   testRecipeData,
+// } = require('../data/test-data');
 
-const Recipe = require('../src/Recipe');
+// const Recipe = require('../src/Recipe');
 
 describe('Recipe', function() {
   let recipe;
