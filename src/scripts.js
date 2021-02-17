@@ -185,7 +185,6 @@ const toggleFavorites = (qualifier) => {
 }
 
 const toggleCalendar = (qualifier) => {
-  // qualifier could be recipe or list
 
   if (qualifier === 'none') {
     document.querySelector('.add-calendar').classList.toggle('hidden');
@@ -202,13 +201,17 @@ const toggleCalendar = (qualifier) => {
 const addRecipeToFavorites = (targetId) => {
   targetId = Number(targetId);
   let recipe = allRecipes.recipes.find(recipe => recipe.id === targetId);
-  currentUser.updateFavorites(recipe);
+  if (!currentUser.favoriteRecipes.recipes.includes(targetId)) {
+    currentUser.updateFavorites(recipe);
+  }
 }
 
 const addRecipeToCookit = (targetId) => {
   targetId = Number(targetId);
   let recipe = allRecipes.recipes.find(recipe => recipe.id === targetId);
-  currentUser.updateCookList(recipe);
+  if (!currentUser.recipesToCook.includes(targetId)) {
+    currentUser.updateCookList(recipe);
+  }
 }
 
 heartSelector.addEventListener('click', (e) => {
@@ -361,6 +364,31 @@ const displayRecipe = (id) => {
   recipeCalendarSelector.setAttribute('data-id', foundRecipe.id);
   document.querySelector('.add-calendar-recipe').setAttribute('data-id', foundRecipe.id);
   document.querySelector('.remove-calendar-recipe').setAttribute('data-id', foundRecipe.id);
+
+  displayAppropriateIcons(foundRecipe.id)
+}
+
+const displayAppropriateIcons = (id) => {
+  // if this recipe id is in the currentUser's favorites, show red full heart
+  // else show blank
+  if (currentUser.favoriteRecipes.recipes.find(recipe => recipe.id === id)) {
+    document.querySelector('.favorite-heart-recipe').classList.add('hidden');
+    document.querySelector('.unfavorite-heart-recipe').classList.remove('hidden');
+  } else {
+    document.querySelector('.favorite-heart-recipe').classList.remove('hidden');
+    document.querySelector('.unfavorite-heart-recipe').classList.add('hidden');
+  }
+
+  // if this recipe id is in the currentUser's recipesToCook array, show blue checkmark calendar
+  // else show blank
+  console.log("this is the id", id)
+  if (currentUser.recipesToCook.find(recipe => recipe.id === id)) {
+    document.querySelector('.add-calendar-recipe').classList.add('hidden');
+    document.querySelector('.remove-calendar-recipe').classList.remove('hidden');
+  } else {
+    document.querySelector('.add-calendar-recipe').classList.remove('hidden');
+    document.querySelector('.remove-calendar-recipe').classList.add('hidden');
+  }
 }
 
 const getTagsToSearchFor = (choices) => {
