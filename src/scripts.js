@@ -295,9 +295,9 @@ const createRecipeListContent = (recipeList) => {
   });
 }
 
-const displayRecipes = (recipeList, title) => {
+const displayRecipes = (recipeList, searchMessage) => {
   displayRecipeList();
-  recipeListSearchMessage.innerText = title;
+  recipeListSearchMessage.innerText = searchMessage;
   recipeListContainer.innerHTML = '';
   createRecipeListContent(recipeList);
 }
@@ -431,7 +431,8 @@ const displayFavorites = () => {
   if (currentUser.favoriteRecipes.recipes.length === 0) {
     favoritesSearchMessage.innerText = `You don't have any favorites 😢`
   } else {
-    displayRecipes(currentUser.favoriteRecipes.recipes, 'Favorites');
+    // TODO need to fix this: recipes aren't showing and "Favorites" is showing up where searchMessage thingy should be
+    displayRecipes(currentUser.favoriteRecipes.recipes, '');
   }
 }
 
@@ -439,7 +440,7 @@ const displayFavorites = () => {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 allRecipesButton.addEventListener('click', function() {
-  displayRecipes(allRecipes.recipes, 'All recipes');
+  displayRecipes(allRecipes.recipes, '');
 });
 
 
