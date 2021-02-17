@@ -208,7 +208,7 @@ const addRecipeToFavorites = (targetId) => {
 const addRecipeToCookit = (targetId) => {
   targetId = Number(targetId);
   let recipe = allRecipes.recipes.find(recipe => recipe.id === targetId);
-  currentUser.updateFavorites(recipe);
+  currentUser.updateCookList(recipe);
 }
 
 heartSelector.addEventListener('click', (e) => {
@@ -334,6 +334,15 @@ const displayRecipe = (id) => {
 
   ingredientsDetailList.innerHTML = '';
   recipeInstructions.innerHTML = '';
+
+  // todo heart-recipe add data-id to the span and to both icons
+  recipeHeartSelector.setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.favorite-heart-recipe').setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.unfavorite-heart-recipe').setAttribute('data-id', foundRecipe.id);
+
+  recipeCalendarSelector.setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.add-calendar-recipe').setAttribute('data-id', foundRecipe.id);
+  document.querySelector('.remove-calendar-recipe').setAttribute('data-id', foundRecipe.id);
 
   foundRecipe.ingredients.forEach(ingredient => {
     let amount;
