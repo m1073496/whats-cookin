@@ -273,11 +273,11 @@ const getTagsToSearchFor = (choices) => {
   return searchFor;
 }
 
-const searchByTags = (tags) => {
+const searchByTags = (tags, repository) => {
   if (tags.includes('all')) {
-    return allRecipes.recipes;
+    return repository.recipes;
   } else {
-    return allRecipes.filterByTags(tags);
+    return repository.filterByTags(tags);
   }
 }
 
@@ -295,7 +295,7 @@ const splitInput = (input) => {
   return input.value.split(' ');
 }
 
-const search = (searchInput, dropDownInput) => {
+const search = (searchInput, dropDownInput, repository) => {
   hide(searchError);
 
   const words = splitInput(searchInput);
@@ -303,7 +303,7 @@ const search = (searchInput, dropDownInput) => {
   const selections = [...dropDownInput.selectedOptions].map(option => option.value);
   const parsedSelections = parseSelections(selections);
   const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
-  const tagMatches = searchByTags(tagsToSearchFor);
+  const tagMatches = searchByTags(tagsToSearchFor, repository);
   const tagMatchesRepository = new RecipeRepository(tagMatches);
 
   const results = tagMatchesRepository.findRecipes(words);
@@ -329,11 +329,12 @@ allRecipesButton.addEventListener('click', function() {
 
 
 goButton.addEventListener('click', function() {
-  search(searchBarInput, dropdownSelection);
+  search(searchBarInput, dropdownSelection, allRecipes);
 });
 
 goListButton.addEventListener('click',function() {
-  search(searchBarInput, dropdownSelection);
+  // TODO change allRecipes to favorites or whatever
+  search(searchBarInput, dropdownSelection, allRecipes);
 });
 
 homeSelector.addEventListener('click', displayLanding);
