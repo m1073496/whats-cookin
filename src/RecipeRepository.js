@@ -40,12 +40,16 @@ class RecipeRepository {
       return this.filterByTags([word]);
     });
     const foundRecipes = [
-      ...foundIngredientRecipes, 
-      ...foundNameRecipes, 
+      ...foundIngredientRecipes,
+      ...foundNameRecipes,
       ...foundTagRecipes
     ];
     const results = this.removeDuplicates(foundRecipes);
     return new RecipeRepository(results);
+  }
+
+  splitInput(input) {
+    return input.value.split(' ');
   }
 
   removeDuplicates(arr) {

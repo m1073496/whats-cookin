@@ -469,7 +469,7 @@ const testUsersData = [
       },
       {
         "ingredient": 19335,
-        "amount": 0.3333333333333333
+        "amount": 0.33
       }
     ]
   }
