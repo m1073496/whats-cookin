@@ -10,8 +10,10 @@ const favoritesView = document.querySelector('.favorites-view');
 const pantryView = document.querySelector('.pantry-view');
 const recipeListTitle = document.querySelector('.recipe-list-title');
 const recipeListSearchMessage = document.querySelector('.recipe-list-search-message');
+const favoritesSearchMessage = document.querySelector('.favorites-search-message');
 const recipeListContainer = document.querySelector('.recipe-list-content1');
 const recipeTitle = document.querySelector('.recipe-title');
+const favoritesTitle = document.querySelector('.favorites-title');
 const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
 const ingredientsDetailList = document.querySelector('.ingredients-list');
@@ -79,7 +81,13 @@ const displayRecipeList = () => {
   display(recipeListView);
 }
 
-// TODO need to add displayFavoritesList function here -- and then chase through where to call it
+const displayFavoritesList = () => {
+  hide(landingView);
+  hide(pantryView);
+  hide(recipeDetailView);
+  display(favoritesView);
+  hide(recipeListView);
+}
 
 const displayRecipeDetailView = () => {
   hide(recipeListView);
@@ -88,7 +96,6 @@ const displayRecipeDetailView = () => {
   hide(favoritesView);
   display(recipeDetailView);
 }
-
 
 // *** START 🦄 Nikki's 🦄 work ***
 const displayLanding = () => {
@@ -413,10 +420,10 @@ const determineListTitle = (listName) => {
 
 // TODO chase through how this affects what Katie did w/ determineListTitle, etc.
 const displayFavorites = () => {
-  displayRecipeList();
+  displayFavoritesList();
   console.log(currentUser.favoriteRecipes);
   if (currentUser.favoriteRecipes.recipes.length === 0) {
-    recipeListTitle.innerText = `You don't have any favorites 😢`
+    favoritesSearchMessage.innerText = `You don't have any favorites 😢`
   } else {
     displayRecipes(currentUser.favoriteRecipes.recipes, 'Favorites');
   }
