@@ -163,17 +163,22 @@ const toggleCalendar = (qualifier) => {
   // refresh list of favorites
 }
 
-heartSelector.addEventListener('click', () => {
-  toggleFavorites('none')
-});
-
-recipeHeartSelector.addEventListener('click', () => {
-  toggleFavorites('recipe');
+const addRecipeToFavorites = () => {
   console.log(document.querySelector('.recipe-title').innerText);
   let recipe = allRecipes.recipes.find(element => element.name === document.querySelector('.recipe-title').innerText);
   console.log(recipe);
     currentUser.updateFavorites(recipe);
     console.log(currentUser.favoriteRecipes);
+}
+
+heartSelector.addEventListener('click', () => {
+  toggleFavorites('none');
+  addRecipeToFavorites();
+});
+
+recipeHeartSelector.addEventListener('click', () => {
+  toggleFavorites('recipe');
+  addRecipeToFavorites();
   })
 // });
 
