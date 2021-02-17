@@ -33,6 +33,7 @@ const recipeCalendarSelector = document.querySelector('.calendar-recipe');
 // const listCalendarSelector = document.querySelector('.calendar-list');
 const userGreeting = document.querySelector('.header__right--text');
 const userPantryList = document.querySelector('.pantry__bottom--left');
+const userPantryTitle = document.querySelector('.pantry__top--title');
 
 
 let allRecipes;
@@ -105,6 +106,8 @@ const displayPantry = () => {
   hide(favoritesView);
   display(pantryView);
 
+  userPantryTitle.innerHTML = `${currentUser.userName}'s Pantry`;
+  userPantryList.innerHTML = '';
 
   currentUser.userPantry.forEach(item => {
     let ingredient = ingredientsData.find(element => element['id'] === item['ingredient']);
