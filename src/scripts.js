@@ -258,10 +258,11 @@ const findAppropriateMessage = (recipe) => {
 
 const createRecipeListContent = (recipeList) => {
   recipeList.forEach(recipe => {
+    console.log(recipe)
     // todo ==> this is where property id isn't recognized, for displaying favorites. find out why.
     let newRecipeItem = document.createElement('article');
     newRecipeItem.className = 'recipe content1';
-    newRecipeItem.id = recipe.id; //  specifically,  here
+    newRecipeItem.id = recipe.id;
     recipeListContainer.appendChild(newRecipeItem);
 
     findAppropriateMessage(recipe);
@@ -312,7 +313,7 @@ const displayRecipes = (recipeList, searchMessage, listName) => {
   if (listName === 'favorites') {
     favoritesListSearchMessage.innerText = searchMessage;
   } else if (listName === 'cookit') {
-    favoritesListSearchMessage.innerText = searchMessage;
+    cookitListSearchMessage.innerText = searchMessage;
   } else {
     recipeListSearchMessage.innerText = searchMessage;
   }
@@ -369,8 +370,6 @@ const displayRecipe = (id) => {
 }
 
 const displayAppropriateIcons = (id) => {
-  // if this recipe id is in the currentUser's favorites, show red full heart
-  // else show blank
   if (currentUser.favoriteRecipes.recipes.find(recipe => recipe.id === id)) {
     document.querySelector('.favorite-heart-recipe').classList.add('hidden');
     document.querySelector('.unfavorite-heart-recipe').classList.remove('hidden');
@@ -379,9 +378,6 @@ const displayAppropriateIcons = (id) => {
     document.querySelector('.unfavorite-heart-recipe').classList.add('hidden');
   }
 
-  // if this recipe id is in the currentUser's recipesToCook array, show blue checkmark calendar
-  // else show blank
-  console.log("this is the id", id)
   if (currentUser.recipesToCook.find(recipe => recipe.id === id)) {
     document.querySelector('.add-calendar-recipe').classList.add('hidden');
     document.querySelector('.remove-calendar-recipe').classList.remove('hidden');
@@ -454,6 +450,8 @@ const displayResults = (searchInput, recipes, listName) => {
   // TODO later will need to incorporate recipesToCook
   if (listName === 'favorites') {
     displayFavoritesListView();
+  } else if (listName === 'cookit') {
+    displayCookitListView();
   } else {
     displayRecipeListView();
   }
