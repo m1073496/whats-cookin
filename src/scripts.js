@@ -35,7 +35,10 @@ window.addEventListener('load', function() {
   console.log('page loaded 🥺');
   const recipeInstances = recipeData.map(recipe => new Recipe(recipe));
   allRecipes = new RecipeRepository(recipeInstances);
-  currentUser = new User(usersData[getRandomIndex(usersData.length)]);
+
+  currentUser = new User(usersData.find(user => user.name === "Earline Von"));
+
+  // currentUser = new User(usersData[getRandomIndex(usersData.length)]);
   userGreeting.innerText = `Hello, ${currentUser.userName}!`;
   displayMYFavorite();
   displayRandomFavorites();
@@ -168,8 +171,8 @@ const addRecipeToFavorites = () => {
   console.log(document.querySelector('.recipe-title').innerText);
   let recipe = allRecipes.recipes.find(element => element.name === document.querySelector('.recipe-title').innerText);
   console.log(recipe);
-  currentUser.updateFavorites(recipe);
-  console.log(currentUser.favoriteRecipes);
+    currentUser.updateFavorites(recipe);
+    console.log(currentUser.favoriteRecipes);
 }
 
 heartSelector.addEventListener('click', () => {
@@ -201,6 +204,17 @@ recipeCalendarSelector.addEventListener('click', () => {
 // });
 
 // *** END 🦄 Nikki's work 🦄 ***
+const findAppropriateMessage = (recipe) => {
+  let appropriateMessage;
+
+  if (currentUser.findMissingIngredients(recipe).length === 0) {
+    appropriateMessage = `You have everything needed to make this recipe!`;
+  } else {
+    appropriateMessage = `You're a few ingredients short.`;
+  }
+  return appropriateMessage;
+}
+
 
 const displayRecipes = (recipeList, title) => {
   displayRecipeList();
@@ -212,6 +226,10 @@ const displayRecipes = (recipeList, title) => {
     newRecipeItem.className = 'recipe content1';
     newRecipeItem.id = recipe.id;
     parent.appendChild(newRecipeItem);
+
+    findAppropriateMessage(recipe);
+
+
 
     newRecipeItem.innerHTML += `
       <section class="item-container">
@@ -237,7 +255,7 @@ const displayRecipes = (recipeList, title) => {
 
           <li>
             <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
-            <span class="ingredients-and-cost__item--isInPantry">You have everything needed to make this recipe!</span>
+            <span class="ingredients-and-cost__item--isInPantry">${findAppropriateMessage(recipe)}</span>
           </li>
 
           <li>

@@ -52,6 +52,7 @@ class User {
         missingIngredients.push(itemCopy);
       }
     });
+    console.log(missingIngredients);
     return missingIngredients;
   }
 
