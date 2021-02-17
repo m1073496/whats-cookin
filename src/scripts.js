@@ -5,6 +5,7 @@ const allRecipesButton = document.getElementById('all-recipes');
 const landingView = document.querySelector('.landing-view');
 const recipeDetailView = document.querySelector('.recipe-detail-view');
 const recipeListView = document.querySelector('.list-view');
+const favoritesView = document.querySelector('.favorites-view');
 const pantryView = document.querySelector('.pantry-view');
 const recipeListTitle = document.querySelector('.recipe-list-title');
 const recipeListSearchMessage = document.querySelector('.recipe-list-search-message');
@@ -17,6 +18,7 @@ const searchError = document.querySelector('.search-error');
 const dropdownSelection = document.querySelector('#tag-selector');
 const goButton = document.getElementById('go');
 const goListButton = document.getElementById('goListButton');
+const goFavoritesButton = document.getElementById('goFavoritesButton');
 const homeSelector = document.querySelector('.header__left');
 const userSelector = document.querySelector('.header__right');
 const featuredSectionSelector = document.querySelector('.featured-section');
@@ -59,13 +61,17 @@ const displayRecipeList = () => {
   hide(landingView);
   hide(pantryView);
   hide(recipeDetailView);
+  hide(favoritesView);
   display(recipeListView);
 }
+
+// TODO need to add displayFavoritesList function here -- and then chase through where to call it
 
 const displayRecipeDetailView = () => {
   hide(recipeListView);
   hide(landingView);
   hide(pantryView);
+  hide(favoritesView);
   display(recipeDetailView);
 }
 
@@ -78,6 +84,7 @@ const displayLanding = () => {
   hide(recipeListView);
   hide(recipeDetailView);
   hide(pantryView);
+  hide(favoritesView);
   display(landingView);
 }
 
@@ -85,6 +92,7 @@ const displayPantry = () => {
   hide(recipeListView);
   hide(recipeDetailView);
   hide(landingView);
+  hide(favoritesView);
   display(pantryView);
 }
 
@@ -286,11 +294,13 @@ const getTagsToSearchFor = (choices) => {
   return searchFor;
 }
 
-const searchByTags = (tags, repository) => {
+const searchByTags = (tags, listName) => {
   if (tags.includes('all')) {
-    return repository.recipes;
+    return allRecipes.recipes;
+  } else if (listName === 'favorites') {
+    return currentUser.favoriteRecipes.filterByTags(tags);
   } else {
-    return repository.filterByTags(tags);
+    return allRecipes.recipes;
   }
 }
 
@@ -308,7 +318,7 @@ const splitInput = (input) => {
   return input.value.split(' ');
 }
 
-const search = (searchInput, dropDownInput, repository) => {
+const search = (searchInput, dropDownInput, listName) => {
   hide(searchError);
 
   const words = splitInput(searchInput);
@@ -316,15 +326,15 @@ const search = (searchInput, dropDownInput, repository) => {
   const selections = [...dropDownInput.selectedOptions].map(option => option.value);
   const parsedSelections = parseSelections(selections);
   const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
-  const tagMatches = searchByTags(tagsToSearchFor, repository);
+  const tagMatches = searchByTags(tagsToSearchFor, listName);
   const tagMatchesRepository = new RecipeRepository(tagMatches);
 
   const results = tagMatchesRepository.findRecipes(words);
-  displayResults(searchInput, results.recipes, repository);
+  displayResults(searchInput, results.recipes, listName);
 }
 
-const displayResults = (searchInput, recipes, repository) => {
-  determineListTitle(repository);
+const displayResults = (searchInput, recipes, listName) => {
+  determineListTitle(listName);
 
   if (recipes.length > 0 && searchInput.value) {
     displayRecipes(recipes, `Search results matching "${searchInput.value}"`);
@@ -335,15 +345,15 @@ const displayResults = (searchInput, recipes, repository) => {
   }
 }
 
-const determineListTitle = (repository) => {
+const determineListTitle = (listName) => {
   const listTitle = '';
 
-  if (repository === currentUser.favoriteRecipes) {
+  if (listName === 'favorites') {
     listTitle = 'My favorite recipes';
     display(recipeListTitle);
-  } else if (repository === allRecipes) {
+  } else if (listName === 'all') {
     hide(recipeListTitle);
-  } else if (repository === recipesToCook) {
+  } else if (listName === 'recipesToCook') {
     listTitle = 'Recipes to cook this week';
     display(recipeListTitle);
   }
@@ -358,12 +368,15 @@ allRecipesButton.addEventListener('click', function() {
 
 
 goButton.addEventListener('click', function() {
-  search(searchBarInput, dropdownSelection, allRecipes);
+  search(searchBarInput, dropdownSelection, 'all');
 });
 
-goListButton.addEventListener('click',function() {
-  // TODO change allRecipes to favorites or whatever: currentUser.favoriteRecipes
-  search(searchBarInput, dropdownSelection, allRecipes);
+goListButton.addEventListener('click', function() {
+  search(searchBarInput, dropdownSelection, 'all');
+});
+
+goFavoritesButton.addEventListener('click', function() {
+  search(searchBarInput, dropdownSelection, 'favorites');
 });
 
 homeSelector.addEventListener('click', displayLanding);
