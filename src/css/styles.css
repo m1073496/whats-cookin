@@ -403,6 +403,10 @@ select:focus {
     text-align: left;
 }
 
+.ingredients-and-cost__item--name {
+    font-weight: 700;
+}
+
 /* *** Recipe list *** */
 .recipe {
     margin: 10px 80px;

@@ -199,7 +199,6 @@ const displayRecipes = (recipeList, title) => {
       <section class="recipe-list__item">
         <ul class="ingredients-and-cost">
           <li>
-            <span class="ingredients-and-cost__item--icon"><i class="fal fa-ellipsis-h"></i></span>
             <span class="ingredients-and-cost__item--name">${recipe.name}</span>
           </li>
           
