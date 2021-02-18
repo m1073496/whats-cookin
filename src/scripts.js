@@ -470,33 +470,19 @@ const displayResults = (searchInput, recipes, listName) => {
     recipeListContainer.innerHTML = '';
   } else if (listName === 'favorites' && recipes.length > 0 && searchInput.value) {
     displayFavoritesListView();
-    // TODO does this line need to go somewhere else?
+    hide(favoritesSearchError);
     favoritesListSearchMessage.innerText = '';
     displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
   } else {
     display(favoritesSearchError);
+    favoritesListSearchMessage.innerText = '';
     recipeListFavoritesContainer.innerHTML = '';
   }
-
-  // if (recipes.length > 0 && searchInput.value) {
-  //   displayRecipeListView();
-  //   displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
-  // } else if (recipes.length) {
-  //   displayRecipeListView();
-  //   displayRecipes(recipes, `Search results`, listName);
-  // } else if (listName === 'favorites') {
-  //   displayFavoritesListView();
-  //   display(favoritesSearchError);
-  //   favoritesListSearchMessage.innerText = '';
-  //   recipeListFavoritesContainer.innerHTML = '';
-  // } else {
-  //   display(searchError);
-  //   recipeListContainer.innerHTML = '';
-  // }
 }
 
 const displayFavorites = () => {
   displayFavoritesListView();
+  hide(favoritesSearchError);
   favoritesDropdownSelection.value = 'all';
 
   if (currentUser.favoriteRecipes.recipes.length === 0) {
