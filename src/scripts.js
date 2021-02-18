@@ -302,11 +302,11 @@ const createRecipeListContent = (recipeList, listName) => {
       </section>
     `;
 
-    if(findAppropriateMessage(recipe) === ` You're a few ingredients short.`) {
+    if (findAppropriateMessage(recipe) === ` You're a few ingredients short.`) {
       newRecipeItem.querySelector('.test').innerHTML = `
         <span class="ingredients-and-cost__item--icon"><i class="far fa-times-circle"></i>${findAppropriateMessage(recipe)}</span>
       `
-    };
+    }
 
     newRecipeItem.addEventListener('click', function() {
       let target = newRecipeItem.id;
