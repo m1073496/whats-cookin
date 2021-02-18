@@ -267,8 +267,6 @@ const createRecipeListContent = (recipeList, listName) => {
 
     findAppropriateMessage(recipe);
 
-    console.log(recipe, currentUser.findMissingIngredients(recipe));
-
     newRecipeItem.innerHTML += `
       <section class="item-container">
         <div class="recipe-list__item">
