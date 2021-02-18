@@ -1,14 +1,14 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const User = require('../src/User');
-const RecipeRepository = require('../src/RecipeRepository');
-const Recipe = require('../src/Recipe');
+// const User = require('../src/User');
+// const RecipeRepository = require('../src/RecipeRepository');
+// const Recipe = require('../src/Recipe');
 
 const {
   testUsersData,
   testRecipeData
-} = require('../data/test-data');
+} = require('../src/data/test-data');
 
 describe('User', function() {
   let user1;
@@ -128,7 +128,7 @@ describe('User', function() {
     // user1 Flossie CAN make vegan lentil loaf
     let goodResultUser1 = user1.findMissingIngredients(recipes[0]);
     let mixedResultUser1 = user1.findMissingIngredients(recipes[2]);
-    
+
     // user2 Rocky can't make vegan lentil loaf
     let badResultUser2 = user2.findMissingIngredients(recipes[0]);
     // user2 Rocky CAN make pastry cream
@@ -193,7 +193,7 @@ describe('User', function() {
         totalCostInCents: 297.66
       }
     ]);
-    
+
     expect(goodResultUser1).to.deep.equal([]);
 
     expect(mixedResultUser1).to.deep.equal([
