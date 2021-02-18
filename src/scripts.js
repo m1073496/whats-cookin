@@ -21,10 +21,12 @@ const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
 const ingredientsDetailList = document.querySelector('.ingredients-list');
 const searchBarInput = document.querySelector('.search-bar');
+const listSearchBarInput = document.querySelector('#searchBarList');
 const favoritesSearchBarInput = document.querySelector('#searchBarFavorites');
 const searchError = document.querySelector('.search-error');
 const favoritesSearchError = document.querySelector('.favorites-search-error');
 const dropdownSelection = document.querySelector('#tag-selector');
+const listDropdownSelection = document.querySelector('#tag-selector-list');
 const favoritesDropdownSelection = document.querySelector('#tag-selector-favorites');
 const goButton = document.getElementById('go');
 const goListButton = document.getElementById('goListButton');
@@ -508,7 +510,7 @@ goButton.addEventListener('click', function() {
 });
 
 goListButton.addEventListener('click', function() {
-  search(searchBarInput, dropdownSelection, 'all');
+  search(listSearchBarInput, listDropdownSelection, 'all');
   document.getElementById('searchBarList').value = '';
 });
 
