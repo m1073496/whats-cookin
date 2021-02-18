@@ -2,6 +2,10 @@
 
 A [Front-End Project](https://frontend.turing.io/projects/whats-cookin.html) by [Nikki Petersen](https://github.com/piknikki), [Katie B](https://github.com/knees4bees) and [Jessica Justice](https://github.com/m1073496)
 
+* [Trello Project Board](https://trello.com/b/BqKP6hlD/whats-cooking-pair-project)
+* [Balsamic Wireframes](https://balsamiq.cloud/s76d3gm/pr1wc9d/r2278)
+* ### [Netlify Deployment Site](insert link here)
+
 
 1. [Overview](#overview)
 2. [Set Up](#set-up)
@@ -31,9 +35,10 @@ This is a Turing School of Software and Design - Module 2 group project.
 
 ## Learning Goals
 
-*
-*
-*
+* Practice Test Driven Development (TDD) best practices
+* Using a linter to standardize our code
+* Practice writing Object-Oriented javascript classes
+* Implementing CSS Grid
 
 
 ## Technologies
@@ -43,27 +48,42 @@ This is a Turing School of Software and Design - Module 2 group project.
 * Javascript
 * Git
 * GitHub
-* [Netlify Deployment Site](insert link here)
+* eslint
 
 ---
 ## Features
 
 + [Landing Page](#landing-page)
-+ [All Recipes list](#all-recipes-list)
 + [Search Recipes](#search-recipes)
-+ [Search Favorites](#search-favorites)
-+ [View Recipes to Cook](#view-recipes-to-cook)
++ [Recipe Detail view](#recipe-detail-view)
++ [My Favorites](#my-favorites)
++ [All Recipes list](#all-recipes-list)
++ [This Week list](#this-week-list)
 + [View Pantry](#view-pantry)
 
 
 ## Landing Page
 
+Upon launching the app, the landing page will display the app's interactive logo and app title that doubles as a home button. On page load, a random user is generated, complete with their own pantry of available ingredients. The landing page will display a greeting to that user, accompanied by an icon that leads to that user's pantry, where those ingredients can be found. Below, the navigation bar gives the user further navigation options:
 
+ * `My Favorites` 
+    This link displays a list of the user's favorite recipes (no user has favorite recipes on page load, but they can be added at any time)
+ * `All Recipes`
+    This link displays a list of all the recipes that the app has to offer (50 in total).
+ * `This Week`
+    This link displays a list of recipes that the user has chosen to cook that week (no user has weekly recipes on page load, but they can be added at any time)
+
+The landing page also offers the user a search bar and a multi-choice list of categories to filter through all the app's recipes. These filtering options can be used separately or in tandem, and the user can select multiple categories by holding down the `command` button.
+
+Next, the landing page displays a hero image of a featured recipe, accompanied by the title of that recipe as well as a heart icon and a calendar icon. Clicking the heart icon will add that featured recipe to their favorites, while clicking the calendar icon will add it to the user's weekly recipe list. 
+Finally, the user will see four other featured recipes.
 
 ![](insert gif here)
 
 
-## All Recipes List
+## View Pantry
+
+Selecting the user icon or user greeting, both located at the top of the app, will bring the user to their pantry. On this view, a user will see a list of ingredients that they have available to use, as well as their quantities.
 
 
 
@@ -72,27 +92,41 @@ This is a Turing School of Software and Design - Module 2 group project.
 
 ## Search Recipes
 
+When a user makes a search, they will be taken to a list view that displays a list of recipes represented by an image, name, cost and message to the user. This list will only display results that match the user's search and/or filter selections. If no matches are found, a message will relay this result to the user. The search bar persists on this view to offer the user the ability to start a new search from this view. The app title, user greeting & pantry, and navigation bar also persist on this view to provide easy navigation options and better user experience.
 
 ![](insert gif here)
 
 
-## Search Favorites
+## Recipe Detail view
 
+When the user is viewing a list of recipes, each recipe in that list is clickable. Clicking on an individual recipe will take the user to the Recipe Detail view. This view displays the recipe name, followed by numbered instructions for how to make the recipe on the lefthand side of the page. On the righthand side of this view, the user will see an image of the dish, followed by the total cost of the dishes required ingredients, and a list of the ingredients necessary for making the recipe. If a user does not have enough of a particular ingredient on this list, a message will appear below that ingredient notifying the user of the exact quantity they are missing. 
+
+From this view, a user can select the heart or calendar icons to save this recipe to their list of favorite recipes or their list of recipes to cook that week, respectively. Selecting these icons again will undo this change. The app title, user greeting & pantry, and navigation bar also persist on this view to provide easy navigation options and better user experience.
+
+![](insert gif here)
+
+
+## My Favorites
+
+When a user selects the `My Favorites` link in the navigation bar, they are redirected to a page that displays only those recipes the user has favorited. On this view, selecting any recipe on the list will take the user to the Recipe Detail view to find information about that particular recipe. Recipes that feature a heart icon with red outline indicate that that particular recipe has been favorited by the user. Selecting this icon again will unfavorite that recipe, changing the icon border to its default of black. If the user returns to the `My Favorites` page, they will see that any unfavorited recipes have been removed from the list.
+
+
+![](insert gif here)
+
+
+## All Recipes List
+
+The All Recipes list view is displayed when a user selects it's corresponding link in the nav bar or if a search is made with no search terms or category selections. The All Recipes view displays a list of all 50 recipes that the app has to offer. Every recipe on this list is represented by an image of a dish which corresponds to the recipe, as well as the name of the dish, total cost to make the dish, and a message and icon to indicate whether the user has enough ingredients in thier pantry to make that recipe. The search bar is included here to give the user the ability to search through all the recipes on this page as well.
 
 ![](insert gif here)
 
 
 ## View Recipes to Cook
 
-
-
-![](insert gif here)
-
-
-## View Pantry
-
+Selecting the `This Week` link in the navigation bar will bring the user to a list view that displays all the recipes that they have chosen to cook for the week. On this view, selecting any recipe on the list will take the user to the Recipe Detail view to find information about that particular recipe. These recipes are added when a user selects the calendar icon on any given recipe, and removed when the user deselects that calendar icon on the same recipe. When a recipe is on the user's list of recipes to cook, the icon border will be purple, while recipes not on the list will have calendar icons with black borders, their default setting.
 
 ![](insert gif here)
+
 
 
 ---
