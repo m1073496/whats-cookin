@@ -2,19 +2,17 @@
 
 A [Front-End Project](https://frontend.turing.io/projects/whats-cookin.html) by [Nikki Petersen](https://github.com/piknikki), [Katie B](https://github.com/knees4bees) and [Jessica Justice](https://github.com/m1073496)
 
-* [Trello Project Board](https://trello.com/b/BqKP6hlD/whats-cooking-pair-project)
-* [Balsamic Wireframes](https://balsamiq.cloud/s76d3gm/pr1wc9d/r2278)
-* ### [Netlify Deployment Site](https://what-the-fork-is-for-dinner.netlify.app/)
 
 
 1. [Overview](#overview)
-2. [DEMO](#demo)
-3. [Learning Goals](#learning-goals)
-4. [Technologies](#technologies)
-5. [Features](#features)
-6. [Challenges](#challenges)
-7. [Wins](#wins)
-8. [Future Additions](#future-additions)
+2. [Planning Resources](#planning-resources)
+3. [DEMO](#demo)
+4. [Learning Goals](#learning-goals)
+5. [Technologies](#technologies)
+6. [Features](#features)
+7. [Challenges](#challenges)
+8. [Wins](#wins)
+9. [Future Additions](#future-additions)
 
 
 ## Overview
@@ -22,6 +20,11 @@ A [Front-End Project](https://frontend.turing.io/projects/whats-cookin.html) by 
 This is a Turing School of Software and Design - Module 2 group project.
 
 What's Cookin'? began as a bare-bones starter kit. Over the course of this project, we built out the HTML structure, CSS Grid styling & responsive design, and Javascript functionality from scratch. The project now has three class files, `Recipe.js`, `RecipeRepository.js` & `User.js`, that were each built via Test Driven Development. The app itself hosts a number of recipe objects, displayed to the user and made interactive. Users can navigate through the app, search for recipes to either favorite or add to their lists to cook for the week, take a look at the ingredients in their pantry, or simply browse for recipe information.
+
+## Planning Resources
+
+* [Trello Project Board](https://trello.com/b/BqKP6hlD/whats-cooking-pair-project)
+* [Balsamic Wireframes](https://balsamiq.cloud/s76d3gm/pr1wc9d/r2278)
 
 
 ## DEMO
