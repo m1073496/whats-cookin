@@ -267,6 +267,8 @@ const createRecipeListContent = (recipeList, listName) => {
 
     findAppropriateMessage(recipe);
 
+    console.log(recipe, currentUser.findMissingIngredients(recipe));
+
     newRecipeItem.innerHTML += `
       <section class="item-container">
         <div class="recipe-list__item">
@@ -300,10 +302,11 @@ const createRecipeListContent = (recipeList, listName) => {
       </section>
     `;
 
-    if(currentUser.findMissingIngredients(recipe).length !== 0) {
+    if(findAppropriateMessage(recipe) === `You're a few ingredients short.`) {
       newRecipeItem.querySelector('.test').innerHTML = `
         <span class="ingredients-and-cost__item--icon"><i class="far fa-times-circle"></i>${findAppropriateMessage(recipe)}</span>
-      `};
+      `
+    };
 
     newRecipeItem.addEventListener('click', function() {
       let target = newRecipeItem.id;
@@ -332,6 +335,8 @@ const displayRecipe = (id) => {
   let foundRecipe = allRecipes.recipes.find(recipe => {
     return recipe.id === parseInt(id);
   });
+
+    console.log(currentUser.findMissingIngredients(foundRecipe));
 
   recipeTitle.innerText = foundRecipe.name;
   recipeDetailImage.innerHTML = `
