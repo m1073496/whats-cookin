@@ -289,9 +289,8 @@ const createRecipeListContent = (recipeList, listName) => {
             <span class="ingredients-and-cost__item--name">${recipe.name}</span>
           </li>
 
-          <li>
-            <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
-            <span class="ingredients-and-cost__item--isInPantry">${findAppropriateMessage(recipe)}</span>
+          <li class="test">
+            <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i>${findAppropriateMessage(recipe)}</span>
           </li>
           <li>
             <span class="ingredients-and-cost__item--icon"><i class="far fa-badge-dollar"></i></span>
@@ -300,6 +299,12 @@ const createRecipeListContent = (recipeList, listName) => {
         </ul>
       </section>
     `;
+
+    if(findAppropriateMessage(recipe) === `You're a few ingredients short.`) {
+      newRecipeItem.querySelector('.test').innerHTML = `
+        <span class="ingredients-and-cost__item--icon"><i class="far fa-times-circle"></i>${findAppropriateMessage(recipe)}</span>
+      `
+    };
 
     newRecipeItem.addEventListener('click', function() {
       let target = newRecipeItem.id;
@@ -328,6 +333,8 @@ const displayRecipe = (id) => {
   let foundRecipe = allRecipes.recipes.find(recipe => {
     return recipe.id === parseInt(id);
   });
+
+    console.log(currentUser.findMissingIngredients(foundRecipe));
 
   recipeTitle.innerText = foundRecipe.name;
   recipeDetailImage.innerHTML = `

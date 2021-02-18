@@ -3511,10 +3511,6 @@ let usersData = [
         "amount": 3
       },
       {
-        "ingredient": 19296,
-        "amount": 3
-      },
-      {
         "ingredient": 11124,
         "amount": 3
       },
@@ -3657,6 +3653,54 @@ let usersData = [
       {
         "ingredient": 2015,
         "amount": 3
+      },
+      {
+        "ingredient": 9040,
+        "amount": 12
+      },
+      {
+        "ingredient": 20011,
+        "amount": 3
+      },
+      {
+        "ingredient": 1230,
+        "amount": 5
+      },
+      {
+        "ingredient": 16098,
+        "amount": 12
+      },
+      {
+        "ingredient": 19350,
+        "amount": 5
+      },
+      {
+        "ingredient": 9099,
+        "amount": 100
+      },
+      {
+        "ingredient": 93627,
+        "amount": 1000
+      },
+      {
+        "ingredient": 2028,
+        "amount": 300
+      },
+      {
+        "ingredient": 10072,
+        "amount": 50
+      },
+      {
+        "ingredient": 6971,
+        "amount": 20
+      },
+      {
+        "ingredient": 1012047,
+        "amount": 8
+      },
+      {
+        "ingredient": 19296,
+        "amount": 4
       }
     ]
   },
