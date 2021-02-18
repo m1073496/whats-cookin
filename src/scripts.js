@@ -21,8 +21,10 @@ const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
 const ingredientsDetailList = document.querySelector('.ingredients-list');
 const searchBarInput = document.querySelector('.search-bar');
+const favoritesSearchBarInput = document.querySelector('#searchBarFavorites');
 const searchError = document.querySelector('.search-error');
 const dropdownSelection = document.querySelector('#tag-selector');
+const favoritesDropdownSelection = document.querySelector('#tag-selector-favorites');
 const goButton = document.getElementById('go');
 const goListButton = document.getElementById('goListButton');
 const goFavoritesButton = document.getElementById('goFavoritesButton');
@@ -409,10 +411,17 @@ const getTagsToSearchFor = (choices) => {
 }
 
 const searchByTags = (tags, listName) => {
-  if (tags.includes('all')) {
-    return allRecipes.recipes;
-  } else if (listName === 'favorites') {
+  // if (tags.includes('all')) {
+  //   return allRecipes.recipes;
+  // } else if (listName === 'favorites') {
+  //   return currentUser.favoriteRecipes.filterByTags(tags);
+  // } else {
+  //   return allRecipes.filterByTags(tags);
+  // }
+  if (listName === 'favorites') {
     return currentUser.favoriteRecipes.filterByTags(tags);
+  } else if (tags.includes('all')) {
+    return allRecipes.recipes;
   } else {
     return allRecipes.filterByTags(tags);
   }
@@ -431,6 +440,9 @@ const splitInput = (input) => {
 }
 
 const search = (searchInput, dropDownInput, listName) => {
+  console.log("searchInput value: ", searchInput.value);
+  console.log("dropDownInput value: ", dropDownInput.value);
+  console.log("listName: ", listName);
   hide(searchError);
 
   const words = splitInput(searchInput);
@@ -440,13 +452,13 @@ const search = (searchInput, dropDownInput, listName) => {
   const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
   const tagMatches = searchByTags(tagsToSearchFor, listName);
   const tagMatchesRepository = new RecipeRepository(tagMatches);
+  console.log("tagMatchesRepository: ", tagMatchesRepository);
 
   const results = tagMatchesRepository.findRecipes(words);
   displayResults(searchInput, results.recipes, listName);
 }
 
 const displayResults = (searchInput, recipes, listName) => {
-  // TODO later will need to incorporate recipesToCook
   if (listName === 'favorites') {
     displayFavoritesListView();
   } else if (listName === 'cookit') {
@@ -486,11 +498,9 @@ const displayCookit = () => {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 allRecipesButton.addEventListener('click', function() {
-  // TODO need to make this a separate named function now that it's more than one line?
   displayRecipeListView();
   displayRecipes(allRecipes.recipes, '', 'all');
 });
-
 
 goButton.addEventListener('click', function() {
   search(searchBarInput, dropdownSelection, 'all');
@@ -503,18 +513,18 @@ goListButton.addEventListener('click', function() {
 });
 
 goFavoritesButton.addEventListener('click', function() {
-  search(searchBarInput, dropdownSelection, 'favorites');
+  search(favoritesSearchBarInput, favoritesDropdownSelection, 'favorites');
   document.getElementById('searchBarFavorites').value = '';
+  document.getElementById('tag-selector-favorites').value = '';
 });
 
 goCookitButton.addEventListener('click', function() {
+  // TODO if we keep this button, we need to change the search and dropdown params to be special for cookit
   search(searchBarInput, dropdownSelection, 'cookit');
   document.getElementById('searchBarCookit').value = '';
 });
 
 homeSelector.addEventListener('click', displayLanding);
-
 userSelector.addEventListener('click', displayPantry);
-
 myFavoritesButton.addEventListener('click', displayFavorites);
 cookitButton.addEventListener('click', displayCookit);
