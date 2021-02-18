@@ -116,7 +116,7 @@ When the user is viewing a list of recipes, each recipe in that list is clickabl
 From this view, a user can select the heart or calendar icons to save this recipe to their list of favorite recipes or their list of recipes to cook that week, respectively. Selecting these icons again will undo this change. The app title, user greeting & pantry, and navigation bar also persist on this view to provide easy navigation options and better user experience.
 
 
-<img width="600" alt="recipe detail view" src="Screen Shot 2021-02-17 at 7.56.07 PM.png">
+<img width="800" alt="recipe detail view" src="Screen Shot 2021-02-17 at 7.56.07 PM.png">
 
 
 ## My Favorites list
