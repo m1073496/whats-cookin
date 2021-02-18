@@ -33,10 +33,10 @@ What's Cookin'? began as a bare-bones starter kit. Over the course of this proje
 An instance of this user has been left in the `src/scripts.js` file for convenience. We recommend using her to check that the appropriate messages and ingredient counts are being displayed throughout the app. 
 
 This user has enough ingredients in her pantry to make the following recipes:
-    * Loaded Chocolate Chip Pudding Cupcakes
-    * Elvis Pancakes
-    * Ambrosia Cupcakes
-    * Pulled Pork
+* Loaded Chocolate Chip Pudding Cupcakes
+* Elvis Pancakes
+* Ambrosia Cupcakes
+* Pulled Pork
 
 ### [Netlify Deployment Site](https://what-the-fork-is-for-dinner.netlify.app/)
 
