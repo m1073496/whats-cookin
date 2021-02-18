@@ -244,9 +244,9 @@ const findAppropriateMessage = (recipe) => {
   let appropriateMessage;
 
   if (currentUser.findMissingIngredients(recipe).length === 0) {
-    appropriateMessage = `You have everything needed to make this recipe!`;
+    appropriateMessage = ` You have everything needed to make this recipe!`;
   } else {
-    appropriateMessage = `You're a few ingredients short.`;
+    appropriateMessage = ` You're a few ingredients short.`;
   }
   return appropriateMessage;
 }
@@ -302,7 +302,7 @@ const createRecipeListContent = (recipeList, listName) => {
       </section>
     `;
 
-    if(findAppropriateMessage(recipe) === `You're a few ingredients short.`) {
+    if(findAppropriateMessage(recipe) === ` You're a few ingredients short.`) {
       newRecipeItem.querySelector('.test').innerHTML = `
         <span class="ingredients-and-cost__item--icon"><i class="far fa-times-circle"></i>${findAppropriateMessage(recipe)}</span>
       `
