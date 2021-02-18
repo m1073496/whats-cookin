@@ -47,7 +47,6 @@ let allRecipes;
 let currentUser;
 
 window.addEventListener('load', function() {
-  console.log('page loaded 🥺');
   const recipeInstances = recipeData.map(recipe => new Recipe(recipe));
   allRecipes = new RecipeRepository(recipeInstances);
 
@@ -107,7 +106,6 @@ const displayRecipeDetailView = () => {
   display(recipeDetailView);
 }
 
-// *** START 🦄 Nikki's 🦄 work ***
 const displayLanding = () => {
   hide(searchError);
   displayMYFavorite();
@@ -239,9 +237,6 @@ recipeCalendarSelector.addEventListener('click', (e) => {
   toggleCalendar('recipe');
   addRecipeToCookit(targetId);
 });
-
-
-// *** END 🦄 Nikki's work 🦄 ***
 
 const findAppropriateMessage = (recipe) => {
   let appropriateMessage;
@@ -414,25 +409,13 @@ const getTagsToSearchFor = (choices) => {
 }
 
 const searchByTags = (tags, listName) => {
-  // if (tags.includes('all')) {
-  //   return allRecipes.recipes;
-  // } else if (listName === 'favorites') {
-  //   return currentUser.favoriteRecipes.filterByTags(tags);
-  // } else {
-  //   return allRecipes.filterByTags(tags);
-  // }
   if (listName === 'favorites' && tags.includes('all')) {
-    console.log("searchByTags: first condition");
-    console.log('currentUser.favoriteRecipes: ', currentUser.favoriteRecipes);
     return currentUser.favoriteRecipes.recipes;
   } else if (listName === 'favorites') {
-    console.log("searchByTags: second condition");
     return currentUser.favoriteRecipes.filterByTags(tags);
   } else if (tags.includes('all')) {
-    console.log("searchByTags: third condition");
     return allRecipes.recipes;
   } else {
-    console.log("searchByTags: fourth condition");
     return allRecipes.filterByTags(tags);
   }
 }
@@ -450,25 +433,16 @@ const splitInput = (input) => {
 }
 
 const search = (searchInput, dropDownInput, listName) => {
-  console.log("searchInput value: ", searchInput.value);
-  console.log("dropDownInput value: ", dropDownInput.value);
-  console.log("listName: ", listName);
   hide(searchError);
   hide(favoritesSearchError);
 
   const words = splitInput(searchInput);
-
   const selections = [...dropDownInput.selectedOptions].map(option => option.value);
   const parsedSelections = parseSelections(selections);
   const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
-  console.log("tagsToSearchFor: ", tagsToSearchFor);
   const tagMatches = searchByTags(tagsToSearchFor, listName);
-  console.log("tagMatches: ", tagMatches);
   const tagMatchesRepository = new RecipeRepository(tagMatches);
-  console.log("tagMatchesRepository: ", tagMatchesRepository);
-
   const results = tagMatchesRepository.findRecipes(words);
-  console.log("results.recipes from search: ", results.recipes)
   displayResults(searchInput, results.recipes, listName);
 }
 
@@ -480,8 +454,6 @@ const displayResults = (searchInput, recipes, listName) => {
   } else {
     displayRecipeListView();
   }
-
-  console.log("recipes.length in displayResults: ", recipes.length);
 
   if (recipes.length > 0 && searchInput.value) {
     displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
@@ -541,7 +513,6 @@ goFavoritesButton.addEventListener('click', function() {
 });
 
 goCookitButton.addEventListener('click', function() {
-  // TODO if we keep this button, we need to change the search and dropdown params to be special for cookit
   search(searchBarInput, dropdownSelection, 'cookit');
   document.getElementById('searchBarCookit').value = '';
 });
