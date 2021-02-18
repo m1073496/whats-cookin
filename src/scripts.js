@@ -334,8 +334,6 @@ const displayRecipe = (id) => {
     return recipe.id === parseInt(id);
   });
 
-    console.log(currentUser.findMissingIngredients(foundRecipe));
-
   recipeTitle.innerText = foundRecipe.name;
   recipeDetailImage.innerHTML = `
     <img src="${foundRecipe.image}" alt="${foundRecipe.name}" style="width:250px;">
@@ -455,19 +453,18 @@ const search = (searchInput, dropDownInput, listName) => {
 }
 
 const displayResults = (searchInput, recipes, listName) => {
-  if (listName === 'favorites') {
-    displayFavoritesListView();
-  } else if (listName === 'cookit') {
+  if (listName === 'cookit') {
     displayCookitListView();
-  } else {
-    displayRecipeListView();
-  }
+  } 
 
   if (recipes.length > 0 && searchInput.value) {
+    displayRecipeListView();
     displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
   } else if (recipes.length) {
+    displayRecipeListView();
     displayRecipes(recipes, `Search results`, listName);
   } else if (listName === 'favorites') {
+    displayFavoritesListView();
     display(favoritesSearchError);
     favoritesListSearchMessage.innerText = '';
     recipeListFavoritesContainer.innerHTML = '';
