@@ -459,21 +459,40 @@ const displayResults = (searchInput, recipes, listName) => {
     displayCookitListView();
   } 
 
-  if (recipes.length > 0 && searchInput.value) {
+  if (listName === 'all' && recipes.length > 0 && searchInput.value) {
     displayRecipeListView();
     displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
-  } else if (recipes.length) {
+  } else if (listName === 'all' && recipes.length) {
     displayRecipeListView();
     displayRecipes(recipes, `Search results`, listName);
-  } else if (listName === 'favorites') {
-    displayFavoritesListView();
-    display(favoritesSearchError);
-    favoritesListSearchMessage.innerText = '';
-    recipeListFavoritesContainer.innerHTML = '';
-  } else {
+  } else if (listName === 'all') {
     display(searchError);
     recipeListContainer.innerHTML = '';
+  } else if (listName === 'favorites' && recipes.length > 0 && searchInput.value) {
+    displayFavoritesListView();
+    // TODO does this line need to go somewhere else?
+    favoritesListSearchMessage.innerText = '';
+    displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
+  } else {
+    display(favoritesSearchError);
+    recipeListFavoritesContainer.innerHTML = '';
   }
+
+  // if (recipes.length > 0 && searchInput.value) {
+  //   displayRecipeListView();
+  //   displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
+  // } else if (recipes.length) {
+  //   displayRecipeListView();
+  //   displayRecipes(recipes, `Search results`, listName);
+  // } else if (listName === 'favorites') {
+  //   displayFavoritesListView();
+  //   display(favoritesSearchError);
+  //   favoritesListSearchMessage.innerText = '';
+  //   recipeListFavoritesContainer.innerHTML = '';
+  // } else {
+  //   display(searchError);
+  //   recipeListContainer.innerHTML = '';
+  // }
 }
 
 const displayFavorites = () => {
