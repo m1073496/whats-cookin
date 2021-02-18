@@ -46,8 +46,8 @@ This user has enough ingredients in her pantry to make the following recipes:
 * Practice Test Driven Development (TDD) best practices
 * Use a linter to standardize our code
 * Practice writing Object-Oriented javascript classes
-* Implementing CSS Grid
-* Creating a responsive design
+* Implement CSS Grid
+* Create a responsive design
 
 
 ## Technologies
