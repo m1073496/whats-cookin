@@ -289,9 +289,8 @@ const createRecipeListContent = (recipeList, listName) => {
             <span class="ingredients-and-cost__item--name">${recipe.name}</span>
           </li>
 
-          <li>
-            <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i></span>
-            <span class="ingredients-and-cost__item--isInPantry">${findAppropriateMessage(recipe)}</span>
+          <li class="test">
+            <span class="ingredients-and-cost__item--icon"><i class="far fa-check-circle"></i>${findAppropriateMessage(recipe)}</span>
           </li>
           <li>
             <span class="ingredients-and-cost__item--icon"><i class="far fa-badge-dollar"></i></span>
@@ -300,6 +299,11 @@ const createRecipeListContent = (recipeList, listName) => {
         </ul>
       </section>
     `;
+
+    if(currentUser.findMissingIngredients(recipe).length !== 0) {
+      newRecipeItem.querySelector('.test').innerHTML = `
+        <span class="ingredients-and-cost__item--icon"><i class="far fa-times-circle"></i>${findAppropriateMessage(recipe)}</span>
+      `};
 
     newRecipeItem.addEventListener('click', function() {
       let target = newRecipeItem.id;
