@@ -87,8 +87,8 @@ The landing page also offers the user a search bar and a multi-choice list of ca
 Next, the landing page displays a hero image of a featured recipe, accompanied by the title of that recipe as well as a heart icon and a calendar icon. Clicking the heart icon will add that featured recipe to their favorites, while clicking the calendar icon will add it to the user's weekly recipe list. 
 Finally, the user will see four other featured recipes.
 
-<https://turingschool.slack.com/files/U01CJGLFWNP/F01NA0NE0UE/landing.png>
-<https://turingschool.slack.com/files/U01CJGLFWNP/F01NA0NE0UE/landing.png>
+<img width="1266" alt="Screen Shot 2021-01-12 at 8 26 17 PM" src="https://turingschool.slack.com/files/U01CJGLFWNP/F01NA0NE0UE/landing.png">
+<img width="1266" alt="Screen Shot 2021-01-12 at 8 26 17 PM" src="https://turingschool.slack.com/files/U01CJGLFWNP/F01NA0NE0UE/landing.png">
 
 
 ## View Pantry
@@ -114,7 +114,8 @@ When the user is viewing a list of recipes, each recipe in that list is clickabl
 
 From this view, a user can select the heart or calendar icons to save this recipe to their list of favorite recipes or their list of recipes to cook that week, respectively. Selecting these icons again will undo this change. The app title, user greeting & pantry, and navigation bar also persist on this view to provide easy navigation options and better user experience.
 
-<https://what-the-fork-is-for-dinner.netlify.app/>
+
+<img width="1266" alt="Screen Shot 2021-01-12 at 8 26 17 PM" src="https://what-the-fork-is-for-dinner.netlify.app/">
 
 
 ## My Favorites list
@@ -123,7 +124,8 @@ When a user selects the `My Favorites` link in the navigation bar, they are redi
 
 
 ![](https://media.giphy.com/media/Yke0DzclSclG5R1CPu/giphy.gif)
-<https://turingschool.slack.com/files/U01CJGLFWNP/F01NVCHHE1X/favorites_mobile.png>
+
+<img width="1266" alt="Screen Shot 2021-01-12 at 8 26 17 PM" src="https://turingschool.slack.com/files/U01CJGLFWNP/F01NVCHHE1X/favorites_mobile.png">
 
 
 ## All Recipes list
