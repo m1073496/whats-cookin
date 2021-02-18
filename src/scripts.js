@@ -134,7 +134,7 @@ const displayPantry = () => {
     let ingredient = ingredientsData.find(element => element['id'] === item['ingredient']);
     userPantryList.innerHTML += `
       <ul>
-        <li class="pantry__item">${ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1)} -- Quantity: ${item['amount']}</li>
+        <li class="pantry__item">${ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1)}: ${item['amount']}</li>
       </ul>
     `
   })
@@ -351,7 +351,7 @@ const displayRecipe = (id) => {
 
     ingredientsDetailList.innerHTML += `
       <article class="ingredients__item">
-        <i class="far fa-times-circle"></i>
+        <i class="far fa-check-circle"></i>
         ${ingredient.amount} ${ingredient.unit} ${ingredient.name} <span class="ingredients__message" id=${ingredient.id}></span>
       </article>
     `;
