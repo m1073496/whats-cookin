@@ -95,7 +95,6 @@ const displayFavoritesListView = () => {
   hide(recipeListView);
   hide(cookitListView);
   display(favoritesView);
-  favoritesDropdownSelection.value = 'all';
 }
 
 const displayRecipeDetailView = () => {
@@ -482,6 +481,8 @@ const displayResults = (searchInput, recipes, listName) => {
 
 const displayFavorites = () => {
   displayFavoritesListView();
+  favoritesDropdownSelection.value = 'all';
+
   if (currentUser.favoriteRecipes.recipes.length === 0) {
     favoritesListSearchMessage.innerText = `You don't have any favorites 😢`
   } else {
