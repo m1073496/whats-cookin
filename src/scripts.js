@@ -109,6 +109,7 @@ const displayRecipeDetailView = () => {
 
 // *** START 🦄 Nikki's 🦄 work ***
 const displayLanding = () => {
+  hide(searchError);
   displayMYFavorite();
   hide(recipeListView);
   hide(recipeDetailView);
