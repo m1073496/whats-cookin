@@ -23,6 +23,7 @@ const ingredientsDetailList = document.querySelector('.ingredients-list');
 const searchBarInput = document.querySelector('.search-bar');
 const favoritesSearchBarInput = document.querySelector('#searchBarFavorites');
 const searchError = document.querySelector('.search-error');
+const favoritesSearchError = document.querySelector('.favorites-search-error');
 const dropdownSelection = document.querySelector('#tag-selector');
 const favoritesDropdownSelection = document.querySelector('#tag-selector-favorites');
 const goButton = document.getElementById('go');
@@ -420,11 +421,18 @@ const searchByTags = (tags, listName) => {
   // } else {
   //   return allRecipes.filterByTags(tags);
   // }
-  if (listName === 'favorites') {
+  if (listName === 'favorites' && tags.includes('all')) {
+    console.log("searchByTags: first condition");
+    console.log('currentUser.favoriteRecipes: ', currentUser.favoriteRecipes);
+    return currentUser.favoriteRecipes.recipes;
+  } else if (listName === 'favorites') {
+    console.log("searchByTags: second condition");
     return currentUser.favoriteRecipes.filterByTags(tags);
   } else if (tags.includes('all')) {
+    console.log("searchByTags: third condition");
     return allRecipes.recipes;
   } else {
+    console.log("searchByTags: fourth condition");
     return allRecipes.filterByTags(tags);
   }
 }
@@ -446,18 +454,21 @@ const search = (searchInput, dropDownInput, listName) => {
   console.log("dropDownInput value: ", dropDownInput.value);
   console.log("listName: ", listName);
   hide(searchError);
+  hide(favoritesSearchError);
 
   const words = splitInput(searchInput);
 
   const selections = [...dropDownInput.selectedOptions].map(option => option.value);
   const parsedSelections = parseSelections(selections);
   const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
+  console.log("tagsToSearchFor: ", tagsToSearchFor);
   const tagMatches = searchByTags(tagsToSearchFor, listName);
   console.log("tagMatches: ", tagMatches);
   const tagMatchesRepository = new RecipeRepository(tagMatches);
   console.log("tagMatchesRepository: ", tagMatchesRepository);
 
   const results = tagMatchesRepository.findRecipes(words);
+  console.log("results.recipes from search: ", results.recipes)
   displayResults(searchInput, results.recipes, listName);
 }
 
@@ -470,12 +481,19 @@ const displayResults = (searchInput, recipes, listName) => {
     displayRecipeListView();
   }
 
+  console.log("recipes.length in displayResults: ", recipes.length);
+
   if (recipes.length > 0 && searchInput.value) {
     displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
   } else if (recipes.length) {
     displayRecipes(recipes, `Search results`, listName);
+  } else if (listName === 'favorites') {
+    display(favoritesSearchError);
+    favoritesListSearchMessage.innerText = '';
+    recipeListFavoritesContainer.innerHTML = '';
   } else {
     display(searchError);
+    recipeListContainer.innerHTML = '';
   }
 }
 
