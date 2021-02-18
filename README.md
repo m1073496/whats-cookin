@@ -88,7 +88,7 @@ Next, the landing page displays a hero image of a featured recipe, accompanied b
 Finally, the user will see four other featured recipes.
 
 <img width="600" alt="landing-desktop" src="landing.png">
-<img width="600" alt="landing-mobile" src="landing_mobile.png">
+<img width="350" alt="landing-mobile" src="landing_mobile.png">
 
 
 
