@@ -87,8 +87,8 @@ The landing page also offers the user a search bar and a multi-choice list of ca
 Next, the landing page displays a hero image of a featured recipe, accompanied by the title of that recipe as well as a heart icon and a calendar icon. Clicking the heart icon will add that featured recipe to their favorites, while clicking the calendar icon will add it to the user's weekly recipe list. 
 Finally, the user will see four other featured recipes.
 
-<img width="100" alt="landing-desktop" src="landing.png">
-<img width="100" alt="landing-mobile" src="landing_mobile.png">
+<img width="600" alt="landing-desktop" src="landing.png">
+<img width="600" alt="landing-mobile" src="landing_mobile.png">
 
 
 
