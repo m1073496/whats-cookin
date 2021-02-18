@@ -25,11 +25,6 @@ describe('User', function() {
 
   it('should be a function', function() {
     expect(User).to.be.a('function');
-    // console.log("user1 pantry: ", user1.userName, user1.userPantry);
-    // console.log("user2 pantry: ", user2.userName, user2.userPantry);
-    // console.log("recipes[0].ingredients: ", recipes[0].name, recipes[0].ingredients);
-    // console.log("recipes[1].ingredients: ", recipes[1].name, recipes[1].ingredients);
-    // console.log("recipes[2].ingredients: ", recipes[2].name, recipes[2].ingredients);
   });
 
   it('should be an instance of a User', function() {
@@ -395,21 +390,5 @@ describe('User', function() {
     ]);
 
     expect(goodResultUser2).to.deep.equal([]);
-  });
-
-  it('should remove ingredients from pantry', function() {
-    // user2.recipesToCook.push(recipes[1]);
-    // user2.recipesToCook.push(recipes[0]);
-    // user2.cookMeal(recipes[1]);
-    // user2.cookMeal(recipes[0]);
-
-    user1.recipesToCook.push(recipes[0]);
-    user1.cookMeal(recipes[0]);
-
-    expect(user1.recipesToCook.length).to.equal(0);
-    expect(user1.userPantry.length).to.equal(0);
-
-    // expect(user2.recipesToCook.length).to.equal(1);
-    // expect(user2.userPantry.length).to.equal(0);
   });
 });

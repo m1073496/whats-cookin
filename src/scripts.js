@@ -21,10 +21,12 @@ const recipeInstructions = document.querySelector('.instructions-details')
 const recipeDetailImage = document.querySelector('.detail-section__recipe-profile--img');
 const ingredientsDetailList = document.querySelector('.ingredients-list');
 const searchBarInput = document.querySelector('.search-bar');
+const listSearchBarInput = document.querySelector('#searchBarList');
 const favoritesSearchBarInput = document.querySelector('#searchBarFavorites');
 const searchError = document.querySelector('.search-error');
 const favoritesSearchError = document.querySelector('.favorites-search-error');
 const dropdownSelection = document.querySelector('#tag-selector');
+const listDropdownSelection = document.querySelector('#tag-selector-list');
 const favoritesDropdownSelection = document.querySelector('#tag-selector-favorites');
 const goButton = document.getElementById('go');
 const goListButton = document.getElementById('goListButton');
@@ -132,7 +134,7 @@ const displayPantry = () => {
     let ingredient = ingredientsData.find(element => element['id'] === item['ingredient']);
     userPantryList.innerHTML += `
       <ul>
-        <li class="pantry__item">${ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1)} -- Quantity: ${item['amount']}</li>
+        <li class="pantry__item">${ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1)}: ${item['amount']}</li>
       </ul>
     `
   })
@@ -242,9 +244,9 @@ const findAppropriateMessage = (recipe) => {
   let appropriateMessage;
 
   if (currentUser.findMissingIngredients(recipe).length === 0) {
-    appropriateMessage = `You have everything needed to make this recipe!`;
+    appropriateMessage = ` You have everything needed to make this recipe!`;
   } else {
-    appropriateMessage = `You're a few ingredients short.`;
+    appropriateMessage = ` You're a few ingredients short.`;
   }
   return appropriateMessage;
 }
@@ -300,11 +302,11 @@ const createRecipeListContent = (recipeList, listName) => {
       </section>
     `;
 
-    if(findAppropriateMessage(recipe) === `You're a few ingredients short.`) {
+    if (findAppropriateMessage(recipe) === ` You're a few ingredients short.`) {
       newRecipeItem.querySelector('.test').innerHTML = `
         <span class="ingredients-and-cost__item--icon"><i class="far fa-times-circle"></i>${findAppropriateMessage(recipe)}</span>
       `
-    };
+    }
 
     newRecipeItem.addEventListener('click', function() {
       let target = newRecipeItem.id;
@@ -334,8 +336,6 @@ const displayRecipe = (id) => {
     return recipe.id === parseInt(id);
   });
 
-    console.log(currentUser.findMissingIngredients(foundRecipe));
-
   recipeTitle.innerText = foundRecipe.name;
   recipeDetailImage.innerHTML = `
     <img src="${foundRecipe.image}" alt="${foundRecipe.name}" style="width:250px;">
@@ -351,7 +351,7 @@ const displayRecipe = (id) => {
 
     ingredientsDetailList.innerHTML += `
       <article class="ingredients__item">
-        <i class="far fa-times-circle"></i>
+        <i class="far fa-check-circle"></i>
         ${ingredient.amount} ${ingredient.unit} ${ingredient.name} <span class="ingredients__message" id=${ingredient.id}></span>
       </article>
     `;
@@ -455,30 +455,34 @@ const search = (searchInput, dropDownInput, listName) => {
 }
 
 const displayResults = (searchInput, recipes, listName) => {
-  if (listName === 'favorites') {
-    displayFavoritesListView();
-  } else if (listName === 'cookit') {
+  if (listName === 'cookit') {
     displayCookitListView();
-  } else {
-    displayRecipeListView();
-  }
+  } 
 
-  if (recipes.length > 0 && searchInput.value) {
+  if (listName === 'all' && recipes.length > 0 && searchInput.value) {
+    displayRecipeListView();
     displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
-  } else if (recipes.length) {
+  } else if (listName === 'all' && recipes.length) {
+    displayRecipeListView();
     displayRecipes(recipes, `Search results`, listName);
-  } else if (listName === 'favorites') {
+  } else if (listName === 'all') {
+    display(searchError);
+    recipeListContainer.innerHTML = '';
+  } else if (listName === 'favorites' && recipes.length > 0 && searchInput.value) {
+    displayFavoritesListView();
+    hide(favoritesSearchError);
+    favoritesListSearchMessage.innerText = '';
+    displayRecipes(recipes, `Search results matching "${searchInput.value}"`, listName);
+  } else {
     display(favoritesSearchError);
     favoritesListSearchMessage.innerText = '';
     recipeListFavoritesContainer.innerHTML = '';
-  } else {
-    display(searchError);
-    recipeListContainer.innerHTML = '';
   }
 }
 
 const displayFavorites = () => {
   displayFavoritesListView();
+  hide(favoritesSearchError);
   favoritesDropdownSelection.value = 'all';
 
   if (currentUser.favoriteRecipes.recipes.length === 0) {
@@ -511,7 +515,7 @@ goButton.addEventListener('click', function() {
 });
 
 goListButton.addEventListener('click', function() {
-  search(searchBarInput, dropdownSelection, 'all');
+  search(listSearchBarInput, listDropdownSelection, 'all');
   document.getElementById('searchBarList').value = '';
 });
 
