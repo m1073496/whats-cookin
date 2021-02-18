@@ -97,6 +97,7 @@ Selecting the user icon or user greeting, both located at the top of the app, wi
 
 
 ![](https://media.giphy.com/media/JzWO5R7K2BYd1dRHiF/giphy.gif)
+
 ***GIF INCLUDES DEMO OF INTERACTIVE LOGO STYLING!***
 
 
