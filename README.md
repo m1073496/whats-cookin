@@ -126,8 +126,6 @@ When a user selects the `My Favorites` link in the navigation bar, they are redi
 
 ![](https://media.giphy.com/media/Yke0DzclSclG5R1CPu/giphy.gif)
 
-<img src="https://turingschool.slack.com/files/U01CJGLFWNP/F01NVCHHE1X/favorites_mobile.png"/>
-
 
 ## All Recipes list
 
