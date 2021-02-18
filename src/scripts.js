@@ -85,6 +85,7 @@ const displayRecipeListView = () => {
   hide(favoritesView);
   hide(cookitListView);
   display(recipeListView);
+  dropdownSelection.value = 'all';
 }
 
 const displayFavoritesListView = () => {
@@ -94,6 +95,7 @@ const displayFavoritesListView = () => {
   hide(recipeListView);
   hide(cookitListView);
   display(favoritesView);
+  favoritesDropdownSelection.value = 'all';
 }
 
 const displayRecipeDetailView = () => {
@@ -451,6 +453,7 @@ const search = (searchInput, dropDownInput, listName) => {
   const parsedSelections = parseSelections(selections);
   const tagsToSearchFor = getTagsToSearchFor(parsedSelections);
   const tagMatches = searchByTags(tagsToSearchFor, listName);
+  console.log("tagMatches: ", tagMatches);
   const tagMatchesRepository = new RecipeRepository(tagMatches);
   console.log("tagMatchesRepository: ", tagMatchesRepository);
 
@@ -515,7 +518,6 @@ goListButton.addEventListener('click', function() {
 goFavoritesButton.addEventListener('click', function() {
   search(favoritesSearchBarInput, favoritesDropdownSelection, 'favorites');
   document.getElementById('searchBarFavorites').value = '';
-  document.getElementById('tag-selector-favorites').value = '';
 });
 
 goCookitButton.addEventListener('click', function() {
