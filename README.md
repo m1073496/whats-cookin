@@ -19,7 +19,7 @@ A [Front-End Project](https://frontend.turing.io/projects/whats-cookin.html) by 
 
 This is a Turing School of Software and Design - Module 2 group project.
 
-What's Cookin'? began as a bare-bones starter kit. Over the course of this project, we built out the HTML structure, CSS Grid styling & responsive design, and Javascript functionality from scratch. The project now has three class files, `Recipe.js`, `RecipeRepository.js` & `User.js`, that were each built via Test Driven Development. The app itself hosts a number of recipe objects, displayed to the user and made interactive. Users can navigate through the app, search for recipes to either favorite or add to their lists to cook for the week, take a look at the ingredients in their pantry, or simply browse for recipe information.
+What's Cookin'? began as a bare-bones starter kit. Over the course of this project, we built out the HTML structure, CSS Grid styling & responsive design, and Javascript functionality from scratch. The project now has three class files, `Recipe.js`, `RecipeRepository.js` & `User.js`, that were each built using Test Driven Development best practices. The app itself hosts a number of recipe objects, displayed to the user and made interactive. Users can navigate through the app, search for recipes to either favorite or add to their lists to cook for the week, take a look at the ingredients in their pantry, or simply browse for recipe information.
 
 ## Planning Resources
 
