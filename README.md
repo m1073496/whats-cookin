@@ -24,7 +24,7 @@ What's Cookin'? began as a bare-bones starter kit. Over the course of this proje
 ## Planning Resources
 
 * [Trello Project Board](https://trello.com/b/BqKP6hlD/whats-cooking-pair-project)
-* [Balsamic Wireframes](https://balsamiq.cloud/s76d3gm/pr1wc9d/r2278)
+* [Balsamiq Wireframes](https://balsamiq.cloud/s76d3gm/pr1wc9d/r2278)
 
 
 ## DEMO
