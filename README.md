@@ -1,6 +1,6 @@
 # What's Cookin'?
 
-A [Front-End Project](https://frontend.turing.io/projects/whats-cookin.html) by [Nikki Petersen](https://github.com/piknikki), [Katie B](https://github.com/knees4bees) and [Jessica Justice](https://github.com/m1073496)
+A [Front-End Project](https://frontend.turing.io/projects/whats-cookin.html) by [Jessica Justice](https://github.com/m1073496), [Nikki Petersen](https://github.com/piknikki), and [Katie B](https://github.com/knees4bees).
 
 
 
