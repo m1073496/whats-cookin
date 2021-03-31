@@ -38,7 +38,7 @@ This user has enough ingredients in her pantry to make the following recipes:
 * Ambrosia Cupcakes
 * Pulled Pork
 
-### Open app here: [Netlify Deployment Site](https://what-the-fork-is-for-dinner.netlify.app/)
+### Open app here: [What's Cookin'?](https://what-the-fork-is-for-dinner.netlify.app/)
 
 
 ## Learning Goals
