@@ -1,8 +1,8 @@
 # What's Cookin'?
 
-A [Front-End Project](https://frontend.turing.io/projects/whats-cookin.html) by [Jessica Justice](https://github.com/m1073496), [Nikki Petersen](https://github.com/piknikki), and [Katie B](https://github.com/knees4bees).
-
 ### Open app here: [What's Cookin'?](https://what-the-fork-is-for-dinner.netlify.app/)
+
+A [Front-End Project](https://frontend.turing.io/projects/whats-cookin.html) by [Jessica Justice](https://github.com/m1073496), [Nikki Petersen](https://github.com/piknikki), and [Katie B](https://github.com/knees4bees).
 
 
 
