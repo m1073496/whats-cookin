@@ -53,9 +53,9 @@ This user has enough ingredients in her pantry to make the following recipes:
 
 ## Technologies
 
-* HTML
-* CSS
-* Javascript
+* HTML5
+* CSS3
+* Javascript ES6
 * Git
 * GitHub
 * ESlint
